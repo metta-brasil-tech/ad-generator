@@ -566,6 +566,8 @@ class PNGAssembler:
                     self._draw_image(canvas, el, image_urls, warnings)
                 elif etype == "pill_cta":
                     self._draw_pill_cta(canvas, draw, el)
+                elif etype == "rect":
+                    self._draw_rect(canvas, draw, el)
                 else:
                     warnings.append(f"unknown element type: {etype}")
             except Exception as e:
@@ -627,14 +629,85 @@ class PNGAssembler:
             warnings.append(f"image fetch failed for {el['slot_name']}")
             self._draw_placeholder_rect(canvas, el)
             return
-        # Resize to slot dimensions (FILL mode — crop center)
         target_w, target_h = int(el["width"]), int(el["height"])
         img = ImageOps.fit(img, (target_w, target_h), method=Image.LANCZOS)
-        # Paste — if image has alpha, use as mask
+        x, y = int(el["x"]), int(el["y"])
         if img.mode == "RGBA":
-            canvas.paste(img, (int(el["x"]), int(el["y"])), mask=img)
+            canvas.paste(img, (x, y), mask=img)
         else:
-            canvas.paste(img, (int(el["x"]), int(el["y"])))
+            canvas.paste(img, (x, y))
+
+        # Apply gradient overlay (for text legibility on top of image)
+        overlay_spec = el.get("overlay")
+        if overlay_spec:
+            self._apply_gradient_overlay(canvas, x, y, target_w, target_h, overlay_spec)
+
+    def _apply_gradient_overlay(self, canvas, x: int, y: int, w: int, h: int, overlay_spec):
+        """Draw gradient overlay on canvas above image area.
+
+        overlay_spec can be a string like "gradient-fade-to-black-bottom-50%"
+        OR a dict like {direction: "bottom", color: "#000000", extent_pct: 50}
+        """
+        import re
+        # Parse string spec
+        if isinstance(overlay_spec, str):
+            s = overlay_spec.lower()
+            if "none" in s or not s:
+                return
+            if "gradient" not in s and "fade" not in s:
+                return
+            direction = "bottom"
+            for d in ("top", "bottom", "left", "right"):
+                if d in s:
+                    direction = d
+                    break
+            m = re.search(r"(\d+)%", s)
+            extent_pct = int(m.group(1)) if m else 50
+            # Color: default black, accept "to-black" / "to-white" hints
+            color = "#FFFFFF" if "to-white" in s else "#000000"
+            spec = {"direction": direction, "color": color, "extent_pct": extent_pct}
+        elif isinstance(overlay_spec, dict):
+            spec = overlay_spec
+        else:
+            return
+
+        direction = spec.get("direction", "bottom")
+        color_rgb = _hex_to_rgb(spec.get("color", "#000000"))
+        extent_pct = spec.get("extent_pct", 50) / 100.0
+
+        # Build alpha gradient as L-mode image and composite a solid color via the alpha mask
+        overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        ovd = ImageDraw.Draw(overlay)
+
+        if direction == "bottom":
+            zone_h = int(h * extent_pct)
+            zone_start = h - zone_h
+            for i in range(zone_start, h):
+                progress = (i - zone_start) / max(1, zone_h - 1)
+                # Ease-in for darker contrast at the very bottom
+                alpha = int(255 * (progress ** 1.15))
+                ovd.line([(0, i), (w, i)], fill=(*color_rgb, min(255, alpha)))
+        elif direction == "top":
+            zone_h = int(h * extent_pct)
+            for i in range(0, zone_h):
+                progress = 1 - (i / max(1, zone_h - 1))
+                alpha = int(255 * (progress ** 1.15))
+                ovd.line([(0, i), (w, i)], fill=(*color_rgb, min(255, alpha)))
+        elif direction == "right":
+            zone_w = int(w * extent_pct)
+            zone_start = w - zone_w
+            for i in range(zone_start, w):
+                progress = (i - zone_start) / max(1, zone_w - 1)
+                alpha = int(255 * (progress ** 1.15))
+                ovd.line([(i, 0), (i, h)], fill=(*color_rgb, min(255, alpha)))
+        elif direction == "left":
+            zone_w = int(w * extent_pct)
+            for i in range(0, zone_w):
+                progress = 1 - (i / max(1, zone_w - 1))
+                alpha = int(255 * (progress ** 1.15))
+                ovd.line([(i, 0), (i, h)], fill=(*color_rgb, min(255, alpha)))
+
+        canvas.paste(overlay, (x, y), mask=overlay)
 
     def _draw_placeholder_rect(self, canvas, el):
         from PIL import ImageDraw as _ID
@@ -650,6 +723,20 @@ class PNGAssembler:
             d.text((x + (w - tw) // 2, y + h // 2 - 12), label, font=f, fill=(255, 190, 24))
         except Exception:
             pass
+
+    def _draw_rect(self, canvas, draw, el):
+        """Draw a filled rectangle (used for yellow_container, yellow_band, etc.)"""
+        x, y = int(el.get("x", 0)), int(el.get("y", 0))
+        w, h = int(el.get("width", 100)), int(el.get("height", 100))
+        fill = _hex_to_rgb(el.get("fill", "#FFBE18"))
+        radius = int(el.get("corner_radius", 0))
+        if radius > 0:
+            try:
+                draw.rounded_rectangle((x, y, x + w, y + h), radius=radius, fill=fill)
+            except Exception:
+                draw.rectangle((x, y, x + w, y + h), fill=fill)
+        else:
+            draw.rectangle((x, y, x + w, y + h), fill=fill)
 
     def _draw_pill_cta(self, canvas, draw, el):
         font = _load_font(

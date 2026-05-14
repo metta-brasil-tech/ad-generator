@@ -14,10 +14,21 @@ import yaml
 
 
 def load_model_yaml(model_id: str, knowledge_path: str | None = None) -> dict | None:
-    """Load the YAML spec for a given model_id. Matches against `id` and `alias` array."""
+    """Load the YAML spec for a given model_id. Tolerates LLM hallucinations.
+
+    Lookup order:
+      1. exact id match
+      2. alias array case-insensitive
+      3. prefix match (model_id IS prefix of YAML id, e.g. "C" → "C-tipografia-pura-dark")
+      4. first-segment match (LLM hybrid like "B-light-provocador" → "B" → B-foto-top-headline-mixed)
+    """
     kp = Path(knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "../../brand-knowledge"))
     candidates = list((kp / "models").glob("*.yaml"))
     model_id_lc = model_id.lower().strip()
+    # Get the FIRST SEGMENT before "-" — handles hybrids like "B-something" → "B"
+    first_segment = model_id_lc.split("-", 1)[0]
+
+    all_models = []
     for path in candidates:
         if path.name.startswith("_"):
             continue
@@ -25,18 +36,37 @@ def load_model_yaml(model_id: str, knowledge_path: str | None = None) -> dict | 
             data = yaml.safe_load(path.read_text(encoding="utf-8"))
             if not data:
                 continue
-            if data.get("id") == model_id:
-                return data
-            # Match against aliases (case-insensitive)
-            aliases = data.get("alias", []) or []
-            if any(a.lower() == model_id_lc for a in aliases):
-                return data
-            # Fallback: match if model_id is a prefix of id (e.g., "C" matches "C-tipografia-pura-dark")
-            file_id = data.get("id", "")
-            if file_id.lower().startswith(model_id_lc + "-") or file_id.lower() == model_id_lc:
-                return data
+            all_models.append(data)
         except Exception:
             continue
+
+    # 1) Exact id match
+    for data in all_models:
+        if data.get("id") == model_id:
+            return data
+
+    # 2) Alias match
+    for data in all_models:
+        aliases = data.get("alias", []) or []
+        if any(a.lower() == model_id_lc for a in aliases):
+            return data
+
+    # 3) Prefix match: model_id is a prefix of yaml.id
+    for data in all_models:
+        file_id = data.get("id", "").lower()
+        if file_id.startswith(model_id_lc + "-") or file_id == model_id_lc:
+            return data
+
+    # 4) First-segment match: yaml.id starts with first_segment
+    for data in all_models:
+        file_id = data.get("id", "").lower()
+        if file_id.startswith(first_segment + "-") or file_id == first_segment:
+            return data
+        # Also try aliases starting with first_segment
+        aliases = data.get("alias", []) or []
+        if any(a.lower() == first_segment for a in aliases):
+            return data
+
     return None
 
 
@@ -129,6 +159,40 @@ def enforce(layout_spec: dict, briefing: dict, knowledge_path: str | None = None
         slot = _default_image_slot(model, target_w, target_h)
         elements.append(slot)
         log.append(f"FIX: injected missing image_slot (placement={image_cfg.get('placement', 'auto')})")
+
+    # 2b) Attach gradient overlay spec from YAML to image_slot (so assembler renders it)
+    image_overlay = image_cfg.get("filters", {}).get("overlay", "") if image_cfg else ""
+    if image_overlay and image_overlay.lower() not in ("none", ""):
+        for el in elements:
+            if el.get("type") == "image_slot" and not el.get("overlay"):
+                el["overlay"] = image_overlay
+                log.append(f"FIX: applied YAML overlay '{image_overlay}' to {el.get('slot_name')}")
+
+    # 2c) Force image_slot dimensions from YAML placement (LLM often picks wrong size)
+    placement = (image_cfg.get("placement") or "").lower() if image_cfg else ""
+    for el in elements:
+        if el.get("type") != "image_slot":
+            continue
+        # Compute target dims from placement
+        target_slot = _default_image_slot(model, target_w, target_h)
+        # Override only if LLM's dims diverge significantly from YAML intent
+        cur_x, cur_y = el.get("x", 0), el.get("y", 0)
+        cur_w, cur_h = el.get("width", 0), el.get("height", 0)
+        target_x, target_y = target_slot["x"], target_slot["y"]
+        tgt_w, tgt_h = target_slot["width"], target_slot["height"]
+        if "full-bleed" in placement:
+            # Force 100% canvas coverage
+            if (cur_x, cur_y, cur_w, cur_h) != (0, 0, target_w, target_h):
+                log.append(f"FIX: image_slot {cur_x},{cur_y} {cur_w}x{cur_h} -> 0,0 {target_w}x{target_h} (full-bleed)")
+                el["x"], el["y"], el["width"], el["height"] = 0, 0, target_w, target_h
+        elif "top" in placement and "bleed" in placement:
+            if cur_y != 0 or cur_w < target_w * 0.8:
+                log.append(f"FIX: image_slot top-bleed -> 0,0 {target_w}x{tgt_h}")
+                el["x"], el["y"], el["width"], el["height"] = 0, 0, target_w, tgt_h
+        elif placement and (cur_w < tgt_w * 0.5 or cur_h < tgt_h * 0.5):
+            # LLM picked tiny slot — replace with YAML default
+            log.append(f"FIX: image_slot too small {cur_w}x{cur_h} -> {tgt_w}x{tgt_h} ({placement})")
+            el.update({k: target_slot[k] for k in ("x", "y", "width", "height")})
 
     # 3a) TYPOGRAPHY ENFORCEMENT — overwrite font from YAML's typography spec
     typo = model.get("typography", {})
@@ -249,11 +313,11 @@ def enforce(layout_spec: dict, briefing: dict, knowledge_path: str | None = None
 
             el["font"] = cur_font
 
-    # 3b) COLOR ENFORCEMENT — snap text/cta colors to YAML palette
+    # 3b) COLOR ENFORCEMENT — force role-based color per YAML (unconditional override)
     for el in elements:
         slot = el.get("slot_name", "")
         if el.get("type") == "text":
-            # Force role-based color
+            # Force role-based color from YAML (LLM choice is overridden)
             if slot == "headline":
                 expected = fg_authoritative
             elif slot == "body":
@@ -263,143 +327,100 @@ def enforce(layout_spec: dict, briefing: dict, knowledge_path: str | None = None
             else:
                 expected = fg_authoritative
             cur = el.get("color", "")
-            if cur.startswith("var(") or _luminance_distance(cur, bg_authoritative) < 0.25:
-                # Off-palette or low-contrast — snap to authoritative
-                log.append(f"FIX: {slot} color {cur} -> {expected}")
-                el["color"] = expected
-            elif cur != expected and _looks_offbrand(cur, [fg_authoritative, body_authoritative, accent_authoritative]):
-                log.append(f"FIX: {slot} color {cur} -> {expected} (snap to palette)")
+            if cur != expected:
+                log.append(f"FIX: {slot} color {cur or '(none)'} -> {expected} (YAML role)")
                 el["color"] = expected
             # Snap ranges to accent if any
             for rng in el.get("ranges", []) or []:
-                if rng.get("fill", "").startswith("var(") or _looks_offbrand(rng.get("fill", ""), [accent_authoritative]):
+                if rng.get("fill", "") != accent_authoritative:
                     rng["fill"] = accent_authoritative
 
         elif el.get("type") == "pill_cta":
             cur_bg_pill = el.get("background", "")
             cur_text_pill = el.get("text_color", "")
-            if cur_bg_pill.startswith("var(") or cur_bg_pill != cta_bg_auth:
+            if cur_bg_pill != cta_bg_auth:
                 log.append(f"FIX: CTA bg {cur_bg_pill} -> {cta_bg_auth}")
                 el["background"] = cta_bg_auth
-            if cur_text_pill.startswith("var(") or cur_text_pill != cta_text_auth:
+            if cur_text_pill != cta_text_auth:
                 log.append(f"FIX: CTA text {cur_text_pill} -> {cta_text_auth}")
                 el["text_color"] = cta_text_auth
 
-    # 4) COORDINATE IMAGE_SLOT + TEXT positions — preserve relative spacing
+    # 3c) CTA language normalization — fix PT/ES typos from LLM
+    CTA_LANG_FIXES = {
+        # Spanish leak → PT-BR
+        "INSCRIBIR-SE": "INSCREVER-SE",
+        "INSCRIBIRSE": "INSCREVER-SE",
+        "INSCRÍBIR-SE": "INSCREVER-SE",
+        "REGISTRAR-SE": "CADASTRAR-SE",
+        "DESCUBRIR": "DESCUBRA",
+        "APRENDER MÁS": "SAIBA MAIS",
+        "APRENDER MAS": "SAIBA MAIS",
+        "PARTICIPAR AHORA": "PARTICIPAR AGORA",
+        "ENVIAR AHORA": "ENVIAR AGORA",
+        # Anglicisms
+        "SIGN UP": "INSCREVER-SE",
+        "LEARN MORE": "SAIBA MAIS",
+        "BUY NOW": "COMPRAR AGORA",
+        "GET STARTED": "COMECE AGORA",
+    }
+    for el in elements:
+        if el.get("type") == "pill_cta":
+            t = (el.get("text") or "").strip().upper()
+            if t in CTA_LANG_FIXES:
+                fixed = CTA_LANG_FIXES[t]
+                log.append(f"FIX: CTA text '{el['text']}' -> '{fixed}' (PT-BR normalization)")
+                el["text"] = fixed
+
+    # 3d) YELLOW-BLOCO container injection — yellow rect behind headline+bullets
+    yaml_id = (model.get("id") or "").lower()
+    is_yellow_bloco = "yellow-bloco" in yaml_id or "yellow_bloco" in yaml_id
+    has_yellow_rect = any(e.get("type") == "rect" and e.get("role") == "yellow_container" for e in elements)
+    if is_yellow_bloco and not has_yellow_rect:
+        # Yellow rect occupies left 60% of canvas, vertically centered (~ y 400-1500)
+        rect_x, rect_y = 60, 380
+        rect_w, rect_h = int(target_w * 0.65), 1100
+        elements.append({
+            "type": "rect",
+            "role": "yellow_container",
+            "x": rect_x, "y": rect_y,
+            "width": rect_w, "height": rect_h,
+            "fill": accent_authoritative,
+            "corner_radius": 24,
+        })
+        log.append(f"FIX: injected YELLOW-BLOCO yellow container rect ({rect_x},{rect_y}) {rect_w}x{rect_h}")
+
+    # 3e) Yellow band divider — for styles with ornament:"yellow-band-divider" (e.g., K)
+    yaml_ornament = (model.get("composicao", {}).get("ornament") or "").lower()
+    has_yellow_band = any(e.get("type") == "rect" and e.get("role") == "yellow_band" for e in elements)
+    if "yellow-band-divider" in yaml_ornament and not has_yellow_band:
+        # Inserted between headline and body — assembler positions it by sequencing
+        elements.append({
+            "type": "rect",
+            "role": "yellow_band",
+            "x": 80, "y": 0,  # y set by tight_block placement
+            "width": 120, "height": 6,
+            "fill": accent_authoritative,
+            "corner_radius": 3,
+        })
+        log.append(f"FIX: injected yellow-band divider")
+
+    # 4) TIGHT BLOCK POSITIONING — group h1+h2+body+CTA close together in computed text zone
     image_slots = [e for e in elements if e.get("type") == "image_slot"]
-    text_pills = [e for e in elements if e.get("type") in ("text", "pill_cta")]
+    primary_image = image_slots[0] if image_slots else None
 
-    # 4.0) ALWAYS sequence text blocks based on text height — even without images
-    if not image_slots:
-        sorted_texts = sorted(
-            [el for el in text_pills if el.get("type") == "text"],
-            key=lambda e: e.get("y", 0)
-        )
-        if sorted_texts:
-            cursor_y = max(sorted_texts[0].get("y", 100) or 100, 100)
-            for el in sorted_texts:
-                font_cfg = el.get("font", {})
-                size = font_cfg.get("size", 32)
-                lh_pct = font_cfg.get("line_height_pct", 120)
-                style_cur = font_cfg.get("style", "")
-                if "Expanded" in style_cur and any(k in style_cur for k in ["Heavy", "Bold"]):
-                    cw = 0.78
-                elif "Expanded" in style_cur:
-                    cw = 0.70
-                elif any(k in style_cur for k in ["Heavy", "Bold", "Black"]):
-                    cw = 0.62
-                else:
-                    cw = 0.55
-                width = el.get("width") or (target_w - 160)
-                cpl = max(6, int(width / (size * cw)))
-                txt = el.get("text", "")
-                wrapped = 0
-                for line in txt.split("\n"):
-                    wrapped += max(1, -(-len(line) // cpl)) if line else 1
-                # Pillow font metrics typically render lines with extra space — use 1.35x buffer
-                line_h = size * max(lh_pct / 100, 1.0)  # min 100% line-height
-                est_h = int(line_h * wrapped * 1.35)
-                if el.get("y") != cursor_y:
-                    log.append(f"FIX: {el.get('slot_name')} y {el.get('y')} -> {cursor_y} (seq lines={wrapped} est_h={est_h})")
-                    el["y"] = cursor_y
-                gap = 80 if el.get("slot_name") == "headline" else (40 if el.get("slot_name") in ("tag", "tag_eyebrow") else 32)
-                cursor_y += est_h + gap
+    text_zone = _compute_text_zone(model, target_w, target_h, primary_image, image_cfg)
+    log.append(f"INFO: text_zone x={text_zone['x']} y={text_zone['y']} w={text_zone['w']} h={text_zone['h']} align={text_zone['align']}")
 
-    for img in image_slots:
-        img_y, img_h = img.get("y", 0), img.get("height", 0)
-        img_w = img.get("width", 0)
-        img_bottom = img_y + img_h
+    _layout_tight_block(elements, text_zone, log, target_w)
 
-        # Image is top-anchored (y<=80, large width)
-        is_top_image = img_y <= 80 and img_w >= target_w * 0.7
-        is_full_bleed = is_top_image and img_h >= target_h * 0.7
-
-        # Determine text safe zone start (where text can begin)
-        if is_full_bleed:
-            text_safe_top = int(target_h * 0.62)
-        elif is_top_image:
-            text_safe_top = img_bottom + 80  # margin below image
-        else:
-            text_safe_top = 100  # default top margin
-
-        # Sort text elements by current y to preserve their order/relative spacing
-        sorted_texts = sorted(
-            [el for el in text_pills if el.get("type") == "text"],
-            key=lambda e: e.get("y", 0)
-        )
-        cta = next((e for e in text_pills if e.get("type") == "pill_cta"), None)
-
-        # If any text is above the safe zone, rebuild positions
-        needs_rebuild = any(el.get("y", 0) < text_safe_top for el in sorted_texts)
-        if needs_rebuild and sorted_texts:
-            cursor_y = text_safe_top
-            for el in sorted_texts:
-                font = el.get("font", {})
-                size = font.get("size", 32)
-                line_height_pct = font.get("line_height_pct", 120)
-                style = font.get("style", "")
-                # Char width factor varies by typeface family + width axis
-                # SF Pro Expanded / Heavy / Bold = wider glyphs
-                if "Expanded" in style:
-                    char_w_factor = 0.72 if any(k in style for k in ["Heavy", "Bold"]) else 0.65
-                elif any(k in style for k in ["Heavy", "Bold", "Black"]):
-                    char_w_factor = 0.60
-                else:
-                    char_w_factor = 0.52
-                width = el.get("width") or (target_w - 160)
-                if isinstance(width, (int, float)) and size > 0:
-                    chars_per_line = max(6, int(width / (size * char_w_factor)))
-                    explicit_lines = max(1, len(el.get("text", "").split("\n")))
-                    # Count line breaks needed by wrapping each explicit line independently
-                    wrapped = 0
-                    for line in el.get("text", "").split("\n"):
-                        wrapped += max(1, -(-len(line) // chars_per_line))  # ceil division
-                    est_lines = max(explicit_lines, wrapped)
-                else:
-                    est_lines = max(1, len(el.get("text", "").split("\n")))
-                line_h = size * (line_height_pct / 100)
-                est_h = int(line_h * est_lines * 1.20)  # +20% safety
-                if el.get("y", 0) != cursor_y:
-                    log.append(f"FIX: {el.get('slot_name')} y {el.get('y')} -> {cursor_y} (lines={est_lines} est_h={est_h})")
-                    el["y"] = cursor_y
-                # Gap between blocks: larger for headline→body
-                gap = 56 if el.get("slot_name") == "headline" else (40 if el.get("slot_name") in ("tag", "tag_eyebrow") else 32)
-                cursor_y += est_h + gap
-
-    # Ensure CTA is near bottom
-    cta_els = [e for e in elements if e.get("type") == "pill_cta"]
-    for cta in cta_els:
-        if cta.get("y", 0) < target_h - 250 or cta.get("y", 0) > target_h - 100:
-            new_y = target_h - 200
-            log.append(f"FIX: CTA y {cta.get('y')} -> {new_y} (bottom anchor)")
-            cta["y"] = new_y
-
-    # Z-ORDER: image_slot must render FIRST (background), then text/pills on top.
-    image_slots_z = [e for e in elements if e.get("type") == "image_slot"]
-    other_z = [e for e in elements if e.get("type") != "image_slot"]
-    new_order = image_slots_z + other_z
+    # Z-ORDER: image_slots (bg) → rects (mid) → text/pills (top)
+    images_z = [e for e in elements if e.get("type") == "image_slot"]
+    rects_z = [e for e in elements if e.get("type") == "rect"]
+    text_z = [e for e in elements if e.get("type") in ("text", "pill_cta")]
+    others = [e for e in elements if e.get("type") not in ("image_slot", "rect", "text", "pill_cta")]
+    new_order = images_z + rects_z + text_z + others
     if new_order != elements:
-        log.append(f"FIX: reordered z-stack — image_slots ({len(image_slots_z)}) first, then text/CTAs ({len(other_z)})")
+        log.append(f"FIX: z-stack — images({len(images_z)}) + rects({len(rects_z)}) + text({len(text_z)})")
         layout_spec["elements"] = new_order
 
     return layout_spec, log
@@ -440,6 +461,189 @@ def _looks_offbrand(color: str, palette: list[str]) -> bool:
         if dist < 30:
             return False
     return True
+
+
+def _compute_text_zone(model: dict, target_w: int, target_h: int, image_slot: dict | None, image_cfg: dict) -> dict:
+    """Compute where the text block (h1+h2+body+CTA) should live, based on image placement.
+
+    Returns dict: {x, y, w, h, align}
+      align ∈ {"top", "center", "bottom"}: where in the zone to anchor the block.
+    """
+    margin_x = 80
+    margin_top = 120
+    margin_bot = 120
+
+    if not image_slot:
+        # No image — text fills the canvas, top-aligned
+        return {
+            "x": margin_x, "y": margin_top,
+            "w": target_w - 2 * margin_x,
+            "h": target_h - margin_top - margin_bot,
+            "align": "top",
+        }
+
+    placement = (image_cfg.get("placement") or "").lower()
+    img_x, img_y = image_slot["x"], image_slot["y"]
+    img_w, img_h = image_slot["width"], image_slot["height"]
+
+    # Full bleed (image covers nearly whole canvas) — text in bottom 38%
+    is_full_bleed = (img_y <= 80 and img_h >= target_h * 0.75 and img_w >= target_w * 0.85)
+    is_top = img_y <= 80 and img_w >= target_w * 0.7 and img_h < target_h * 0.6
+    is_bottom = (img_y >= target_h * 0.4 and img_y + img_h >= target_h - 100)
+    is_right_or_corner = img_x >= target_w * 0.35 and img_w < target_w * 0.85
+
+    if is_full_bleed or "full-bleed" in placement:
+        text_top = int(target_h * 0.62)
+        return {
+            "x": margin_x, "y": text_top,
+            "w": target_w - 2 * margin_x,
+            "h": target_h - text_top - margin_bot,
+            "align": "bottom",
+        }
+    if is_bottom or "bottom" in placement:
+        # Text above image
+        return {
+            "x": margin_x, "y": margin_top,
+            "w": target_w - 2 * margin_x,
+            "h": img_y - margin_top - 40,
+            "align": "top",
+        }
+    if is_top or "top" in placement:
+        # Text below image, tight to it
+        text_top = img_y + img_h + 60
+        return {
+            "x": margin_x, "y": text_top,
+            "w": target_w - 2 * margin_x,
+            "h": target_h - text_top - margin_bot,
+            "align": "top",
+        }
+    if is_right_or_corner or "right" in placement or "corner" in placement:
+        # Text on the left, image bleeds right
+        text_right = img_x - 30
+        return {
+            "x": margin_x, "y": margin_top,
+            "w": text_right - margin_x,
+            "h": target_h - margin_top - margin_bot,
+            "align": "top",
+        }
+    # Default — top
+    return {
+        "x": margin_x, "y": margin_top,
+        "w": target_w - 2 * margin_x,
+        "h": target_h - margin_top - margin_bot,
+        "align": "top",
+    }
+
+
+def _estimate_element_height(el: dict, zone_width: int) -> int:
+    """Estimate rendered height of a text or pill element."""
+    if el.get("type") == "pill_cta":
+        font = el.get("font", {})
+        size = font.get("size", 24)
+        padding_y = el.get("padding_y", 22)
+        return int(size * 1.0 + padding_y * 2 + 4)  # text + 2*padding + small fudge
+    if el.get("type") == "text":
+        font = el.get("font", {})
+        size = font.get("size", 28)
+        lh_pct = font.get("line_height_pct", 120)
+        style = font.get("style", "")
+        # Char-width factor — Expanded glyphs are wider, Heavy/Bold add to it
+        if "Expanded" in style and any(k in style for k in ["Heavy", "Bold"]):
+            cw = 0.78
+        elif "Expanded" in style:
+            cw = 0.70
+        elif any(k in style for k in ["Heavy", "Bold", "Black"]):
+            cw = 0.62
+        else:
+            cw = 0.55
+        cpl = max(6, int(zone_width / (size * cw)))
+        txt = el.get("text", "")
+        wrapped = 0
+        for line in txt.split("\n"):
+            wrapped += max(1, -(-len(line) // cpl)) if line else 1
+        # Pillow renders ascenders/descenders adding ~30-40% on top of nominal size
+        line_h = size * max(lh_pct / 100, 1.0)
+        return int(line_h * wrapped * 1.30)
+    return 60
+
+
+def _layout_tight_block(elements: list, text_zone: dict, log: list, target_w: int):
+    """Stack text + CTA tightly within text_zone with the alignment direction.
+
+    Also positions yellow_band divider between headline and body if present.
+    """
+    role_order = {"tag": 0, "tag_eyebrow": 0, "headline": 1, "body": 2, "cta": 3}
+
+    block_items = [e for e in elements if e.get("type") in ("text", "pill_cta")]
+    yellow_band = next((e for e in elements if e.get("type") == "rect" and e.get("role") == "yellow_band"), None)
+    if not block_items:
+        return
+
+    def _sort_key(el):
+        slot = el.get("slot_name", "")
+        if el.get("type") == "pill_cta":
+            return (3, el.get("y", 9999))
+        return (role_order.get(slot, 2), el.get("y", 0))
+
+    block_items.sort(key=_sort_key)
+
+    # Compute heights and gaps
+    heights = []
+    gaps = []
+    for i, el in enumerate(block_items):
+        h = _estimate_element_height(el, text_zone["w"])
+        heights.append(h)
+        # Gaps: tag→headline 32, headline→body 40, body→CTA 56, before CTA when no body 48
+        if i < len(block_items) - 1:
+            cur = el.get("slot_name", "")
+            nxt = block_items[i + 1]
+            nxt_slot = nxt.get("slot_name", "")
+            nxt_is_cta = nxt.get("type") == "pill_cta"
+            if cur in ("tag", "tag_eyebrow") and nxt_slot == "headline":
+                gaps.append(36)
+            elif cur == "headline" and nxt_slot == "body":
+                gaps.append(40)
+            elif cur == "headline" and nxt_is_cta:
+                gaps.append(56)
+            elif cur == "body" and nxt_is_cta:
+                gaps.append(56)
+            else:
+                gaps.append(32)
+        else:
+            gaps.append(0)
+
+    total_h = sum(heights) + sum(gaps)
+
+    # Position block based on alignment
+    if text_zone["align"] == "bottom":
+        cursor_y = text_zone["y"] + text_zone["h"] - total_h
+    elif text_zone["align"] == "center":
+        cursor_y = text_zone["y"] + max(0, (text_zone["h"] - total_h) // 2)
+    else:  # top
+        cursor_y = text_zone["y"]
+
+    # Ensure block doesn't overflow canvas top
+    cursor_y = max(cursor_y, 80)
+
+    # Place each element + insert yellow_band between headline and body
+    for i, el in enumerate(block_items):
+        new_x = text_zone["x"]
+        new_y = int(cursor_y)
+        if el.get("x") != new_x:
+            el["x"] = new_x
+        if el.get("y") != new_y:
+            log.append(f"FIX: {el.get('slot_name')} pos -> ({new_x}, {new_y}) [h={heights[i]}]")
+            el["y"] = new_y
+        if el.get("type") == "text":
+            el["width"] = text_zone["w"]
+        cursor_y += heights[i] + gaps[i]
+
+        # If this was the headline and we have a yellow_band, insert it after with extra gap
+        if yellow_band and el.get("slot_name") == "headline":
+            yellow_band["x"] = text_zone["x"]
+            yellow_band["y"] = int(cursor_y - 16)  # tight after headline
+            cursor_y += yellow_band.get("height", 6) + 24
+            log.append(f"FIX: yellow_band positioned at y={yellow_band['y']}")
 
 
 def _default_image_slot(model: dict, frame_w: int, frame_h: int) -> dict:

@@ -275,6 +275,48 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
 
     # Pick top-1 (in v2: ask human)
     chosen_model_id = style_rec["recommended"][0]["model_id"]
+
+    # Explicit style override — when user mentions "estilo X" / "style X" in briefing
+    raw = (briefing.get("raw_request") or "").lower()
+    EXPLICIT_STYLE_PATTERNS = [
+        # (pattern, model_id)
+        ("yellow-bloco", "YELLOW-BLOCO"),
+        ("yellow bloco", "YELLOW-BLOCO"),
+        ("yellow-editorial", "YELLOW-EDITORIAL"),
+        ("yellow editorial", "YELLOW-EDITORIAL"),
+        ("yellow-frame", "YELLOW-FRAME"),
+        ("yellow-draw", "YELLOW-DRAW"),
+        ("yellow-split", "YELLOW-SPLIT"),
+        ("light-surreal", "LIGHT-SURREAL"),
+        ("light surreal", "LIGHT-SURREAL"),
+        ("hbr editorial", "LIGHT-SURREAL"),
+        ("light-tipo", "LIGHT-TIPO"),
+        ("dark-carta", "DARK-CARTA"),
+        ("dark-objeto", "DARK-OBJETO"),
+        ("dark-colagem", "DARK-COLAGEM"),
+        ("news-card", "NEWS-CARD"),
+        ("logo-wall", "LOGO-WALL"),
+        ("estilo a ", "A-headline-foto-dark"),
+        ("style a ", "A-headline-foto-dark"),
+        ("estilo b ", "B-foto-top-headline-mixed"),
+        ("style b ", "B-foto-top-headline-mixed"),
+        ("estilo c ", "C-tipografia-pura-dark"),
+        ("style c ", "C-tipografia-pura-dark"),
+        ("estilo d ", "D-foto-fullbleed-overlay"),
+        ("style d ", "D-foto-fullbleed-overlay"),
+        ("tipografia pura", "C-tipografia-pura-dark"),
+        ("full-bleed", "D-foto-fullbleed-overlay"),
+        ("foto top", "B-foto-top-headline-mixed"),
+        ("big number", "YELLOW-EDITORIAL"),
+        ("numero gigante", "YELLOW-EDITORIAL"),
+    ]
+    for pattern, forced_id in EXPLICIT_STYLE_PATTERNS:
+        if pattern in raw:
+            if chosen_model_id != forced_id:
+                info(f"explicit style override: '{pattern}' detected -> {forced_id} (was {chosen_model_id})")
+                chosen_model_id = forced_id
+            break
+
     info(f"Chosen style: {chosen_model_id}")
 
     # Skill 03 — layout composer
@@ -316,11 +358,27 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
     # Skill 04 — image prompt engineer
     image_slots = [el for el in layout_spec.get("elements", []) if el.get("type") == "image_slot"]
     image_urls: dict[str, str] = {}
+    ad_refs_list = []
     if image_slots:
+        # Look up visual references from banco BEFORE generating the image prompt
+        try:
+            from vector_search import search_ad_refs, refs_to_prompt_addendum
+            query = f"{briefing.get('tese_central', '')} {briefing.get('intent', '')} {briefing.get('tom', '')}"
+            ad_refs_list, status = search_ad_refs(query, style_filter=chosen_model_id, top_k=3)
+            if ad_refs_list:
+                info(f"banco refs found: {len(ad_refs_list)} ({status})")
+                for ref in ad_refs_list:
+                    info(f"  ref: {ref.filename[:60]} (style={ref.style_id} score={ref.score:.3f})")
+            else:
+                info(f"no banco refs ({status})")
+        except Exception as e:
+            info(f"ad-refs search skipped: {e}")
+
         info("Running 04-image-prompt-engineer...")
+        extra_ctx = refs_to_prompt_addendum(ad_refs_list) if ad_refs_list else ""
         prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
         t0 = time.time()
-        result = runner.run("04-image-prompt-engineer", prompt_input)
+        result = runner.run("04-image-prompt-engineer", prompt_input, extra_context=extra_ctx)
         log_event(run_id, {"skill": "04", "ok": result.ok,
                            "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
         if not result.ok:
@@ -333,15 +391,20 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
 
         if not image_spec.get("skip"):
             image_gen = ImageGenAdapter()
+            # Resolve banco refs into local paths for image-gen with reference support (Nano Banana 2)
+            ref_paths = [ref.png_path for ref in ad_refs_list if ref.png_path]
             for p in image_spec.get("prompts", []):
+                # Merge LLM-provided refs with banco refs
+                refs = list(p.get("reference_images", []) or [])
+                refs.extend(ref_paths)
                 ig_result = image_gen.generate(
                     prompt=p["prompt"],
                     negative_prompt=p.get("negative_prompt", ""),
                     aspect_ratio=p.get("aspect_ratio", "9:16"),
-                    reference_images=p.get("reference_images", []),
+                    reference_images=refs[:3],  # cap at 3
                 )
                 image_urls[p["slot_name"]] = ig_result.url
-                info(f"image generated: {p['slot_name']} → {ig_result.url}")
+                info(f"image generated: {p['slot_name']} -> {ig_result.url} (refs={len(refs[:3])})")
     else:
         info("No image slots in layout — skipping skills 04 (image-prompt-engineer)")
 
