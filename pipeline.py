@@ -6,8 +6,10 @@ import os
 import sys
 import time
 import uuid
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import click
 from dotenv import load_dotenv
@@ -34,6 +36,21 @@ except ImportError:
     def ok(msg): print(f"[ok] {msg}")
     def err(msg): print(f"[err] {msg}")
     def panel(title, data): print(f"=== {title} ===\n{json.dumps(data, ensure_ascii=False, indent=2)}")
+
+
+@dataclass
+class PipelineResult:
+    run_id: str
+    ok: bool
+    error: str | None = None
+    model_id: str | None = None
+    png_path: str | None = None
+    jpeg_path: str | None = None
+    qa_status: str | None = None
+    qa_warnings: list = field(default_factory=list)
+    skill_errors: list = field(default_factory=list)
+    elapsed_ms: int = 0
+    artifacts_dir: Path = Path("./artifacts")
 
 
 SKILL_ORDER = [
@@ -155,6 +172,263 @@ MOCK_FIXTURES = {
 }
 
 
+def run_pipeline(
+    briefing_text: str | None = None,
+    *,
+    mock: bool = False,
+    provider: str | None = None,
+    input_data: dict | None = None,
+    stop_at: str | None = None,
+    verbose: bool = False,
+    reference_image_url: str | None = None,
+    artifacts_dir: Path | None = None,
+) -> PipelineResult:
+    """Execute the full ad-generator pipeline programmatically.
+
+    Args:
+        briefing_text: Free-text briefing in PT-BR (fed to skill 01).
+        mock: Use mock LLM and image-gen (no API calls).
+        provider: Override LLM_PROVIDER env var.
+        input_data: Pre-parsed briefing dict (skips skill 01).
+        stop_at: Stop after this skill number ('01'-'06').
+        verbose: Print rich panels for each skill output.
+        reference_image_url: User-provided visual reference (URL or local path).
+        artifacts_dir: Override ARTIFACTS_DIR env var.
+
+    Returns:
+        PipelineResult with ok, png_path, qa_status, etc.
+    """
+    t_global = time.time()
+    _artifacts_dir = artifacts_dir or Path(os.getenv("ARTIFACTS_DIR", "./artifacts"))
+    _artifacts_dir.mkdir(parents=True, exist_ok=True)
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:6]
+
+    info(f"run_id = {run_id}")
+    info(f"mode = {'MOCK' if mock else 'LIVE'} | provider = {provider or os.getenv('LLM_PROVIDER', 'claude')}")
+
+    llm = MockLLMAdapter(fixtures=MOCK_FIXTURES) if mock else LLMAdapter(provider=provider)
+    runner = SkillRunner(llm=llm)
+
+    # ── Skill 01 — briefing parser (or load from dict) ──────────────────────
+    if input_data:
+        briefing = input_data
+        info("Using pre-parsed briefing dict.")
+    else:
+        if not briefing_text:
+            return PipelineResult(run_id=run_id, ok=False,
+                                  error="briefing_text or input_data required",
+                                  artifacts_dir=_artifacts_dir)
+        info("Running 01-briefing-parser...")
+        t0 = time.time()
+        result = runner.run("01-briefing-parser", briefing_text)
+        log_event(run_id, {"skill": "01", "ok": result.ok,
+                           "tokens_in": result.llm_response.tokens_in if result.llm_response else 0,
+                           "tokens_out": result.llm_response.tokens_out if result.llm_response else 0,
+                           "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+        if not result.ok:
+            return PipelineResult(run_id=run_id, ok=False,
+                                  error=f"briefing-parser failed: {result.error}",
+                                  artifacts_dir=_artifacts_dir)
+        briefing = result.output
+        if briefing.get("clarifying_questions"):
+            write_artifact(run_id, "01-briefing", briefing, _artifacts_dir)
+            return PipelineResult(run_id=run_id, ok=False,
+                                  error="clarifying_questions: " + "; ".join(briefing["clarifying_questions"]),
+                                  artifacts_dir=_artifacts_dir)
+
+    write_artifact(run_id, "01-briefing", briefing, _artifacts_dir)
+    vr = validate(briefing, "briefing.schema.json")
+    if not vr.ok:
+        return PipelineResult(run_id=run_id, ok=False,
+                              error=f"briefing schema invalid: {vr.errors}",
+                              artifacts_dir=_artifacts_dir)
+    if verbose:
+        panel("01 · briefing", briefing)
+    if stop_at == "01":
+        return PipelineResult(run_id=run_id, ok=True, artifacts_dir=_artifacts_dir)
+
+    # ── Skill 02 — style selector ────────────────────────────────────────────
+    info("Running 02-style-selector...")
+    t0 = time.time()
+    vector_context = ""
+    if not mock:
+        try:
+            from vector_search import search_styles, candidates_to_context
+            query = briefing.get("tese_central", "") + " | " + briefing.get("intent", "")
+            candidates, status = search_styles(query, top_k=5)
+            if candidates:
+                info(f"vector search → top: {candidates[0].model_id} (score={candidates[0].combined_score:.3f})")
+                vector_context = candidates_to_context(candidates)
+            else:
+                info(f"vector search skipped: {status}")
+        except Exception as e:
+            info(f"vector search unavailable (graceful fallback): {e}")
+
+    result = runner.run("02-style-selector", briefing, extra_context=vector_context)
+    log_event(run_id, {"skill": "02", "ok": result.ok,
+                       "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+    if not result.ok:
+        return PipelineResult(run_id=run_id, ok=False,
+                              error=f"style-selector failed: {result.error}",
+                              artifacts_dir=_artifacts_dir)
+    style_rec = result.output
+    write_artifact(run_id, "02-style-recommendation", style_rec, _artifacts_dir)
+    if verbose:
+        panel("02 · style recommendation", style_rec)
+    if stop_at == "02":
+        return PipelineResult(run_id=run_id, ok=True,
+                              model_id=style_rec["recommended"][0]["model_id"],
+                              artifacts_dir=_artifacts_dir)
+
+    chosen_model_id = style_rec["recommended"][0]["model_id"]
+    info(f"Chosen style: {chosen_model_id}")
+
+    # ── Skill 03 — layout composer ───────────────────────────────────────────
+    info("Running 03-layout-composer...")
+    layout_input = {
+        "briefing": briefing,
+        "model_id": chosen_model_id,
+        "copy": {"_note": "MVP — generate copy inside layout composer for now"},
+    }
+    t0 = time.time()
+    result = runner.run(
+        "03-layout-composer", layout_input,
+        extra_context="Note: this MVP also generates the copy. Compose appropriate headline/body/CTA aligned to the tese_central and the model's slot constraints.",
+    )
+    log_event(run_id, {"skill": "03", "ok": result.ok,
+                       "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+    if not result.ok:
+        return PipelineResult(run_id=run_id, ok=False,
+                              error=f"layout-composer failed: {result.error}",
+                              model_id=chosen_model_id, artifacts_dir=_artifacts_dir)
+    layout_spec = result.output
+
+    try:
+        from layout_enforcer import enforce
+        layout_spec, enforcer_log = enforce(layout_spec, briefing)
+        for msg in enforcer_log:
+            info(f"enforcer: {msg}")
+    except Exception as e:
+        info(f"enforcer skipped: {e}")
+
+    write_artifact(run_id, "03-layout-spec", layout_spec, _artifacts_dir)
+    if verbose:
+        panel("03 · layout spec (post-enforce)", layout_spec)
+    if stop_at == "03":
+        return PipelineResult(run_id=run_id, ok=True, model_id=chosen_model_id,
+                              artifacts_dir=_artifacts_dir)
+
+    # ── Skill 04 — image prompt engineer ─────────────────────────────────────
+    image_slots = [el for el in layout_spec.get("elements", []) if el.get("type") == "image_slot"]
+    image_urls: dict[str, str] = {}
+    if image_slots:
+        info("Running 04-image-prompt-engineer...")
+        prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
+        t0 = time.time()
+        result = runner.run("04-image-prompt-engineer", prompt_input)
+        log_event(run_id, {"skill": "04", "ok": result.ok,
+                           "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+        if not result.ok:
+            return PipelineResult(run_id=run_id, ok=False,
+                                  error=f"image-prompt-engineer failed: {result.error}",
+                                  model_id=chosen_model_id, artifacts_dir=_artifacts_dir)
+        image_spec = result.output
+        write_artifact(run_id, "04-image-prompt", image_spec, _artifacts_dir)
+        if verbose:
+            panel("04 · image prompts", image_spec)
+
+        if not image_spec.get("skip"):
+            image_gen = ImageGenAdapter()
+            for p in image_spec.get("prompts", []):
+                refs = list(p.get("reference_images", []))
+                # Inject user-provided visual reference if present
+                if reference_image_url and reference_image_url not in refs:
+                    refs.insert(0, reference_image_url)
+                ig_result = image_gen.generate(
+                    prompt=p["prompt"],
+                    negative_prompt=p.get("negative_prompt", ""),
+                    aspect_ratio=p.get("aspect_ratio", "9:16"),
+                    reference_images=refs,
+                )
+                image_urls[p["slot_name"]] = ig_result.url
+                info(f"image generated: {p['slot_name']} → {ig_result.url}")
+    else:
+        info("No image slots — skipping skill 04")
+
+    if stop_at == "04":
+        return PipelineResult(run_id=run_id, ok=True, model_id=chosen_model_id,
+                              artifacts_dir=_artifacts_dir)
+
+    # ── Skill 05 — assembler ─────────────────────────────────────────────────
+    info("Running 05-assembler (PNG output)...")
+    assembler = AssemblerAdapter()
+    t0 = time.time()
+    asm_result = assembler.assemble(layout_spec, image_urls)
+    log_event(run_id, {"skill": "05", "ok": True,
+                       "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+    asm_output = {
+        "destination": asm_result.destination,
+        "png_path": asm_result.png_path,
+        "jpeg_path": asm_result.jpeg_path,
+        "html_path": asm_result.html_path,
+        "figma": {"url": asm_result.figma_url} if asm_result.figma_url else None,
+        "preview_url": f"file://{asm_result.png_path}" if asm_result.png_path else None,
+        "metadata": {"style_id": layout_spec.get("model_id"),
+                     "elapsed_ms": asm_result.elapsed_ms,
+                     "warnings": asm_result.warnings or []}
+    }
+    if asm_result.png_path:
+        ok(f"PNG salvo: {asm_result.png_path}")
+    write_artifact(run_id, "05-ad-output", asm_output, _artifacts_dir)
+    if stop_at == "05":
+        return PipelineResult(run_id=run_id, ok=True, model_id=chosen_model_id,
+                              png_path=asm_result.png_path, jpeg_path=asm_result.jpeg_path,
+                              artifacts_dir=_artifacts_dir)
+
+    # ── Skill 06 — QA validator ───────────────────────────────────────────────
+    info("Running 06-qa-validator...")
+    qa_input = {"ad_output": asm_output, "layout_spec": layout_spec, "model_id": chosen_model_id}
+    t0 = time.time()
+    result = runner.run("06-qa-validator", qa_input)
+    log_event(run_id, {"skill": "06", "ok": result.ok,
+                       "latency_ms": int((time.time() - t0) * 1000)}, _artifacts_dir)
+    if not result.ok:
+        # QA parse failure — still return the image with a warning
+        return PipelineResult(
+            run_id=run_id, ok=True,
+            model_id=chosen_model_id,
+            png_path=asm_result.png_path,
+            jpeg_path=asm_result.jpeg_path,
+            qa_status="ERROR",
+            qa_warnings=[f"qa-validator error: {result.error}"],
+            elapsed_ms=int((time.time() - t_global) * 1000),
+            artifacts_dir=_artifacts_dir,
+        )
+    qa = result.output
+    write_artifact(run_id, "06-qa-report", qa, _artifacts_dir)
+    if verbose:
+        panel("06 · QA report", qa)
+
+    qa_warnings = [w.get("fix_suggestion", str(w)) for w in qa.get("warnings", [])]
+    qa_issues = [i.get("fix_suggestion", str(i)) for i in qa.get("issues", [])]
+
+    elapsed = int((time.time() - t_global) * 1000)
+    ok(f"Pipeline complete in {elapsed}ms. Run dir: {_artifacts_dir / run_id}")
+
+    return PipelineResult(
+        run_id=run_id,
+        ok=qa.get("status") != "FAIL",
+        error=f"QA FAIL — {len(qa.get('issues', []))} issues" if qa.get("status") == "FAIL" else None,
+        model_id=chosen_model_id,
+        png_path=asm_result.png_path,
+        jpeg_path=asm_result.jpeg_path,
+        qa_status=qa.get("status"),
+        qa_warnings=qa_warnings + qa_issues,
+        elapsed_ms=elapsed,
+        artifacts_dir=_artifacts_dir,
+    )
+
+
 def write_artifact(run_id: str, step: str, data: dict, artifacts_dir: Path):
     out = artifacts_dir / run_id
     out.mkdir(parents=True, exist_ok=True)
@@ -187,212 +461,31 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
 
       python pipeline.py --input artifacts/briefings/hiperzoo.json --stop-at 03
     """
-    artifacts_dir = Path(os.getenv("ARTIFACTS_DIR", "./artifacts"))
-    artifacts_dir.mkdir(parents=True, exist_ok=True)
-    run_id = datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:6]
-
-    info(f"run_id = {run_id}")
-    info(f"mode = {'MOCK' if mock else 'LIVE'} | provider = {provider or os.getenv('LLM_PROVIDER', 'claude')}")
-
-    # Setup LLM
-    if mock:
-        llm = MockLLMAdapter(fixtures=MOCK_FIXTURES)
-    else:
-        llm = LLMAdapter(provider=provider)
-
-    runner = SkillRunner(llm=llm)
-
-    # Skill 01 — briefing parser (or load from file)
+    input_data = None
     if input_file:
-        briefing = json.loads(Path(input_file).read_text(encoding="utf-8"))
+        input_data = json.loads(Path(input_file).read_text(encoding="utf-8"))
         info(f"Loaded briefing from {input_file}")
-    else:
-        if not briefing_text:
-            err("Need either briefing_text argument or --input file.")
-            sys.exit(1)
-        info("Running 01-briefing-parser...")
-        t0 = time.time()
-        result = runner.run("01-briefing-parser", briefing_text)
-        log_event(run_id, {"skill": "01", "ok": result.ok,
-                           "tokens_in": result.llm_response.tokens_in if result.llm_response else 0,
-                           "tokens_out": result.llm_response.tokens_out if result.llm_response else 0,
-                           "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-        if not result.ok:
-            err(f"briefing-parser failed: {result.error}")
-            sys.exit(2)
-        briefing = result.output
-        if briefing.get("clarifying_questions"):
-            ok("briefing-parser asked for clarification:")
-            for q in briefing["clarifying_questions"]:
-                console.print(f"  ? {q}") if 'console' in globals() else print(f"  ? {q}")
-            err("Pipeline paused — fill clarifications and re-run.")
-            write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
+
+    result = run_pipeline(
+        briefing_text=briefing_text,
+        mock=mock,
+        provider=provider,
+        input_data=input_data,
+        stop_at=stop_at,
+        verbose=verbose,
+    )
+
+    if not result.ok:
+        err(result.error or "Pipeline failed")
+        if result.error and "clarifying_questions" in result.error:
             sys.exit(0)
-
-    write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
-    vr = validate(briefing, "briefing.schema.json")
-    if not vr.ok:
-        err(f"briefing schema invalid: {vr.errors}")
-        sys.exit(3)
-    if verbose:
-        panel("01 · briefing", briefing)
-
-    if stop_at == "01":
-        ok(f"stopped at 01. Output: {artifacts_dir / run_id / '01-briefing.json'}")
-        return
-
-    # Skill 02 — style selector (with optional vector search injection)
-    info("Running 02-style-selector...")
-    t0 = time.time()
-
-    vector_context = ""
-    if not mock:
-        try:
-            from vector_search import search_styles, candidates_to_context
-            query = briefing.get("tese_central", "") + " | " + briefing.get("intent", "")
-            candidates, status = search_styles(query, top_k=5)
-            if candidates:
-                info(f"vector search → top candidate: {candidates[0].model_id} (score={candidates[0].combined_score:.3f})")
-                vector_context = candidates_to_context(candidates)
-            else:
-                info(f"vector search skipped: {status}")
-        except Exception as e:
-            info(f"vector search unavailable (graceful fallback): {e}")
-
-    result = runner.run("02-style-selector", briefing, extra_context=vector_context)
-    log_event(run_id, {"skill": "02", "ok": result.ok,
-                       "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-    if not result.ok:
-        err(f"style-selector failed: {result.error}")
         sys.exit(2)
-    style_rec = result.output
-    write_artifact(run_id, "02-style-recommendation", style_rec, artifacts_dir)
-    if verbose:
-        panel("02 · style recommendation", style_rec)
-    if stop_at == "02":
-        ok(f"stopped at 02. top1 = {style_rec['recommended'][0]['model_id']}")
-        return
 
-    # Pick top-1 (in v2: ask human)
-    chosen_model_id = style_rec["recommended"][0]["model_id"]
-    info(f"Chosen style: {chosen_model_id}")
-
-    # Skill 03 — layout composer
-    info("Running 03-layout-composer...")
-    layout_input = {
-        "briefing": briefing,
-        "model_id": chosen_model_id,
-        "copy": {
-            # In production, copy generation is its own step (delegated to /copy-ad).
-            # MVP: prompt LLM to generate copy now AND compose layout in one call.
-            "_note": "MVP — generate copy inside layout composer for now"
-        }
-    }
-    t0 = time.time()
-    result = runner.run("03-layout-composer", layout_input,
-                        extra_context="Note: this MVP also generates the copy. Compose appropriate headline/body/CTA aligned to the tese_central and the model's slot constraints.")
-    log_event(run_id, {"skill": "03", "ok": result.ok,
-                       "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-    if not result.ok:
-        err(f"layout-composer failed: {result.error}")
-        sys.exit(2)
-    layout_spec = result.output
-
-    # Enforce model YAML constraints (inject missing image_slot, fix frame size, resolve tokens)
-    try:
-        from layout_enforcer import enforce
-        layout_spec, enforcer_log = enforce(layout_spec, briefing)
-        for msg in enforcer_log:
-            info(f"enforcer: {msg}")
-    except Exception as e:
-        info(f"enforcer skipped: {e}")
-
-    write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
-    if verbose:
-        panel("03 · layout spec (post-enforce)", layout_spec)
-    if stop_at == "03":
-        return
-
-    # Skill 04 — image prompt engineer
-    image_slots = [el for el in layout_spec.get("elements", []) if el.get("type") == "image_slot"]
-    image_urls: dict[str, str] = {}
-    if image_slots:
-        info("Running 04-image-prompt-engineer...")
-        prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
-        t0 = time.time()
-        result = runner.run("04-image-prompt-engineer", prompt_input)
-        log_event(run_id, {"skill": "04", "ok": result.ok,
-                           "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-        if not result.ok:
-            err(f"image-prompt-engineer failed: {result.error}")
-            sys.exit(2)
-        image_spec = result.output
-        write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
-        if verbose:
-            panel("04 · image prompts", image_spec)
-
-        if not image_spec.get("skip"):
-            image_gen = ImageGenAdapter()
-            for p in image_spec.get("prompts", []):
-                ig_result = image_gen.generate(
-                    prompt=p["prompt"],
-                    negative_prompt=p.get("negative_prompt", ""),
-                    aspect_ratio=p.get("aspect_ratio", "9:16"),
-                    reference_images=p.get("reference_images", []),
-                )
-                image_urls[p["slot_name"]] = ig_result.url
-                info(f"image generated: {p['slot_name']} → {ig_result.url}")
-    else:
-        info("No image slots in layout — skipping skills 04 (image-prompt-engineer)")
-
-    if stop_at == "04":
-        return
-
-    # Skill 05 — assembler (PNG default — entregável final)
-    info("Running 05-assembler (PNG output)...")
-    assembler = AssemblerAdapter()  # reads ASSEMBLER env var (default: png)
-    t0 = time.time()
-    asm_result = assembler.assemble(layout_spec, image_urls)
-    log_event(run_id, {"skill": "05", "ok": True,
-                       "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-    asm_output = {
-        "destination": asm_result.destination,
-        "png_path": asm_result.png_path,
-        "jpeg_path": asm_result.jpeg_path,
-        "html_path": asm_result.html_path,
-        "figma": {"url": asm_result.figma_url} if asm_result.figma_url else None,
-        "preview_url": f"file://{asm_result.png_path}" if asm_result.png_path else None,
-        "metadata": {"style_id": layout_spec.get("model_id"),
-                     "elapsed_ms": asm_result.elapsed_ms,
-                     "warnings": asm_result.warnings or []}
-    }
-    if asm_result.png_path:
-        ok(f"PNG salvo: {asm_result.png_path}")
-    write_artifact(run_id, "05-ad-output", asm_output, artifacts_dir)
-    ok(f"Ad assembled. {asm_output}")
-    if stop_at == "05":
-        return
-
-    # Skill 06 — QA validator
-    info("Running 06-qa-validator...")
-    qa_input = {"ad_output": asm_output, "layout_spec": layout_spec, "model_id": chosen_model_id}
-    t0 = time.time()
-    result = runner.run("06-qa-validator", qa_input)
-    log_event(run_id, {"skill": "06", "ok": result.ok,
-                       "latency_ms": int((time.time() - t0) * 1000)}, artifacts_dir)
-    if not result.ok:
-        err(f"qa-validator failed: {result.error}")
-        sys.exit(2)
-    qa = result.output
-    write_artifact(run_id, "06-qa-report", qa, artifacts_dir)
-    if verbose:
-        panel("06 · QA report", qa)
-
-    if qa.get("status") == "FAIL":
-        err(f"QA FAILED — {len(qa.get('issues', []))} issues")
+    if result.qa_status == "FAIL":
+        err(f"QA FAILED — see {result.artifacts_dir / result.run_id / '06-qa-report.json'}")
         sys.exit(4)
 
-    ok(f"Pipeline complete. Run dir: {artifacts_dir / run_id}")
+    ok(f"Pipeline complete. Run dir: {result.artifacts_dir / result.run_id}")
 
 
 if __name__ == "__main__":
