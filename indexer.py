@@ -16,15 +16,24 @@ from adapters.vector_store import VectorStore
 
 
 def load_models(knowledge_path: Path) -> list[dict]:
+    """Load YAMLs from models/{marca}/*.yaml (recursive). Auto-tag marca from parent dir if missing."""
     models_dir = knowledge_path / "models"
     models: list[dict] = []
-    for yaml_file in models_dir.glob("*.yaml"):
+    for yaml_file in models_dir.rglob("*.yaml"):
         if yaml_file.name.startswith("_"):
-            continue  # skip _schema.yaml
+            continue
         data = yaml.safe_load(yaml_file.read_text(encoding="utf-8"))
         if not data or not data.get("id"):
             continue
-        data["_source_file"] = yaml_file.name
+        # Brand namespace: parent dir name is canonical when models/{marca}/file.yaml
+        rel_parent = yaml_file.parent.relative_to(models_dir).as_posix()
+        if rel_parent and rel_parent != ".":
+            inferred_marca = rel_parent.split("/")[0]
+            if not data.get("marca"):
+                data["marca"] = inferred_marca
+            elif data["marca"] != inferred_marca:
+                print(f"  ⚠ {yaml_file.name}: marca='{data['marca']}' contradicts path '{inferred_marca}/' — using YAML value")
+        data["_source_file"] = f"{rel_parent}/{yaml_file.name}" if rel_parent != "." else yaml_file.name
         models.append(data)
     return models
 
@@ -81,6 +90,7 @@ def main(re_index: bool, dry_run: bool):
 
         payload = {
             "model_id": m["id"],
+            "marca": m.get("marca", "metta"),
             "display_name": m.get("display_name", ""),
             "formato": m.get("formato", ""),
             "teses": m.get("teses_compativeis", []),

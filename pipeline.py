@@ -61,24 +61,24 @@ MOCK_FIXTURES = {
             "tem_logo_cliente_nomeado": True, "case_nominal_id": "hiperzoo",
             "data_evento": None, "cta_obrigatorio": None, "plataforma_destino": "meta_ads"
         },
-        "marca": "metta_institucional",
+        "marca": "metta",
         "raw_request": "(mock)",
         "clarifying_questions": []
     },
     "style-selector": {
         "recommended": [
             {"rank": 1, "model_id": "A-headline-foto-dark",
-             "yaml_path": "brand-knowledge/models/A-headline-foto-dark.yaml",
+             "yaml_path": "brand-knowledge/models/metta/A-headline-foto-dark.yaml",
              "score": 0.92,
              "rationale": "Headline+foto pessoa encaixa caso nominal Hiperzoo. Paleta dark dá gravidade institucional.",
              "tradeoffs": "Não destaca o número (se for o foco, ir YELLOW-EDITORIAL)."},
             {"rank": 2, "model_id": "YELLOW-BLOCO",
-             "yaml_path": "brand-knowledge/models/YELLOW-BLOCO.yaml",
+             "yaml_path": "brand-knowledge/models/metta/YELLOW-BLOCO.yaml",
              "score": 0.78,
              "rationale": "Logo Hiperzoo no logo bar + foto líder à direita + bullets de resultados.",
              "tradeoffs": "Mais 'flyer institucional' do que 'storytelling de caso'."},
             {"rank": 3, "model_id": "LOGO-WALL",
-             "yaml_path": "brand-knowledge/models/LOGO-WALL.yaml",
+             "yaml_path": "brand-knowledge/models/metta/LOGO-WALL.yaml",
              "score": 0.71,
              "rationale": "Prova agregada com Hiperzoo + outros pet stores se quiser variar.",
              "tradeoffs": "Dilui presença individual do Hiperzoo."}
@@ -250,12 +250,13 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
         try:
             from vector_search import search_styles, candidates_to_context
             query = briefing.get("tese_central", "") + " | " + briefing.get("intent", "")
-            candidates, status = search_styles(query, top_k=5)
+            marca = briefing.get("marca") or "metta"
+            candidates, status = search_styles(query, top_k=5, marca=marca)
             if candidates:
-                info(f"vector search → top candidate: {candidates[0].model_id} (score={candidates[0].combined_score:.3f})")
+                info(f"vector search → top candidate: {candidates[0].model_id} (score={candidates[0].combined_score:.3f}, marca={marca})")
                 vector_context = candidates_to_context(candidates)
             else:
-                info(f"vector search skipped: {status}")
+                info(f"vector search skipped: {status} (marca={marca})")
         except Exception as e:
             info(f"vector search unavailable (graceful fallback): {e}")
 

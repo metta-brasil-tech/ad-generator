@@ -30,10 +30,12 @@ class StyleCandidate:
 def search_styles(
     query_text: str,
     top_k: int = 5,
+    marca: str | None = None,
 ) -> tuple[list[StyleCandidate], str]:
-    """Search styles by semantic similarity. Returns (candidates, status_message).
+    """Search styles by semantic similarity, optionally filtered by marca.
 
-    Gracefully returns ([], 'qdrant_unavailable') if Qdrant/embeddings fail.
+    Returns ([], 'qdrant_unavailable') if Qdrant/embeddings fail.
+    marca='metta'|'tiago' applies a hard filter — never returns cross-brand models.
     """
     try:
         embedder = EmbeddingAdapter()
@@ -50,8 +52,8 @@ def search_styles(
         return [], f"embedding_failed: {e}"
 
     try:
-        intent_hits = store.search(query_vec, vector_name="intent", limit=top_k)
-        visual_hits = store.search(query_vec, vector_name="visual", limit=top_k)
+        intent_hits = store.search(query_vec, vector_name="intent", limit=top_k, marca_filter=marca)
+        visual_hits = store.search(query_vec, vector_name="visual", limit=top_k, marca_filter=marca)
     except Exception as e:
         return [], f"qdrant_search_failed: {e}"
 

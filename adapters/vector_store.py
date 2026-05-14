@@ -72,12 +72,24 @@ class VectorStore:
         vector_name: str = "intent",
         limit: int = 5,
         score_threshold: float | None = None,
+        marca_filter: str | None = None,
     ) -> list[SearchResult]:
+        qdrant_filter = None
+        if marca_filter:
+            qdrant_filter = qdrant_models.Filter(
+                must=[
+                    qdrant_models.FieldCondition(
+                        key="marca",
+                        match=qdrant_models.MatchValue(value=marca_filter),
+                    )
+                ]
+            )
         results = self.client.search(
             collection_name=self.collection,
             query_vector=(vector_name, query_vector),
             limit=limit,
             score_threshold=score_threshold,
+            query_filter=qdrant_filter,
         )
         return [
             SearchResult(
