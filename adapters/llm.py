@@ -77,8 +77,8 @@ class LLMAdapter:
         if not self.model.startswith(("claude-", "anthropic/")):
             kwargs["temperature"] = self.temperature
 
-        # Use JSON Schema-constrained output when provided
-        if json_schema is not None:
+        # JSON Schema-constrained output — only for OpenAI (Claude doesn't support oneOf/anyOf)
+        if json_schema is not None and not self.model.startswith(("claude-", "anthropic/")):
             kwargs["response_format"] = {
                 "type": "json_schema",
                 "json_schema": {"name": "Output", "schema": json_schema, "strict": False},
