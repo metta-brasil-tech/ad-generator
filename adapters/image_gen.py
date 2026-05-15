@@ -1,4 +1,4 @@
-"""Image generation adapter — Nano Banana 2 (Gemini) / gpt-image-2 / gpt-image-1.
+"""Image generation adapter — gpt-image-2 (OpenAI) / Nano Banana 2 (Gemini).
 
 Implementação real. Use `IMAGE_GEN_PROVIDER` env var pra escolher provider.
 Salva PNG local em artifacts/images/ + retorna URL/path.
@@ -36,11 +36,7 @@ def _save_bytes(data: bytes, name: str) -> Path:
 def _aspect_to_size(aspect: str, provider: str, model: str = "") -> str:
     """Map aspect ratio to provider-specific size string."""
     if provider == "openai":
-        if model in ("gpt-image-2", "gpt-image-1"):
-            # gpt-image-2 / gpt-image-1: portrait 1024x1536, landscape 1536x1024
-            mapping = {"9:16": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
-        else:
-            mapping = {"9:16": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
+        mapping = {"9:16": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
     elif provider == "gemini":
         mapping = {"9:16": "9:16", "16:9": "16:9", "1:1": "1:1", "4:3": "4:3", "3:4": "3:4"}
     else:
@@ -49,7 +45,7 @@ def _aspect_to_size(aspect: str, provider: str, model: str = "") -> str:
 
 
 class OpenAIImageGen:
-    """OpenAI Images API. Default: gpt-image-2 (mais recente). Suporta gpt-image-1 também."""
+    """OpenAI Images API — gpt-image-2."""
 
     def __init__(self, model: str = "gpt-image-2"):
         self.model = model
@@ -79,7 +75,6 @@ class OpenAIImageGen:
         data = r.json()["data"][0]
         b64 = data.get("b64_json") or ""
         if not b64:
-            # gpt-image-1 may return URL instead — handle both
             if "url" in data:
                 img_bytes = httpx.get(data["url"], timeout=60).content
             else:
@@ -240,9 +235,8 @@ class ImageGenAdapter:
 
         if self.provider == "mock":
             self.backend = MockImageGen()
-        elif self.provider in ("openai", "gpt-image-2", "gpt-image-1"):
-            model = "gpt-image-1" if self.provider == "gpt-image-1" else "gpt-image-2"
-            self.backend = OpenAIImageGen(model=model)
+        elif self.provider in ("openai", "gpt-image-2"):
+            self.backend = OpenAIImageGen(model="gpt-image-2")
         elif self.provider in ("nano-banana-2", "gemini-nano-banana"):
             self.backend = GeminiImageGen(model="gemini-2.5-flash-image-preview")
         elif self.provider in ("gemini", "imagen", "imagen-3"):
