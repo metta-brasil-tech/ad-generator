@@ -52,7 +52,7 @@ Você NÃO compõe o layout (`03-layout-composer` faz). Você só RECOMENDA quai
 if briefing.marca == "metta":
     catalogo = ler_yamls("brand-knowledge/models/metta/*.yaml")  # 19 estilos
 elif briefing.marca == "tiago":
-    catalogo = ler_yamls("brand-knowledge/models/tiago/*.yaml")  # 1 estilo (TIAGO-TWITTER-CARD)
+    catalogo = ler_yamls("brand-knowledge/models/tiago/*.yaml")  # 12 estilos (5 editorial-cinema + 7 lo-fi cotidiano)
 else:
     raise ValueError(f"marca inválida: {briefing.marca}. Aceito: metta | tiago")
 ```
@@ -83,7 +83,10 @@ Fonte: `design/banco-ads-figma.md §3`. Cobre 80% dos casos Metta.
 
 #### §1.B · Mapa Tiago (quando `briefing.marca == "tiago"`)
 
-Fonte: `design/banco-tiago-conteudo.md §1-5`. Catálogo de **5 estilos** (1 mock-Twitter + 4 editoriais).
+Fonte: `design/banco-tiago-conteudo.md §1-5` (editorial) + `design/banco-tiago-conteudo.md §3` (lo-fi cotidiano 2026-05-15). Catálogo de **12 estilos** organizados em duas camadas:
+
+- **Camada editorial-cinema (5):** TIAGO-TWITTER-CARD + 4 editoriais (HERO/CARD/DARK/CTA) — capa de carrossel cinematográfico com colagem surreal noir
+- **Camada lo-fi cotidiano (7):** STORY-COVER-HERO, STORY-YELLOW-BLOCK, STORY-MINIMAL-QUESTION, NOTES-MOCKUP, TYPO-PURE, DARK-SURREAL, PHOTO-RAW — feed/story do dia a dia, fotografia real, SF Pro Condensed Semibold/Light
 
 | Tese central | Posição no carrossel | Estilos recomendados |
 |---|---|---|
@@ -101,16 +104,39 @@ Fonte: `design/banco-tiago-conteudo.md §1-5`. Catálogo de **5 estilos** (1 moc
 | Pergunta engajamento ("Conta aqui…") | fim | TIAGO-EDITORIAL-CTA (variant A) |
 | Qualificação "pra quem é/não é" | fim | TIAGO-EDITORIAL-CTA (variant B) |
 | Reveal de oferta/protocolo com data | fim | TIAGO-EDITORIAL-CTA (variant C) |
+| Auto-confissão Tiago em ambiente real (story) | capa story | TIAGO-STORY-COVER-HERO |
+| Lista "as N coisas que…" com Tiago como sujeito | capa story | TIAGO-STORY-COVER-HERO |
+| Pergunta diagnóstica situacional ancorada em ambiente | qualquer story | TIAGO-STORY-YELLOW-BLOCK |
+| Checklist rápido visual ("Use esse checklist antes de…") | qualquer story | TIAGO-STORY-YELLOW-BLOCK |
+| Reflexão contemplativa baixo volume | qualquer story | TIAGO-STORY-MINIMAL-QUESTION |
+| Pergunta aberta sem pedir resposta imediata | qualquer story | TIAGO-STORY-MINIMAL-QUESTION |
+| Storytelling lista numerada ("Tomei 3 decisões:") | qualquer | TIAGO-NOTES-MOCKUP |
+| Lições aprendidas em formato de anotação pessoal | qualquer | TIAGO-NOTES-MOCKUP |
+| Frase de impacto isolada / post-quote standalone | qualquer | TIAGO-TYPO-PURE |
+| Tese filosófica curta tipo-tatuagem | qualquer | TIAGO-TYPO-PURE |
+| Intersticial atmosférico entre slides pesados | meio | TIAGO-DARK-SURREAL |
+| Capa estética sem copy / ponte simbólica | qualquer | TIAGO-DARK-SURREAL |
+| Bastidor de vida (treino, viagem, comunidade) | qualquer | TIAGO-PHOTO-RAW |
+| Humanização alta sem qualquer copy | qualquer | TIAGO-PHOTO-RAW |
 
-#### §1.B.1 · Pareamento canônico de carrossel (HERO → CARD/DARK → CTA)
+#### §1.B.1 · Pareamento canônico de carrossel — duas camadas
 
-O catálogo Tiago foi desenhado pra compor carrosseis com 3 movimentos:
+O catálogo Tiago tem dois sistemas de composição que NÃO se misturam num mesmo carrossel (escolher um):
+
+**A) Carrossel editorial-cinema (HERO → CARD/DARK → CTA)** — versão revista premium
 
 1. **Capa** (hook): `TIAGO-EDITORIAL-HERO` ou `TIAGO-EDITORIAL-DARK`
 2. **Desenvolvimento** (prova/dor): `TIAGO-EDITORIAL-CARD` (quando dado) ou `TIAGO-EDITORIAL-DARK` (quando tom noir)
 3. **Fechamento** (engajamento): `TIAGO-EDITORIAL-CTA`
 
-Se o briefing menciona "carrossel completo" ou "campanha pra Tiago", o style-selector pode retornar uma lista ORDENADA dos 3 estilos sugeridos em vez do top-3 ranking semântico padrão.
+**B) Carrossel lo-fi cotidiano (STORY-COVER → NOTES/MINIMAL/YELLOW-BLOCK → DARK-SURREAL?)** — versão dia-a-dia
+
+1. **Capa** (hook): `TIAGO-STORY-COVER-HERO` (com Tiago como sujeito) ou `TIAGO-STORY-YELLOW-BLOCK` (sem Tiago, pergunta diagnóstica)
+2. **Desenvolvimento** (storytelling): `TIAGO-NOTES-MOCKUP` (lista numerada) ou `TIAGO-STORY-MINIMAL-QUESTION` (reflexão)
+3. **Intersticial opcional** (respiro): `TIAGO-DARK-SURREAL` entre slides pesados
+4. **Fechamento** (humanização): `TIAGO-PHOTO-RAW` ou retorna `TIAGO-STORY-MINIMAL-QUESTION`
+
+Se o briefing menciona "carrossel completo" ou "campanha pra Tiago", o style-selector pode retornar uma lista ORDENADA em vez do top-3 ranking. **Não misturar camadas A e B no mesmo carrossel** — quebra a coerência visual (editorial vs lo-fi).
 
 #### §1.B.2 · TIAGO-TWITTER-CARD vs sistema editorial
 

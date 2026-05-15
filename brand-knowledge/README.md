@@ -46,17 +46,35 @@ brand-knowledge/
 │   │   ├── YELLOW-FRAME.yaml · YELLOW-SPLIT.yaml
 │   │   ├── DARK-CARTA.yaml · DARK-COLAGEM.yaml · DARK-OBJETO.yaml
 │   │   └── NEWS-CARD.yaml · LOGO-WALL.yaml
-│   └── tiago/                             # estilos marca pessoal Tiago Alves
-│       └── TIAGO-TWITTER-CARD.yaml        # carrossel mock-Twitter feed 1080×1350
+│   └── tiago/                             # estilos marca pessoal Tiago Alves — 12 estilos
+│       ├── TIAGO-TWITTER-CARD.yaml        # carrossel mock-Twitter feed 1080×1350
+│       ├── TIAGO-EDITORIAL-HERO.yaml      # capa editorial cinema (headline gigante + colagem surreal)
+│       ├── TIAGO-EDITORIAL-CARD.yaml      # slide meio editorial (big stat / lista sintomas)
+│       ├── TIAGO-EDITORIAL-DARK.yaml      # slide noir investigativo (tese psicológica)
+│       ├── TIAGO-EDITORIAL-CTA.yaml       # slide fechamento (engajamento / qualificação / reveal)
+│       ├── TIAGO-STORY-COVER-HERO.yaml    # story 9:16 — foto lo-fi Tiago + headline + ARRASTA
+│       ├── TIAGO-STORY-YELLOW-BLOCK.yaml  # story 9:16 — foto ambiente + bloco amarelo central
+│       ├── TIAGO-STORY-MINIMAL-QUESTION.yaml # story 9:16 — foto contemplativa + texto leve
+│       ├── TIAGO-NOTES-MOCKUP.yaml        # mock iPhone Notes — H1 marker + lista numerada
+│       ├── TIAGO-TYPO-PURE.yaml           # tipográfico puro — headline gigante + keyword colorida
+│       ├── TIAGO-DARK-SURREAL.yaml        # fundo preto + imagem surreal B&W (intersticial)
+│       └── TIAGO-PHOTO-RAW.yaml           # foto crua sem texto (bastidor / humanização)
 ├── image-prompts/                         # Prompts pra image-gen, isolados por marca
 │   ├── metta/
 │   │   ├── _base.md                       # base universal Metta (editorial dark cinema)
 │   │   ├── style-A.md · style-B.md · style-C.md · style-D.md
 │   │   ├── style-YELLOW-BLOCO.md
 │   │   └── style-LIGHT-SURREAL.md
-│   └── tiago/
+│   └── tiago/                             # 1 base + 8 styles (2 originais editorial + 5 lo-fi novos)
 │       ├── _base-tiago.md                 # base Tiago (documental light snapshot)
-│       └── style-twitter-card.md
+│       ├── style-twitter-card.md
+│       ├── style-editorial-collage.md     # cinema noir editorial (HERO/CARD)
+│       ├── style-editorial-dark.md        # variante noir investigativa
+│       ├── style-story-cover-hero.md      # foto lo-fi Tiago cotidiano (capa story)
+│       ├── style-story-yellow-block.md    # foto ambiente lo-fi (bloco amarelo overlay)
+│       ├── style-story-minimal.md         # foto contemplativa minimal
+│       ├── style-dark-surreal.md          # imagem B&W surreal isolada
+│       └── style-photo-raw.md             # foto crua bastidor sem produção
 ├── skills/                                # 6 skills do pipeline (marca-aware)
 │   ├── 01-briefing-parser.md              # Texto livre → JSON briefing (detecta marca)
 │   ├── 02-style-selector.md               # Etapa 0: filtro duro por marca → top-3 estilos
@@ -140,9 +158,9 @@ Você não toca nessa pasta — você usa a UI/CLI que consome ela. Veja `apps/a
 | Doc mestre arquitetural | ✅ feito (v2.0) |
 | Schema YAML canônico (com campo `marca`) | ✅ feito |
 | 19 modelos Metta | ✅ feito (organizados em `models/metta/`) |
-| 1 modelo Tiago (TIAGO-TWITTER-CARD) | ✅ feito |
+| 12 modelos Tiago (5 originais editorial + 7 lo-fi cotidiano 2026-05-15) | ✅ feito |
 | Image prompts Metta (6) | ✅ feito (em `image-prompts/metta/`) |
-| Image prompts Tiago (_base + style-twitter-card) | ✅ feito |
+| Image prompts Tiago (_base + 8 styles: editorial-collage/dark/twitter + 5 lo-fi) | ✅ feito |
 | Tokens Tiago (`design/tiago-tokens.md`) | ✅ feito |
 | Banco narrativo Tiago (`design/banco-tiago-conteudo.md`) | ✅ feito |
 | 6 skills do pipeline (marca-aware, v2.0) | ✅ feito |
