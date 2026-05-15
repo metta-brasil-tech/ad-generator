@@ -1,0 +1,200 @@
+$schema_version: "1.0"
+id: "METTA-TWEET-CARD"
+display_name: "Tweet-card tipográfico com avatar + statement curto"
+alias: ["tweet-card", "metta-tweet"]
+formato: "STORY"
+banco_ref: []
+versao: "1.0"
+status: "ativo"
+marca: "metta"
+
+logica_visual: |
+  Inspirado no formato de screenshot de tweet mas completamente brandado Metta.
+  Card centralizado sobre fundo dark (ou branco) com avatar + nome Metta no topo,
+  statement curto e impactante em destaque, e fonte de credibilidade no rodapé.
+  Ideal para quotes de autoridade, dados de impacto e provocações virais.
+  A força está na brevidade — uma frase, uma ideia, memorizável.
+
+estrutura:
+  zonas:
+    top: "Avatar circular Metta + nome @mettaoficial + cargo (como tweet)"
+    center: "Statement principal — 1 ou 2 frases curtas em tipografia grande"
+    bottom: "Metric ou fonte de credibilidade + data/contexto"
+    background: "Fundo dark com ruído sutil ou fundo branco clean"
+  hierarquia:
+    - {elemento: "statement", peso: 1}
+    - {elemento: "avatar_byline", peso: 2}
+    - {elemento: "credencial", peso: 3}
+
+composicao:
+  background: "solid"
+  background_color: "#0C161B"
+  contrast: "high"
+  ritmo: "autoridade (avatar) → provocação (statement) → credencial — like + share"
+  proporcao:
+    avatar_area: "80-100px altura"
+    statement_area: "50-60% canvas"
+    credencial_area: "60-80px"
+  ornament: "border-card-rounded"
+
+typography:
+  statement:
+    role: "title-xl"
+    family: "SF Pro"
+    style: "Expanded Heavy"
+    weight: 870
+    stretch_pct: 132
+    size_range: [52, 80]
+    line_height_pct: 100
+    letter_spacing_pct: -1
+    text_case: "sentence"
+  byline_name:
+    role: "label-large"
+    family: "SF Pro"
+    style: "Expanded Bold"
+    weight: 700
+    stretch_pct: 100
+    size_range: [28, 34]
+    line_height_pct: 100
+    text_case: "sentence"
+  byline_handle:
+    role: "label-medium"
+    family: "SF Pro"
+    style: "Regular"
+    weight: 400
+    stretch_pct: 100
+    size_range: [22, 26]
+    line_height_pct: 100
+    text_case: "lowercase"
+  credencial:
+    role: "body-small"
+    family: "SF Pro"
+    style: "Regular"
+    weight: 400
+    stretch_pct: 100
+    size_range: [20, 24]
+    line_height_pct: 130
+    text_case: "sentence"
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-10)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-75)"
+  card_bg: "#141F26"
+  card_border: "rgba(255,255,255,0.08)"
+  handle_color: "var(--metta-ref-palette-night-60)"
+
+spacing:
+  safe_margin_x: 72
+  safe_margin_top: 100
+  safe_margin_bot: 120
+  gap_between_blocks: 40
+  card_padding: 64
+
+shape:
+  card_radius: "var(--metta-sys-shape-corner-lg)"
+  avatar_radius: "50%"
+
+composition_pattern: "tweet-card-centered-dark"
+
+image:
+  required: false
+  type: "none"
+  placement: "n/a"
+  filters: {}
+  ratio: "n/a"
+  prompt_template_ref: "n/a — tipografia pura sem imagem"
+  reference_image: []
+
+slots:
+  - name: "avatar"
+    role: "identidade_metta"
+    required: true
+    component: "circle-avatar"
+    size: "80x80px"
+    asset: "metta-avatar-oficial"
+    position: {x: "card-padding", y: "card-padding"}
+  - name: "byline_name"
+    role: "nome_autoridade"
+    required: true
+    max_chars: 20
+    default: "Metta"
+    style_ref: "typography.byline_name"
+    color_ref: "colors.fg_primary"
+    align: "left"
+    position: {x: "after-avatar+16px", y: "avatar-top"}
+  - name: "byline_handle"
+    role: "handle_verificado"
+    required: true
+    max_chars: 20
+    default: "@mettaoficial"
+    style_ref: "typography.byline_handle"
+    color_ref: "colors.handle_color"
+    align: "left"
+    position: {x: "after-avatar+16px", y: "byline-name-bottom+4px"}
+  - name: "statement"
+    role: "provocacao_central"
+    required: true
+    max_chars: 160
+    max_lines: 5
+    style_ref: "typography.statement"
+    color_ref: "colors.fg_primary"
+    align: "left"
+    position: {x: "card-padding", y: "after-byline+40px"}
+    accent_word:
+      allowed: true
+      max_words: 3
+      color_ref: "colors.accent"
+  - name: "credencial"
+    role: "fonte_ou_metrica"
+    required: false
+    max_chars: 80
+    max_lines: 2
+    style_ref: "typography.credencial"
+    color_ref: "colors.body_text"
+    align: "left"
+    position: {x: "card-padding", y: "after-statement+32px"}
+
+quando_brilha:
+  - "Quote curta de autoridade ('Em 2026, quem não tiver processo...')"
+  - "Dado de impacto com credencial ('R$2.3M gerados. 3 meses. Mesmo time.')"
+  - "Provocação viral de raciocínio rápido"
+  - "Slide de carrossel com break tipográfico — dar respiro entre imagens"
+  - "Repost de conteúdo do Tiago brandado Metta"
+
+funil_recomendado: ["TOFU", "viral"]
+audiencia_recomendada: ["fria_qualificada", "warm_early", "todos_segmentos"]
+teses_compativeis:
+  - "provocacao_pensamento"
+  - "dado_impacto_credencial"
+  - "quote_autoridade"
+  - "reframe_mercado"
+  - "statement_polarizador"
+
+anti_padroes:
+  - "Copy longa (mais de 160 chars — perde o DNA de tweet)"
+  - "Foto humana como background (destrói legibilidade card)"
+  - "Tom corporativo genérico — precisa soar humano e direto"
+  - "Mais de 1 CTA (tweet-card não vende, provoca)"
+
+hibridizacoes_validas:
+  - "C-tipografia-pura-dark (versão sem card, tipografia direto no fundo)"
+  - "NEWS-CARD (versão com header de news)"
+  - "K-bold-dourado-urgencia (quando statement precisa de urgência)"
+
+embedding_text:
+  intent: |
+    Formato tweet-card brandado Metta. Carrega quotes de autoridade, dados
+    de impacto e provocações virais em tipografia pura. Avatar + handle Metta
+    no topo, statement curto e impactante, credencial no rodapé. Tom direto,
+    memorizável, shareável.
+  visual_features: |
+    Fundo dark #0C161B com card interno bordado. Avatar circular Metta +
+    handle @mettaoficial. Statement branco 52-80px Expanded Heavy com palavras
+    amarelas. Credencial cinza abaixo. Tipografia pura, sem imagem. Clean, viral.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§novo-tweet-card"
+created: "2026-05-15"
+updated: "2026-05-15"
+maintainer: "Head de Design Metta"

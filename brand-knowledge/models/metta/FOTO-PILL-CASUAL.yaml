@@ -1,0 +1,194 @@
+$schema_version: "1.0"
+id: "FOTO-PILL-CASUAL"
+display_name: "Foto fullbleed light + headline casual + pill CTA"
+alias: ["foto-pill-casual", "light-foto-casual"]
+formato: "STORY"
+banco_ref: []
+versao: "1.0"
+status: "ativo"
+marca: "metta"
+
+logica_visual: |
+  Fundo branco ou cinza claro com foto dominante (pessoa real, editorial clean).
+  Headline grande em cima da foto com gradiente suave. Tom mais leve e acessível
+  do que o estilo B dark. Ideal para teses de transformação positiva, case de
+  resultado e conteúdo TOFU de identificação leve.
+  Estrutura: foto ocupa 55-65% do topo, headline + body abaixo em área branca.
+
+estrutura:
+  zonas:
+    top: "Foto pessoa (clean, editorial — sem sorriso forçado) (55-65% do canvas)"
+    transition: "Fade branco entre foto e área de texto"
+    center: "Headline grande mixed-weight com palavra amarela"
+    bottom: "Body + pill CTA"
+  hierarquia:
+    - {elemento: "foto_pessoa", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background: "white"
+  background_color: "#FFFFFF"
+  contrast: "medium-low"
+  ritmo: "foto (cenário positivo) → headline (nomeia o ganho) → body (contextualiza) → CTA"
+  proporcao:
+    image_area: "55-65%"
+    headline_area: "15-20%"
+    body_area: "10-15%"
+    cta_area: "100-130px"
+  ornament: "gradient-fade-to-white-bottom-25%"
+
+typography:
+  headline:
+    role: "title-large"
+    family: "SF Pro"
+    style: "Expanded Heavy"
+    weight: 870
+    stretch_pct: 132
+    size_range: [54, 80]
+    line_height_pct: 95
+    letter_spacing_pct: -0.5
+    text_case: "UPPER"
+  body:
+    role: "body-medium"
+    family: "SF Pro"
+    style: "Expanded Regular"
+    weight: 510
+    stretch_pct: 100
+    size_range: [26, 34]
+    line_height_pct: 130
+    text_case: "sentence"
+  tag_eyebrow:
+    role: "label-large"
+    family: "SF Pro"
+    style: "Expanded Medium"
+    weight: 540
+    stretch_pct: 132
+    size_range: [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case: "UPPER"
+  cta:
+    role: "label-large"
+    family: "SF Pro"
+    style: "Expanded Bold"
+    weight: 700
+    stretch_pct: 132
+    size_range: [22, 28]
+    line_height_pct: 100
+    text_case: "UPPER"
+
+colors:
+  bg_primary: "#FFFFFF"
+  fg_primary: "#0C161B"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "#2E2E2E"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x: 80
+  safe_margin_top: 0
+  safe_margin_bot: 120
+  gap_between_blocks: 28
+
+shape:
+  cta_radius: "var(--metta-sys-shape-corner-full)"
+  card_radius: "var(--metta-sys-shape-corner-md)"
+
+composition_pattern: "light-foto-top-text-bottom-white"
+
+image:
+  required: true
+  type: "photo-editorial-clean"
+  placement: "top-bleed"
+  filters:
+    saturation: 0
+    contrast: 0.1
+    overlay: "gradient-fade-to-white-bottom-25%"
+  ratio: "free"
+  prompt_template_ref: "image-prompts/style-foto-pill-casual.md"
+  reference_image: []
+
+slots:
+  - name: "tag"
+    role: "contexto_leve"
+    required: false
+    max_chars: 30
+    style_ref: "typography.tag_eyebrow"
+    color_ref: "colors.accent"
+    align: "left"
+    position: {x: "80px", y: "after-image+24px"}
+  - name: "headline"
+    role: "nomear_ganho"
+    required: true
+    max_chars: 80
+    max_lines: 4
+    style_ref: "typography.headline"
+    color_ref: "colors.fg_primary"
+    align: "left"
+    position: {x: "80px", y: "after-tag+16px"}
+    accent_word:
+      allowed: true
+      max_words: 2
+      color_ref: "colors.accent"
+  - name: "body"
+    role: "contextualizacao"
+    required: false
+    max_chars: 130
+    max_lines: 3
+    style_ref: "typography.body"
+    color_ref: "colors.body_text"
+    align: "left"
+    position: {x: "80px", y: "after-headline+24px"}
+  - name: "cta"
+    role: "acao"
+    required: true
+    max_chars: 28
+    style_ref: "typography.cta"
+    color_ref: "colors.cta_text"
+    bg_color_ref: "colors.cta_bg"
+    component: "pill"
+    position: {x: "80px", y: "bottom-130px"}
+
+quando_brilha:
+  - "Resultado de cliente / case de transformação (foto positiva, não sofrimento)"
+  - "Conteúdo de valor leve TOFU para audiência fria"
+  - "Carrossel slide com fundo claro dentro de sequência mista dark/light"
+  - "Anúncio com foto de pessoa real em contexto de crescimento ou conquista"
+
+funil_recomendado: ["TOFU", "MOFU"]
+audiencia_recomendada: ["fria_qualificada", "warm_early", "empresario_curioso"]
+teses_compativeis:
+  - "case_resultado_positivo"
+  - "transformacao_visible"
+  - "identificacao_leve"
+  - "diferencial_competitivo"
+
+anti_padroes:
+  - "Tese de dor intensa (contraste emocional quebra o visual light)"
+  - "Foto stock sorriso corporativo — destrói credibilidade Metta"
+  - "Fundo dark (use B ou A)"
+  - "Mais de 3 elementos de texto na área branca"
+
+hibridizacoes_validas:
+  - "B (versão dark do mesmo conceito)"
+  - "D (foto mais bleed sem área branca)"
+  - "LIGHT-TIPO (versão sem foto)"
+
+embedding_text:
+  intent: |
+    Versão light e acessível do estilo foto+headline. Tom de conquista e
+    transformação positiva. Fundo branco clean, foto editorial no topo,
+    headline dark com palavra amarela. Ideal para TOFU e slides de carrossel
+    com paleta clara.
+  visual_features: |
+    Fundo branco #FFFFFF. Foto editorial clean topo (55-65% canvas). Fade
+    branco transição. Headline dark #0C161B UPPER 54-80px com palavra amarela.
+    Body cinza escuro. CTA pill amarelo. Visual clean, não dark.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§novo-foto-pill-casual"
+created: "2026-05-15"
+updated: "2026-05-15"
+maintainer: "Head de Design Metta"
