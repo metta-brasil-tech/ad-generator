@@ -1,0 +1,112 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-PHOTO-RAW"
+display_name:        "Foto raw lo-fi sem texto — prova de vida / bastidor"
+alias:               ["TIAGO-RAW", "Photo Raw Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/POSTS/image 25.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Foto crua, sem edição, sem copy, sem ornamento. Selfie ou flagrante do Tiago em contexto pessoal
+  (treino, viagem, família, comunidade). Lo-fi extremo — parece celular, não publi paga.
+  Sensação alvo: "olha o que ele tá fazendo agora" — bastidor de vida real, prova social,
+  comunidade ao redor. Engajamento via curtida/comentário, não via leitura.
+
+estrutura:
+  zonas:
+    top:        "Vazio — foto bleed"
+    center:     "Foto bleed full"
+    bottom:     "Vazio — foto bleed"
+    overlay:    "n/a"
+  hierarquia:
+    - {elemento: "foto_bleed_raw", peso: 1}
+
+composicao:
+  background:        "photo-bleed"
+  background_color:  "n/a"
+  contrast:          "natural"
+  ritmo:             "foto carrega tudo — momento real, lo-fi, sem produção"
+  proporcao:
+    foto_area:       "100% (bleed)"
+  ornament:          "nenhum"
+
+typography:
+  headline:
+    role:           "n/a"
+    family:         "n/a"
+    notes: "Formato proíbe copy — typography vazio por defensividade"
+
+colors:
+  bg_primary:        "n/a"
+
+spacing:
+  safe_margin_x:     0
+  safe_margin_top:   0
+  safe_margin_bot:   0
+
+shape: {}
+
+composition_pattern: "raw-photo-no-text"
+
+image:
+  required:          true
+  type:              "selfie-or-candid-tiago-real-life"
+  placement:         "full-bleed"
+  filters:
+    saturation:      0
+    contrast:        0
+    overlay:         "nenhum"
+  ratio:             "free (1:1, 4:5, 9:16)"
+  prompt_template_ref: "image-prompts/tiago/style-photo-raw.md"
+  reference_image:
+    - "exemplars/tiago/PHOTO-RAW/01-jiu-jitsu-amigos.png"
+
+slots:
+  - name:            "foto_raw"
+    role:            "momento_real_vida"
+    required:        true
+    description:     "Selfie ou flagrante real do Tiago em contexto pessoal — treino, viagem, família, comunidade, refeição. Lo-fi celular, sem edição."
+
+quando_brilha:
+  - "Bastidor de vida — Tiago em momento real fora do trabalho"
+  - "Prova social comunitária (amigos, time, família)"
+  - "Pós-evento ou ritual pessoal (jiu-jitsu, leitura, treino, refeição)"
+  - "Quando precisa de 'humanização' alta sem qualquer copy"
+
+funil_recomendado: ["TOFU"]
+
+audiencia_recomendada:
+  - "audiencia_warm_perfil_tiago_engajamento_pessoal"
+  - "follow_organico_humanizacao"
+
+teses_compativeis:
+  - "humanizacao_bastidor"
+  - "comunidade_real_prova_social"
+  - "ritual_pessoal_publico"
+
+anti_padroes:
+  - "Texto na imagem — formato proíbe copy"
+  - "Foto produzida em estúdio — pede lo-fi celular puro"
+  - "Foto stock — pede momento real autêntico"
+  - "Edição cinema — pede natural sem filtro"
+
+hibridizacoes_validas: []
+
+embedding_text:
+  intent: |
+    Post de bastidor pro feed Tiago. Foto crua sem texto, sem edição. Selfie ou
+    flagrante em contexto pessoal — treino, viagem, comunidade, ritual. Humanização
+    alta, engajamento via curtida/comentário. TOFU.
+  visual_features: |
+    Foto bleed full lo-fi celular. Selfie ou candid real do Tiago em contexto pessoal
+    (jiu-jitsu, viagem, família, refeição). Sem filtro, sem edição, sem texto, sem
+    overlay. Saturação e contraste naturais. Mood: momento autêntico capturado.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

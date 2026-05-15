@@ -1,0 +1,196 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-NOTES-MOCKUP"
+display_name:        "Mock iPhone Notes app — H1 marker amarelo + lista numerada"
+alias:               ["TIAGO-NOTES", "Notes Mockup Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/POSTS/Frame 1294.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Mock visual do app Notes do iPhone — empresta credibilidade nativa de "isso aqui é o que ele realmente
+  anotou". Status bar 9:41 + nav '<Notas' amarelo + 'OK' amarelo + ícone '...' amarelo no header.
+  Conteúdo: H1 com background marker amarelo (selo de destaque) seguido de lista numerada (1./2./3.)
+  com sub-texto cinza em SF Pro Regular. Sensação alvo: "isso é a anotação dele de verdade",
+  storytelling em formato organizado (3 decisões, 5 lições, N coisas).
+
+estrutura:
+  zonas:
+    top:        "Status bar iPhone (9:41, ícones rede/wifi/bateria) + nav app Notes amarelo"
+    center:     "H1 com marker amarelo + lista numerada com sub-texto"
+    bottom:     "Vazio (notes app não tem footer)"
+    overlay:    "n/a"
+  hierarquia:
+    - {elemento: "h1_marker_amarelo", peso: 1}
+    - {elemento: "lista_numerada", peso: 2}
+    - {elemento: "navbar_notes", peso: 3}
+    - {elemento: "status_bar", peso: 4}
+
+composicao:
+  background:        "solid"
+  background_color:  "#FFFFFF"
+  contrast:          "high"
+  ritmo:             "status bar discreto → nav amarelo nativo → H1 detona com marker amarelo → lista numerada organizada"
+  proporcao:
+    status_bar_area: "4-5%"
+    nav_area:        "5-7%"
+    h1_area:         "10-15% (com marker)"
+    lista_area:      "70-80%"
+  ornament:          "marker amarelo retângulo sob H1 (signature visual do estilo)"
+
+typography:
+  headline:
+    role:           "notes-h1"
+    family:         "SF Pro Condensed"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    75
+    size_range:     [40, 52]
+    line_height_pct: 110
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  body:
+    role:           "notes-body-regular"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [22, 28]
+    line_height_pct: 140
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "lista-item-numero"
+    family:         "SF Pro Condensed"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    75
+    size_range:     [24, 30]
+    line_height_pct: 120
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  cta:
+    role:           "notes-nav-amarelo"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 0
+    text_case:      "natural"
+
+colors:
+  bg_primary:        "#FFFFFF"
+  fg_primary:        "#000000"
+  accent:            "#FFCC00"           # marker amarelo + nav amarelo
+  fg_secondary:      "#6E6E73"           # sub-texto cinza iOS
+  marker_bg:         "#FFE89E"           # marker amarelo claro com transparência
+
+spacing:
+  safe_margin_x:     32
+  safe_margin_top:   60
+  safe_margin_bot:   60
+  gap_lista_item:    36
+  gap_item_subtext:  12
+
+shape:
+  marker_radius:     "0"   # marker é retângulo flat (estilo highlighter)
+
+composition_pattern: "iphone-notes-mockup-numbered-list"
+
+image:
+  required:          false
+  type:              "none"
+  notes:             "Estilo é puro mock textual — sem foto"
+
+slots:
+  - name:            "status_bar"
+    role:            "ios_status_bar_fixo"
+    required:        true
+    fixed:           true
+    text:            "9:41 [rede][wifi][bateria]"
+    style_ref:       "typography.cta"
+    color_ref:       "colors.fg_primary"
+    position: {x: "0", y: "0"}
+    notes: "Fixo, não editável — assinatura de mock iPhone."
+
+  - name:            "nav_bar"
+    role:            "notes_app_nav"
+    required:        true
+    fixed:           true
+    elements:
+      back_arrow:    "'<' amarelo"
+      title:         "'Notas' amarelo"
+      action_icon:   "'...' círculo amarelo borda"
+      action_text:   "'OK' amarelo bold"
+    style_ref:       "typography.cta"
+    color_ref:       "colors.accent"
+
+  - name:            "h1_marker"
+    role:            "titulo_anotacao_destaque"
+    required:        true
+    max_chars:       60
+    max_lines:       2
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    background_ref:  "colors.marker_bg"
+    notes: "H1 sempre com marker amarelo embaixo (efeito de highlighter texto). Marker tem corner radius 2 e extende 4-8px além das letras laterais."
+
+  - name:            "lista_numerada"
+    role:            "items_storytelling"
+    required:        true
+    min_items:       3
+    max_items:       6
+    item_structure:
+      numero:        "'1.' '2.' '3.' em Condensed Semibold preto"
+      titulo_item:   "Texto em Condensed Semibold preto, sentence case"
+      sub_texto:     "Texto em SF Pro Regular cinza #6E6E73, sentence case"
+
+quando_brilha:
+  - "Storytelling em lista organizada ('Tomei 3 decisões:', '5 lições do livro X')"
+  - "Tese em formato 'aqui é o que eu anotei depois de X'"
+  - "Quando precisa de credibilidade de 'isso é real, ele anotou mesmo'"
+  - "Bullet points narrativos com sub-texto explicativo"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_acompanhando_tiago_organico"
+  - "audiencia_warm_perfil_tiago"
+
+teses_compativeis:
+  - "storytelling_lista_numerada"
+  - "lessons_learned_pos_evento"
+  - "decisoes_tomadas_publicas"
+  - "framework_simples_3_pontos"
+
+anti_padroes:
+  - "Sem marker amarelo no H1 — quebra a signature visual"
+  - "Mais de 6 itens — destrói legibilidade mock Notes"
+  - "Texto sem sub-explicação — formato pede par título+sub pra cada item"
+  - "Background não-branco — Notes é #FFFFFF puro"
+  - "Tipografia não-Condensed no H1 — destrói o look iOS de heading"
+
+hibridizacoes_validas: []
+
+embedding_text:
+  intent: |
+    Mock iPhone Notes app pro feed Tiago. Storytelling em lista numerada (3-6 itens)
+    com cabeçalho H1 destacado por marker amarelo. Empresta credibilidade nativa de
+    'isso é a anotação dele de verdade'. Voz: organização pessoal, lições aprendidas,
+    decisões tomadas, frameworks simples.
+  visual_features: |
+    Background branco puro #FFFFFF. Status bar iOS 9:41 no topo. Nav Notes amarelo
+    ('<Notas', '...', 'OK'). H1 SF Pro Condensed Semibold 40-52px preto com marker
+    amarelo solid retangular embaixo (efeito highlighter). Lista numerada Condensed
+    Semibold preto + sub SF Pro Regular cinza #6E6E73 22-28px. Sem foto, sem CTA pill.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

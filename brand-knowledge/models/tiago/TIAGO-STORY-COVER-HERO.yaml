@@ -1,0 +1,198 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-STORY-COVER-HERO"
+display_name:        "Capa de carrossel story — foto lo-fi Tiago + headline + assinatura + ARRASTA"
+alias:               ["TIAGO-HERO-STORY", "Story Cover Tiago Lo-fi"]
+formato:             "STORY"
+banco_ref:
+  - "IA/POSTS/Frame 1321317322.png"
+  - "IA/POSTS/Frame 1321317323.png"
+  - "IA/POSTS/Frame 1321317333.png"
+  - "IA/POSTS/Frame 1321317327.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Capa de carrossel em formato story 9:16 com Tiago como sujeito principal (palestra, casa, leitura, viagem).
+  Foto bleed full real e lo-fi (sem produção, parece celular). Headline branco SF Pro Condensed Semibold
+  ocupa metade do canvas alinhado canto-esquerdo. Assinatura SVG do Tiago (amarela ou branca) no topo.
+  Pílula amarela "ARRASTA PRO LADO 👉" na base como CTA de carrossel.
+  Sensação alvo: "olha o que ele tá pensando agora" — pessoa real, não produção publicitária.
+  Substitui colagem cinematográfica do TIAGO-EDITORIAL-HERO por camada ORGÂNICA cotidiana.
+
+estrutura:
+  zonas:
+    top:        "Assinatura SVG Tiago (amarelo em fundos light/yellow, branco em dark)"
+    center:     "Headline branco SF Pro Condensed Semibold ocupando ~40% da altura, alinhado esquerda"
+    bottom:     "Pílula amarela 'ARRASTA PRO LADO 👉'"
+    overlay:    "Foto bleed full por baixo de tudo, sem moldura, sem grain"
+  hierarquia:
+    - {elemento: "foto_bleed", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "assinatura_tiago", peso: 3}
+    - {elemento: "cta_pill", peso: 4}
+
+composicao:
+  background:        "photo-bleed"
+  background_color:  "n/a — foto preenche tudo"
+  contrast:          "high"
+  ritmo:             "foto contemplativa lo-fi → headline ancora atenção no canto-esquerdo → ARRASTA fecha"
+  proporcao:
+    foto_area:       "100% (bleed)"
+    headline_area:   "35-45% (overlay esquerda)"
+    assinatura_area: "8-10% (topo)"
+    cta_area:        "60-70px pill bottom"
+  ornament:          "leve gradient overlay scrim no canto da headline pra legibilidade"
+
+typography:
+  headline:
+    role:           "story-hero-headline"
+    family:         "SF Pro Condensed"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    75
+    size_range:     [54, 76]
+    line_height_pct: 100
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  body:
+    role:           "subhead-curto"
+    family:         "SF Pro Condensed"
+    style:          "Light"
+    weight:         300
+    stretch_pct:    75
+    size_range:     [28, 36]
+    line_height_pct: 125
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  cta:
+    role:           "pill-arrasta"
+    family:         "SF Pro"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    100
+    size_range:     [22, 26]
+    line_height_pct: 100
+    letter_spacing_pct: 4
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "n/a"               # foto
+  fg_primary:        "#FFFFFF"           # texto branco sobre foto
+  accent:            "#FFCC00"           # amarelo pílula e assinatura
+  fg_secondary:      "#E5E5E5"           # sub-headline cinza claro
+  cta_bg:            "#FFCC00"
+  cta_text:          "#0F1419"
+  scrim:             "rgba(15, 20, 25, 0.25)"   # overlay leve atrás do texto
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   80
+  safe_margin_bot:   100
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+
+composition_pattern: "photo-bleed-headline-overlay-tiago-signature"
+
+image:
+  required:          true
+  type:              "photo-tiago-cotidiano-lofi"
+  placement:         "full-bleed"
+  filters:
+    saturation:      -0.1
+    contrast:        0.1
+    overlay:         "soft scrim 25% no canto da headline pra legibilidade"
+  ratio:             "9:16"
+  prompt_template_ref: "image-prompts/tiago/style-story-cover-hero.md"
+  reference_image:
+    - "exemplars/tiago/STORY-COVER-HERO/01-palestra-azul.png"
+    - "exemplars/tiago/STORY-COVER-HERO/02-casa-familia.png"
+
+slots:
+  - name:            "foto_bleed"
+    role:            "background_principal"
+    required:        true
+    description:     "Foto real lo-fi do Tiago em contexto: palestrando, em casa, viagem, lendo. Sem produção, parece celular."
+
+  - name:            "assinatura_tiago"
+    role:            "marca_pessoal_topo"
+    required:        true
+    fixed:           true
+    asset:           "assinatura-tiago-amarelo.svg | assinatura-tiago-branco.svg"
+    width:           180
+    position: {x: "right-64px", y: "60px"}
+    notes: "Amarela em fundos light/yellow. Branca em fundos dark."
+
+  - name:            "headline"
+    role:            "tese_curta_carrossel"
+    required:        true
+    max_chars:       90
+    max_lines:       5
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "64px", y: "center-vertical"}
+    accent_word:
+      allowed:       true
+      max_words:     3
+      mode:          "yellow-rect-highlight"   # palavra-chave com fundo amarelo retângulo
+      color_ref:     "colors.accent"
+
+  - name:            "cta_pill"
+    role:            "arrasta_pro_lado"
+    required:        true
+    text:            "ARRASTA PRO LADO 👉"
+    bg_color_ref:    "colors.cta_bg"
+    fg_color_ref:    "colors.cta_text"
+    component:       "pill"
+    height:          64
+    padding_x:       24
+    position: {x: "64px", y: "bottom-100px"}
+
+quando_brilha:
+  - "Capa de carrossel story Tiago — abre série"
+  - "Tese curta cabível em headline 4-12 palavras"
+  - "Auto-confissão Tiago em ambiente real"
+  - "Lista que se desenvolve nos próximos slides ('as 4 coisas que…')"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_acompanhando_tiago_organico"
+  - "audiencia_warm_perfil_tiago"
+
+teses_compativeis:
+  - "auto_confissao_tiago"
+  - "lista_carrossel"
+  - "pergunta_diagnostica_aberta"
+  - "statement_provocativo"
+
+anti_padroes:
+  - "Foto stock produzida — quebra ilusão lo-fi"
+  - "Foto sem Tiago — vai pra TIAGO-STORY-YELLOW-BLOCK ou TIAGO-STORY-MINIMAL-QUESTION"
+  - "Colagem cinema surreal — pertence ao TIAGO-EDITORIAL-HERO"
+  - "Headline em UPPER — formato pede sentence case"
+  - "Pílula preta — story pede pílula amarela pra contrastar com foto"
+
+hibridizacoes_validas:
+  - "TIAGO-STORY-YELLOW-BLOCK (quando foto não é do Tiago)"
+
+embedding_text:
+  intent: |
+    Capa de carrossel story 9:16 do perfil pessoal Tiago Alves. Foto cotidiana lo-fi do
+    Tiago como sujeito (palestra, casa, viagem, leitura) ocupando bleed full. Headline
+    branco condensed semibold ancorando tese curta. Assinatura amarela topo + ARRASTA
+    PRO LADO amarelo bottom. Tom: real, sem produção, pensamento no calor da hora.
+  visual_features: |
+    Story 9:16. Foto bleed full lo-fi (iPhone, sem produção). Tiago como sujeito.
+    Headline branco SF Pro Condensed Semibold 54-76px alinhado canto-esquerdo center-vertical.
+    Assinatura SVG Tiago amarela top-right 180px. Pílula amarela ARRASTA PRO LADO 👉
+    bottom-left 64px height. Sem grain noise, sem colagem surreal.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

@@ -1,0 +1,128 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-DARK-SURREAL"
+display_name:        "Fundo preto + imagem surreal isolada — intersticial atmosférico"
+alias:               ["TIAGO-SURREAL", "Dark Surreal Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/POSTS/Frame 1321317329.png"
+  - "IA/POSTS/freepik__recrie-uma-imagem-parecida-com-a-img1-em-zoom-in-m__20390 1.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Fundo preto puro. Imagem surreal/onírica única isolada no centro — colagem editorial ou foto B&W
+  com mood noir-poster. Exemplos: pessoa com máscara de animal cobrindo metade do rosto, gato
+  sentado em frente a espelho oval, objeto isolado iluminado por luz dura.
+  SEM texto. SEM headline. Imagem carrega o peso emocional sozinha.
+  Sensação alvo: intersticial de carrossel — slide de respiro/atmosfera entre conteúdos pesados.
+  Funciona como capa estética ou ponte simbólica.
+
+estrutura:
+  zonas:
+    top:        "Vazio (preto)"
+    center:     "Imagem surreal centralizada ocupando 40-65% do canvas"
+    bottom:     "Vazio (preto)"
+    overlay:    "n/a"
+  hierarquia:
+    - {elemento: "imagem_surreal", peso: 1}
+    - {elemento: "fundo_preto_respiro", peso: 2}
+
+composicao:
+  background:        "solid"
+  background_color:  "#000000"
+  contrast:          "extreme"
+  ritmo:             "preto absoluto domina → imagem isolada respira no centro → silêncio visual"
+  proporcao:
+    imagem_area:     "40-65%"
+    respiro_area:    "35-60% (preto puro ao redor)"
+  ornament:          "leve grain noise sobre tudo (opcional)"
+
+typography:
+  headline:
+    role:           "n/a"
+    family:         "SF Pro Condensed"
+    style:          "Light"
+    weight:         300
+    stretch_pct:    75
+    size_range:     [0, 0]
+    notes: "Formato proíbe texto — typography fica vazio por defensividade"
+
+colors:
+  bg_primary:        "#000000"
+  fg_primary:        "n/a"
+  accent:            "n/a"
+
+spacing:
+  safe_margin_x:     0
+  safe_margin_top:   0
+  safe_margin_bot:   0
+
+shape:
+  image_radius:      "0"   # imagem livre, sem container
+
+composition_pattern: "black-canvas-surreal-image-centered"
+
+image:
+  required:          true
+  type:              "surreal-collage-or-photo-noir-bw"
+  placement:         "center-isolated"
+  filters:
+    saturation:      -1.0   # B&W ou muito desaturado
+    contrast:        0.3
+    overlay:         "grain noise leve, vinheta sutil"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/tiago/style-dark-surreal.md"
+  reference_image:
+    - "exemplars/tiago/DARK-SURREAL/01-mascara-animal.png"
+    - "exemplars/tiago/DARK-SURREAL/02-gato-espelho-oval.png"
+
+slots:
+  - name:            "imagem_surreal"
+    role:            "metafora_visual_isolada"
+    required:        true
+    placement:       "center"
+    size_pct:        "40-65%"
+    description:     "Imagem única em B&W ou monocromática dark. Surreal/onírica: pessoa com máscara animal cobrindo rosto, gato em frente espelho oval, objeto isolado iluminado por luz dura. Mood noir-poster."
+
+quando_brilha:
+  - "Intersticial de carrossel entre slides pesados — pause atmosférico"
+  - "Capa estética sem precisar de copy"
+  - "Ponte simbólica entre temas dentro de uma série"
+  - "Pós-revelação dramática (próximo slide explica)"
+
+funil_recomendado: ["TOFU"]
+
+audiencia_recomendada:
+  - "audiencia_warm_perfil_tiago_estetica"
+  - "feed_organico_engajamento_save"
+
+teses_compativeis:
+  - "intersticial_carrossel"
+  - "atmosfera_sem_copy"
+  - "ponte_simbolica"
+
+anti_padroes:
+  - "Texto na imagem — formato proíbe copy direto"
+  - "Imagem saturada em cores — pede B&W ou monocromática dark"
+  - "Fundo claro — pede preto puro"
+  - "Múltiplas imagens no canvas — pede UMA imagem isolada"
+  - "Stock photo genérica — pede surreal/onírica curada"
+
+hibridizacoes_validas: []
+
+embedding_text:
+  intent: |
+    Intersticial atmosférico pro feed Tiago. Sem copy, sem CTA. Imagem surreal/onírica
+    isolada em fundo preto puro. Funciona como pause de respiro, capa estética ou ponte
+    simbólica em carrossel. Voz: silêncio dramático, poster noir.
+  visual_features: |
+    Background preto absoluto #000000. Imagem única B&W ou monocromática dark
+    centralizada ocupando 40-65% do canvas. Surreal/onírica: máscara animal, gato
+    espelho, objeto isolado luz dura. Grain noise leve, vinheta sutil. SEM TEXTO.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

@@ -1,0 +1,194 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-STORY-YELLOW-BLOCK"
+display_name:        "Story foto lo-fi + bloco amarelo overlay com pergunta/checklist"
+alias:               ["TIAGO-YELLOW-BLOCK", "Story Yellow Box Tiago"]
+formato:             "STORY"
+banco_ref:
+  - "IA/POSTS/442573.png"
+  - "IA/POSTS/Frame 1321317324.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Story 9:16 com foto bleed lo-fi de ambiente (escritório, academia, mesa, paisagem) — SEM Tiago como sujeito.
+  Bloco amarelo solid overlay centralizado com headline preto SF Pro Condensed Semibold (pergunta ou checklist).
+  Sub-headline em peso Light embaixo. Variante opcional: timestamp/hora no canto superior direito.
+  Foto serve de pano de fundo contextual (sala de reunião = empresa, academia = disciplina, mesa = trabalho).
+  Sensação alvo: "esse momento te lembra de pensar nisso?" — gancho situacional.
+
+estrutura:
+  zonas:
+    top:        "Variante: timestamp '07:42' canto superior direito (opcional)"
+    center:     "Bloco amarelo solid (radius 16) com headline preto + sub Light dentro"
+    bottom:     "Vazio ou pílula opcional"
+    overlay:    "Foto bleed full por baixo"
+  hierarquia:
+    - {elemento: "bloco_amarelo_headline", peso: 1}
+    - {elemento: "foto_bleed_contexto", peso: 2}
+    - {elemento: "timestamp_opcional", peso: 3}
+
+composicao:
+  background:        "photo-bleed"
+  background_color:  "n/a"
+  contrast:          "high"
+  ritmo:             "foto ambiente lo-fi como contexto → bloco amarelo detona com headline → sub Light fecha"
+  proporcao:
+    foto_area:       "100% (bleed)"
+    bloco_amarelo_area: "55-70% largura, 25-35% altura — central-vertical"
+    timestamp_area:  "4-6% (opcional canto)"
+  ornament:          "nenhum — bloco amarelo é o próprio destaque"
+
+typography:
+  headline:
+    role:           "yellow-block-headline"
+    family:         "SF Pro Condensed"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    75
+    size_range:     [42, 58]
+    line_height_pct: 105
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  body:
+    role:           "sub-headline-light"
+    family:         "SF Pro Condensed"
+    style:          "Light"
+    weight:         300
+    stretch_pct:    75
+    size_range:     [22, 30]
+    line_height_pct: 130
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "timestamp-opcional"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [20, 26]
+    line_height_pct: 100
+    letter_spacing_pct: 2
+    text_case:      "natural"
+
+colors:
+  bg_primary:        "n/a"               # foto
+  fg_primary:        "#0F1419"           # texto preto no bloco amarelo
+  accent:            "#FFCC00"           # bloco amarelo solid
+  fg_secondary:      "#3B4350"           # sub em cinza neutro
+  timestamp_color:   "#FFFFFF"           # timestamp branco sobre foto
+
+spacing:
+  safe_margin_x:     56
+  safe_margin_top:   80
+  safe_margin_bot:   80
+  bloco_padding:     32
+  gap_between_blocks: 16
+
+shape:
+  bloco_radius:      "16"
+
+composition_pattern: "photo-bleed-yellow-block-center"
+
+image:
+  required:          true
+  type:              "photo-ambiente-lofi-contexto"
+  placement:         "full-bleed"
+  filters:
+    saturation:      -0.15
+    contrast:        0.05
+    overlay:         "nenhum"
+  ratio:             "9:16"
+  prompt_template_ref: "image-prompts/tiago/style-story-yellow-block.md"
+  reference_image:
+    - "exemplars/tiago/STORY-YELLOW-BLOCK/01-sala-reuniao-vista.png"
+    - "exemplars/tiago/STORY-YELLOW-BLOCK/02-academia-vazia.png"
+
+slots:
+  - name:            "foto_bleed"
+    role:            "ambiente_contexto"
+    required:        true
+    description:     "Foto lo-fi de ambiente real — escritório, sala reunião com vista, academia, mesa cozy, paisagem urbana. SEM pessoas como sujeito principal. Lo-fi cotidiano."
+
+  - name:            "bloco_amarelo"
+    role:            "container_destaque"
+    required:        true
+    bg_color_ref:    "colors.accent"
+    corner_radius:   "16"
+    padding:         32
+    width_pct:       "60-70%"
+    position: {x: "center-horizontal", y: "center-vertical"}
+
+  - name:            "headline"
+    role:            "pergunta_ou_titulo_checklist"
+    required:        true
+    max_chars:       60
+    max_lines:       3
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    container_ref:   "bloco_amarelo"
+
+  - name:            "subhead"
+    role:            "instrucao_curta"
+    required:        false
+    max_chars:       100
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_secondary"
+    align:           "left"
+    container_ref:   "bloco_amarelo"
+    position: {x: "0", y: "after-headline+12px"}
+
+  - name:            "timestamp"
+    role:            "hora_contextual_opcional"
+    required:        false
+    max_chars:       8
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.timestamp_color"
+    position: {x: "right-64px", y: "80px"}
+    notes: "Quando timestamp presente, reforça 'esse momento te lembra…' (ex: 07:42 antes do dia começar)"
+
+quando_brilha:
+  - "Pergunta diagnóstica situacional ('Sua meta é realista?', 'Já bateu sua meta hoje?')"
+  - "Checklist visual ('Use esse checklist rápido antes de…')"
+  - "Lembrete de hábito ancorado em ambiente (academia=disciplina, mesa=foco)"
+  - "Hook contextual onde a foto reforça o tema"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_audiencia_warm_tiago"
+  - "gestor_buscando_diagnostico"
+
+teses_compativeis:
+  - "pergunta_diagnostica_situacional"
+  - "checklist_curto"
+  - "lembrete_disciplina"
+
+anti_padroes:
+  - "Foto com Tiago como sujeito — vai pra TIAGO-STORY-COVER-HERO"
+  - "Headline acusatória — voz Tiago acolhe"
+  - "Bloco em outra cor — bloco é AMARELO solid, signature da marca"
+  - "UPPER no headline — formato pede sentence case"
+  - "Texto solto sem bloco — vai pra TIAGO-STORY-MINIMAL-QUESTION"
+
+hibridizacoes_validas:
+  - "TIAGO-STORY-MINIMAL-QUESTION (quando texto é leve, sem destaque)"
+
+embedding_text:
+  intent: |
+    Story 9:16 com pergunta diagnóstica ou checklist ancorada em ambiente cotidiano.
+    Foto lo-fi de espaço (escritório, academia, mesa) como contexto, bloco amarelo
+    central com headline preto SF Pro Condensed Semibold. Hook situacional Tiago.
+  visual_features: |
+    Story 9:16. Foto bleed full lo-fi de ambiente (SEM pessoas em destaque).
+    Bloco amarelo solid (#FFCC00) radius 16 ocupa 60-70% largura center-vertical.
+    Headline preto SF Pro Condensed Semibold 42-58px + sub Light cinza 22-30px dentro.
+    Timestamp opcional canto superior direito. Sem pílula ARRASTA.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

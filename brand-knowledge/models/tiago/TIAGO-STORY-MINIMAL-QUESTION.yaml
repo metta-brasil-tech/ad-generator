@@ -1,0 +1,168 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-STORY-MINIMAL-QUESTION"
+display_name:        "Story foto lo-fi + texto leve solto SEM caixa — reflexão minimalista"
+alias:               ["TIAGO-MINIMAL", "Story Minimal Tiago"]
+formato:             "STORY"
+banco_ref:
+  - "IA/POSTS/Frame 1321317321.png"
+  - "IA/POSTS/Frame 1321317326.png"
+  - "IA/POSTS/Frame 1321317330.png"
+  - "IA/POSTS/Frame 1321317334.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Story 9:16 ultra-minimalista. Foto bleed lo-fi cotidiana (mesa noturna, sala vista, livro aberto, paisagem RJ).
+  Texto branco/cinza claro em SF Pro Condensed Light ou Regular alinhado ao canto — geralmente uma pergunta
+  contemplativa ou frase curta de reflexão. SEM caixa, SEM assinatura forte, SEM pílula CTA.
+  Variante: keyword colorida em amarelo destacada inline.
+  Sensação alvo: "ele tá pensando alto" — voz íntima, baixo volume, alta densidade.
+
+estrutura:
+  zonas:
+    top:        "Vazio (foto respira) OU texto curto contemplativo"
+    center:     "Texto leve ao canto — pergunta/reflexão"
+    bottom:     "Vazio (sem CTA)"
+    overlay:    "Foto bleed full lo-fi por baixo"
+  hierarquia:
+    - {elemento: "foto_bleed", peso: 1}
+    - {elemento: "texto_solto", peso: 2}
+
+composicao:
+  background:        "photo-bleed"
+  background_color:  "n/a"
+  contrast:          "medium"
+  ritmo:             "foto contemplativa domina → texto entra leve, sutilmente"
+  proporcao:
+    foto_area:       "100% (bleed)"
+    texto_area:      "15-25% (overlay leve, geralmente canto ou center-left)"
+  ornament:          "leve gradient scrim sob o texto (15-20% opacidade) só pra legibilidade"
+
+typography:
+  headline:
+    role:           "reflexao-leve"
+    family:         "SF Pro Condensed"
+    style:          "Light"
+    weight:         300
+    stretch_pct:    75
+    size_range:     [30, 42]
+    line_height_pct: 120
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  body:
+    role:           "complemento-curto"
+    family:         "SF Pro Condensed"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    75
+    size_range:     [22, 28]
+    line_height_pct: 130
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+
+colors:
+  bg_primary:        "n/a"
+  fg_primary:        "#FFFFFF"
+  accent:            "#FFCC00"           # keyword destacada
+  fg_secondary:      "#D5D5D5"           # texto secundário em cinza claro
+  scrim:             "rgba(15, 20, 25, 0.18)"
+
+spacing:
+  safe_margin_x:     56
+  safe_margin_top:   80
+  safe_margin_bot:   80
+
+shape:
+  text_radius:       "0"
+
+composition_pattern: "photo-bleed-text-floating-minimal"
+
+image:
+  required:          true
+  type:              "photo-cotidiano-contemplativo-lofi"
+  placement:         "full-bleed"
+  filters:
+    saturation:      -0.2
+    contrast:        0.05
+    overlay:         "scrim 18% leve sob o texto"
+  ratio:             "9:16"
+  prompt_template_ref: "image-prompts/tiago/style-story-minimal.md"
+  reference_image:
+    - "exemplars/tiago/STORY-MINIMAL/01-mesa-noturna-laptop.png"
+    - "exemplars/tiago/STORY-MINIMAL/02-vista-rj-pao-de-acucar.png"
+
+slots:
+  - name:            "foto_bleed"
+    role:            "contexto_contemplativo"
+    required:        true
+    description:     "Foto lo-fi cotidiana — mesa noturna com luminária, vista urbana, livro aberto, sala/cozinha. Mood contemplativo, baixa saturação. SEM rosto direto."
+
+  - name:            "texto_reflexao"
+    role:            "pergunta_ou_pensamento"
+    required:        true
+    max_chars:       100
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "56px", y: "center-vertical | top-third | bottom-third"}
+    accent_word:
+      allowed:       true
+      max_words:     4
+      mode:          "inline-yellow-color"   # palavra muda de cor, sem fundo
+      color_ref:     "colors.accent"
+
+  - name:            "complemento"
+    role:            "linha_secundaria_opcional"
+    required:        false
+    max_chars:       80
+    max_lines:       2
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_secondary"
+    align:           "left"
+    position: {x: "56px", y: "after-texto+16px"}
+
+quando_brilha:
+  - "Reflexão contemplativa ('o que você não abre mão pra…')"
+  - "Pergunta aberta de baixo volume sem pedir resposta imediata"
+  - "Frase íntima de pensamento — voz Tiago em momento privado"
+  - "Pause entre slides pesados de um carrossel"
+
+funil_recomendado: ["TOFU"]
+
+audiencia_recomendada:
+  - "audiencia_warm_perfil_tiago_engaja_organico"
+  - "empresario_seguindo_dia_a_dia"
+
+teses_compativeis:
+  - "reflexao_contemplativa"
+  - "pergunta_aberta_baixo_volume"
+  - "auto_reflexao_tiago"
+
+anti_padroes:
+  - "Caixa amarela ou container forte — vai pra TIAGO-STORY-YELLOW-BLOCK"
+  - "Pílula ARRASTA — vai pra TIAGO-STORY-COVER-HERO"
+  - "Headline grande/dominante — formato pede LEVE, baixo volume"
+  - "Tiago como sujeito da foto — vai pra COVER-HERO"
+  - "Tipografia bold/heavy — pede Light ou Regular"
+
+hibridizacoes_validas:
+  - "TIAGO-STORY-COVER-HERO (quando virar capa de carrossel)"
+
+embedding_text:
+  intent: |
+    Story 9:16 minimalista pro perfil Tiago Alves. Reflexão contemplativa baixo
+    volume, frase íntima ou pergunta aberta. Foto cotidiana lo-fi contemplativa.
+    Texto leve sem caixa, sem CTA. Tom: pensamento privado, voz íntima Tiago.
+  visual_features: |
+    Story 9:16. Foto bleed full lo-fi (mesa, vista, livro, sala). Mood contemplativo
+    baixa saturação. Texto branco SF Pro Condensed Light 30-42px alinhado canto-
+    esquerdo. Keyword opcional em amarelo inline (sem fundo). Sem container, sem
+    pílula, sem assinatura forte. Mínimo absoluto.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"

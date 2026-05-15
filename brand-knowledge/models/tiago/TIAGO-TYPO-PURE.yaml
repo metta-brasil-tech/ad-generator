@@ -1,0 +1,154 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-TYPO-PURE"
+display_name:        "Tipográfico puro — headline gigante + keyword colorida"
+alias:               ["TIAGO-TYPO", "Tipografia Pura Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/POSTS/Frame 1321317328.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Tipográfico puro, sem foto. Fundo claro (branco off ou cinza muito claro). Headline GIGANTE
+  SF Pro Condensed Semibold ocupando 60-75% do canvas, com 1-3 palavras-chave em cor de destaque
+  (azul-cinza dark #3D5762 ou amarelo). Handle @tiago.alves.oliveira em SF Pro Regular cinza
+  embaixo como assinatura sutil. Sem assinatura SVG, sem pílula, sem ornamento.
+  Sensação alvo: frase impactante isolada — como post-quote ou tese escrita na parede.
+
+estrutura:
+  zonas:
+    top:        "Vazio (respiro)"
+    center:     "Headline gigante com keyword colorida"
+    bottom:     "@tiago.alves.oliveira pequeno em cinza"
+    overlay:    "n/a"
+  hierarquia:
+    - {elemento: "headline_gigante", peso: 1}
+    - {elemento: "keyword_destaque", peso: 2}
+    - {elemento: "handle_assinatura", peso: 3}
+
+composicao:
+  background:        "solid"
+  background_color:  "#FAFAFA"
+  contrast:          "high"
+  ritmo:             "headline detona ocupando o canvas → keyword colorida ancora destaque → handle pequeno fecha"
+  proporcao:
+    headline_area:   "60-75%"
+    handle_area:     "6-8% (bottom-left)"
+    respiro_area:    "20-30% (top + sides)"
+  ornament:          "nenhum — tipografia carrega tudo"
+
+typography:
+  headline:
+    role:           "typo-pure-headline"
+    family:         "SF Pro Condensed"
+    style:          "Semibold"
+    weight:         600
+    stretch_pct:    75
+    size_range:     [76, 110]
+    line_height_pct: 95
+    letter_spacing_pct: -1.5
+    text_case:      "sentence"
+  body:
+    role:           "handle-assinatura"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [22, 28]
+    line_height_pct: 120
+    letter_spacing_pct: 0
+    text_case:      "natural"
+
+colors:
+  bg_primary:        "#FAFAFA"
+  fg_primary:        "#0F1419"
+  accent:            "#3D5762"           # azul-cinza dark (default da keyword)
+  accent_alt:        "#FFCC00"           # amarelo (alternativo)
+  fg_secondary:      "#B0BCC1"           # handle em cinza claro
+
+spacing:
+  safe_margin_x:     56
+  safe_margin_top:   120
+  safe_margin_bot:   80
+  gap_handle:        80
+
+shape:
+  text_radius:       "0"
+
+composition_pattern: "typo-only-headline-keyword-color"
+
+image:
+  required:          false
+  type:              "none"
+  notes:             "Estilo é puro typo — proibido adicionar foto"
+
+slots:
+  - name:            "headline"
+    role:            "tese_impactante_isolada"
+    required:        true
+    max_chars:       90
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "56px", y: "120px"}
+    accent_word:
+      allowed:       true
+      max_words:     3
+      mode:          "inline-color"
+      color_ref:     "colors.accent"        # ou accent_alt amarelo
+      notes:         "Palavras-chave em #3D5762 (azul-cinza dark) ou #FFCC00 (amarelo). Default azul-cinza pra contraste forte sem ser óbvio."
+
+  - name:            "handle"
+    role:            "assinatura_sutil"
+    required:        true
+    fixed:           true
+    text:            "@tiago.alves.oliveira"
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_secondary"
+    align:           "left"
+    position: {x: "56px", y: "after-headline+80px"}
+
+quando_brilha:
+  - "Frase de impacto isolada ('A verdadeira meta batida é ter o CNPJ patrocinando o CPF.')"
+  - "Tese curta e fechada — gostaria de ser tatuada na parede"
+  - "Statement provocativo SEM precisar de prova visual"
+  - "Post-quote standalone"
+
+funil_recomendado: ["TOFU"]
+
+audiencia_recomendada:
+  - "audiencia_warm_perfil_tiago"
+  - "feed_organico_engajamento_save"
+
+teses_compativeis:
+  - "statement_filosofico_curto"
+  - "tese_isolada_high_impact"
+  - "frase_tatuagem"
+
+anti_padroes:
+  - "Foto — formato é tipográfico PURO, foto destrói a proposta"
+  - "Headline curto demais (1-2 palavras) — tipografia gigante ficaria solta"
+  - "Mais de 3 palavras-chave coloridas — perde o foco do destaque"
+  - "Assinatura SVG do Tiago — esse estilo usa @handle, não SVG"
+  - "Pílula ARRASTA — não é capa de carrossel"
+
+hibridizacoes_validas: []
+
+embedding_text:
+  intent: |
+    Post tipográfico puro pro feed Tiago. Frase de impacto isolada com 1-3 palavras-chave
+    em cor de destaque. Voz: tese fechada, statement filosófico, post-quote standalone.
+    Engajamento via save/share, não via clique. TOFU.
+  visual_features: |
+    Background #FAFAFA off-white. Headline SF Pro Condensed Semibold 76-110px preto
+    ocupando 60-75% do canvas alinhado canto-esquerdo. 1-3 palavras-chave inline em
+    cor #3D5762 azul-cinza ou #FFCC00 amarelo. Handle @tiago.alves.oliveira pequeno
+    SF Pro Regular cinza claro embaixo. Sem foto, sem CTA, sem assinatura SVG, sem ornamento.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-15"
+updated:             "2026-05-15"
+maintainer:          "Head de Design Metta"
