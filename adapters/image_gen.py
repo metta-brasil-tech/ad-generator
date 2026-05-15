@@ -50,9 +50,9 @@ def _aspect_to_size(aspect: str, provider: str, model: str = "") -> str:
 
 
 class OpenAIImageGen:
-    """OpenAI Images API. Default: gpt-image-1 (current). DALL-E 3 falls back if available."""
+    """OpenAI Images API. Supports gpt-image-2, gpt-image-1, dall-e-3."""
 
-    def __init__(self, model: str = "gpt-image-1"):
+    def __init__(self, model: str = "gpt-image-2"):
         self.model = model
         self.api_key = os.getenv("OPENAI_API_KEY") or os.getenv("OPENAI_IMAGE_API_KEY")
         if not self.api_key:
@@ -65,15 +65,13 @@ class OpenAIImageGen:
         url = "https://api.openai.com/v1/images/generations"
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
-        # gpt-image-1 uses different params than dall-e-3
-        if self.model == "gpt-image-1":
+        if self.model in ("gpt-image-2", "gpt-image-1"):
             payload = {
                 "model": self.model,
-                "prompt": prompt[:4000],  # gpt-image-1 limit ~4000
+                "prompt": prompt[:4000],
                 "size": size,
                 "quality": "high",
                 "n": 1,
-                # gpt-image-1 returns b64 by default — no response_format needed
             }
             est_cost = 0.19 if size == "1024x1792" else 0.17
         else:
@@ -255,9 +253,10 @@ class ImageGenAdapter:
 
         if self.provider == "mock":
             self.backend = MockImageGen()
-        elif self.provider in ("openai", "gpt-image-1", "dall-e-3"):
-            # Default to gpt-image-1 (current model). dall-e-3 is legacy.
-            model = "dall-e-3" if self.provider == "dall-e-3" else "gpt-image-1"
+        elif self.provider in ("openai", "gpt-image-2", "gpt-image-1", "dall-e-3"):
+            model = "dall-e-3" if self.provider == "dall-e-3" else (
+                "gpt-image-1" if self.provider == "gpt-image-1" else "gpt-image-2"
+            )
             self.backend = OpenAIImageGen(model=model)
         elif self.provider in ("nano-banana-2", "gemini-nano-banana"):
             self.backend = GeminiImageGen(model="gemini-2.5-flash-image-preview")
