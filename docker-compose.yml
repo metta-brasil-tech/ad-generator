@@ -1,15 +1,35 @@
 services:
+  ad-generator:
+    build: .
+    container_name: ad-generator
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./assets:/app/assets
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ad-generator.rule=Host(`ad-generator.srv1566436.hstgr.cloud`)"
+      - "traefik.http.routers.ad-generator.entrypoints=websecure"
+      - "traefik.http.routers.ad-generator.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ad-generator.loadbalancer.server.port=8000"
+
   qdrant:
     image: qdrant/qdrant:latest
     container_name: metta-qdrant
     restart: unless-stopped
-    ports:
-      - "6333:6333"   # REST
-      - "6334:6334"   # gRPC
     volumes:
       - qdrant_storage:/qdrant/storage
     environment:
       QDRANT__LOG_LEVEL: INFO
+    networks:
+      - traefik
 
 volumes:
   qdrant_storage:
+
+networks:
+  traefik:
+    external: true
