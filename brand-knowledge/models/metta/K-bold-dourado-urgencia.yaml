@@ -1,0 +1,106 @@
+﻿$schema_version: "1.0"
+id: "K-bold-dourado-urgencia"
+display_name: "Bold dourado / urgência fundamentada"
+alias: ["K", "Estilo K"]
+formato: "STORY"
+banco_ref: ["1:596"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Urgência fundamentada (não fake) com elegância. Linha amarela divide
+  headline da body, dando ritmo de "convite oficial selado". Tom de carta
+  exclusiva, não promo gritante.
+
+estrutura:
+  zonas:
+    top: "Tag UPPERCASE topo"
+    center: "Headline branco gigante LEFT-aligned"
+    overlay: "Linha amarela divisora"
+    bottom: "Body curto + CTA pill amarelo"
+  hierarquia:
+    - {elemento: "headline", peso: 1}
+    - {elemento: "linha_amarela", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background: "solid"
+  background_color: "#0D171C"
+  contrast: "high"
+  ritmo: "tag → headline pesado → divisor → body → CTA — convite formal"
+  proporcao: {headline_area: "45-55%", body_area: "15%", cta_area: "100-130px"}
+  ornament: "yellow-band-divider"
+
+typography:
+  headline: {role: "title-large", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [70, 90], line_height_pct: 92,
+    letter_spacing_pct: -1, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Medium",
+    weight: 510, stretch_pct: 100, size_range: [26, 34], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 12, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "#0D171C"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-85)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 24}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: 0}
+composition_pattern: "left-aligned-with-yellow-divider"
+
+image: {required: false, type: "none", placement: "", ratio: "",
+  prompt_template_ref: "", reference_image: []}
+
+slots:
+  - {name: "tag", role: "breadcrumb", required: true, max_chars: 30,
+     style_ref: "typography.tag_eyebrow", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "100px"}}
+  - {name: "headline", role: "convite_formal", required: true, max_chars: 100, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "200px"},
+     accent_word: {allowed: false, max_words: 0}}
+  - {name: "body", role: "fundamento_urgencia", required: true, max_chars: 120, max_lines: 3,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-yellow-band+24px"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Convite exclusivo (Elite, capacity-limited)"
+  - "Escassez REAL (capacidade trimestral, vagas contadas)"
+  - "Anúncio de fechamento de inscrições"
+
+funil_recomendado: ["BOFU", "retargeting"]
+audiencia_recomendada: ["lista_proprietaria", "warm_BOFU"]
+teses_compativeis: ["convite_exclusivo", "escassez_real", "fechamento_inscricoes"]
+
+anti_padroes:
+  - "Escassez fake — destrói a marca"
+  - "TOFU cold (precisa de warmth pra urgência funcionar)"
+  - "Tese ofertiva descontraída — K é formal sério"
+
+hibridizacoes_validas: ["DARK-CARTA (versão com mockup de contrato)"]
+
+embedding_text:
+  intent: |
+    Estilo do convite formal exclusivo. Carrega urgência fundamentada (real,
+    não fake) com elegância. Tom de carta selada, não promo gritante.
+    Funciona em BOFU com escassez verdadeira.
+  visual_features: |
+    Fundo dark #0D171C. Headline branca UPPER 70-90px massivo LEFT-aligned.
+    Linha amarela horizontal divisora. Body cinza claro. CTA pill amarelo bottom.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.3"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

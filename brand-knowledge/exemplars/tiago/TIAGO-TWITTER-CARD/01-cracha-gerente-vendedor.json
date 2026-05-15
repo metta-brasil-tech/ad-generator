@@ -1,0 +1,140 @@
+{
+  "exemplar_id": "TIAGO-TWITTER-CARD-cracha-gerente-vendedor",
+  "tags": ["pergunta-diagnostica", "carrossel-cover", "gestao-comercial", "MOFU", "voz-tiago"],
+  "variant": "cover",
+  "reference_png": "exemplars/tiago/cr6tiagoabril-1.png",
+  "stages": {
+    "briefing_input": "carrossel pro perfil do Tiago, slide 1 (cover) — pergunta provocativa sobre gerente de vendas vs vendedor com crachá de chefe",
+    "briefing_output": {
+      "intent": "reframe_intelectual",
+      "tese_central": "Pergunta diagnóstica: você tem um gerente de vendas ou um vendedor com crachá de chefe?",
+      "formato": "carrossel",
+      "funil": "MOFU",
+      "audiencia": {
+        "segmento": "varejo_geral",
+        "cargo": "empresario",
+        "porte_revenue": "desconhecido",
+        "estado_emocional": "confortavel_buscando_crescer"
+      },
+      "tom": "intelectual",
+      "constraints": {
+        "tem_logo_cliente_nomeado": false,
+        "case_nominal_id": null,
+        "data_evento": null,
+        "cta_obrigatorio": null,
+        "plataforma_destino": "instagram_organico"
+      },
+      "marca": "tiago",
+      "raw_request": "carrossel pro perfil do Tiago, slide 1 — pergunta provocativa sobre gerente de vendas vs vendedor com crachá de chefe",
+      "clarifying_questions": []
+    },
+    "style_selected": "TIAGO-TWITTER-CARD",
+    "layout_spec": {
+      "model_id": "TIAGO-TWITTER-CARD",
+      "marca": "tiago",
+      "variant": "cover",
+      "frame": {
+        "width": 1080,
+        "height": 1350,
+        "background": {"type": "solid", "value": "#FFFFFF"}
+      },
+      "elements": [
+        {
+          "type": "header_mock",
+          "slot_name": "header_mock",
+          "x": 64, "y": 80, "width": 952,
+          "avatar": {
+            "x": 64, "y": 80,
+            "diameter": 140,
+            "ring_color": "#FFCC00",
+            "ring_thickness": 10,
+            "photo_placeholder": "[imagem] retrato Tiago — recorte ombros, fundo neutro"
+          },
+          "name": {
+            "text": "Tiago Alves",
+            "font": {"family": "SF Pro", "style": "Bold", "weight": 700, "size": 40, "line_height_pct": 120, "letter_spacing_pct": -0.5, "text_case": "sentence"},
+            "color": "#0F1419"
+          },
+          "verified_badge": {"size": 32, "color": "#1D9BF0"},
+          "ellipsis": {"text": "⋯", "color": "#71767B", "size": 32},
+          "handle": {
+            "text": "@tiago.alves.oliveira",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 120, "text_case": "sentence"},
+            "color": "#536471"
+          }
+        },
+        {
+          "type": "text",
+          "slot_name": "headline",
+          "text": "Você tem um gerente de vendas ou um vendedor com crachá de chefe?",
+          "ranges": [
+            {"start": 17, "end": 33, "weight": 700, "comment": "gerente de vendas — bold-emphasis"},
+            {"start": 40, "end": 65, "weight": 700, "comment": "vendedor com crachá de chefe — bold-emphasis"}
+          ],
+          "x": 64, "y": 300, "width": 952,
+          "font": {
+            "family": "SF Pro", "style": "Bold",
+            "weight": 700, "stretch_pct": 100, "size": 56,
+            "line_height_pct": 125, "letter_spacing_pct": -1, "text_case": "sentence"
+          },
+          "color": "#0F1419", "align": "left"
+        },
+        {
+          "type": "text",
+          "slot_name": "transition_emoji",
+          "text": "Arrasta pro Lado 👉",
+          "x": 64, "y": 600, "width": 600,
+          "font": {
+            "family": "SF Pro", "style": "Regular",
+            "weight": 400, "stretch_pct": 100, "size": 34,
+            "line_height_pct": 130, "text_case": "sentence"
+          },
+          "color": "#0F1419", "align": "left"
+        },
+        {
+          "type": "image_slot",
+          "slot_name": "media",
+          "x": 64, "y": 760, "width": 952, "height": 510,
+          "corner_radius": 28,
+          "image_prompt_ref": "image-prompts/tiago/style-twitter-card.md",
+          "url_placeholder": "exemplars/tiago/cr6tiagoabril-1.png (crachá UNIÃO 'Gerente VENDEDOR')"
+        }
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.95}
+    },
+    "image_prompt": {
+      "skip": false,
+      "prompts": [{
+        "slot_name": "media",
+        "prompt": "documentary phone-snapshot of a worn paper id-badge clipped to a denim shirt, the badge reads 'Gerente' typed and 'VENDEDOR' handwritten in bold red marker over it, warm overhead natural light from store ceiling, soft shadows on fabric, desaturated whites and warm beige palette, shot as if grabbed mid-moment without setup, iPhone 15 Pro main lens, editorial 4K, sharp on badge text, casual off-center framing, no studio look, no professional lighting, no logos visible other than badge text, no dramatic editorial mood",
+        "negative_prompt": "no professional studio lighting, no business stock photo aesthetics, no dark moody Metta editorial, no Hasselblad cinema, no perfectly centered subject, no eye contact with camera, no over-styled scene, no surreal collage, no AI render artifacts",
+        "aspect_ratio": "16:9",
+        "reference_images": ["exemplars/tiago/cr6tiagoabril-1.png"],
+        "model_hint": "nano-banana-2",
+        "iteration_strategy": {
+          "max_attempts": 3,
+          "fallback_prompts": [
+            "phone-snapshot of an id-badge on a casual shirt, the printed word 'Gerente' covered by 'VENDEDOR' in red marker, natural overhead daylight, muted neutrals, iPhone main lens, editorial 4K, no studio look",
+            "still life of a worn paper name-tag on dark blue work shirt, label shows role swap from manager to seller in red handwriting, soft natural light, documentary snap, Fujifilm X-T5 35mm, editorial 4K, no logos, no over-saturation"
+          ]
+        },
+        "metadata": {"style_id": "TIAGO-TWITTER-CARD", "mood_chosen": "documentary detail", "marca": "tiago"}
+      }]
+    },
+    "qa_report": {
+      "status": "PASS",
+      "issues": [],
+      "warnings": [],
+      "metadata": {"rules_checked": 14, "passed": 14, "failed": 0, "marca_consistency": "pass"}
+    }
+  },
+  "final_url": null,
+  "performance": {
+    "human_accepted": true,
+    "edits_required": "none — seed exemplar canônico extraído do PNG cr6tiagoabril-1",
+    "ad_metrics": null
+  },
+  "notes": "Cover slide do carrossel. Header mock fixo (signature visual da marca pessoal). Headline com bold-emphasis em 2 segments-chave (sem cor — só peso). Foto documental de crachá ilustra a tese. Sem CTA pill, sem amarelo de background. Footnote 'Arrasta pro Lado 👉' faz ponte pro slide 2.",
+  "created": "2026-05-14"
+}

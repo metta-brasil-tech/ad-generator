@@ -1,0 +1,189 @@
+﻿$schema_version: "1.0"
+
+id:                  "B-foto-top-headline-mixed"
+display_name:        "Foto top + headline mixed-weight + body bottom"
+alias:               ["B", "Estilo B"]
+formato:             "STORY"
+banco_ref:           ["1:229","1:237","1:325","1:526","1:566","1:738","1:837","1:865","1:900"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Foto top abre o cenário emocional (pessoa na situação descrita). Headline embaixo é
+  a interpretação dessa cena. Olho lê em F: foto → headline → body → CTA.
+  Cria "cinema curto" em ad estático.
+
+estrutura:
+  zonas:
+    top:        "Foto pessoa em situação descrita (40-50% do canvas)"
+    center:     "Headline mixed-weight com palavra amarela em destaque"
+    bottom:     "Body branco + CTA pill"
+    overlay:    "Gradiente fade-to-black entre foto e texto"
+  hierarquia:
+    - {elemento: "foto_pessoa", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background:        "image-overlay"
+  background_color:  "#0C161B"
+  contrast:          "medium"
+  ritmo:             "cinema (foto) → reflexão (headline) → ação (CTA) — cadência cinematográfica"
+  proporcao:
+    headline_area:   "20-25%"
+    image_area:      "40-50%"
+    body_area:       "10-15%"
+    cta_area:        "100-150px"
+  ornament:          "gradient-fade-to-black"
+
+typography:
+  headline:
+    role:           "title-large"
+    family:         "SF Pro"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [60, 93]
+    line_height_pct: 95
+    letter_spacing_pct: -1
+    text_case:      "UPPER"
+  body:
+    role:           "body-large"
+    family:         "SF Pro"
+    style:          "Expanded Regular"
+    weight:         590
+    stretch_pct:    100
+    size_range:     [30, 42]
+    line_height_pct: 117
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [24, 30]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-ref-palette-night-10)"
+  fg_primary:        "var(--metta-ref-palette-night-100)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-85)"
+  cta_bg:            "var(--metta-sys-color-primary)"
+  cta_text:          "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   0
+  safe_margin_bot:   120
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "var(--metta-sys-shape-corner-md)"
+
+composition_pattern: "split-vertical-foto-top-text-bottom"
+
+image:
+  required:          true
+  type:              "photo-editorial"
+  placement:         "top-bleed"
+  filters:
+    saturation:      0
+    contrast:        0.2
+    overlay:         "gradient-fade-to-black-bottom-30%"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/style-B.md"
+  reference_image:
+    - "figma://1:229"
+    - "figma://1:865"
+
+slots:
+  - name:            "headline"
+    role:            "interpretacao_cena"
+    required:        true
+    max_chars:       80
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "after-image+48px"}
+    accent_word:
+      allowed:       true
+      max_words:     2
+      color_ref:     "colors.accent"
+  - name:            "body"
+    role:            "explicacao"
+    required:        true
+    max_chars:       150
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "after-headline+32px"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-130px"}
+
+quando_brilha:
+  - "Tese visualizável em foto/cena (refém do operacional, exaustão visível)"
+  - "Statements provocativos que precisam de foto pra ancorar emocionalmente"
+  - "Identificação de problema ('Você está vivendo isso aqui ↓')"
+  - "Reframe de mantra-algema (foto mostra o mantra, headline desmonta)"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_exausto"
+  - "decisor_b2c_servico"
+
+teses_compativeis:
+  - "dor_pessoal_exaustao"
+  - "statement_provocativo"
+  - "reframe_mantra"
+  - "lista_sintomas"
+
+anti_padroes:
+  - "Tese abstrata sem cena visualizável (ex: 'método replicável')"
+  - "Big number puro (foto top dilui o número — usar A ou YELLOW-EDITORIAL)"
+  - "Foto genérica de stock (pessoa sorrindo no escritório) — destrói credibilidade"
+
+hibridizacoes_validas:
+  - "D (foto pode ser mais bleed)"
+  - "LIGHT-SURREAL (versão com colagem em vez de foto realista)"
+
+embedding_text:
+  intent: |
+    Estilo de cinema curto. Carrega tese que precisa de cena humana pra ser sentida:
+    exaustão, refém do operacional, mantra-algema. Decisor se reconhece na foto antes
+    do texto bater.
+  visual_features: |
+    Foto top dominante (40-50% do canvas), pessoa em situação descrita pela copy.
+    Gradiente fade-to-black entre foto e texto. Headline branca mixed-weight com 1-2
+    palavras amarelas. Body abaixo. CTA pill amarelo. Fundo dark.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.2"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

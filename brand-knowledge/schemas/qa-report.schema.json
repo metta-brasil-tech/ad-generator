@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metta.brand-knowledge/qa-report.schema.json",
+  "title": "QA Report — output do 06-qa-validator",
+  "type": "object",
+  "required": ["status", "metadata"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "category", "rule"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["error", "warning"] },
+          "category": {
+            "type": "string",
+            "enum": ["typography", "color", "spacing", "brand", "safe_zone", "content"]
+          },
+          "rule": { "type": "string" },
+          "expected": { "type": "string" },
+          "actual": { "type": "string" },
+          "element": { "type": "string" },
+          "fix_suggestion": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": { "type": "string", "enum": ["warning"] },
+          "category": { "type": "string" },
+          "rule": { "type": "string" },
+          "expected": { "type": "string" },
+          "actual": { "type": "string" },
+          "element": { "type": "string" },
+          "fix_suggestion": { "type": "string" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["rules_checked", "passed", "failed"],
+      "properties": {
+        "rules_checked": { "type": "integer" },
+        "passed": { "type": "integer" },
+        "failed": { "type": "integer" }
+      }
+    }
+  }
+}

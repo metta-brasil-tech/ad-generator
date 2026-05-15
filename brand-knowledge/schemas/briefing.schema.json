@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metta.brand-knowledge/briefing.schema.json",
+  "title": "Briefing — output do 01-briefing-parser",
+  "type": "object",
+  "required": ["intent", "tese_central", "formato", "marca", "raw_request"],
+  "properties": {
+    "intent": {
+      "type": "string",
+      "enum": [
+        "prova_social_case_nominal",
+        "dor_pessoal",
+        "reframe_intelectual",
+        "convite_evento",
+        "manifesto",
+        "promessa_numerica",
+        "case_metric",
+        "reframe_mantra",
+        "autoridade_founder_led",
+        "posicionamento_institucional"
+      ]
+    },
+    "tese_central": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 300,
+      "description": "Frase única que resume o que o ad diz"
+    },
+    "formato": {
+      "type": "string",
+      "enum": ["story", "feed", "sqr", "carrossel", "story_video", "feed_video"]
+    },
+    "funil": {
+      "type": "string",
+      "enum": ["TOFU", "MOFU", "BOFU", "retargeting"]
+    },
+    "audiencia": {
+      "type": "object",
+      "properties": {
+        "segmento": {
+          "type": "string",
+          "examples": ["varejo_pet", "varejo_geral", "servicos_b2b", "concessionaria_auto", "farmacia", "franqueador"]
+        },
+        "cargo": {
+          "type": "string",
+          "enum": ["empresario", "diretor", "gerente", "coordenador", "founder"]
+        },
+        "porte_revenue": {
+          "type": "string",
+          "enum": ["<R$200k/mês", "R$200k-1M/mês", "R$1M-10M/mês", ">R$10M/mês", "desconhecido"]
+        },
+        "estado_emocional": {
+          "type": "string",
+          "enum": ["exausto", "confortavel_buscando_crescer", "desconfiado", "warm", "desconhecido"]
+        }
+      }
+    },
+    "tom": {
+      "type": "string",
+      "enum": ["credibilidade", "emocional", "provocador", "intelectual", "institucional", "direto", "poetico"]
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "tem_logo_cliente_nomeado": { "type": "boolean" },
+        "case_nominal_id": { "type": ["string", "null"] },
+        "data_evento": { "type": ["string", "null"] },
+        "cta_obrigatorio": { "type": ["string", "null"] },
+        "plataforma_destino": {
+          "type": "string",
+          "enum": ["meta_ads", "google_ads", "instagram_organico", "linkedin", "site"]
+        }
+      }
+    },
+    "marca": {
+      "type": "string",
+      "enum": ["metta", "tiago"],
+      "description": "Marca destino. Define namespace de modelos (models/{marca}/), tokens (design/{marca}-tokens.md) e image-prompts (image-prompts/{marca}/). Isolamento duro: selector nunca recomenda modelo de marca diferente."
+    },
+    "raw_request": {
+      "type": "string",
+      "description": "Echo do texto original do operador"
+    },
+    "clarifying_questions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Perguntas pro humano se faltam infos críticas. Se array não vazio, pipeline para aqui."
+    }
+  }
+}

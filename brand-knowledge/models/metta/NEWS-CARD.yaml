@@ -1,0 +1,106 @@
+﻿$schema_version: "1.0"
+id: "NEWS-CARD"
+display_name: "Manchete jornalística"
+alias: ["news-card"]
+formato: "STORY"
+banco_ref: ["1:296"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Posicionamento "imprensa de negócios" — autoridade externa. Layout de
+  manchete tipo Exame/Forbes. Foto editorial + manchete hard-news + tag
+  segmento (#VAREJO, #B2B).
+
+estrutura:
+  zonas:
+    top: "Tag segmento #VAREJO/#B2B/etc + data"
+    center: "Foto editorial (40%)"
+    bottom: "Manchete hard-news + body lead"
+
+composicao:
+  background: "solid"
+  background_color: "#FFFFFF"
+  contrast: "high"
+  ritmo: "tag → foto → manchete → lead — leitura de revista"
+  proporcao: {headline_area: "30-40%", image_area: "40%", body_area: "10-15%"}
+  ornament: "newspaper-grid-frame"
+
+typography:
+  headline: {role: "title-large", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [50, 70], line_height_pct: 100,
+    letter_spacing_pct: -0.5, text_case: "sentence"}
+  body: {role: "body-large", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [22, 28], line_height_pct: 140, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 13, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-100)"
+  fg_primary: "var(--metta-ref-palette-night-10)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-40)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 24}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "newspaper-grid"
+
+image:
+  required: true
+  type: "photo-editorial-newspaper-quality"
+  placement: "top-centered-after-tag"
+  filters: {saturation: 0, contrast: 0.15, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/style-A.md"
+  reference_image: ["figma://1:296"]
+
+slots:
+  - {name: "tag", role: "segmento_data", required: true, max_chars: 40,
+     style_ref: "typography.tag_eyebrow", color_ref: "colors.accent", align: "left",
+     position: {x: "80px", y: "100px"},
+     description: "Ex: #VAREJO · MAI/2026"}
+  - {name: "headline", role: "manchete_hard_news", required: true, max_chars: 110, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "after-image+40px"}}
+  - {name: "body", role: "lead_jornalistico", required: true, max_chars: 160, max_lines: 4,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-headline+24px"}}
+  - {name: "cta", role: "acao", required: false, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Posicionamento institucional de alta autoridade"
+  - "Análise setorial / panorama"
+  - "Estudo / pesquisa Metta"
+
+funil_recomendado: ["MOFU", "retargeting"]
+audiencia_recomendada: ["decisor_culto", "audiencia_warm"]
+teses_compativeis: ["analise_setorial", "panorama_dado", "estudo_publicado"]
+
+anti_padroes:
+  - "Oferta promo (não combina com tom jornalístico)"
+  - "Foto stock pose feliz (destrói credibilidade Exame)"
+
+hibridizacoes_validas: ["I (retrato PB versão)"]
+
+embedding_text:
+  intent: |
+    Estilo de manchete jornalística. Carrega análise setorial, panorama,
+    estudo publicado. Posicionamento Exame/Forbes editorial. Funciona em
+    MOFU/retargeting pra credibilidade externa.
+  visual_features: |
+    Fundo branco puro. Tag segmento UPPER amarelo topo. Foto editorial
+    centrada média. Manchete sentence case 50-70px preto. Body lead cinza.
+    CTA pill amarelo opcional. Estética grid jornalístico.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.9"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

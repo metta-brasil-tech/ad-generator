@@ -1,0 +1,106 @@
+﻿$schema_version: "1.0"
+id: "DARK-CARTA"
+display_name: "Carta/contrato em ângulo + selo"
+alias: ["dark-carta"]
+formato: "STORY"
+banco_ref: ["1:1043"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Convite formal exclusivo, "carta selada". Mockup de carta/contrato em
+  ângulo sobre fundo dark + selo "M" — comunica formalidade real.
+  Pra Elite, capacity-limited, escassez verdadeira.
+
+estrutura:
+  zonas:
+    center: "Mockup carta/contrato em ângulo (40-50%)"
+    bottom: "Headline tipográfica + selo M + body + CTA"
+
+composicao:
+  background: "solid"
+  background_color: "#0C161B"
+  contrast: "medium"
+  ritmo: "objeto formal (carta) → selo (autenticidade) → headline → CTA — convite oficial"
+  proporcao: {object_area: "40-50%", headline_area: "20-25%", body_area: "10-15%"}
+  ornament: "metta-seal-m"
+
+typography:
+  headline: {role: "title-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [50, 70], line_height_pct: 95,
+    letter_spacing_pct: -0.5, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 30], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 12, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-10)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-85)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "dark-formal-object-with-seal"
+
+image:
+  required: true
+  type: "mockup-contract-3d"
+  placement: "center-top"
+  filters: {saturation: -0.2, contrast: 0.3, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "n/a — mockup gerado em Photoshop/Figma"
+  reference_image: ["figma://1:1043"]
+
+slots:
+  - {name: "tag", role: "exclusividade", required: false, max_chars: 30,
+     style_ref: "typography.tag_eyebrow", color_ref: "colors.accent", align: "left",
+     position: {x: "80px", y: "100px"}}
+  - {name: "headline", role: "convite_formal", required: true, max_chars: 90, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "after-image+48px"},
+     accent_word: {allowed: false, max_words: 0}}
+  - {name: "body", role: "fundamento_convite", required: true, max_chars: 120, max_lines: 3,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-headline+24px"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 30,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Convite Elite com vagas limitadas reais"
+  - "Capacity-limited mensal/trimestral"
+  - "Programa exclusivo por convite"
+
+funil_recomendado: ["BOFU", "retargeting"]
+audiencia_recomendada: ["lista_proprietaria", "warm_BOFU", "qualificados_pre"]
+teses_compativeis: ["convite_elite", "vagas_limitadas_reais", "programa_exclusivo"]
+
+anti_padroes:
+  - "Tese descontraída (carta formal não combina com leveza)"
+  - "Escassez fake — destrói a marca"
+  - "TOFU cold (precisa de warmth + qualificação prévia)"
+
+hibridizacoes_validas: ["K (versão sem carta, só tipografia urgência)"]
+
+embedding_text:
+  intent: |
+    Estilo do convite Elite formal. Carrega exclusividade real via mockup
+    de carta/contrato + selo M. Pra BOFU com vagas limitadas verdadeiras,
+    capacity-limited, programa exclusivo por convite.
+  visual_features: |
+    Fundo dark #0C161B. Mockup carta/contrato em ângulo center-top.
+    Selo M autêntico. Headline UPPER 50-70px branca. Body cinza claro.
+    CTA pill amarelo. Tom formal, não promo.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.12"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

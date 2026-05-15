@@ -1,0 +1,243 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-TWITTER-CARD"
+display_name:        "Carrossel mock-Twitter — perfil Tiago Alves"
+alias:               ["TIAGO-TW", "Tiago Twitter Card"]
+formato:             "FEED"
+banco_ref:           ["exemplars/tiago/cr6tiagoabril-1.png", "exemplars/tiago/cr6tiagoabril-2.png"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Imita visualmente um tweet do perfil do Tiago dentro do feed do Instagram.
+  Empresta credibilidade nativa de plataforma de pensamento (X/Twitter) pra slide IG.
+  Olho lê header (identidade pessoal) → headline tweet (tese) → corpo (prova/desenvolvimento) → transition.
+  Sensação alvo: "vendo um pensamento dele no calor da hora", não publi paga.
+
+estrutura:
+  zonas:
+    top:        "Header mock fixo: avatar ring-amarelo + nome + verified azul + handle @"
+    center:     "Tweet headline (bold) + corpo opcional (regular) em parágrafos"
+    bottom:     "Variant cover: foto/mídia embed radius 28px. Variant content: footnote + emoji transition canto inferior esquerdo"
+    overlay:    "none"
+  hierarquia:
+    - {elemento: "header_mock", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "footnote", peso: 4}
+    - {elemento: "media_or_transition", peso: 5}
+
+composicao:
+  background:        "solid"
+  background_color:  "var(--tiago-color-bg)"  # #FFFFFF
+  contrast:          "high"
+  ritmo:             "header denso → headline em bold com respiro → body regular → footnote leve → transition pontual"
+  proporcao:
+    header_area:     "15-18%"
+    headline_area:   "18-25%"
+    body_area:       "20-40% (variável)"
+    media_area:      "30-40% (variant cover)"
+    transition_area: "5-8% (variant content)"
+  ornament:          "yellow-ring-avatar"  # signature da marca pessoal
+
+typography:
+  headline:
+    role:           "tweet-headline"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [48, 60]
+    line_height_pct: 125
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  body:
+    role:           "body-regular"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [40, 48]
+    line_height_pct: 140
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "handle"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [28, 32]
+    line_height_pct: 120
+    letter_spacing_pct: 0
+    text_case:      "sentence"
+  cta:
+    role:           "footnote-or-transition"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [30, 36]
+    line_height_pct: 135
+    text_case:      "sentence"
+
+colors:
+  bg_primary:        "var(--tiago-color-bg)"            # #FFFFFF
+  fg_primary:        "var(--tiago-color-text-primary)"  # #0F1419
+  accent:            "var(--tiago-color-accent-ring)"   # #FFCC00 (só ring avatar)
+  body_text:         "var(--tiago-color-text-primary)"  # #0F1419 (mesmo do headline)
+  cta_bg:            "transparent"                       # sem pill no Tiago
+  cta_text:          "var(--tiago-color-text-secondary)"  # #536471
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   80
+  safe_margin_bot:   80
+  gap_between_blocks: 40
+
+shape:
+  cta_radius:        "0"  # sem pill
+  card_radius:       "var(--tiago-shape-corner-card)"  # 28px (foto embed)
+
+composition_pattern: "twitter-mock-feed"
+
+image:
+  required:          false  # variant content não tem foto
+  type:              "photo-context"  # foto que ilustra o tweet (objeto, cena, screenshot, etc.)
+  placement:         "bottom-card-radius"
+  filters:
+    saturation:      0
+    contrast:        0.1
+    overlay:         "none"
+  ratio:             "free"  # 1:1, 4:3, 4:5 aceitos — vira card embed
+  prompt_template_ref: "image-prompts/tiago/style-twitter-card.md"
+  reference_image:
+    - "exemplars/tiago/cr6tiagoabril-1.png"
+
+slots:
+  - name:            "header_mock"
+    role:            "identidade_fixa"
+    required:        true
+    fixed:           true  # não editável por copy — é assinatura visual
+    description:     "Avatar Tiago com ring amarelo (#FFCC00, 10px) + 'Tiago Alves' bold + verified blue (#1D9BF0) + '@tiago.alves.oliveira' regular cinza (#536471)"
+    position:
+      x:             "64px"
+      y:             "80px"
+
+  - name:            "headline"
+    role:            "tweet_hook"
+    required:        true
+    max_chars:       180
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position:
+      x:             "64px"
+      y:             "after-header+56px"
+    accent_word:
+      allowed:       true
+      max_words:     3
+      mode:          "bold_emphasis"  # diferente do Metta — destaque é peso, não cor
+      color_ref:     "colors.fg_primary"  # mesma cor, peso bold mais carregado
+    notes: |
+      Sentence case obrigatório. Sem UPPER. Pode ter até 3 palavras-chave em peso ainda mais forte
+      (bold-emphasis) mas nunca colorido. Destaque é tipográfico, não cromático.
+
+  - name:            "body"
+    role:            "desenvolvimento_tese"
+    required:        false
+    max_chars:       450
+    max_lines:       8
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position:
+      x:             "64px"
+      y:             "after-headline+32px"
+    notes: |
+      Parágrafos separados por linha em branco (40px gap). Pode misturar regular e bold inline
+      (bold-emphasis) pra ancorar números ou termos-chave. Voz Tiago: pensamento, não acusação.
+
+  - name:            "footnote"
+    role:            "remate_ou_transicao_textual"
+    required:        false
+    max_chars:       120
+    max_lines:       2
+    style_ref:       "typography.cta"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position:
+      x:             "64px"
+      y:             "after-body+56px"
+    notes: |
+      "Ou seja:", "Então fica a pergunta...", "A prova:" — frase curta que prepara próximo slide.
+
+  - name:            "media"
+    role:            "foto_ilustrativa"
+    required:        false  # só variant cover
+    variants:        ["cover", "content"]
+    description:     "variant=cover: foto/imagem rectangular radius 28px ocupa base do slide. variant=content: ausente — só emoji transition."
+    position:
+      x:             "64px"
+      y:             "bottom-80px-aligned"
+
+  - name:            "transition_emoji"
+    role:            "ponte_carrossel"
+    required:        false  # opcional; presente no variant content
+    options:         ["👉", "👇", "→", "Arrasta pro lado 👉"]
+    style_ref:       "typography.cta"
+    position:
+      x:             "64px"
+      y:             "bottom-120px"
+
+quando_brilha:
+  - "Statement provocativo curto ('Mais de 65% dos gerentes comerciais no Brasil não batem meta')"
+  - "Pergunta diagnóstica que abre carrossel ('Você tem um gerente de vendas ou um vendedor com crachá de chefe?')"
+  - "Auto-confissão Tiago ('Demorei X anos pra entender que…')"
+  - "Reframe de mantra-algema ('Todo mundo acha que o problema é o time. A prova mostra que…')"
+  - "Big stat ancorado em frase contextual"
+  - "Voz pessoal Tiago comentando tese de gestão"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_acompanhando_tiago_organico"
+  - "gestor_comercial_buscando_referencia"
+  - "audiencia_warm_perfil_tiago"
+
+teses_compativeis:
+  - "statement_provocativo"
+  - "pergunta_diagnostica_seca"
+  - "auto_confissao_tiago"
+  - "reframe_mantra"
+  - "big_stat_contextualizada"
+
+anti_padroes:
+  - "Convite de evento com data específica — formato não tem CTA pill nem layout de inscrição"
+  - "Logo bar institucional (Sicredi, Vivo, etc.) — quebra ilusão de tweet pessoal, fica publi"
+  - "Caso nominal com logo cliente (AMBI, Hiperzoo) — pertence ao Metta institucional"
+  - "UPPER CASE em headline — Twitter não é UPPER, destrói o mock"
+  - "Headline acusatória ('você é o gargalo') — voz Tiago acolhe, não acusa"
+  - "Big number gigante isolado — formato pede frase envolta, não número solto"
+  - "BOFU vendendo SMTM — voz pessoal indica, não vende"
+
+hibridizacoes_validas: []  # único modelo Tiago por enquanto
+
+embedding_text:
+  intent: |
+    Estilo de marca pessoal Tiago Alves — mock visual de tweet/X dentro do feed IG.
+    Carrega statements provocativos curtos, perguntas diagnósticas, auto-confissões,
+    reframes de mantra. Voz pessoal, pensamento no calor da hora, não publi paga.
+    Empresta credibilidade nativa de Twitter pra IG. TOFU/MOFU em audiência warm Tiago.
+  visual_features: |
+    Fundo branco puro. Header mock fixo (avatar com ring amarelo, nome bold, verified
+    azul Twitter, handle @tiago.alves.oliveira cinza). Tweet headline preto bold sentence
+    case 56px. Body regular mesmo size. Sem CTA pill — emoji transition canto inferior
+    ou foto card embed radius 28px na base. Sem amarelo de CTA, sem dark mode, sem Expanded.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§1"
+created:             "2026-05-14"
+updated:             "2026-05-14"
+maintainer:          "Head de Design Metta"

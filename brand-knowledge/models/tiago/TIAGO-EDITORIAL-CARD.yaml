@@ -1,0 +1,218 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-EDITORIAL-CARD"
+display_name:        "Card de dados Tiago — bloco central com stats e ornamento pixel"
+alias:               ["TIAGO-CARD", "Card Dados Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/CARROSSEL - GERAÇÃO Z/Slice 2.png"
+  - "IA/CARROSSEL - SEU FUNCIONÁRIO/cr5tiagoabril-3.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Slide de prova: dados/stats/lista de sintomas embarcados num CARD central com bg colorido
+  (cinza-azul dark teal #3D5762 ou similar). Card tem corner radius generoso e ornamentos
+  pixel-amarelos (triângulos com "!", setas →, ícones de alerta) dispersos no fundo do canvas
+  pra texture editorial.
+
+  Eyebrow UPPER amarelo (label small "O DADO CRU:") abre o bloco. Headline+stats centralizadas
+  mix de peso (bold pra número/conceito-chave + regular pra contexto). Footer dentro do card:
+  remate "Não é falta de vontade. **É falta de método.**" + 👉.
+
+estrutura:
+  zonas:
+    top:        "Optional small header bar UPPER tracked (eyebrow framing)"
+    center:     "Card central — eyebrow amarelo UPPER + headline/stats centralizadas multi-linha + remate bold"
+    bottom:     "Transition 👉 inside card OR external CTA pill"
+    overlay:    "Pixel ornaments amarelos (⚠ ↘ →) dispersos no canvas atrás do card"
+  hierarquia:
+    - {elemento: "card_container", peso: 1}
+    - {elemento: "eyebrow_amarelo", peso: 2}
+    - {elemento: "stats_centralizadas", peso: 3}
+    - {elemento: "remate_bold", peso: 4}
+    - {elemento: "pixel_ornaments", peso: 5}
+
+composicao:
+  background:        "solid"
+  background_color:  "#EDEEEE"           # off-white com noise (canvas)
+  contrast:          "high"
+  ritmo:             "card respira no centro — texto centralizado lê em ritmo de gráfico/dashboard editorial"
+  proporcao:
+    card_area:       "78-88% do canvas (card centralizado com 64px de margin lateral)"
+    ornament_area:   "5-10% (pixels dispersos atrás)"
+  ornament:          "pixel-alert-triangles-yellow + pixel-arrows-yellow"
+
+typography:
+  headline:
+    role:           "stats-central"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [44, 60]
+    line_height_pct: 115
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  body:
+    role:           "stats-detalhe"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [30, 38]
+    line_height_pct: 135
+    letter_spacing_pct: -0.3
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "eyebrow-amarelo-label"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [24, 30]
+    line_height_pct: 110
+    letter_spacing_pct: 5
+    text_case:      "UPPER"
+  cta:
+    role:           "remate-bold-inline"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [28, 36]
+    line_height_pct: 130
+    text_case:      "sentence"
+
+colors:
+  bg_primary:        "#EDEEEE"            # canvas
+  card_bg:           "#3D5762"            # card central dark teal (Slice 2 / cr5tiagoabril-3)
+  card_bg_alt:       "#0F1419"            # variante preta (cr5tiagoabril-3 type)
+  fg_primary:        "#FFFFFF"            # texto sobre card
+  fg_secondary:      "#C3D0D9"            # body secondary sobre card
+  accent:            "#FFCC00"            # eyebrow + pixel ornaments + word highlights
+  ornament_color:    "#FFCC00"
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   80
+  safe_margin_bot:   80
+  card_padding_x:    56
+  card_padding_y:    72
+  gap_between_blocks: 32
+
+shape:
+  card_radius:       "var(--metta-sys-shape-corner-xl)"  # 32-40px
+  cta_radius:        "0"   # sem pill — remate inline
+
+composition_pattern: "centered-card-with-pixel-ornament"
+
+image:
+  required:          false
+  type:              "collage-pixel-art OR none"
+  notes:             "ornaments são SVG/PNG pequenos (triângulos amarelos pixel) — não imagem-foto"
+  placement:         "scattered-background-behind-card"
+  prompt_template_ref: null
+  reference_image:
+    - "exemplars/tiago/TIAGO-EDITORIAL-CARD/01-geracao-z-stats.png"
+
+slots:
+  - name:            "card_eyebrow"
+    role:            "label_amarelo_UPPER"
+    required:        true
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.accent"
+    align:           "center"
+    position: {x: "card-center", y: "card-top+72px"}
+    examples:
+      - "O DADO CRU:"
+      - "A PROVA:"
+      - "NÃO É EXCEÇÃO:"
+
+  - name:            "stats_block"
+    role:            "multi_line_stats"
+    required:        true
+    max_chars:       320
+    max_lines:       8
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "center"
+    position: {x: "card-center", y: "after-eyebrow+40px"}
+    accent_word:
+      allowed:       true
+      mode:          "bold-emphasis | yellow-text"
+    notes: |
+      Mix de peso é essencial: número/conceito-chave em bold, contexto em regular.
+      "Turnover recorde **entre 18 e 24 anos**." — alterna pra ritmo de leitura.
+
+  - name:            "remate"
+    role:            "fechamento_bold"
+    required:        true
+    max_chars:       100
+    max_lines:       2
+    style_ref:       "typography.cta"
+    color_ref:       "colors.fg_primary"
+    align:           "left | center"
+    position: {x: "card-left+56px", y: "card-bottom-100px"}
+    accent_word:
+      allowed:       true
+      mode:          "bold-emphasis"
+
+  - name:            "transition_emoji"
+    role:            "ponte_carrossel"
+    required:        false
+    options:         ["👉"]
+    position: {x: "card-left+56px", y: "card-bottom-48px"}
+
+  - name:            "pixel_ornaments"
+    role:            "ornamento_atras_card"
+    required:        false
+    asset_set:       "pixel-alerts-yellow (3-5 instances)"
+    notes: |
+      Triângulos amarelos com "!" centralizados (8-16px), espalhados nos cantos atrás do card.
+      Reforça mood "alerta de dado".
+
+quando_brilha:
+  - "Slide de dados/stats numéricas que precisam respirar (NÃO grandes números isolados)"
+  - "Lista de sintomas/sub-dores com bullets implícitos"
+  - "Bloco de prova quantitativa com remate de método"
+  - "Após capa hero, primeiro slide de desenvolvimento"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_buscando_dado_quantitativo"
+  - "gestor_que_responde_a_numero"
+
+teses_compativeis:
+  - "stats_multi_dado_contextualizado"
+  - "lista_de_sintomas_dor_pessoal"
+  - "prova_quantitativa_de_problema"
+
+anti_padroes:
+  - "Um único big number gigante isolado — use TIAGO-EDITORIAL-HERO ou variante dark"
+  - "Citação literal de pessoa — use TIAGO-EDITORIAL-CITACAO (futuro)"
+  - "CTA forte de comentário — use TIAGO-EDITORIAL-CTA"
+  - "Card claro sobre fundo claro — quebra contraste editorial"
+
+hibridizacoes_validas:
+  - "TIAGO-EDITORIAL-DARK (versão fullbleed do mesmo conteúdo)"
+
+embedding_text:
+  intent: |
+    Slide de prova quantitativa Tiago — dados, stats, listas de sintomas com card editorial.
+    Eyebrow amarelo 'O DADO CRU' abre o bloco. Stats centralizadas com mix bold/regular.
+    Remate de método fecha. Funciona como segundo/terceiro slide de carrossel depois de
+    HERO ou DARK.
+  visual_features: |
+    Card central dark teal/preto com corner radius 32-40px ocupando 80% do canvas. Eyebrow
+    UPPER amarelo no topo do card. Stats centralizadas brancas mix bold/regular multi-linha.
+    Ornamentos pixel amarelos (⚠) dispersos atrás do card no canvas off-white com noise.
+    Remate bold com 👉 dentro do card bottom.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
+created:             "2026-05-14"
+updated:             "2026-05-14"
+maintainer:          "Head de Design Metta"

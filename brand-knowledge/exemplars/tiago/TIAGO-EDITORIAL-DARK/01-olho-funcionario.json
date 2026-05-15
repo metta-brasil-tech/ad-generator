@@ -1,0 +1,54 @@
+{
+  "exemplar_id": "TIAGO-EDITORIAL-DARK-olho-funcionario",
+  "tags": ["capa-noir", "close-up-olho", "psicologico", "tom-comportamental", "handwritten-overlay"],
+  "reference_png": "exemplars/tiago/TIAGO-EDITORIAL-DARK/01-olho-funcionario.png",
+  "stages": {
+    "briefing_input": "capa do carrossel sobre como o funcionário capta o medo do dono — tom noir psicológico",
+    "briefing_output": {
+      "intent": "dor_pessoal",
+      "tese_central": "O funcionário capta o medo do dono e entrega o mínimo enquanto sentir essa tensão",
+      "formato": "carrossel",
+      "funil": "MOFU",
+      "audiencia": {"segmento": "varejo_geral", "cargo": "empresario", "porte_revenue": "desconhecido", "estado_emocional": "exausto"},
+      "tom": "intelectual",
+      "constraints": {"tem_logo_cliente_nomeado": false, "case_nominal_id": null, "data_evento": null, "cta_obrigatorio": "COMO NÃO SE TORNAR UM REFÉM", "plataforma_destino": "instagram_organico"},
+      "marca": "tiago",
+      "raw_request": "capa noir psicológica sobre funcionário captar medo do dono",
+      "clarifying_questions": []
+    },
+    "style_selected": "TIAGO-EDITORIAL-DARK",
+    "layout_spec": {
+      "model_id": "TIAGO-EDITORIAL-DARK",
+      "marca": "tiago",
+      "frame": {"width": 1080, "height": 1350, "background": {"type": "image", "value": "image_fullbleed", "gradient_overlay": "linear-gradient(180deg, rgba(15,20,25,0.2) 0%, rgba(15,20,25,0.85) 65%, rgba(15,20,25,1) 100%)"}},
+      "elements": [
+        {"type": "text", "slot_name": "header_eyebrow_left", "text": "ESTRATÉGIAS DE\nGESTÃO DE VENDAS", "x": 64, "y": 60, "font": {"family": "SF Pro", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#D9DEE3"},
+        {"type": "asset", "slot_name": "header_signature", "asset": "assinatura-tiago-amarelo.svg", "x": "center", "y": 40, "width": 180, "color_override": "#FFFFFF"},
+        {"type": "text", "slot_name": "header_eyebrow_right", "text": "VENDAS É CIÊNCIA", "x": "right-64", "y": 60, "align": "right", "font": {"family": "SF Pro", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#D9DEE3"},
+        {"type": "image_slot", "slot_name": "image_fullbleed", "x": 0, "y": 0, "width": 1080, "height": 850, "image_prompt_ref": "image-prompts/tiago/style-editorial-dark.md#exemplo-1", "url_placeholder": "Cinematic noir close-up of single human eye, dramatic side light, B&W desaturated warm"},
+        {"type": "text", "slot_name": "handwritten_overlay", "text": "Não vai embora\npelo amor de Deus", "x": "image-center", "y": "image-center-pupila", "font": {"family": "Caveat", "weight": 400, "size": 36, "line_height_pct": 110}, "color": "#FFFFFF", "opacity": 0.75, "align": "center"},
+        {"type": "text", "slot_name": "headline", "text": "SEU FUNCIONÁRIO\nSENTE O SEU MEDO.", "ranges": [{"start": 16, "end": 32, "fill": "#FFCC00"}], "x": 64, "y": 920, "font": {"family": "SF Pro", "weight": 800, "size": 68, "line_height_pct": 100, "text_case": "UPPER"}, "color": "#FFFFFF"},
+        {"type": "text", "slot_name": "sub", "text": "E enquanto ele sentir, vai continuar entregando o mínimo.", "x": 64, "y": "after-headline+24", "font": {"family": "SF Pro", "weight": 400, "size": 32, "line_height_pct": 135, "text_case": "sentence"}, "color": "#D9DEE3"},
+        {"type": "pill_cta", "slot_name": "cta_pill", "text": "COMO NÃO SE TORNAR UM REFÉM 👉", "x": 64, "y": "bottom-100", "bg": "#0F1419", "border": "1px solid #FFFFFF20", "text_color": "#FFFFFF", "corner_radius": 999, "padding_x": 28, "height": 70, "font": {"family": "SF Pro", "weight": 700, "size": 22, "text_case": "UPPER", "letter_spacing_pct": 4}}
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.94}
+    },
+    "image_prompt": {
+      "skip": false,
+      "prompts": [{
+        "slot_name": "image_fullbleed",
+        "prompt": "Cinematic noir close-up photograph of a single adult human eye, brown/hazel iris with sharp focus on pupil, eyelashes and skin pores visible, deep dramatic side lighting from the right, hard shadow on left half of face, extremely shallow depth of field, sharp focus on pupil reflection, desaturated black and white with subtle warm undertone, heavy vignette darkening corners, no smile, no movement, isolated against deep black background, no logos, no text in image, Sony A7R V 85mm f/1.4, cinema editorial 4K, RAW",
+        "negative_prompt": "no smile, no eye contact with camera, no posed business portrait, no studio bright lighting, no logos visible, no readable text in image, no AI plastic skin, no surreal collage, no documentary snap mood",
+        "aspect_ratio": "4:5",
+        "reference_images": ["exemplars/tiago/TIAGO-EDITORIAL-DARK/01-olho-funcionario.png"],
+        "model_hint": "nano-banana-2"
+      }]
+    },
+    "qa_report": {"status": "PASS", "issues": [], "warnings": [], "metadata": {"rules_checked": 22, "passed": 22, "failed": 0, "marca_consistency": "pass"}}
+  },
+  "final_url": null,
+  "performance": {"human_accepted": true, "edits_required": "none — seed exemplar canônico capa Funcionário", "ad_metrics": null},
+  "notes": "Capa noir psicológica. Close-up de olho fullbleed top com texto cursivo manuscrito BRANCO opacity 75% DENTRO da pupila ('Não vai embora pelo amor de Deus'). Darkening gradient bottom 65%. Headline UPPER white com 'SEU MEDO.' em amarelo. Sub regular cinza claro. CTA pill preto com border sutil branco 'COMO NÃO SE TORNAR UM REFÉM 👉'.",
+  "created": "2026-05-14"
+}

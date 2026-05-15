@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metta.brand-knowledge/ad-output.schema.json",
+  "title": "Ad Output — output do 05-assembler",
+  "type": "object",
+  "required": ["destination", "metadata"],
+  "properties": {
+    "destination": { "type": "string", "enum": ["figma", "html"] },
+    "figma": {
+      "type": "object",
+      "properties": {
+        "file_key": { "type": "string" },
+        "page_id": { "type": "string" },
+        "node_id": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "preview_png_url": { "type": "string", "format": "uri" }
+      }
+    },
+    "html": {
+      "type": "object",
+      "properties": {
+        "html_path": { "type": "string" },
+        "png_path": { "type": "string" },
+        "preview_url": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["style_id"],
+      "properties": {
+        "style_id": { "type": "string" },
+        "elapsed_ms": { "type": "number" },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

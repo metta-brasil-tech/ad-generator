@@ -1,0 +1,112 @@
+﻿$schema_version: "1.0"
+id: "LOGO-WALL"
+display_name: "Grade de logos + número grande"
+alias: ["logo-wall"]
+formato: "STORY"
+banco_ref: ["1:444"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Prova social agregada por volume. Grade 3x3 de logos clientes top +
+  número GIGANTE ao lado ("+1000 empresas"). Pra BOFU retargeting puro
+  — quem já conhece a marca precisa só do empurrão de credibilidade.
+
+estrutura:
+  zonas:
+    top: "Tag + headline curto"
+    center: "Grade 3x3 logos B&W + número gigante ao lado"
+    bottom: "Card escuro com prova + CTA pill"
+
+composicao:
+  background: "solid"
+  background_color: "#FFFFFF"
+  contrast: "high"
+  ritmo: "logos (volume) + número (escala) + prova (calor) — credibilidade pura"
+  proporcao: {logo_grid: "40-50%", number: "20-30%", proof_card: "20%"}
+  ornament: "logo-grid-3x3"
+
+typography:
+  headline: {role: "display-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [150, 220], line_height_pct: 88,
+    letter_spacing_pct: -2, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 30], line_height_pct: 140, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-100)"
+  fg_primary: "var(--metta-ref-palette-night-10)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-100)"
+  card_bg: "var(--metta-ref-palette-night-10)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-xl)"}
+composition_pattern: "logo-grid-big-number"
+
+image:
+  required: true
+  type: "logo-grid"
+  placement: "center-left"
+  filters: {saturation: -1, contrast: 0.2, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "n/a — assets reais"
+  reference_image: ["figma://1:444"]
+
+slots:
+  - {name: "tag", role: "label", required: false, max_chars: 30,
+     style_ref: "typography.tag_eyebrow", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "80px"}}
+  - {name: "logo_grid", role: "prova_volume", required: true, items: [6, 9],
+     position: {x: "80px", y: "200px"},
+     description: "6-9 logos B&W em grade 3x2 ou 3x3"}
+  - {name: "headline_number", role: "escala_numerica", required: true, max_chars: 10, max_lines: 1,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "right",
+     position: {x: "right-grid", y: "center"},
+     description: "+1000 / +500 / etc"}
+  - {name: "proof_card", role: "linha_prova", required: true, max_chars: 100, max_lines: 2,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "bottom-300px"},
+     container: "dark-card"}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Retargeting BOFU puro (audiência já conhece marca)"
+  - "Credibilidade por volume — '+1000 empresas confiam'"
+  - "Argumento de ecossistema sem caso nominal individual"
+
+funil_recomendado: ["BOFU", "retargeting"]
+audiencia_recomendada: ["lista_proprietaria", "warm_engajados"]
+teses_compativeis: ["credibilidade_volume", "ecossistema_agregado"]
+
+anti_padroes:
+  - "TOFU cold (precisa de warmth pra logos terem peso)"
+  - "Tese dramática (estilo é racional, dados)"
+  - "Logos inventados (PROIBIDO — só clientes reais)"
+
+hibridizacoes_validas: ["YELLOW-BLOCO (versão com bloco amarelo + logos no topo)"]
+
+embedding_text:
+  intent: |
+    Estilo da credibilidade por volume. Carrega prova social agregada via
+    grade de logos clientes + número gigante. BOFU retargeting puro,
+    fechamento de venda por reforço de credibilidade.
+  visual_features: |
+    Fundo branco. Grade 3x3 de logos B&W clientes centrada. Número gigante
+    UPPER 150-220px preto ao lado ('+1000'). Card escuro bottom com prova.
+    CTA pill amarelo.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.10"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

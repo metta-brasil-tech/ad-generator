@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metta.brand-knowledge/layout-spec.schema.json",
+  "title": "Layout Spec — output do 03-layout-composer",
+  "type": "object",
+  "required": ["model_id", "frame", "elements"],
+  "properties": {
+    "model_id": { "type": "string" },
+    "frame": {
+      "type": "object",
+      "required": ["width", "height", "background"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 320 },
+        "height": { "type": "integer", "minimum": 320 },
+        "background": {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "type": "string", "enum": ["solid", "gradient", "image"] },
+            "value": { "type": "string" }
+          }
+        }
+      }
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["type", "slot_name", "text", "x", "y", "font", "color"],
+            "properties": {
+              "type": { "const": "text" },
+              "slot_name": { "type": "string" },
+              "text": { "type": "string" },
+              "ranges": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["start", "end", "fill"],
+                  "properties": {
+                    "start": { "type": "integer" },
+                    "end": { "type": "integer" },
+                    "fill": { "type": "string" }
+                  }
+                }
+              },
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "width": { "type": ["number", "string"] },
+              "height": { "type": ["number", "string"] },
+              "font": {
+                "type": "object",
+                "required": ["family", "style", "size"],
+                "properties": {
+                  "family": { "type": "string" },
+                  "style": { "type": "string" },
+                  "weight": { "type": "integer" },
+                  "stretch_pct": { "type": "integer" },
+                  "size": { "type": "number" },
+                  "line_height_pct": { "type": "number" },
+                  "letter_spacing_pct": { "type": "number" },
+                  "text_case": { "type": "string", "enum": ["UPPER", "sentence", "mixed"] }
+                }
+              },
+              "color": { "type": "string" },
+              "align": { "type": "string", "enum": ["left", "center", "right"] }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["type", "slot_name", "x", "y", "width", "height"],
+            "properties": {
+              "type": { "const": "image_slot" },
+              "slot_name": { "type": "string" },
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "width": { "type": "number" },
+              "height": { "type": "number" },
+              "bleed_right": { "type": "boolean" },
+              "bleed_bottom": { "type": "boolean" },
+              "image_prompt_ref": { "type": "string" },
+              "url_placeholder": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["type", "slot_name", "text", "x", "y"],
+            "properties": {
+              "type": { "const": "pill_cta" },
+              "slot_name": { "type": "string" },
+              "text": { "type": "string" },
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "width": { "type": ["number", "string"] },
+              "height": { "type": "number" },
+              "padding_x": { "type": "number" },
+              "padding_y": { "type": "number" },
+              "background": { "type": "string" },
+              "text_color": { "type": "string" },
+              "corner_radius": { "type": "number" },
+              "font": { "$ref": "#/properties/elements/items/oneOf/0/properties/font" }
+            }
+          }
+        ]
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fit_metrics": {
+      "type": "object",
+      "properties": {
+        "fit_score": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

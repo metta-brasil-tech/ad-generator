@@ -45,7 +45,7 @@ class SkillRunner:
         llm: LLMAdapter | MockLLMAdapter | None = None,
     ):
         self.knowledge_path = Path(
-            knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "../../brand-knowledge")
+            knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "./brand-knowledge")
         )
         self.llm = llm or LLMAdapter()
 

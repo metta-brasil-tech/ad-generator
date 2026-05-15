@@ -1,0 +1,263 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-EDITORIAL-CTA"
+display_name:        "CTA editorial Tiago — slide final com signature handwritten OU foto real + engajamento"
+alias:               ["TIAGO-CTA", "CTA Final Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/CARROSSEL - LIDERANÇA NÃO É FANTASIA/c1tiagomaio-9.png"
+  - "IA/CARROSSEL - METODO DE JESUS/10.png"
+  - "IA/CARROSSEL - GERAÇÃO Z/Slice 10.png"
+  - "IA/CARROSSEL - SEU FUNCIONÁRIO/cr5tiagoabril-8.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Slide final do carrossel. Há duas variantes principais:
+
+  Variant A — signature handwritten Tiago Alves GIGANTE amarela como ornamento de fundo (top),
+  headline pergunta engajamento ("Pra você, o que separa um chefe de um líder?"),
+  sub "Conta aqui embaixo. Quero ler.", avatar Tiago verified small bottom-center.
+
+  Variant B — foto real do Tiago (palestrando, gesticulando) ao lado, signature amarela como
+  ornament behind, headline + sub e cards de qualificação ("✓ Pra quem é / ✗ Pra quem NÃO é"),
+  CTA inline "Se você é um desses, clica no link da bio."
+
+  Variant C — pill CTA AMARELO GIGANTE ("COMENTA PROTOCOLO"), eyebrow "NO DIA 30/03" reveal,
+  body promessa, footer com VENDAS É CIÊNCIA + signature + avatar verified.
+
+  Sensação alvo: encerramento que convoca conversa, não que vende.
+
+estrutura:
+  zonas:
+    top:        "Signature handwritten Tiago Alves amarela GIGANTE como ornament (50-60% do canvas top)"
+    center:     "Headline pergunta engajamento + sub regular"
+    bottom:     "CTA pill amarelo gigante OU avatar Tiago small verified + nome 'Tiago Alves'"
+    overlay:    "Variant B: foto real Tiago sobreposta com signature como ornament"
+  hierarquia:
+    - {elemento: "signature_ornament_OR_foto_real", peso: 1}
+    - {elemento: "headline_pergunta", peso: 2}
+    - {elemento: "sub_engajamento", peso: 3}
+    - {elemento: "cta_pill_OR_avatar_verified", peso: 4}
+
+composicao:
+  background:        "solid"
+  background_color:  "#EDEEEE"            # canvas off-white com noise
+  contrast:          "high"
+  ritmo:             "signature dá presença afetiva top → headline pergunta abre conversa → sub convida → CTA OU avatar verified fecha"
+  proporcao:
+    signature_ornament: "30-50%"
+    headline:          "20-30%"
+    sub:               "8-12%"
+    cta_or_avatar:     "10-15%"
+  ornament:          "signature-handwritten-yellow-large + grain-noise"
+
+typography:
+  headline:
+    role:           "pergunta-engajamento"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [56, 80]
+    line_height_pct: 110
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  body:
+    role:           "sub-convida-conversa"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [36, 48]
+    line_height_pct: 130
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "framing-reveal-date"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [56, 80]
+    line_height_pct: 110
+    text_case:      "UPPER"
+  cta:
+    role:           "pill-gigante-comenta"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [40, 56]
+    line_height_pct: 110
+    letter_spacing_pct: 2
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "#EDEEEE"
+  fg_primary:        "#0F1419"
+  accent:            "#FFCC00"
+  signature_color:   "#FFCC00"            # signature handwritten amarela
+  body_text:         "#3B4350"
+  cta_bg:            "#FFCC00"
+  cta_text:          "#0F1419"
+  verified_blue:     "#1D9BF0"
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   60
+  safe_margin_bot:   80
+  gap_between_blocks: 40
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       16
+
+composition_pattern: "signature-ornament-headline-question-engagement-close"
+
+image:
+  required:          false   # variant A não tem foto, variant B tem foto real Tiago
+  type:              "photo-real-tiago | none"
+  placement:         "right-half OR right-bleed"
+  reference_image:
+    - "exemplars/tiago/TIAGO-EDITORIAL-CTA/01-lideranca-pergunta-final.png"
+    - "exemplars/tiago/TIAGO-EDITORIAL-CTA/02-foto-real-tiago-microfone.png"
+    - "exemplars/tiago/TIAGO-EDITORIAL-CTA/03-comenta-protocolo-pill.png"
+
+slots:
+  - name:            "signature_ornament"
+    role:            "assinatura_handwritten_gigante_top"
+    required:        true
+    asset:           "assinatura-tiago-amarelo.svg"
+    width:           "80-110% do canvas (extravasa propositalmente nas pontas)"
+    position: {x: "center", y: "top-40px"}
+    opacity:         1.0
+    notes: |
+      Signature ENORME e amarela como ornamento principal. Diferente do uso pequeno como
+      assinatura de moldura nos outros estilos — aqui ela é elemento de design dominante.
+
+  - name:            "eyebrow_reveal_date"
+    role:            "data_reveal_protocolo"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    align:           "center"
+    position: {x: "center", y: "below-signature+40px"}
+    examples:
+      - "NO DIA 30/03"
+      - "ESTA SEMANA"
+
+  - name:            "headline"
+    role:            "pergunta_engajamento_OR_promessa_reveal"
+    required:        true
+    max_chars:       100
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left | center"
+    position: {x: "64px", y: "auto-center"}
+    accent_word:
+      allowed:       true
+      max_words:     3
+      mode:          "color-blue OR bold-emphasis"
+      color_ref:     "#3D5762"
+    examples:
+      - "Pra você, o que separa um chefe de um líder de verdade?"
+      - "Comenta aqui, empresário:"
+      - "eu vou revelar o protocolo de 5 etapas..."
+
+  - name:            "sub"
+    role:            "convida_conversa_ou_explica"
+    required:        false
+    max_chars:       180
+    max_lines:       4
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "64px", y: "after-headline+24px"}
+    examples:
+      - "Conta aqui embaixo. Quero ler."
+      - "Não reunião. Conversa."
+      - "aqui embaixo e eu mando o link direto pra você."
+
+  - name:            "cta_pill_gigante"
+    role:            "pill_comenta_protocolo"
+    required:        false   # variant C usa, A/B podem omitir
+    text:            "COMENTA PROTOCOLO"
+    bg_color_ref:    "colors.cta_bg"
+    fg_color_ref:    "colors.cta_text"
+    component:       "pill"
+    height:          120
+    padding_x:       60
+    full_width:      true   # quase atravessa o canvas
+    position: {x: "center", y: "after-headline+60px"}
+
+  - name:            "avatar_tiago_verified"
+    role:            "avatar_small_centralizado_bottom"
+    required:        false   # variant A usa, C tem signature+avatar no footer
+    avatar_asset:    "avatar-tiago.png"
+    width:           80
+    name_label:      "Tiago Alves"
+    verified:        true
+    position: {x: "center", y: "bottom-120px"}
+
+  - name:            "photo_real_tiago"
+    role:            "variant_B_foto_real_palestra"
+    required:        false   # variant B
+    placement:       "right-half"
+    aspect_ratio:    "3:4"
+    corner_radius:   24
+
+  - name:            "qual_cards"
+    role:            "variant_B_pra_quem_e_nao_e"
+    required:        false   # variant B
+    layout:          "two-stacked-cards"
+    card_bg:         "#EDEEEE"   # claro com border sutil
+    items:
+      - {icon: "✓", title: "Pra quem é:", body: "..."}
+      - {icon: "✗", title: "Pra quem NÃO é:", body: "..."}
+
+quando_brilha:
+  - "Slide final de carrossel — pede conversa nos comentários"
+  - "Reveal de oferta/protocolo com CTA pill gigante"
+  - "Pergunta diagnóstica final que abre engajamento"
+  - "Qualificação 'pra quem é/não é' com foto real Tiago"
+
+funil_recomendado: ["MOFU", "BOFU"]
+
+audiencia_recomendada:
+  - "audiencia_que_consumiu_o_carrossel_inteiro"
+  - "warm_pronto_pra_engajar"
+
+teses_compativeis:
+  - "pergunta_engajamento_final"
+  - "reveal_protocolo_com_data"
+  - "qualificacao_quem_nao_e"
+
+anti_padroes:
+  - "Slide do meio do carrossel — esse formato é CTA final, não conteúdo"
+  - "Tese sem pergunta/convite — formato pede ação de engajamento"
+  - "Citação literal — usar HERO ou CITACAO"
+  - "Foto stock — variant B SÓ funciona com foto real Tiago"
+
+hibridizacoes_validas:
+  - "TIAGO-EDITORIAL-HERO (capa) — pareamento natural cover→close"
+  - "TIAGO-EDITORIAL-DARK (variante dark do close)"
+
+embedding_text:
+  intent: |
+    Slide final de carrossel Tiago — convoca conversa nos comentários ou reveal de oferta.
+    Pergunta engajamento, qualificação 'pra quem é/não é', reveal de protocolo com CTA pill
+    gigante. Voz Tiago que abre diálogo, não vende duro.
+  visual_features: |
+    Signature handwritten amarela GIGANTE como ornamento dominante top. Headline pergunta bold
+    sentence case. Sub convida conversa. Avatar Tiago small verified centralizado bottom OU
+    foto real Tiago lateral OU pill amarelo gigante 'COMENTA PROTOCOLO'. Background off-white
+    com noise. Header tracked discreto.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§5"
+created:             "2026-05-14"
+updated:             "2026-05-14"
+maintainer:          "Head de Design Metta"

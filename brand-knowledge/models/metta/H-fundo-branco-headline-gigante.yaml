@@ -1,0 +1,105 @@
+﻿$schema_version: "1.0"
+id: "H-fundo-branco-headline-gigante"
+display_name: "Fundo branco com headline gigante"
+alias: ["H", "Estilo H"]
+formato: "STORY"
+banco_ref: ["1:158"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Alto impacto em feed claro. Contraste com competição (todos ads dark).
+  Foto/objeto pequeno + headline preta gigante + body cinza.
+
+estrutura:
+  zonas:
+    top: "Foto/objeto conceito"
+    center: "Headline preta gigante"
+    bottom: "Body cinza + CTA amarelo"
+  hierarquia:
+    - {elemento: "headline", peso: 1}
+    - {elemento: "foto_objeto", peso: 2}
+    - {elemento: "cta", peso: 3}
+
+composicao:
+  background: "solid"
+  background_color: "#FFFFFF"
+  contrast: "high"
+  ritmo: "objeto-conceito → headline → CTA — leitura rápida"
+  proporcao: {headline_area: "40-50%", image_area: "25-35%", cta_area: "100-130px"}
+  ornament: "none"
+
+typography:
+  headline: {role: "display-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [80, 110], line_height_pct: 92,
+    letter_spacing_pct: -1, text_case: "UPPER"}
+  body: {role: "body-large", family: "SF Pro", style: "Expanded Regular",
+    weight: 590, stretch_pct: 100, size_range: [28, 36], line_height_pct: 130,
+    text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-100)"
+  fg_primary: "var(--metta-ref-palette-night-10)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-40)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "object-top-headline-bottom-light"
+
+image:
+  required: true
+  type: "object-3d-or-photo"
+  placement: "top-centered"
+  filters: {saturation: 0, contrast: 0.1, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/_base.md"
+  reference_image: ["figma://1:158"]
+
+slots:
+  - {name: "headline", role: "statement_principal", required: true, max_chars: 120, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "after-image+48px"},
+     accent_word: {allowed: true, max_words: 1, color_ref: "colors.accent"}}
+  - {name: "body", role: "explicacao", required: false, max_chars: 100, max_lines: 2,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-headline+24px"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text",
+     bg_color_ref: "colors.cta_bg", component: "pill",
+     position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Ad de prova com objeto-conceito (cédulas em anzóis = perde vendas)"
+  - "Contraste em feed dominado por ads dark"
+
+funil_recomendado: ["TOFU", "MOFU"]
+audiencia_recomendada: ["empresario_generico", "varejo_geral"]
+teses_compativeis: ["prova_concreta_objeto", "statement_seco"]
+
+anti_padroes:
+  - "Tese emocional pesada (light fica chato pra dor)"
+  - "Foto humana grande (peda contraste com texto)"
+
+hibridizacoes_validas: ["LIGHT-SURREAL (versão com colagem)"]
+
+embedding_text:
+  intent: |
+    Estilo de alto impacto em fundo claro. Carrega statement seco ancorado em
+    objeto-conceito. Funciona pra TOFU contraste em feed dark-dominante.
+  visual_features: |
+    Fundo branco puro. Foto/objeto pequeno top centrado. Headline preta UPPER
+    80-110px gigante. Body cinza. CTA pill amarelo. Sem ornamento.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.1"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

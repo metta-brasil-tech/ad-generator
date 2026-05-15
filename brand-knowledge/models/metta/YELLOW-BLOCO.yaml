@@ -1,0 +1,203 @@
+﻿$schema_version: "1.0"
+
+id:                  "YELLOW-BLOCO"
+display_name:        "Bloco amarelo + foto pessoa direita + bullets"
+alias:               ["yellow-bloco", "Yellow Bloco"]
+formato:             "STORY"
+banco_ref:           ["1:78","1:816","1:975","1:987","1:1021"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Convite institucional + autoridade institucional. Foto pessoa à direita comunica "eu",
+  logo bar comunica "+1.000 empresas confiam". Bloco amarelo no centro/esquerda destaca
+  a oferta com bullets concretos (3-5 itens). Híbrido: reels editorial + flyer evento.
+
+estrutura:
+  zonas:
+    top:        "Logo Metta + tag + logo bar de clientes (Sicredi · PanVel · Vivo · Korin)"
+    center:     "Bloco amarelo grande à esquerda/centro com headline + bullets"
+    bottom:     "CTA pill preto + body curto"
+    overlay:    "Foto pessoa direita bleed corner"
+  hierarquia:
+    - {elemento: "logo_bar_clientes", peso: 1}
+    - {elemento: "headline_no_bloco", peso: 2}
+    - {elemento: "bullets", peso: 3}
+    - {elemento: "foto_pessoa", peso: 4}
+    - {elemento: "cta", peso: 5}
+
+composicao:
+  background:        "solid"
+  background_color:  "#FFFFFF"
+  contrast:          "high"
+  ritmo:             "convite oficial → promessa → como (bullets) → ação — funil claro"
+  proporcao:
+    headline_area:   "20%"
+    image_area:      "30-40% (direita)"
+    body_area:       "30% (bullets)"
+    cta_area:        "100-140px"
+  ornament:          "logo-bar-top"
+
+typography:
+  headline:
+    role:           "title-large"
+    family:         "SF Pro"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [60, 100]
+    line_height_pct: 95
+    letter_spacing_pct: -1
+    text_case:      "UPPER"
+  body:
+    role:           "body-large"
+    family:         "SF Pro"
+    style:          "Expanded Regular"
+    weight:         590
+    stretch_pct:    100
+    size_range:     [28, 36]
+    line_height_pct: 130
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [24, 28]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-ref-palette-night-100)"
+  fg_primary:        "var(--metta-ref-palette-night-10)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-10)"
+  cta_bg:            "var(--metta-ref-palette-night-10)"
+  cta_text:          "var(--metta-ref-palette-night-100)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   140
+  safe_margin_bot:   140
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "var(--metta-sys-shape-corner-xl)"
+
+composition_pattern: "yellow-block-center-photo-right"
+
+image:
+  required:          true
+  type:              "photo-editorial"
+  placement:         "corner-bleed-right"
+  filters:
+    saturation:      0
+    contrast:        0.15
+    overlay:         "none"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/style-YELLOW-BLOCO.md"
+  reference_image:
+    - "figma://1:78"
+    - "figma://1:1021"
+
+slots:
+  - name:            "logo_bar"
+    role:            "prova_social_agregada"
+    required:        true
+    max_logos:       6
+    style_ref:       "n/a"
+    color_ref:       "colors.fg_primary"
+    position: {x: "80px", y: "200px"}
+    spec:            "4-6 logos B&W ou monocromáticos pequenos em linha"
+  - name:            "headline"
+    role:            "oferta_no_bloco_amarelo"
+    required:        true
+    max_chars:       50
+    max_lines:       3
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "inside-bloco", y: "top"}
+    container:       "yellow-block"
+  - name:            "bullets"
+    role:            "sub_beneficios"
+    required:        true
+    items:           [3, 5]
+    max_chars_each:  60
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "inside-bloco", y: "after-headline"}
+    bullet_char:     "•"
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-130px"}
+  - name:            "tag"
+    role:            "breadcrumb"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "100px"}
+
+quando_brilha:
+  - "Convite pra evento/webinário (com data + agenda em bullets)"
+  - "Posicionamento 'ecossistema de marcas grandes' (logo bar carrega)"
+  - "Oferta com 3-5 sub-benefícios concretos"
+  - "Carregar prova social agregada SEM precisar de cases nominais"
+
+funil_recomendado: ["MOFU", "BOFU"]
+
+audiencia_recomendada:
+  - "decisor_b2b_buscando_credibilidade"
+  - "convidados_evento"
+
+teses_compativeis:
+  - "convite_evento"
+  - "posicionamento_institucional"
+  - "oferta_com_sub_beneficios"
+
+anti_padroes:
+  - "Tese provocativa/dor pessoal — tom amarelo-festivo destrói gravidade"
+  - "Headline curta (< 5 palavras) — bloco amarelo fica vazio"
+  - "Sem logo bar real (não inventar logos!)"
+
+hibridizacoes_validas:
+  - "A (variante sem bullets pra headline+pessoa puros)"
+  - "LOGO-WALL (versão sem bloco, só logos)"
+
+embedding_text:
+  intent: |
+    Estilo do convite institucional. Carrega oferta com sub-benefícios concretos +
+    prova social agregada via logo bar. Posicionamento "ecossistema de marcas grandes"
+    sem precisar nomear caso específico. Tom institucional, não provocativo.
+  visual_features: |
+    Fundo branco/cinza claro. Bloco amarelo grande à esquerda com headline preta UPPER
+    + 3-5 bullets em sentence case. Foto pessoa à direita bleed corner. Logo bar top
+    com 4-6 marcas B&W. CTA pill preto bottom. Híbrido reels-editorial + flyer-evento.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.5"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

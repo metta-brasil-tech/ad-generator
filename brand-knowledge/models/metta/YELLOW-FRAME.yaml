@@ -1,0 +1,108 @@
+﻿$schema_version: "1.0"
+id: "YELLOW-FRAME"
+display_name: "Cartão escuro central em fundo amarelo"
+alias: ["yellow-frame", "Yellow Frame"]
+formato: "STORY"
+banco_ref: ["1:139", "1:370", "1:398"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Moldura amarela faz card escuro pop como tela de TV. Pergunta crítica
+  segmentada (varejo, serviços, B2B) flutua no centro com peso máximo.
+
+estrutura:
+  zonas:
+    top: "Tag/breadcrumb topo do card"
+    center: "Card escuro central com headline branca/amarela"
+    bottom: "CTA pill amarelo dentro ou fora do card"
+  hierarquia:
+    - {elemento: "moldura_amarela", peso: 1}
+    - {elemento: "card_escuro", peso: 2}
+    - {elemento: "headline_no_card", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background: "solid"
+  background_color: "#FFBE18"
+  contrast: "extreme"
+  ritmo: "moldura → card pop → headline crítico — TV mode"
+  proporcao: {card_area: "60-70%", margin_yellow_frame: "80-120px lateral"}
+  ornament: "yellow-frame-all-sides"
+
+typography:
+  headline: {role: "title-large", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [56, 76], line_height_pct: 100,
+    letter_spacing_pct: -0.5, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [16, 20], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-sys-color-primary)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-85)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+  card_bg: "var(--metta-ref-palette-night-10)"
+
+spacing: {safe_margin_x: 120, safe_margin_top: 200, safe_margin_bot: 200, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-xl)"}
+composition_pattern: "yellow-frame-dark-card-center"
+
+image:
+  required: false
+  type: "photo-or-object-optional-top"
+  placement: "top-inside-card"
+  filters: {saturation: 0, contrast: 0.2, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/_base.md"
+  reference_image: ["figma://1:139", "figma://1:370"]
+
+slots:
+  - {name: "tag", role: "segmento_pergunta", required: true, max_chars: 30,
+     style_ref: "typography.tag_eyebrow", color_ref: "colors.body_text", align: "left",
+     position: {x: "inside-card-top", y: "card-top+40px"}}
+  - {name: "headline", role: "pergunta_critica", required: true, max_chars: 80, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "inside-card", y: "card-center"},
+     container: "dark-card",
+     accent_word: {allowed: true, max_words: 1, color_ref: "colors.accent"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "inside-card-bottom", y: "card-bottom-80px"}}
+
+quando_brilha:
+  - "Pergunta crítica direcionada a segmento (varejo, serviços)"
+  - "Prova rápida com pergunta hard"
+
+funil_recomendado: ["TOFU", "MOFU"]
+audiencia_recomendada: ["segmento_especifico", "varejo_pet", "concessionaria"]
+teses_compativeis: ["pergunta_segmentada", "prova_rapida_pergunta"]
+
+anti_padroes:
+  - "Tese genérica universal (precisa SER segmento-específico)"
+  - "Body longo (card é pequeno demais)"
+
+hibridizacoes_validas: ["A (versão sem moldura amarela)"]
+
+embedding_text:
+  intent: |
+    Estilo da pergunta crítica segmentada. Carrega pergunta hard direcionada
+    a um nicho (varejo/serviços/B2B). Funciona em TOFU pra cold attention via
+    contraste amarelo + segmentação clara.
+  visual_features: |
+    Fundo amarelo total. Card escuro central radius xl com 80-120px margem
+    amarela ao redor. Headline branca UPPER 56-76px dentro do card.
+    Tag topo do card. CTA pill amarelo dentro ou fora do card.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.4"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

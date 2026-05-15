@@ -1,0 +1,217 @@
+# =============================================================================
+# Schema canônico de um modelo de ad — brand-knowledge/models/_schema.yaml
+# =============================================================================
+# Todo arquivo {ID}.yaml em models/ deve seguir essa estrutura.
+# Schema versionado — mudança breaking exige migration script + bump em $schema_version.
+# Lido por: skills 02-style-selector, 03-layout-composer, 04-image-prompt-engineer.
+# =============================================================================
+
+$schema_version: "1.0"
+
+# IDENTIFICAÇÃO -----------------------------------------------------------------
+id:                  ""    # canônico — kebab-case (ex: "A-headline-foto-dark")
+display_name:        ""    # nome humano legível (ex: "Headline impactante sobre preto + foto direita")
+alias:               []    # outros nomes (ex: ["A", "Estilo A"])
+formato:             ""    # STORY (1080x1920) | FEED (1080x1350) | SQR (1080x1080) | FEED_VIDEO | CARROSSEL
+banco_ref:           []    # IDs dos modelos no Figma "Modelos-ADS" (ex: ["1:704", "1:1204"])
+versao:              "1.0"
+status:              ""    # ativo | experimental | deprecated
+marca:               ""    # metta | tiago — define namespace de tokens, image-prompts e isolamento no pipeline
+
+# DNA --------------------------------------------------------------------------
+# Documentação completa do estilo. Skills consultam pra entender quando/como usar.
+
+logica_visual:       ""    # 2-4 linhas — efeito psicológico, como guia o olho, qual emoção evoca
+
+estrutura:                  # arranjo dos elementos
+  zonas:                    # quais elementos em quais zonas (top/center/bottom/left/right)
+    top:        ""
+    center:     ""
+    bottom:     ""
+    overlay:    ""          # opcional — overlay sobre foto
+  hierarquia:               # ordem de leitura visual (1 = primeiro que o olho bate)
+    - elemento: ""          # ex: "headline"
+      peso:     1
+    - elemento: ""
+      peso:     2
+
+composicao:                 # princípios composicionais
+  background:        ""     # solid | gradient | image-overlay | yellow-block
+  background_color:  ""     # token ou hex (ex: "var(--metta-sys-color-surface-dim)" ou "#0C161B")
+  contrast:          ""     # high | medium | low — quanto de contraste tipo-bg
+  ritmo:             ""     # cadência da leitura (ex: "cinema → reflexão → ação")
+  proporcao:                # % do canvas que cada zona ocupa
+    headline_area:   ""     # ex: "40-50%"
+    image_area:      ""     # ex: "30-40%"
+    body_area:       ""     # ex: "10-15%"
+    cta_area:        ""     # ex: "100-150px fixo"
+  ornament:          ""     # opcional — c-mark, yellow-band, etc
+
+# TOKENS DE DESIGN -------------------------------------------------------------
+# Aponta pra metta-tokens.md — não inventar valores aqui.
+
+typography:
+  headline:
+    role:           ""      # display-hero | title-large | display-large | etc (de metta-tokens.md §3.4)
+    family:         ""      # ex: "SF Pro" + fallback "Zalando Sans Expanded"
+    style:          ""      # ex: "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [80, 115]   # min/max em px
+    line_height_pct: 90
+    letter_spacing_pct: -1
+    text_case:      ""      # UPPER | sentence | mixed
+  body:
+    role:           ""
+    family:         ""
+    style:          ""
+    weight:         590
+    stretch_pct:    100
+    size_range:     [28, 36]
+    line_height_pct: 120
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           ""
+    family:         ""
+    style:          ""
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           ""
+    family:         ""
+    style:          ""
+    weight:         700
+    stretch_pct:    132
+    size_range:     [22, 28]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        ""     # ex: "night-10" — sempre via token
+  fg_primary:        ""     # texto principal
+  accent:            ""     # ex: "yellow-50"
+  body_text:         ""
+  cta_bg:            ""
+  cta_text:          ""
+
+spacing:
+  safe_margin_x:     0      # px do canvas border
+  safe_margin_top:   0
+  safe_margin_bot:   0
+  gap_between_blocks: 0
+
+shape:
+  cta_radius:        ""     # ex: "var(--metta-sys-shape-corner-full)"
+  card_radius:       ""
+
+# COMPOSITION PATTERN ----------------------------------------------------------
+composition_pattern: ""     # full-bleed-image | split-horizontal | photo-corner-bleed |
+                            # split-half-half | yellow-block-center | tipografia-pura
+
+# IMAGEM (se o estilo usa) -----------------------------------------------------
+image:
+  required:          false  # true se o estilo SEMPRE precisa de imagem
+  type:              ""     # none | photo-editorial | collage-surreal | object-3d | illustration
+  placement:         ""     # full-bleed | right-bleed | top-bleed | corner-bleed | centered
+  filters:                  # processamento sugerido
+    saturation:      0      # delta -1 a +1
+    contrast:        0
+    overlay:         ""     # ex: "gradient-fade-to-black-bottom-40%"
+  ratio:             ""     # ex: "9:16" | "1:1" | "free"
+  prompt_template_ref: ""   # ref a image-prompts/style-{ID}.md
+  reference_image:   []     # URLs/paths pros few-shot refs do banco
+
+# SLOTS DE CONTEÚDO ------------------------------------------------------------
+# Quais campos a copy preenche + constraints.
+
+slots:
+  - name:            "headline"
+    role:            "hook_principal"
+    required:        true
+    max_chars:       60
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position:                   # posição relativa no canvas (% ou px)
+      x:             "80px"
+      y:             "auto-center"
+    accent_word:                # palavra-chave colorida (1-2 max)
+      allowed:       true
+      max_words:     2
+      color_ref:     "colors.accent"
+  - name:            "body"
+    role:            "framing_ou_prova"
+    required:        false
+    max_chars:       150
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position:
+      x:             "80px"
+      y:             "after-headline+48px"
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       20
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"   # pill | rectangle | text-only
+    position:
+      x:             "80px"
+      y:             "bottom-120px"
+  - name:            "tag"
+    role:            "breadcrumb"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position:
+      x:             "80px"
+      y:             "100px"
+
+# QUANDO USAR ------------------------------------------------------------------
+quando_brilha:                # cenários onde o estilo performa melhor
+  - ""                        # ex: "Pergunta diagnóstica seca com peso"
+
+funil_recomendado:            # TOFU | MOFU | BOFU | retargeting
+  - ""
+
+audiencia_recomendada:        # ICP recortes
+  - ""
+
+teses_compativeis:            # tipos de tese central
+  - ""                        # ex: "dor_pessoal_exaustao"
+  - ""                        # ex: "promessa_numerica_autoridade"
+
+# ANTI-PADRÕES -----------------------------------------------------------------
+anti_padroes:                 # quando NÃO usar
+  - ""
+
+# HIBRIDIZAÇÃO -----------------------------------------------------------------
+hibridizacoes_validas:        # estilos que casam bem com este
+  - ""                        # ex: "YELLOW-BLOCO" (pode pegar paleta dele)
+
+# EMBEDDING HINTS --------------------------------------------------------------
+# Texto livre que será vetorizado pra busca semântica. Capturar conceitos-chave.
+
+embedding_text:
+  intent: |
+    Resumo da intenção do estilo em 3-5 linhas — qual TIPO de mensagem ele carrega,
+    quando o decisor olha pra esse ad e identifica que é pra ele.
+  visual_features: |
+    Descrição em 3-5 linhas das features visuais — cor dominante, formato,
+    presença de foto, hierarquia, mood.
+
+# REFERÊNCIA -------------------------------------------------------------------
+referencias_dna_completo: ""  # link pro doc narrativo (banco-ads-figma.md §X.Y)
+created:             ""
+updated:             ""
+maintainer:          ""

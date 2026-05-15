@@ -1,0 +1,191 @@
+﻿$schema_version: "1.0"
+
+id:                  "C-tipografia-pura-dark"
+display_name:        "Tipografia pura sobre escuro"
+alias:               ["C", "Estilo C"]
+formato:             "STORY"
+banco_ref:           ["1:116","1:149","1:421","1:1168"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Sem distração visual. A copy É o ad. Headline gigante ocupa quase a tela toda.
+  Cor amarela só destaca palavra-chave dentro da headline. Convida o leitor a parar
+  e LER. Funciona quando a tese é tão forte que dispensa imagem.
+
+estrutura:
+  zonas:
+    top:        "Logo + tag opcional"
+    center:     "Headline gigante 4-7 linhas (60-70% do canvas)"
+    bottom:     "Body curto opcional + CTA pill"
+    overlay:    "none"
+  hierarquia:
+    - {elemento: "headline", peso: 1}
+    - {elemento: "cta", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "tag", peso: 4}
+
+composicao:
+  background:        "solid"
+  background_color:  "#0C161B"
+  contrast:          "extreme"
+  ritmo:             "linha curta + longa + curta — cadência cinematográfica"
+  proporcao:
+    headline_area:   "60-70%"
+    image_area:      "0%"
+    body_area:       "10-15%"
+    cta_area:        "100-150px"
+  ornament:          "none"
+
+typography:
+  headline:
+    role:           "display-hero"
+    family:         "SF Pro"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [80, 115]
+    line_height_pct: 90
+    letter_spacing_pct: -1
+    text_case:      "UPPER"
+  body:
+    role:           "body-medium"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         510
+    stretch_pct:    100
+    size_range:     [28, 36]
+    line_height_pct: 120
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [24, 28]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-ref-palette-night-10)"
+  fg_primary:        "var(--metta-ref-palette-night-100)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-85)"
+  cta_bg:            "var(--metta-sys-color-primary)"
+  cta_text:          "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   180
+  safe_margin_bot:   180
+  gap_between_blocks: 48
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "0"
+
+composition_pattern: "tipografia-pura"
+
+image:
+  required:          false
+  type:              "none"
+  placement:         ""
+  ratio:             ""
+  prompt_template_ref: ""
+  reference_image:   []
+
+slots:
+  - name:            "headline"
+    role:            "statement_unico"
+    required:        true
+    max_chars:       180
+    max_lines:       7
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "auto-center"}
+    accent_word:
+      allowed:       true
+      max_words:     2
+      color_ref:     "colors.accent"
+  - name:            "body"
+    role:            "fechamento_opcional"
+    required:        false
+    max_chars:       100
+    max_lines:       2
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "after-headline+48px"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-130px"}
+  - name:            "tag"
+    role:            "breadcrumb"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "100px"}
+
+quando_brilha:
+  - "Tese forte demais pra precisar de foto (provocação seca, dado contraintuitivo)"
+  - "Pergunta diagnóstica que paralisa"
+  - "Ad de retargeting onde já tem warmth (audiência conhece a marca)"
+  - "Comunicado/manifesto"
+
+funil_recomendado: ["MOFU", "BOFU", "retargeting"]
+
+audiencia_recomendada:
+  - "audiencia_warm"
+  - "lista_proprietaria"
+  - "retargeting_engajados"
+
+teses_compativeis:
+  - "pergunta_diagnostica_seca"
+  - "dado_contraintuitivo"
+  - "provocacao_direta"
+  - "manifesto"
+
+anti_padroes:
+  - "Tese fraca — sem foto pra distrair, ad fica vazio"
+  - "Mais de 8 linhas de headline — transborda, perde impacto"
+  - "3+ palavras amarelas destacadas — perde hierarquia (1-2 max)"
+
+hibridizacoes_validas:
+  - "A (versão com foto pessoa pra prospecting)"
+
+embedding_text:
+  intent: |
+    Estilo do statement puro. Carrega tese tão forte que dispensa imagem. Provocação
+    seca, dado contraintuitivo, pergunta que paralisa. Funciona em audiência warm que
+    já conhece a marca e responde ao argumento direto.
+  visual_features: |
+    Apenas 3 cores no ad: dark bg, texto branco, palavra-chave amarela. Headline UPPER
+    gigante 80-115px ocupando 60-70% do canvas. CTA pill amarelo. Sem foto, sem
+    ornamento. Tipografia mixed-weight cria dinamismo dentro da própria headline.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.3"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

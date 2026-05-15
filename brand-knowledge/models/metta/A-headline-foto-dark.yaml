@@ -1,0 +1,200 @@
+﻿$schema_version: "1.0"
+
+id:                  "A-headline-foto-dark"
+display_name:        "Headline impactante sobre preto + foto pessoa direita"
+alias:               ["A", "Estilo A"]
+formato:             "STORY"
+banco_ref:           ["1:517","1:538","1:655","1:704","1:765","1:792","1:1191","1:1204","1:1216"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Headline é o protagonista absoluto. Foto serve como âncora humana, não como narrativa.
+  Olho lê headline primeiro, bate na pessoa, desce pro CTA. Comunica autoridade + diretividade.
+
+estrutura:
+  zonas:
+    top:        "Tag/breadcrumb UPPERCASE (label do tema)"
+    center:     "Headline massivo 3-5 linhas (left-aligned default)"
+    bottom:     "Body 3-4 linhas + CTA pill"
+    overlay:    "Foto pessoa bleed à direita ou bottom (pode passar do canvas)"
+  hierarquia:
+    - {elemento: "headline", peso: 1}
+    - {elemento: "foto_pessoa", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+    - {elemento: "tag", peso: 5}
+
+composicao:
+  background:        "solid"
+  background_color:  "#0C161B"
+  contrast:          "high"
+  ritmo:             "headline com lh 0.9 (apertado) + body com lh 1.2 (respira) — contraste rítmico"
+  proporcao:
+    headline_area:   "40-50%"
+    image_area:      "30-40% (bleed direita)"
+    body_area:       "10-15%"
+    cta_area:        "120-160px fixo"
+  ornament:          "none"
+
+typography:
+  headline:
+    role:           "title-large"
+    family:         "SF Pro"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [67, 80]
+    line_height_pct: 90
+    letter_spacing_pct: -1
+    text_case:      "UPPER"
+  body:
+    role:           "body-medium"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         510
+    stretch_pct:    100
+    size_range:     [24, 37]
+    line_height_pct: 120
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [24, 37]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-ref-palette-night-10)"
+  fg_primary:        "var(--metta-ref-palette-night-100)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-85)"
+  cta_bg:            "var(--metta-sys-color-primary)"
+  cta_text:          "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   100
+  safe_margin_bot:   120
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "var(--metta-sys-shape-corner-md)"
+
+composition_pattern: "split-horizontal-text-left-photo-right-bleed"
+
+image:
+  required:          true
+  type:              "photo-editorial"
+  placement:         "right-bleed"
+  filters:
+    saturation:      -0.2
+    contrast:        0.3
+    overlay:         "none"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/style-A.md"
+  reference_image:
+    - "figma://1:704"
+    - "figma://1:1204"
+
+slots:
+  - name:            "headline"
+    role:            "hook_principal"
+    required:        true
+    max_chars:       60
+    max_lines:       5
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "260px"}
+    accent_word:
+      allowed:       true
+      max_words:     2
+      color_ref:     "colors.accent"
+  - name:            "body"
+    role:            "framing"
+    required:        true
+    max_chars:       180
+    max_lines:       4
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "after-headline+48px"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-150px"}
+  - name:            "tag"
+    role:            "breadcrumb"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "100px"}
+
+quando_brilha:
+  - "Pergunta diagnóstica direta com peso ('Você bateu no teto da sua capacidade pessoal.')"
+  - "Promessa numérica institucional ('De R$ 0 a R$ 8,5 bilhões em 12 meses.')"
+  - "Autoridade founder-led com foto Tiago"
+  - "Statement de identidade ('Empresário profissional não carrega o método, codifica.')"
+  - "Cases nominais (Hiperzoo, CBA, AMBI) — big number ancora prova"
+
+funil_recomendado: ["MOFU", "BOFU"]
+
+audiencia_recomendada:
+  - "empresario_50-300M_revenue"
+  - "decisor_b2c_b2b"
+
+teses_compativeis:
+  - "pergunta_diagnostica_seca"
+  - "promessa_numerica_autoridade"
+  - "case_nominal"
+  - "autoridade_founder_led"
+  - "statement_identidade"
+
+anti_padroes:
+  - "Tese vaga ou abstrata sem âncora — sem objeto/dado pra prender"
+  - "Body com 3+ ideias diferentes — desfoca"
+  - "Foto da pessoa sorrindo amigavelmente — destrói gravidade do headline"
+  - "Foto stock genérica de escritório — quebra credibilidade Metta"
+
+hibridizacoes_validas:
+  - "YELLOW-BLOCO (pode pegar paleta amarela do bloco pra CTA destacado)"
+  - "C (versão sem foto pra retargeting)"
+
+embedding_text:
+  intent: |
+    Estilo de autoridade direta. Carrega headlines que pesam: perguntas diagnósticas,
+    promessas numéricas, statements de identidade founder-led, cases nominais.
+    Decisor olha e pensa "isso é sério, é pra mim". Não é convite festivo.
+  visual_features: |
+    Fundo dark predominante #0C161B. Headline branca massiva UPPER ocupa metade do
+    canvas. Foto pessoa moody bleed à direita ou bottom. CTA pill amarelo na base.
+    Mínimo de cor — só preto, branco, amarelo. Tipografia carrega a tela.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.1"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

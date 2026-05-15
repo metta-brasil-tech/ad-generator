@@ -1,0 +1,267 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-EDITORIAL-DARK"
+display_name:        "Editorial dark Tiago — fundo cinema noir com headline UPPER white"
+alias:               ["TIAGO-DARK", "Dark Editorial Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/CARROSSEL - METODO DE JESUS/3.png"
+  - "IA/CARROSSEL - SEU FUNCIONÁRIO/cr5tiagoabril-1.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Slide cinema noir. Background dark fullbleed (#0F1419 preto com gradient sutil) OU foto
+  editorial close-up dark (olho, silhueta, corredor escuro). Headline UPPER bold white grande
+  com accent amarelo em palavra-chave puxa o peso emocional. Quando há foto, ela "vaza" pelo
+  canvas inteiro com darkening overlay e o texto sobre fica em zona safe centralizada-bottom.
+  Header e footer tracked UPPER em branco/cinza claro. Avatar Tiago small bottom-right.
+
+  Sensação alvo: artigo noir/jornalismo investigativo. Tensão controlada, não dramático demais.
+
+estrutura:
+  zonas:
+    top:        "Header bar UPPER tracked em cinza claro — 'VENDAS É CIÊNCIA' | 'GESTÃO COMERCIAL' OU signature Tiago"
+    center:     "Imagem cinema dark fullbleed (olho, silhueta, corredor) OU gradient dark com headline integrada"
+    bottom:     "Headline UPPER white bold + accent amarelo em palavra-chave + sub regular + optional CTA pill preto/amarelo"
+    overlay:    "Optional handwritten white text within image (cursive small text dentro de close-up — ex: dentro do olho)"
+  hierarquia:
+    - {elemento: "imagem_dark_fullbleed", peso: 1}
+    - {elemento: "headline_upper_white", peso: 2}
+    - {elemento: "accent_amarelo_word", peso: 3}
+    - {elemento: "sub_regular", peso: 4}
+    - {elemento: "header_footer_tracked", peso: 5}
+
+composicao:
+  background:        "image-overlay | solid-dark-gradient"
+  background_color:  "#0F1419"            # base dark
+  gradient_overlay:  "linear-gradient(180deg, rgba(15,20,25,0) 0%, rgba(15,20,25,0.85) 60%, rgba(15,20,25,1) 100%)"
+  contrast:          "high"
+  ritmo:             "imagem domina (peso emocional) → headline detona UPPER → accent amarelo prende → sub regular respira → CTA fecha"
+  proporcao:
+    image_area:      "55-70% (fullbleed com darkening na zona de texto)"
+    headline_area:   "20-30%"
+    sub_area:        "8-12%"
+    cta_area:        "60-70px"
+  ornament:          "grain noise overlay sutil no canvas"
+
+typography:
+  headline:
+    role:           "manchete-noir-upper"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [56, 80]
+    line_height_pct: 100
+    letter_spacing_pct: -1
+    text_case:      "UPPER"
+  body:
+    role:           "sub-regular-noir"
+    family:         "SF Pro"
+    style:          "Regular"
+    weight:         400
+    stretch_pct:    100
+    size_range:     [32, 40]
+    line_height_pct: 135
+    letter_spacing_pct: -0.3
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "framing-noir-tracked"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [18, 22]
+    line_height_pct: 110
+    letter_spacing_pct: 8
+    text_case:      "UPPER"
+  cta:
+    role:           "pill-cta-dark"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [22, 28]
+    text_case:      "UPPER"
+  handwritten_overlay:
+    role:           "cursive-small-inside-image"
+    family:         "Caveat | Permanent Marker"   # google fonts handwritten
+    weight:         400
+    size_range:     [28, 40]
+    text_case:      "sentence"
+    color:          "#FFFFFF"
+    opacity:        0.75
+
+colors:
+  bg_primary:        "#0F1419"            # preto editorial
+  bg_secondary:      "#1A2530"            # gradient mid
+  fg_primary:        "#FFFFFF"
+  accent:            "#FFCC00"
+  body_text:         "#D9DEE3"            # branco off-white
+  cta_bg:            "#0F1419"            # CTA preto com fg branco DEFAULT
+  cta_text:          "#FFFFFF"
+  cta_bg_alt:        "#FFCC00"            # variante amarelo
+  cta_text_alt:      "#0F1419"
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   80
+  safe_margin_bot:   80
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       0
+
+composition_pattern: "full-bleed-dark-cinema-with-text-bottom"
+
+image:
+  required:          false   # pode ser solid dark sem imagem
+  type:              "photo-editorial-close-up | silhouette-cinema | none"
+  placement:         "full-bleed-with-darkening-bottom"
+  filters:
+    saturation:      -0.6
+    contrast:        0.5
+    overlay:         "darkening-gradient-bottom-60%"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/tiago/style-editorial-dark.md"
+  reference_image:
+    - "exemplars/tiago/TIAGO-EDITORIAL-DARK/01-olho-funcionario.png"
+    - "exemplars/tiago/TIAGO-EDITORIAL-DARK/02-corredor-silhueta.png"
+
+slots:
+  - name:            "header_eyebrow_left"
+    role:            "framing_label_top_left"
+    required:        true
+    text:            "VENDAS É CIÊNCIA"
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    position: {x: "64px", y: "60px"}
+
+  - name:            "header_eyebrow_right"
+    role:            "framing_label_top_right"
+    required:        true
+    text:            "GESTÃO COMERCIAL"
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    align:           "right"
+    position: {x: "right-64px", y: "60px"}
+
+  - name:            "image_fullbleed"
+    role:            "imagem_cinema_noir"
+    required:        false
+    image_prompt_ref: "image-prompts/tiago/style-editorial-dark.md"
+    notes: |
+      Close-up de olho humano com texto cursivo dentro da pupila, silhueta de empresário em
+      corredor escuro, mãos em sombra. Sempre dark, sempre B&W com tom warm sutil.
+
+  - name:            "handwritten_overlay"
+    role:            "texto_cursivo_dentro_imagem"
+    required:        false
+    max_chars:       80
+    max_lines:       3
+    style_ref:       "typography.handwritten_overlay"
+    position: {x: "image-center", y: "image-center"}
+    notes: |
+      Pequena frase manuscrita dentro do close-up (ex: dentro do olho 'Não vai embora pelo
+      amor de Deus'). Refere-se à voz interna do sujeito da imagem.
+
+  - name:            "headline"
+    role:            "manchete_noir"
+    required:        true
+    max_chars:       80
+    max_lines:       3
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "64px", y: "after-image+0px or auto-bottom"}
+    accent_word:
+      allowed:       true
+      max_words:     3
+      mode:          "yellow-text"
+      color_ref:     "colors.accent"
+
+  - name:            "sub"
+    role:            "framing_intermediario"
+    required:        false
+    max_chars:       150
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "64px", y: "after-headline+24px"}
+
+  - name:            "cta_pill"
+    role:            "como_nao_se_tornar | arrasta_pro_lado"
+    required:        false
+    bg_color_ref:    "colors.cta_bg"
+    fg_color_ref:    "colors.cta_text"
+    component:       "pill"
+    height:          70
+    padding_x:       28
+    position: {x: "64px", y: "bottom-100px"}
+    examples:
+      - "COMO NÃO SE TORNAR UM REFÉM 👉"
+      - "ARRASTA PRO LADO 👉"
+
+  - name:            "footer_attribution"
+    role:            "credito_tiago_bottom"
+    required:        false
+    text:            "2026 © TIAGO ALVES / ESTRATÉGIA E GESTÃO DE VENDAS"
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    position: {x: "64px", y: "bottom-50px"}
+
+  - name:            "footer_avatar_tiago"
+    role:            "avatar_small_bottom_right"
+    required:        false
+    avatar_asset:    "avatar-tiago.png"
+    width:           60
+    position: {x: "right-130px", y: "bottom-65px"}
+
+quando_brilha:
+  - "Capa noir — Tese psicológica/comportamental ('seu funcionário sente seu medo')"
+  - "Slide intermediário cinema editorial ('Eu já vi esse filme em mais de mil empresas')"
+  - "Reframe heavy com tom investigativo"
+  - "Sequência narrativa que precisa de tensão controlada"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_pensativo_warm"
+  - "gestor_consumidor_de_jornalismo"
+
+teses_compativeis:
+  - "tese_psicologica_comportamental"
+  - "reframe_diagnostico_heavy"
+  - "narrativa_investigativa"
+  - "auto_confissao_tiago_dura"
+
+anti_padroes:
+  - "Conteúdo festivo/positivo — quebra o mood noir"
+  - "Lista de dados quantitativos — usar TIAGO-EDITORIAL-CARD"
+  - "Convite leve — dark fica pesado demais"
+  - "Foto stock smile — destrói credibilidade"
+
+hibridizacoes_validas:
+  - "TIAGO-EDITORIAL-HERO (versão light da mesma tese)"
+  - "TIAGO-EDITORIAL-CARD (mesmo card mas em variante card_bg_alt preto)"
+
+embedding_text:
+  intent: |
+    Slide cinema noir editorial Tiago. Tese psicológica/comportamental que precisa de
+    tensão controlada. Manchete UPPER white com accent amarelo. Imagem close-up dark
+    (olho, silhueta) ou solid dark gradient. Para conteúdo heavy, investigativo, reframe
+    diagnóstico profundo.
+  visual_features: |
+    Background dark fullbleed (#0F1419) com gradient OU foto editorial close-up dark
+    com darkening bottom 60%. Headline UPPER bold white com accent amarelo em palavra-chave.
+    Sub regular branca. Header tracked UPPER cinza claro nos cantos. CTA pill preto OU
+    amarelo bottom-left. Avatar Tiago small bottom-right opcional.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§4"
+created:             "2026-05-14"
+updated:             "2026-05-14"
+maintainer:          "Head de Design Metta"

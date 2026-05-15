@@ -1,0 +1,103 @@
+﻿$schema_version: "1.0"
+id: "DARK-COLAGEM"
+display_name: "Colagem fotográfica conceitual escura"
+alias: ["dark-colagem"]
+formato: "STORY"
+banco_ref: ["1:947"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Metáfora visual concreta sobre fundo dark moody. Colagem fotográfica
+  conceitual (mãos com peça quebra-cabeça, dominó dourado) sobre bg escuro.
+  Diferença vs LIGHT-SURREAL: aqui é dark + cinematográfico, lá é claro + editorial.
+
+estrutura:
+  zonas:
+    center: "Colagem fotográfica conceitual moody (50-60%)"
+    bottom: "Headline mixed-weight + body + CTA"
+
+composicao:
+  background: "solid"
+  background_color: "#0C161B"
+  contrast: "medium"
+  ritmo: "metáfora visual → headline (decoda) → body — diagnóstico cinematográfico"
+  proporcao: {headline_area: "20-25%", image_area: "50-60%", body_area: "10-15%"}
+  ornament: "none"
+
+typography:
+  headline: {role: "title-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [56, 76], line_height_pct: 95,
+    letter_spacing_pct: -0.5, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-10)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-85)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 120, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "dark-bg-photographic-collage"
+
+image:
+  required: true
+  type: "photographic-collage-moody"
+  placement: "center-top"
+  filters: {saturation: -0.3, contrast: 0.4, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/style-LIGHT-SURREAL.md"
+  reference_image: ["figma://1:947"]
+
+slots:
+  - {name: "headline", role: "decoda_metafora", required: true, max_chars: 100, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "after-image+48px"},
+     accent_word: {allowed: true, max_words: 2, color_ref: "colors.accent"}}
+  - {name: "body", role: "aplicacao", required: false, max_chars: 120, max_lines: 3,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-headline+24px"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Conceito de 'encaixe' / 'transformação' / 'efeito cascata'"
+  - "Metáfora física do método"
+  - "Tese sistêmica visualizável em objeto"
+
+funil_recomendado: ["MOFU"]
+audiencia_recomendada: ["decisor_culto", "audiencia_warm"]
+teses_compativeis: ["metafora_encaixe", "transformacao_sistemica"]
+
+anti_padroes:
+  - "Cases nominais (estilo é abstrato)"
+  - "Foto humana realista (use B/D pra isso)"
+  - "Cartoon (estilo é fotográfico)"
+
+hibridizacoes_validas: ["LIGHT-SURREAL (versão claro)", "DARK-OBJETO (versão com 1 objeto)"]
+
+embedding_text:
+  intent: |
+    Estilo da metáfora dark cinematográfica. Carrega conceito sistêmico
+    visualizado em colagem fotográfica moody. Diferença vs LIGHT-SURREAL:
+    dark + cinematic, não claro + editorial.
+  visual_features: |
+    Fundo dark #0C161B. Colagem fotográfica conceitual moody centro-top
+    (mãos com peça, dominó dourado). Headline UPPER mixed-weight com
+    palavra amarela. Body cinza. CTA pill amarelo.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.11"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

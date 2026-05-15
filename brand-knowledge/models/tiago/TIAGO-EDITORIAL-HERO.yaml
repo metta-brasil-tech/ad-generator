@@ -1,0 +1,274 @@
+$schema_version: "1.0"
+
+id:                  "TIAGO-EDITORIAL-HERO"
+display_name:        "Capa editorial Tiago — headline gigante + colagem cinema surreal"
+alias:               ["TIAGO-HERO", "Hero Editorial Tiago"]
+formato:             "FEED"
+banco_ref:
+  - "IA/CARROSSEL - GERAÇÃO Z/Slice 1.png"
+  - "IA/CARROSSEL - LIDERANÇA NÃO É FANTASIA/c1tiagomaio-1.png"
+  - "IA/CARROSSEL - METODO DE JESUS/1.png"
+  - "IA/CARROSSEL - POR QUE SEU TIME/1.png"
+versao:              "1.0"
+status:              "ativo"
+marca:               "tiago"
+
+logica_visual: |
+  Capa de carrossel editorial. Headline GIGANTE bold em sentence case (ou UPPER quando enunciado seco)
+  segura a atenção como manchete de revista. Imagem é colagem surreal cinema (corpo decapitado com fumaça,
+  peixe com nadadeira de tubarão, homem em poltrona amarela sem rosto) — metáfora visual que ancora a tese.
+  Moldura "ESTRATÉGIAS DE GESTÃO DE VENDAS / signature Tiago / VENDAS É CIÊNCIA" estabelece editorial pro
+  perfil pessoal. CTA pill amarelo "ARRASTA PRO LADO 👉" no canto inferior esquerdo.
+  Sensação alvo: artigo de revista de negócios brasileira premium (think: Bloomberg Businessweek BR).
+
+estrutura:
+  zonas:
+    top:        "Header bar — eyebrow esquerdo UPPER tracked + signature Tiago centralizada + eyebrow direito UPPER tracked"
+    center:     "Headline GIGANTE bold sentence/UPPER (3-6 linhas) — pode estar em speech-bubble dark se citação"
+    bottom:     "Subhead bold + body regular + CTA pill amarelo 'ARRASTA PRO LADO 👉'"
+    overlay:    "Colagem cinema surreal — sujeito editorial (sem rosto/decapitado/metáfora) ocupa 40-55% direita ou centro-bottom"
+  hierarquia:
+    - {elemento: "headline", peso: 1}
+    - {elemento: "colagem_imagem", peso: 2}
+    - {elemento: "header_bar", peso: 3}
+    - {elemento: "subhead_body", peso: 4}
+    - {elemento: "cta_pill", peso: 5}
+
+composicao:
+  background:        "solid"
+  background_color:  "#EDEEEE"  # off-white com grain noise overlay
+  contrast:          "high"
+  ritmo:             "header tracked discreto → headline detona em peso → colagem entra com tom cinema → CTA pill amarelo fecha"
+  proporcao:
+    header_area:     "8-10%"
+    headline_area:   "30-45%"
+    image_area:      "35-50% (colagem)"
+    body_area:       "10-15%"
+    cta_area:        "60-80px pill"
+  ornament:          "grain-noise-overlay + speech-bubble-dark (opcional quando citação)"
+
+typography:
+  headline:
+    role:           "editorial-display"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         800
+    stretch_pct:    100
+    size_range:     [76, 110]
+    line_height_pct: 95
+    letter_spacing_pct: -2
+    text_case:      "sentence"   # UPPER em outliers (quando enunciado tipo-jornal)
+  body:
+    role:           "body-bold-mixed"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [32, 44]
+    line_height_pct: 125
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "framing-header"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [18, 22]
+    line_height_pct: 110
+    letter_spacing_pct: 8
+    text_case:      "UPPER"
+  cta:
+    role:           "pill-arrasta"
+    family:         "SF Pro"
+    style:          "Bold"
+    weight:         700
+    stretch_pct:    100
+    size_range:     [22, 28]
+    line_height_pct: 100
+    letter_spacing_pct: 4
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "#EDEEEE"            # off-white com noise
+  fg_primary:        "#0F1419"            # texto principal
+  accent:            "#FFCC00"            # amarelo (highlight word + pill bg + signature)
+  accent_dark:       "#FFBE18"            # variante Metta yellow pra signature SVG
+  body_text:         "#3B4350"            # cinza neutral 2
+  cta_bg:            "#0F1419"            # pill PRETO com texto branco (default)
+  cta_text:          "#FFFFFF"
+  speech_bubble_bg:  "#3D5762"            # azul-cinza dark pra speech bubble
+  speech_bubble_fg:  "#FFFFFF"
+
+spacing:
+  safe_margin_x:     64
+  safe_margin_top:   60
+  safe_margin_bot:   60
+  gap_between_blocks: 36
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"  # pill arredondada
+  card_radius:       "32"                                   # speech bubble radius
+  bubble_tail:       true                                   # speech bubble com tail/seta
+
+composition_pattern: "editorial-collage-headline-dominant"
+
+image:
+  required:          true
+  type:              "collage-surreal-cinema"
+  placement:         "right-bleed | center-bottom | full-overlay"
+  filters:
+    saturation:      -0.3
+    contrast:        0.2
+    overlay:         "grain-noise + selective-yellow-paint (parte da figura pintada de amarelo solid)"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/tiago/style-editorial-collage.md"
+  reference_image:
+    - "exemplars/tiago/TIAGO-EDITORIAL-HERO/01-geracao-z-fumaca.png"
+    - "exemplars/tiago/TIAGO-EDITORIAL-HERO/02-lideranca-peixe-tubarao.png"
+
+slots:
+  - name:            "header_eyebrow_left"
+    role:            "framing_label_top_left"
+    required:        true
+    fixed:           true
+    text:            "ESTRATÉGIAS DE GESTÃO DE VENDAS"
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    position: {x: "64px", y: "60px"}
+
+  - name:            "header_signature"
+    role:            "assinatura_tiago_top_center"
+    required:        true
+    fixed:           true
+    asset:           "assinatura-tiago-amarelo.svg"
+    width:           220
+    position: {x: "center", y: "40px"}
+
+  - name:            "header_eyebrow_right"
+    role:            "framing_label_top_right"
+    required:        true
+    fixed:           true
+    text:            "VENDAS É CIÊNCIA"
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    align:           "right"
+    position: {x: "right-64px", y: "60px"}
+
+  - name:            "speech_bubble"
+    role:            "container_opcional_citacao"
+    required:        false
+    bg_color_ref:    "colors.speech_bubble_bg"
+    fg_color_ref:    "colors.speech_bubble_fg"
+    corner_radius:   "var(--metta-sys-shape-corner-lg)"
+    tail:            "bottom-right"
+    notes: |
+      Quando a tese é citação/aspas ("A Geração Z não quer trabalhar."), envolver headline neste bubble.
+      Quando é statement direto, omitir (bubble=null, headline solta no canvas).
+
+  - name:            "headline"
+    role:            "manchete_editorial"
+    required:        true
+    max_chars:       80
+    max_lines:       6
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left | center"
+    position: {x: "64px", y: "180px"}
+    accent_word:
+      allowed:       true
+      max_words:     4
+      mode:          "yellow-highlight-rect | bold-emphasis"
+      color_ref:     "colors.accent"
+
+  - name:            "subhead"
+    role:            "framing_intermediario"
+    required:        false
+    max_chars:       180
+    max_lines:       4
+    style_ref:       "typography.body"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "64px", y: "after-headline+32px"}
+
+  - name:            "body"
+    role:            "remate_observacao"
+    required:        false
+    max_chars:       150
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "64px", y: "after-subhead+24px"}
+
+  - name:            "collage_image"
+    role:            "metafora_visual_cinema"
+    required:        true
+    image_prompt_ref: "image-prompts/tiago/style-editorial-collage.md"
+    notes: |
+      Colagem cinema editorial sempre tem componente surreal/metafórico:
+      - Corpo decapitado com fumaça/raio amarelo (cabeça apagada)
+      - Sujeito com partes do corpo PINTADAS de amarelo solid (recorte editorial vintage)
+      - Objeto-metáfora central (peixe-tubarão, T-Rex esqueleto)
+      Mood: noir editorial, B&W base com selective yellow.
+
+  - name:            "cta_pill"
+    role:            "arrasta_pro_lado"
+    required:        true
+    text:            "ARRASTA PRO LADO 👉"
+    bg_color_ref:    "colors.cta_bg"
+    fg_color_ref:    "colors.cta_text"
+    component:       "pill"
+    height:          70
+    padding_x:       28
+    position: {x: "64px", y: "bottom-100px"}
+    notes: |
+      Variant amarela: bg=#FFCC00 fg=#0F1419. Variant preta: bg=#0F1419 fg=#FFFFFF.
+      Amarelo pra capas claras, preta pra reforço de contraste em cards/imagens.
+
+quando_brilha:
+  - "Capa de carrossel — abre serie com manchete editorial"
+  - "Tese provocativa que cabe em headline curto (4-8 palavras)"
+  - "Citação ou mantra a desmontar (com speech_bubble)"
+  - "Statement de identidade Tiago ('Liderança não é fantasia.')"
+  - "Hook tipo-jornal que pede colagem como metáfora"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "empresario_audiencia_warm_tiago"
+  - "gestor_comercial_pensativo"
+
+teses_compativeis:
+  - "statement_provocativo"
+  - "reframe_mantra_algema"
+  - "pergunta_diagnostica_aberta"
+  - "manifesto_editorial"
+
+anti_padroes:
+  - "Convite de evento com data específica — formato pede manchete editorial, não flyer"
+  - "Big number isolado sem frase envolta — formato pede headline com peso narrativo"
+  - "Caso nominal com logo cliente — quebra ilusão de revista editorial"
+  - "Foto stock genérica de escritório — destrói credibilidade cinema"
+  - "Headline curto demais (1-2 palavras) — tipografia gigante ficaria solta"
+
+hibridizacoes_validas:
+  - "TIAGO-EDITORIAL-DARK (variante dark da mesma capa)"
+  - "TIAGO-EDITORIAL-CITACAO (quando tem author attribution + citação)"
+
+embedding_text:
+  intent: |
+    Capa editorial pro perfil pessoal Tiago Alves. Manchete tipo-revista brasileira premium.
+    Carrega statements provocativos, citações a desmontar, reframes de mantra. Voz pessoal
+    que abre série/carrossel com peso editorial. Audiência warm Tiago.
+  visual_features: |
+    Headline GIGANTE bold sentence ou UPPER ocupa metade do canvas. Colagem cinema surreal
+    (corpos decapitados, fumaça/raio amarelo, partes do corpo pintadas em amarelo solid,
+    metáforas visuais B&W). Background off-white com grain noise. Header tracked UPPER nas
+    pontas + signature Tiago amarela centralizada top. CTA pill amarelo OU preto 'ARRASTA
+    PRO LADO 👉' bottom-left. Speech-bubble dark opcional pra citação.
+
+referencias_dna_completo: "design/banco-tiago-conteudo.md#§2"
+created:             "2026-05-14"
+updated:             "2026-05-14"
+maintainer:          "Head de Design Metta"

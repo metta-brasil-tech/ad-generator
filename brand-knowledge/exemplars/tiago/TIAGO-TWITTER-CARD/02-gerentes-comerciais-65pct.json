@@ -1,0 +1,143 @@
+{
+  "exemplar_id": "TIAGO-TWITTER-CARD-gerentes-comerciais-65pct",
+  "tags": ["big-stat-contextual", "carrossel-content", "gestao-comercial", "MOFU", "voz-tiago", "reframe"],
+  "variant": "content",
+  "reference_png": "exemplars/tiago/cr6tiagoabril-2.png",
+  "stages": {
+    "briefing_input": "carrossel pro perfil do Tiago, slide 2 (content) — desenvolver tese de que 65% dos gerentes comerciais não batem meta e o problema é o gestor, não o time",
+    "briefing_output": {
+      "intent": "reframe_mantra",
+      "tese_central": "65% dos gerentes comerciais no Brasil não batem meta — e o problema não é o tamanho da meta, é o gestor",
+      "formato": "carrossel",
+      "funil": "MOFU",
+      "audiencia": {
+        "segmento": "varejo_geral",
+        "cargo": "empresario",
+        "porte_revenue": "desconhecido",
+        "estado_emocional": "confortavel_buscando_crescer"
+      },
+      "tom": "intelectual",
+      "constraints": {
+        "tem_logo_cliente_nomeado": false,
+        "case_nominal_id": null,
+        "data_evento": null,
+        "cta_obrigatorio": null,
+        "plataforma_destino": "instagram_organico"
+      },
+      "marca": "tiago",
+      "raw_request": "carrossel pro perfil do Tiago, slide 2 — 65% dos gerentes comerciais não batem meta",
+      "clarifying_questions": []
+    },
+    "style_selected": "TIAGO-TWITTER-CARD",
+    "layout_spec": {
+      "model_id": "TIAGO-TWITTER-CARD",
+      "marca": "tiago",
+      "variant": "content",
+      "frame": {
+        "width": 1080,
+        "height": 1350,
+        "background": {"type": "solid", "value": "#FFFFFF"}
+      },
+      "elements": [
+        {
+          "type": "header_mock",
+          "slot_name": "header_mock",
+          "x": 64, "y": 80, "width": 952,
+          "avatar": {
+            "x": 64, "y": 80,
+            "diameter": 140,
+            "ring_color": "#FFCC00",
+            "ring_thickness": 10,
+            "photo_placeholder": "[imagem] retrato Tiago — mesmo do slide cover"
+          },
+          "name": {
+            "text": "Tiago Alves",
+            "font": {"family": "SF Pro", "style": "Bold", "weight": 700, "size": 40, "line_height_pct": 120, "letter_spacing_pct": -0.5, "text_case": "sentence"},
+            "color": "#0F1419"
+          },
+          "verified_badge": {"size": 32, "color": "#1D9BF0"},
+          "ellipsis": {"text": "⋯", "color": "#71767B", "size": 32},
+          "handle": {
+            "text": "@tiago.alves.oliveira",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 120, "text_case": "sentence"},
+            "color": "#536471"
+          }
+        },
+        {
+          "type": "text",
+          "slot_name": "headline",
+          "text": "Mais de 65% dos gerentes comerciais no Brasil não batem meta regularmente.",
+          "x": 64, "y": 300, "width": 952,
+          "font": {
+            "family": "SF Pro", "style": "Bold",
+            "weight": 700, "stretch_pct": 100, "size": 56,
+            "line_height_pct": 125, "letter_spacing_pct": -1, "text_case": "sentence"
+          },
+          "color": "#0F1419", "align": "left"
+        },
+        {
+          "type": "text",
+          "slot_name": "body",
+          "text": "E o problema não é o tamanho da meta.\n\nA prova? Quando 1 gestor de alta performance assume 1 time que não performa, em questão de meses esse time passa a bater os objetivos.",
+          "x": 64, "y": 540, "width": 952,
+          "font": {
+            "family": "SF Pro", "style": "Regular",
+            "weight": 400, "stretch_pct": 100, "size": 44,
+            "line_height_pct": 140, "letter_spacing_pct": -0.5, "text_case": "sentence"
+          },
+          "color": "#0F1419", "align": "left"
+        },
+        {
+          "type": "text",
+          "slot_name": "footnote",
+          "text": "Ou seja: o problema nunca foi o time.\nEntão fica a pergunta...",
+          "x": 64, "y": 1040, "width": 952,
+          "font": {
+            "family": "SF Pro", "style": "Regular",
+            "weight": 400, "stretch_pct": 100, "size": 32,
+            "line_height_pct": 135, "text_case": "sentence"
+          },
+          "color": "#0F1419", "align": "left"
+        },
+        {
+          "type": "text",
+          "slot_name": "transition_emoji",
+          "text": "👉",
+          "x": 64, "y": 1220, "width": 100,
+          "font": {
+            "family": "SF Pro", "style": "Regular",
+            "weight": 400, "size": 64
+          },
+          "color": "#0F1419", "align": "left"
+        }
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.94}
+    },
+    "image_prompt": {
+      "skip": true,
+      "skip_reason": "Variant content do TIAGO-TWITTER-CARD não usa imagem — só texto + transition emoji. Pipeline pula direto pro assembler.",
+      "prompts": []
+    },
+    "qa_report": {
+      "status": "PASS",
+      "issues": [],
+      "warnings": [{
+        "severity": "info", "category": "copy",
+        "rule": "body_chars_close_to_limit",
+        "expected": "<=450", "actual": "188",
+        "element": "body",
+        "fix_suggestion": "Body bem dentro do limite. Footnote também ok."
+      }],
+      "metadata": {"rules_checked": 14, "passed": 14, "failed": 0, "marca_consistency": "pass"}
+    }
+  },
+  "final_url": null,
+  "performance": {
+    "human_accepted": true,
+    "edits_required": "none — seed exemplar canônico extraído do PNG cr6tiagoabril-2",
+    "ad_metrics": null
+  },
+  "notes": "Content slide do carrossel — segundo da sequência (continua o cover-1). Header mock fixo. Big stat na headline ('65%') ancorado em frase contextual. Body desenvolve em 2 parágrafos. Footnote 'Ou seja:' faz reframe + abre pergunta pro próximo slide. Transition emoji 👉 sozinho no rodapé. Sem foto — variant content.",
+  "created": "2026-05-14"
+}

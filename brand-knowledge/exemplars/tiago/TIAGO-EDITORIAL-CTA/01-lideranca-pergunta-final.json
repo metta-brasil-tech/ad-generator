@@ -1,0 +1,43 @@
+{
+  "exemplar_id": "TIAGO-EDITORIAL-CTA-lideranca-pergunta-final",
+  "tags": ["cta-final", "pergunta-engajamento", "signature-gigante", "avatar-verified", "lideranca"],
+  "reference_png": "exemplars/tiago/TIAGO-EDITORIAL-CTA/01-lideranca-pergunta-final.png",
+  "stages": {
+    "briefing_input": "slide final do carrossel Liderança Não É Fantasia — pergunta de engajamento pros comentários",
+    "briefing_output": {
+      "intent": "reframe_intelectual",
+      "tese_central": "Pergunta diagnóstica final: o que separa chefe de líder na sua visão?",
+      "formato": "carrossel",
+      "funil": "MOFU",
+      "audiencia": {"segmento": "varejo_geral", "cargo": "empresario", "porte_revenue": "desconhecido", "estado_emocional": "confortavel_buscando_crescer"},
+      "tom": "intelectual",
+      "constraints": {"tem_logo_cliente_nomeado": false, "case_nominal_id": null, "data_evento": null, "cta_obrigatorio": "Conta aqui embaixo. Quero ler.", "plataforma_destino": "instagram_organico"},
+      "marca": "tiago",
+      "raw_request": "slide final do carrossel Liderança — pergunta engajamento",
+      "clarifying_questions": []
+    },
+    "style_selected": "TIAGO-EDITORIAL-CTA",
+    "layout_spec": {
+      "model_id": "TIAGO-EDITORIAL-CTA",
+      "marca": "tiago",
+      "variant": "A_signature_gigante",
+      "frame": {"width": 1080, "height": 1350, "background": {"type": "solid", "value": "#EDEEEE", "noise": true}},
+      "elements": [
+        {"type": "asset", "slot_name": "signature_ornament", "asset": "assinatura-tiago-amarelo.svg", "x": "center", "y": 40, "width": 980, "color": "#FFCC00", "opacity": 1.0},
+        {"type": "text", "slot_name": "headline", "text": "Pra você, o que separa um chefe de um líder de verdade?", "ranges": [{"start": 12, "end": 26, "color": "#3D5762"}], "x": 64, "y": 540, "width": 952, "font": {"family": "SF Pro", "weight": 800, "size": 68, "line_height_pct": 110, "text_case": "sentence"}, "color": "#0F1419", "align": "left"},
+        {"type": "text", "slot_name": "sub", "text": "Conta aqui\nembaixo. Quero ler.", "x": 64, "y": "after-headline+40", "font": {"family": "SF Pro", "weight": 700, "size": 44, "line_height_pct": 125, "text_case": "sentence"}, "color": "#0F1419"},
+        {"type": "asset", "slot_name": "avatar_tiago_verified", "asset": "avatar-tiago.png", "x": "center", "y": 1170, "width": 80},
+        {"type": "text", "slot_name": "avatar_name", "text": "Tiago Alves", "x": "center", "y": 1265, "font": {"family": "SF Pro", "weight": 700, "size": 28}, "color": "#0F1419", "align": "center"},
+        {"type": "verified_badge", "slot_name": "avatar_verified_badge", "color": "#1D9BF0", "x": "after-avatar-name+8", "y": 1268, "size": 24}
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.92}
+    },
+    "image_prompt": {"skip": true, "skip_reason": "Variant A do TIAGO-EDITORIAL-CTA usa signature SVG e avatar Tiago como assets — sem imagem gerada.", "prompts": []},
+    "qa_report": {"status": "PASS", "issues": [], "warnings": [], "metadata": {"rules_checked": 18, "passed": 18, "failed": 0, "marca_consistency": "pass"}}
+  },
+  "final_url": null,
+  "performance": {"human_accepted": true, "edits_required": "none — seed exemplar canônico variant A", "ad_metrics": null},
+  "notes": "Variant A do TIAGO-EDITORIAL-CTA — signature handwritten amarela GIGANTE como ornamento dominante top (980px wide). Headline pergunta engajamento com 'o que separa' em azul cinza (#3D5762). Sub bold convida conversa. Avatar Tiago centralizado bottom + nome + verified badge azul Twitter.",
+  "created": "2026-05-14"
+}

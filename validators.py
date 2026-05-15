@@ -23,7 +23,7 @@ def validate(data: dict, schema_file: str, knowledge_path: str | None = None) ->
     if not _JS_OK:
         return ValidationResult(ok=True, errors=["jsonschema not installed — skipping validation"])
 
-    kp = Path(knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "../../brand-knowledge"))
+    kp = Path(knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "./brand-knowledge"))
     schema_path = kp / "schemas" / schema_file
     if not schema_path.exists():
         return ValidationResult(ok=False, errors=[f"Schema not found: {schema_path}"])

@@ -1,0 +1,108 @@
+﻿$schema_version: "1.0"
+id: "I-retrato-editorial-pb"
+display_name: "Retrato editorial P&B + logo badge"
+alias: ["I", "Estilo I"]
+formato: "STORY"
+banco_ref: ["1:212", "1:679"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Autoridade editorial via retrato dignificado em P&B. Foto fina remete
+  a perfil de revista de negócios (Forbes/Exame). Logo badge canto inferior
+  carrega marca sem competir com retrato.
+
+estrutura:
+  zonas:
+    top: "Retrato editorial PB top-centro (40-50%)"
+    center: "Headline mixed-weight com palavra amarela"
+    bottom: "Body + logo badge canto + CTA opcional"
+    overlay: "none"
+  hierarquia:
+    - {elemento: "retrato_pb", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "logo_badge", peso: 4}
+
+composicao:
+  background: "solid"
+  background_color: "#0C161B"
+  contrast: "medium"
+  ritmo: "retrato (autoridade) → headline (interpretação) → body — autoridade editorial"
+  proporcao: {headline_area: "20-25%", image_area: "40-50%", body_area: "15-20%"}
+  ornament: "logo-badge-corner"
+
+typography:
+  headline: {role: "title-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [56, 72], line_height_pct: 100,
+    letter_spacing_pct: -0.5, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [26, 32], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-10)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-85)"
+  cta_bg: "var(--metta-sys-color-primary)"
+  cta_text: "var(--metta-sys-color-on-primary)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 80, safe_margin_bot: 120, gap_between_blocks: 32}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "retrato-pb-top-editorial"
+
+image:
+  required: true
+  type: "photo-editorial-bw"
+  placement: "top-centered"
+  filters: {saturation: -1, contrast: 0.3, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/_base.md"
+  reference_image: ["figma://1:212", "figma://1:679"]
+
+slots:
+  - {name: "headline", role: "interpretacao_autoritaria", required: true, max_chars: 100, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "after-image+48px"},
+     accent_word: {allowed: true, max_words: 1, color_ref: "colors.accent"}}
+  - {name: "body", role: "quote_ou_explicacao", required: true, max_chars: 140, max_lines: 3,
+     style_ref: "typography.body", color_ref: "colors.body_text", align: "left",
+     position: {x: "80px", y: "after-headline+24px"}}
+  - {name: "logo_badge", role: "marca", required: true, position: {x: "80px", y: "bottom-220px"}}
+  - {name: "cta", role: "acao_opcional", required: false, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Posicionamento sério, autoridade founder-led"
+  - "Quote de cliente líder"
+  - "Editorial estilo Forbes/Exame"
+
+funil_recomendado: ["MOFU", "BOFU"]
+audiencia_recomendada: ["decisor_culto", "buscando_autoridade_editorial"]
+teses_compativeis: ["quote_lider", "autoridade_founder_led", "posicionamento_editorial"]
+
+anti_padroes:
+  - "Tese provocadora forte (PB sério não comporta)"
+  - "Foto sem dignidade editorial (stock corporativo)"
+
+hibridizacoes_validas: ["A (versão com foto colorida bleed)"]
+
+embedding_text:
+  intent: |
+    Estilo da autoridade editorial. Carrega quote de líder ou posicionamento sério
+    via retrato dignificado P&B. Tom Forbes/Exame, não bronca, não festivo.
+  visual_features: |
+    Fundo dark. Retrato P&B editorial top-centro 40-50% altura. Headline UPPER
+    mixed-weight com palavra amarela. Body branco. Logo badge canto. CTA opcional.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.2"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"

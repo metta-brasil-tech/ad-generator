@@ -1,0 +1,118 @@
+﻿{
+  "exemplar_id": "B-refem-operacao",
+  "tags": ["dor-pessoal", "exaustao", "TOFU", "emocional"],
+  "stages": {
+    "briefing_input": "story de dor pra empresário que tá refém do operacional, tom emocional",
+    "briefing_output": {
+      "intent": "dor_pessoal",
+      "tese_central": "Empresário refém da própria operação — exaustão como problema sistêmico",
+      "formato": "story",
+      "funil": "TOFU",
+      "audiencia": {
+        "segmento": "varejo_geral",
+        "cargo": "empresario",
+        "porte_revenue": "desconhecido",
+        "estado_emocional": "exausto"
+      },
+      "tom": "emocional",
+      "constraints": {
+        "tem_logo_cliente_nomeado": false,
+        "case_nominal_id": null,
+        "data_evento": null,
+        "cta_obrigatorio": null,
+        "plataforma_destino": "meta_ads"
+      },
+      "marca": "metta",
+      "raw_request": "story de dor pra empresário que tá refém do operacional, tom emocional",
+      "clarifying_questions": []
+    },
+    "style_selected": "B-foto-top-headline-mixed",
+    "layout_spec": {
+      "model_id": "B-foto-top-headline-mixed",
+      "frame": {
+        "width": 1080, "height": 1920,
+        "background": {"type": "solid", "value": "#0C161B"}
+      },
+      "elements": [
+        {
+          "type": "image_slot",
+          "slot_name": "photo",
+          "x": 0, "y": 0, "width": 1080, "height": 860,
+          "bleed_right": false,
+          "image_prompt_ref": "image-prompts/style-B.md",
+          "url_placeholder": "pending"
+        },
+        {
+          "type": "text",
+          "slot_name": "headline",
+          "text": "Você não dirige\numa empresa.\nVocê é refém\ndela.",
+          "ranges": [
+            {"start": 28, "end": 35, "fill": "#FFBE18"}
+          ],
+          "x": 80, "y": 960, "width": 920,
+          "font": {
+            "family": "SF Pro", "style": "Expanded Heavy",
+            "weight": 870, "stretch_pct": 132, "size": 88,
+            "line_height_pct": 95, "letter_spacing_pct": -1, "text_case": "UPPER"
+          },
+          "color": "#FFFFFF", "align": "left"
+        },
+        {
+          "type": "text",
+          "slot_name": "body",
+          "text": "Toda decisão volta pra sua mesa. Toda crise espera você. Toda venda depende do seu sim.",
+          "x": 80, "y": 1480, "width": 920,
+          "font": {
+            "family": "SF Pro", "style": "Expanded Regular",
+            "weight": 590, "stretch_pct": 100, "size": 32,
+            "line_height_pct": 117, "letter_spacing_pct": -1, "text_case": "sentence"
+          },
+          "color": "#B0CAD8", "align": "left"
+        },
+        {
+          "type": "pill_cta",
+          "slot_name": "cta",
+          "text": "VER COMO QUEBRAR ISSO",
+          "x": 80, "y": 1710,
+          "width": "auto", "height": 88,
+          "padding_x": 38, "padding_y": 22,
+          "background": "#FFBE18", "text_color": "#0C161B", "corner_radius": 999,
+          "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 24,
+            "line_height_pct": 100, "letter_spacing_pct": 0, "text_case": "UPPER"
+          }
+        }
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.90}
+    },
+    "image_prompt": {
+      "skip": false,
+      "prompts": [{
+        "slot_name": "photo",
+        "prompt": "quiet exhaustion cinematic scene, brazilian retail entrepreneur, 45-50, wrinkled dress shirt rolled sleeves, slumped on dark leather couch head in hands, work bag spilling papers on floor, warm window light from left late afternoon, wide environmental shot subject centered room context visible, desaturated muted editorial dark, photographed in a tired home office with closed venetian blinds, shallow depth of field, Leica SL2 35mm Summilux, editorial photography 4K cinematic intimacy, no text no logos sujeito íntegro",
+        "negative_prompt": "no smiling stock pose, no anonymous suit-and-tie generic, no faces blurred completely, no team setting, no obvious stock posing, no high-five, no cartoon",
+        "aspect_ratio": "16:9",
+        "reference_images": ["figma://1:229", "figma://1:566"],
+        "model_hint": "nano-banana-2",
+        "iteration_strategy": {"max_attempts": 3, "fallback_prompts": []},
+        "metadata": {"style_id": "B-foto-top-headline-mixed", "audience": "varejo_geral_empresario_exausto", "mood_chosen": "quiet exhaustion"}
+      }]
+    },
+    "qa_report": {
+      "status": "PASS",
+      "issues": [],
+      "warnings": [],
+      "metadata": {"rules_checked": 18, "passed": 18, "failed": 0}
+    }
+  },
+  "final_url": null,
+  "performance": {
+    "human_accepted": true,
+    "edits_required": "none — canonical seed",
+    "ad_metrics": null
+  },
+  "notes": "Seed exemplar do estilo B pra dor pessoal/exaustão. Foto top wide environmental, headline mixed-weight com 'refém' em amarelo, body de 3 frases curtas que reforçam o gancho. CTA 'quebrar isso' — não 'agendar' (TOFU pede menos compromisso).",
+  "created": "2026-05-13"
+}

@@ -1,0 +1,184 @@
+﻿$schema_version: "1.0"
+
+id:                  "D-foto-fullbleed-overlay"
+display_name:        "Foto full-bleed + overlay escuro"
+alias:               ["D", "Estilo D"]
+formato:             "STORY"
+banco_ref:           ["1:354","1:487","1:849","1:918","1:928","1:1159","538:105"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Foto DOMINA o frame inteiro (full-bleed). Overlay escuro gradual no bottom dá espaço
+  pra texto. Pessoa na foto é o protagonista narrativo — ela "te conta" a mensagem.
+  Imersão total em vez de leitura. Funciona pra emoção forte.
+
+estrutura:
+  zonas:
+    top:        "Foto full-bleed (60-80% da altura)"
+    center:     "Headline amarela 3-4 linhas"
+    bottom:     "Body branco + CTA pill"
+    overlay:    "Gradiente fade-to-black no bottom 40-50%"
+  hierarquia:
+    - {elemento: "foto_pessoa", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background:        "image-overlay"
+  background_color:  "#0C161B"
+  contrast:          "high"
+  ritmo:             "imersão (foto longa) → beat (overlay) → mensagem — abertura de filme"
+  proporcao:
+    headline_area:   "15-20%"
+    image_area:      "60-80%"
+    body_area:       "8-12%"
+    cta_area:        "100-130px"
+  ornament:          "gradient-fade-to-black-bottom-50%"
+
+typography:
+  headline:
+    role:           "title-medium"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         760
+    stretch_pct:    132
+    size_range:     [60, 67]
+    line_height_pct: 113
+    letter_spacing_pct: -0.5
+    text_case:      "UPPER"
+  body:
+    role:           "body-large"
+    family:         "SF Pro"
+    style:          "Expanded Regular"
+    weight:         510
+    stretch_pct:    100
+    size_range:     [35, 43]
+    line_height_pct: 122
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         760
+    stretch_pct:    132
+    size_range:     [24, 25]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-ref-palette-night-10)"
+  fg_primary:        "var(--metta-sys-color-primary)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-100)"
+  cta_bg:            "var(--metta-sys-color-primary)"
+  cta_text:          "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   0
+  safe_margin_bot:   120
+  gap_between_blocks: 24
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "0"
+
+composition_pattern: "full-bleed-image-overlay"
+
+image:
+  required:          true
+  type:              "photo-editorial"
+  placement:         "full-bleed"
+  filters:
+    saturation:      -0.3
+    contrast:        0.5
+    overlay:         "gradient-fade-to-black-bottom-50%"
+  ratio:             "9:16"
+  prompt_template_ref: "image-prompts/style-D.md"
+  reference_image:
+    - "figma://1:487"
+    - "figma://1:1159"
+    - "figma://538:105"
+
+slots:
+  - name:            "headline"
+    role:            "mensagem_amarela"
+    required:        true
+    max_chars:       100
+    max_lines:       4
+    style_ref:       "typography.headline"
+    color_ref:       "colors.accent"
+    align:           "left"
+    position: {x: "80px", y: "1280px"}
+  - name:            "body"
+    role:            "explicacao_curta"
+    required:        false
+    max_chars:       100
+    max_lines:       2
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "after-headline+24px"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-130px"}
+
+quando_brilha:
+  - "Dor pessoal/emocional forte (exaustão, solidão, pressão)"
+  - "Tese que precisa de 'rosto humano' pra credibilidade"
+  - "Cinema editorial — copy poética (Lovebrand)"
+  - "Story/Reels onde quer máxima retenção visual"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "decisor_emocional"
+  - "audiencia_cold_storytelling"
+
+teses_compativeis:
+  - "dor_pessoal_emocional"
+  - "tese_visual_humana"
+  - "lovebrand_poetico"
+
+anti_padroes:
+  - "Cases nominais com números (foto dilui o número — usar YELLOW-EDITORIAL)"
+  - "Texto longo (cabe pouco texto, máximo 3-4 linhas headline + 2-3 body)"
+  - "Foto sem mood (luz dura, cores saturadas) — quebra o cinematic feel"
+
+hibridizacoes_validas:
+  - "B (versão menos bleed pra mais texto)"
+
+embedding_text:
+  intent: |
+    Estilo do cinema editorial. Carrega dor pessoal/emocional forte onde o rosto humano
+    é o argumento. Pessoa na foto te conta a mensagem — imersão total. Funciona em
+    audiência cold via storytelling.
+  visual_features: |
+    Foto full-bleed dominando 60-80% do canvas. Filtros moody (dessaturação + contrast
+    alto). Overlay preto gradual no bottom. Headline AMARELA 60-67px UPPER. Body branco.
+    CTA pill amarelo. Cinematic feel obrigatório.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.4"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

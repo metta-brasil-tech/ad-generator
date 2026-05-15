@@ -1,0 +1,42 @@
+{
+  "exemplar_id": "TIAGO-EDITORIAL-CARD-geracao-z-stats",
+  "tags": ["card-dados", "stats-centralizadas", "ornamento-pixel", "geracao-z", "dark-teal"],
+  "reference_png": "exemplars/tiago/TIAGO-EDITORIAL-CARD/01-geracao-z-stats.png",
+  "stages": {
+    "briefing_input": "slide de dados do carrossel Geração Z — turnover, salário, % de empresas reclamando",
+    "briefing_output": {
+      "intent": "promessa_numerica",
+      "tese_central": "O dado cru sobre custo de turnover e índices comportamentais da Geração Z no trabalho",
+      "formato": "carrossel",
+      "funil": "MOFU",
+      "audiencia": {"segmento": "varejo_geral", "cargo": "empresario", "porte_revenue": "desconhecido", "estado_emocional": "confortavel_buscando_crescer"},
+      "tom": "intelectual",
+      "constraints": {"tem_logo_cliente_nomeado": false, "case_nominal_id": null, "data_evento": null, "cta_obrigatorio": null, "plataforma_destino": "instagram_organico"},
+      "marca": "tiago",
+      "raw_request": "slide de stats do carrossel Geração Z",
+      "clarifying_questions": []
+    },
+    "style_selected": "TIAGO-EDITORIAL-CARD",
+    "layout_spec": {
+      "model_id": "TIAGO-EDITORIAL-CARD",
+      "marca": "tiago",
+      "frame": {"width": 1080, "height": 1350, "background": {"type": "solid", "value": "#EDEEEE", "noise": true}},
+      "elements": [
+        {"type": "ornament_set", "slot_name": "pixel_ornaments", "asset": "pixel-alert-triangle-yellow.svg", "count": 5, "scattered": true, "size_range": [40, 80], "color": "#FFCC00"},
+        {"type": "container", "slot_name": "card_main", "x": 64, "y": 80, "width": 952, "height": 1190, "corner_radius": 36, "bg": "#3D5762", "padding": [72, 56]},
+        {"type": "text", "slot_name": "card_eyebrow", "text": "O DADO CRU:", "x": "card-center", "y": "card-top+72", "font": {"family": "SF Pro", "weight": 700, "size": 28, "letter_spacing_pct": 5, "text_case": "UPPER"}, "color": "#FFCC00", "align": "center"},
+        {"type": "text", "slot_name": "stats_block", "text": "Turnover de desligamento: até 2x o salário anual.\n\nTurnover recorde entre 18 e 24 anos.\n\n68% das empresas dizem que Gen Z é desafio.", "x": "card-center", "y": "after-eyebrow+48", "font": {"family": "SF Pro", "weight": 800, "size": 52, "line_height_pct": 115, "text_case": "sentence"}, "color": "#FFFFFF", "align": "center", "ranges": [{"start": 36, "end": 53, "weight": 800}, {"start": 87, "end": 109, "weight": 800}, {"start": 119, "end": 122, "weight": 800}]},
+        {"type": "text", "slot_name": "remate", "text": "A conta tá pesada pra todo mundo.", "x": "card-left+56", "y": "card-bottom-160", "font": {"family": "SF Pro", "weight": 700, "size": 32, "text_case": "sentence"}, "color": "#FFFFFF"},
+        {"type": "text", "slot_name": "transition_emoji", "text": "👉", "x": "card-left+56+text-width+12", "y": "card-bottom-160", "font": {"size": 32}}
+      ],
+      "errors": [], "warnings": [],
+      "fit_metrics": {"fit_score": 0.93}
+    },
+    "image_prompt": {"skip": true, "skip_reason": "Estilo CARD usa apenas ornamentos pixel SVG (não foto gerada).", "prompts": []},
+    "qa_report": {"status": "PASS", "issues": [], "warnings": [], "metadata": {"rules_checked": 18, "passed": 18, "failed": 0, "marca_consistency": "pass"}}
+  },
+  "final_url": null,
+  "performance": {"human_accepted": true, "edits_required": "none — seed exemplar canônico", "ad_metrics": null},
+  "notes": "Card central dark teal #3D5762 com corner radius 36px. Eyebrow amarelo UPPER 'O DADO CRU:'. Stats centralizadas brancas mix bold/regular (3 dados separados por linha em branco). Remate bold + 👉 dentro do card bottom. Ornamentos pixel amarelos (triângulos com !) dispersos atrás do card no canvas off-white com noise.",
+  "created": "2026-05-14"
+}

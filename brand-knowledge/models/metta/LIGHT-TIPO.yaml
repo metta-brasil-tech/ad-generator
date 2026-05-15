@@ -1,0 +1,99 @@
+﻿$schema_version: "1.0"
+id: "LIGHT-TIPO"
+display_name: "Fundo bege/cinza claro 100% tipográfico"
+alias: ["light-tipo"]
+formato: "STORY"
+banco_ref: ["1:883"]
+versao: "1.0"
+status: "experimental"
+marca:               "metta"
+
+logica_visual: |
+  Statement filosófico minimal — só palavra dá o sermão. Fundo bege ou
+  cinza muito claro. Word-pair em 4 linhas com bleed (palavras "transbordam"
+  o canvas). Bloco amarelo destaca palavra-chave.
+
+estrutura:
+  zonas:
+    center: "Word-pair 4 linhas com bleed lateral"
+    bottom: "Bloco amarelo highlight + CTA opcional"
+
+composicao:
+  background: "solid"
+  background_color: "#EDF2F5"
+  contrast: "extreme"
+  ritmo: "palavra → palavra → palavra-com-bg-amarelo — sermão poético"
+  proporcao: {headline_area: "80%", cta_area: "100-130px opcional"}
+  ornament: "yellow-highlight-block"
+
+typography:
+  headline: {role: "display-hero", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [120, 180], line_height_pct: 85,
+    letter_spacing_pct: -2, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+
+colors:
+  bg_primary: "#EDF2F5"
+  fg_primary: "var(--metta-ref-palette-night-10)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text: "var(--metta-ref-palette-night-40)"
+  cta_bg: "var(--metta-ref-palette-night-10)"
+  cta_text: "var(--metta-ref-palette-night-100)"
+
+spacing: {safe_margin_x: 60, safe_margin_top: 160, safe_margin_bot: 160, gap_between_blocks: 16}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: 0}
+composition_pattern: "tipografia-pura-light-bleed"
+
+image: {required: false, type: "none", placement: "", ratio: "",
+  prompt_template_ref: "", reference_image: []}
+
+slots:
+  - {name: "headline", role: "frase_memoravel_2_conceitos", required: true, max_chars: 60, max_lines: 4,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "60px", y: "auto-center"},
+     accent_word: {allowed: true, max_words: 1, color_ref: "colors.accent",
+       background: "yellow-block-highlight"},
+     description: "Frase tipo: FATURAMENTO É EGO. LUCRO É LIBERDADE."}
+  - {name: "cta", role: "acao_opcional", required: false, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "60px", y: "bottom-130px"}}
+
+quando_brilha:
+  - "Frase memorável Lovebrand de 2 conceitos opostos"
+  - "Statement filosófico minimal"
+  - "Manifesto sem foto"
+
+funil_recomendado: ["TOFU", "retargeting"]
+audiencia_recomendada: ["audiencia_culta", "warm_buscando_filosofia"]
+teses_compativeis: ["frase_memoravel_opostos", "manifesto_filosofico"]
+
+anti_padroes:
+  - "Tese complexa (precisa de 2 conceitos simples opostos)"
+  - "Variação de copy de tamanho diferente da original — quebra bleed"
+  - "Caso nominal (estilo é abstrato)"
+
+hibridizacoes_validas: ["LIGHT-SURREAL (versão com colagem)"]
+
+embedding_text:
+  intent: |
+    Estilo do statement filosófico. Carrega frase memorável de 2 conceitos
+    opostos (Lovebrand). Tom poético minimal — só palavra dá o sermão.
+  visual_features: |
+    Fundo bege/cinza claro #EDF2F5. Word-pair UPPER 120-180px gigante em 4
+    linhas com bleed lateral propositais. Bloco amarelo destaca uma palavra
+    como highlight. CTA pill preto opcional.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.8"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"
+warning: |
+  ⚠ LAYOUT FRÁGIL — posições hardcoded com bleed negativo. Trocar palavras
+  de tamanho diferente quebra layout. Usar SÓ se word-pair tem mesma
+  quantidade de chars das originais, OU re-posicionar tudo manualmente.

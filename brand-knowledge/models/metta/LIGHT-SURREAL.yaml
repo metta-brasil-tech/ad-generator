@@ -1,0 +1,196 @@
+﻿$schema_version: "1.0"
+
+id:                  "LIGHT-SURREAL"
+display_name:        "Fundo claro + colagem ilustrativa surreal"
+alias:               ["light-surreal", "Light Surreal"]
+formato:             "STORY"
+banco_ref:           ["1:220","1:477","1:645","1:1151"]
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Metáfora visual da dor. Imagem é uma colagem editorial surreal (homem com cabeça de
+  pedra, balão como cérebro, cabeça de monitor) que personifica visualmente a dor
+  descrita na copy. Estética editorial — referência a revista de negócios fina (HBR,
+  Exame). Tom intelectual, não emotivo.
+
+estrutura:
+  zonas:
+    top:        "Colagem surreal centralizada ou composta com cenário cotidiano (60-70%)"
+    center:     "Headline preta sentence case"
+    bottom:     "Body cinza-azulado + CTA pill amarelo"
+    overlay:    "Linha divisora sutil entre imagem e texto"
+  hierarquia:
+    - {elemento: "colagem_surreal", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "body", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background:        "solid"
+  background_color:  "#EFF3F5"
+  contrast:          "medium"
+  ritmo:             "imagem-conceito → headline (decoda) → body (aplica) — tom diagnóstico intelectual"
+  proporcao:
+    headline_area:   "15-20%"
+    image_area:      "60-70%"
+    body_area:       "10-15%"
+    cta_area:        "100-140px"
+  ornament:          "thin-divider-line"
+
+typography:
+  headline:
+    role:           "title-medium"
+    family:         "SF Pro"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [50, 67]
+    line_height_pct: 95
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  body:
+    role:           "body-medium"
+    family:         "SF Pro"
+    style:          "Expanded Semibold"
+    weight:         650
+    stretch_pct:    100
+    size_range:     [25, 32]
+    line_height_pct: 120
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "SF Pro"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [22, 28]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "#EFF3F5"
+  fg_primary:        "var(--metta-ref-palette-night-10)"
+  accent:            "var(--metta-sys-color-primary)"
+  body_text:         "var(--metta-ref-palette-night-40)"
+  cta_bg:            "var(--metta-sys-color-primary)"
+  cta_text:          "var(--metta-sys-color-on-primary)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   100
+  safe_margin_bot:   140
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "var(--metta-sys-shape-corner-md)"
+
+composition_pattern: "split-vertical-collage-top-text-bottom"
+
+image:
+  required:          true
+  type:              "collage-surreal"
+  placement:         "top-centered"
+  filters:
+    saturation:      0
+    contrast:        0.1
+    overlay:         "none"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/style-LIGHT-SURREAL.md"
+  reference_image:
+    - "figma://1:220"
+    - "figma://1:477"
+
+slots:
+  - name:            "headline"
+    role:            "decoda_metafora"
+    required:        true
+    max_chars:       100
+    max_lines:       3
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "after-image+48px"}
+    accent_word:
+      allowed:       false
+      max_words:     0
+  - name:            "body"
+    role:            "aplicacao"
+    required:        true
+    max_chars:       120
+    max_lines:       3
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "after-headline+24px"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "80px", y: "bottom-130px"}
+  - name:            "tag"
+    role:            "breadcrumb_opcional"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.body_text"
+    align:           "left"
+    position: {x: "80px", y: "60px"}
+
+quando_brilha:
+  - "Provocação editorial intelectual (não bronca, é diagnóstico)"
+  - "Dor pessoal/sistêmica que precisa de metáfora pra ser dita (mantra-algema desmontado)"
+  - "Tom 'imprensa de negócios' (HBR/Exame)"
+  - "Statements filosóficos (Tiago founder-led modo intelectual)"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "decisor_culto"
+  - "audiencia_cold_intelectual"
+
+teses_compativeis:
+  - "metafora_dor_sistemica"
+  - "reframe_intelectual"
+  - "statement_filosofico"
+
+anti_padroes:
+  - "Cases nominais (estilo é abstrato — concretude vai pra YELLOW-EDITORIAL ou LOGO-WALL)"
+  - "Colagem cartoon ou ilustração vetorial chapada (destrói o 'editorial sério')"
+  - "Headline UPPERCASE agressiva (quebra o tom intelectual contido)"
+
+hibridizacoes_validas:
+  - "B (versão dark + foto realista)"
+  - "C (versão sem imagem, só tipografia)"
+
+embedding_text:
+  intent: |
+    Estilo editorial intelectual. Carrega metáfora visual da dor — colagem surreal
+    personifica o que a copy diagnostica. Tom HBR/Exame, não bronca direta. Funciona
+    em decisor culto que responde a reframes abstratos.
+  visual_features: |
+    Fundo claro #EFF3F5 ou #FAFCFD. Colagem surreal centralizada top (homem-pedra,
+    cabeça-monitor, balão-cérebro). Linha divisora sutil. Headline preta sentence case
+    50-67px. Body cinza-azulado. CTA pill amarelo. Sem UPPERCASE agressivo, sem cartoon.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§4.6"
+created:             "2026-05-13"
+updated:             "2026-05-13"
+maintainer:          "Head de Design Metta"

@@ -42,7 +42,7 @@ def load_models(knowledge_path: Path) -> list[dict]:
 @click.option("--re-index", is_flag=True, help="Drop and rebuild collection.")
 @click.option("--dry-run", is_flag=True, help="Show what would be indexed without writing.")
 def main(re_index: bool, dry_run: bool):
-    knowledge_path = Path(os.getenv("BRAND_KNOWLEDGE_PATH", "../../brand-knowledge"))
+    knowledge_path = Path(os.getenv("BRAND_KNOWLEDGE_PATH", "./brand-knowledge"))
     if not knowledge_path.exists():
         print(f"Knowledge path not found: {knowledge_path}", file=sys.stderr)
         sys.exit(1)

@@ -1,0 +1,103 @@
+﻿$schema_version: "1.0"
+id: "YELLOW-SPLIT"
+display_name: "Split horizontal preto+amarelo"
+alias: ["yellow-split"]
+formato: "STORY"
+banco_ref: ["1:1142"]
+versao: "1.0"
+status: "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Dois "atos" visuais — top dark dramático com retrato, bottom amarelo com CTA.
+  Cinema + oferta. Funciona quando precisa de mood + ação imediata.
+
+estrutura:
+  zonas:
+    top: "Metade superior dark com retrato + ilustração (50%)"
+    bottom: "Metade inferior amarela com CTA preto (50%)"
+
+composicao:
+  background: "split-horizontal"
+  background_color: "#0C161B-top / #FFBE18-bottom"
+  contrast: "extreme"
+  ritmo: "drama (top dark) → oferta (bottom yellow) — 2 atos"
+  proporcao: {top_dark: "50%", bottom_yellow: "50%"}
+  ornament: "split-line-horizontal"
+
+typography:
+  headline: {role: "title-medium", family: "SF Pro", style: "Expanded Heavy",
+    weight: 870, stretch_pct: 132, size_range: [50, 70], line_height_pct: 95,
+    letter_spacing_pct: -0.5, text_case: "UPPER"}
+  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+    weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
+  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+    weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
+    letter_spacing_pct: 11, text_case: "UPPER"}
+  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+    weight: 700, stretch_pct: 132, size_range: [24, 32], line_height_pct: 100, text_case: "UPPER"}
+
+colors:
+  bg_primary: "var(--metta-ref-palette-night-10)"
+  bg_secondary: "var(--metta-sys-color-primary)"
+  fg_primary: "var(--metta-ref-palette-night-100)"
+  accent: "var(--metta-sys-color-primary)"
+  body_text_dark: "var(--metta-ref-palette-night-85)"
+  body_text_light: "var(--metta-ref-palette-night-10)"
+  cta_bg: "var(--metta-ref-palette-night-10)"
+  cta_text: "var(--metta-ref-palette-night-100)"
+
+spacing: {safe_margin_x: 80, safe_margin_top: 100, safe_margin_bot: 100, gap_between_blocks: 24}
+shape: {cta_radius: "var(--metta-sys-shape-corner-full)", card_radius: "var(--metta-sys-shape-corner-md)"}
+composition_pattern: "split-horizontal-2-acts"
+
+image:
+  required: true
+  type: "photo-or-illustration-top-dark"
+  placement: "top-half"
+  filters: {saturation: -0.2, contrast: 0.3, overlay: "none"}
+  ratio: "free"
+  prompt_template_ref: "image-prompts/style-A.md"
+  reference_image: ["figma://1:1142"]
+
+slots:
+  - {name: "headline_top", role: "statement_dramatico", required: true, max_chars: 80, max_lines: 3,
+     style_ref: "typography.headline", color_ref: "colors.fg_primary", align: "left",
+     position: {x: "80px", y: "inside-top-dark"},
+     accent_word: {allowed: true, max_words: 1, color_ref: "colors.accent"}}
+  - {name: "body_bottom", role: "oferta_ou_pergunta", required: true, max_chars: 100, max_lines: 2,
+     style_ref: "typography.body", color_ref: "colors.body_text_light", align: "left",
+     position: {x: "80px", y: "inside-bottom-yellow-top"}}
+  - {name: "cta", role: "acao", required: true, max_chars: 24,
+     style_ref: "typography.cta", color_ref: "colors.cta_text", bg_color_ref: "colors.cta_bg",
+     component: "pill", position: {x: "80px", y: "inside-bottom-yellow-bottom"}}
+
+quando_brilha:
+  - "Statement híbrido drama + oferta"
+  - "Funil onde precisa de cena emocional + CTA forte"
+  - "Anúncio de evento com gancho dramático"
+
+funil_recomendado: ["MOFU", "BOFU"]
+audiencia_recomendada: ["aud_warm_pronta_pra_ofertacao"]
+teses_compativeis: ["statement_drama_oferta", "convite_com_gancho"]
+
+anti_padroes:
+  - "TOFU cold (muito comprometido pra abordagem dura)"
+  - "Tese só dramática sem oferta (desperdiça metade do ad)"
+
+hibridizacoes_validas: ["YELLOW-BLOCO (versão sem split)"]
+
+embedding_text:
+  intent: |
+    Estilo do split 2-atos. Carrega drama emocional + oferta na mesma peça.
+    Funciona quando precisa de mood cinematográfico + CTA imediato pra
+    audiência warm BOFU.
+  visual_features: |
+    Canvas dividido 50/50 horizontal. Top dark com retrato/ilustração e
+    headline UPPER. Bottom amarelo com body preto + CTA pill preto.
+    Linha divisora horizontal sutil.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.7"
+created: "2026-05-13"
+updated: "2026-05-13"
+maintainer: "Head de Design Metta"
