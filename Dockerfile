@@ -15,7 +15,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 7860
+EXPOSE 8000
 
-# PORT é injetado pelo HF Spaces (default 7860). Docker Compose local mantém 8000.
-CMD uvicorn api:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
