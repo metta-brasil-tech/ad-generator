@@ -4,12 +4,51 @@ services:
     container_name: metta-qdrant
     restart: unless-stopped
     ports:
-      - "6333:6333"   # REST
-      - "6334:6334"   # gRPC
+      - "6333:6333"
+      - "6334:6334"
     volumes:
       - qdrant_storage:/qdrant/storage
     environment:
       QDRANT__LOG_LEVEL: INFO
 
+  api:
+    build: .
+    container_name: ad-generator
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      ARTIFACTS_DIR: /app/artifacts
+    volumes:
+      - artifacts:/app/artifacts
+    depends_on:
+      - qdrant
+    networks:
+      - default
+      - traefik
+
+  telegram-bot:
+    build: .
+    container_name: ad-generator-telegram
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      API_URL: http://api:8000
+      ARTIFACTS_DIR: /app/artifacts
+    volumes:
+      - artifacts:/app/artifacts
+    depends_on:
+      - api
+    command: python telegram_bot.py
+
 volumes:
   qdrant_storage:
+  artifacts:
+
+networks:
+  traefik:
+    external: true
