@@ -36,9 +36,10 @@ def _save_bytes(data: bytes, name: str) -> Path:
 def _aspect_to_size(aspect: str, provider: str, model: str = "") -> str:
     """Map aspect ratio to provider-specific size string."""
     if provider == "openai":
-        if model == "gpt-image-1":
-            # gpt-image-1: 1024x1024, 1024x1536 (portrait), 1536x1024 (landscape)
-            mapping = {"9:16": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
+        if model in ("gpt-image-2", "gpt-image-1"):
+            # gpt-image-2 + gpt-image-1 supported sizes: 1024x1024, 1024x1536 (portrait), 1536x1024 (landscape)
+            # 4:5 (feed 1080x1350) and 9:16 (story 1080x1920) both map to 1024x1536 — assembler scales to canvas
+            mapping = {"9:16": "1024x1536", "4:5": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
         else:
             # dall-e-3: 1024x1024, 1024x1792 (portrait), 1792x1024 (landscape)
             mapping = {"9:16": "1024x1792", "3:4": "1024x1792", "16:9": "1792x1024", "1:1": "1024x1024"}
@@ -73,7 +74,7 @@ class OpenAIImageGen:
                 "quality": "high",
                 "n": 1,
             }
-            est_cost = 0.19 if size == "1024x1792" else 0.17
+            est_cost = 0.17  # 1024x1536 portrait
         else:
             # dall-e-3 legacy
             payload = {

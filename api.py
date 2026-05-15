@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Header, Depends
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -19,9 +19,7 @@ load_dotenv()
 
 app = FastAPI(title="ad-generator API", version="1.0.0")
 
-# CORS — em produção quem consome é o proxy Vercel (server-side, sem CORS).
-# Lista cobre dev local (brand-system, telegram bot) + ALLOWED_ORIGINS via env var.
-_extra_origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o.strip()]
+# CORS — libera consumo HTTP do brand-system local (porta 5173) e clientes dev comuns.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -29,26 +27,11 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        *_extra_origins,
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-# Bearer auth — opcional. Se AD_GENERATOR_TOKEN não estiver setado, endpoints ficam abertos
-# (modo dev). Em produção, sempre definir o token via secret/env var.
-_EXPECTED_TOKEN = os.getenv("AD_GENERATOR_TOKEN", "").strip()
-
-
-def require_token(authorization: Optional[str] = Header(default=None)) -> None:
-    if not _EXPECTED_TOKEN:
-        return  # sem token configurado → modo aberto (dev local, telegram bot interno)
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing Authorization: Bearer <token>")
-    if authorization.removeprefix("Bearer ").strip() != _EXPECTED_TOKEN:
-        raise HTTPException(status_code=403, detail="Invalid token")
 
 
 class GenerateRequest(BaseModel):
@@ -176,7 +159,7 @@ def health():
 
 
 @app.post("/generate", response_model=GenerateResponse)
-async def generate(req: GenerateRequest, _auth: None = Depends(require_token)):
+async def generate(req: GenerateRequest):
     loop = asyncio.get_event_loop()
     result = await loop.run_in_executor(None, _run_pipeline, req.briefing, req.mock)
     if not result["ok"]:
@@ -185,7 +168,7 @@ async def generate(req: GenerateRequest, _auth: None = Depends(require_token)):
 
 
 @app.get("/image/{run_id}")
-def get_image(run_id: str, _auth: None = Depends(require_token)):
+def get_image(run_id: str):
     artifacts_dir = Path(os.getenv("ARTIFACTS_DIR", "./artifacts"))
     ad_output_path = artifacts_dir / run_id / "05-ad-output.json"
     if not ad_output_path.exists():

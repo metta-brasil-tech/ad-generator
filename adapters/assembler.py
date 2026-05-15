@@ -556,22 +556,30 @@ class PNGAssembler:
 
         draw = ImageDraw.Draw(canvas)
 
-        # Draw elements in order
-        for el in layout_spec.get("elements", []):
-            etype = el.get("type")
-            try:
-                if etype == "text":
-                    self._draw_text(canvas, draw, el)
-                elif etype == "image_slot":
-                    self._draw_image(canvas, el, image_urls, warnings)
-                elif etype == "pill_cta":
-                    self._draw_pill_cta(canvas, draw, el)
-                elif etype == "rect":
-                    self._draw_rect(canvas, draw, el)
-                else:
-                    warnings.append(f"unknown element type: {etype}")
-            except Exception as e:
-                warnings.append(f"error on {etype}/{el.get('slot_name', '?')}: {e}")
+        elements = layout_spec.get("elements", [])
+        # Draw image_slots first (backgrounds), then text/pill on top
+        for layer in ("image_slot", "other"):
+            for el in elements:
+                etype = el.get("type")
+                is_image = etype == "image_slot"
+                if layer == "image_slot" and not is_image:
+                    continue
+                if layer == "other" and is_image:
+                    continue
+                try:
+                    if etype == "text":
+                        self._draw_text(canvas, draw, el)
+                    elif etype == "image_slot":
+                        self._draw_image(canvas, el, image_urls, warnings, W, H)
+                    elif etype == "pill_cta":
+                        self._draw_pill_cta(canvas, draw, el)
+                    elif etype == "rect":
+                        self._draw_rect(canvas, draw, el)
+                    else:
+                        warnings.append(f"unknown element type: {etype}")
+                except Exception as e:
+                    warnings.append(f"error on {etype}/{el.get('slot_name', '?')}: {e}")
+        draw = ImageDraw.Draw(canvas)  # refresh draw after image pastes
 
         # Save
         out_dir = Path(os.getenv("ARTIFACTS_DIR", "./artifacts")) / "outputs"
@@ -618,7 +626,7 @@ class PNGAssembler:
             text_case=el["font"].get("text_case", "sentence"),
         )
 
-    def _draw_image(self, canvas, el, image_urls, warnings):
+    def _draw_image(self, canvas, el, image_urls, warnings, canvas_w=1080, canvas_h=1920):
         url = image_urls.get(el["slot_name"])
         if not url:
             warnings.append(f"no image for slot {el['slot_name']} — drawing placeholder")
@@ -629,18 +637,35 @@ class PNGAssembler:
             warnings.append(f"image fetch failed for {el['slot_name']}")
             self._draw_placeholder_rect(canvas, el)
             return
-        target_w, target_h = int(el["width"]), int(el["height"])
-        img = ImageOps.fit(img, (target_w, target_h), method=Image.LANCZOS)
-        x, y = int(el["x"]), int(el["y"])
-        if img.mode == "RGBA":
-            canvas.paste(img, (x, y), mask=img)
+        # fullbleed: stretch image to cover the entire canvas (used as background)
+        placement = el.get("placement", "")
+        slot_w = el.get("width") or 0
+        slot_h = el.get("height") or 0
+        auto_fullbleed = (int(slot_w) >= canvas_w) or (not slot_w and not slot_h)
+        is_fullbleed = (
+            el.get("fullbleed", False)
+            or placement in ("fullbleed", "full-bleed", "background")
+            or auto_fullbleed
+        )
+        if is_fullbleed:
+            img = ImageOps.fit(img, (canvas_w, canvas_h), method=Image.LANCZOS, centering=(0.5, 0.3))
+            paste_x, paste_y = 0, 0
+            target_w, target_h = canvas_w, canvas_h
         else:
-            canvas.paste(img, (x, y))
+            target_w = int(el.get("width") or canvas_w)
+            target_h = int(el.get("height") or canvas_h)
+            img = ImageOps.fit(img, (target_w, target_h), method=Image.LANCZOS, centering=(0.5, 0.0))
+            paste_x, paste_y = int(el.get("x", 0)), int(el.get("y", 0))
+
+        if img.mode == "RGBA":
+            canvas.paste(img, (paste_x, paste_y), mask=img)
+        else:
+            canvas.paste(img, (paste_x, paste_y))
 
         # Apply gradient overlay (for text legibility on top of image)
         overlay_spec = el.get("overlay")
         if overlay_spec:
-            self._apply_gradient_overlay(canvas, x, y, target_w, target_h, overlay_spec)
+            self._apply_gradient_overlay(canvas, paste_x, paste_y, target_w, target_h, overlay_spec)
 
     def _apply_gradient_overlay(self, canvas, x: int, y: int, w: int, h: int, overlay_spec):
         """Draw gradient overlay on canvas above image area.
