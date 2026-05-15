@@ -71,9 +71,11 @@ class LLMAdapter:
         kwargs: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
-            "temperature": self.temperature,
             "max_tokens": max_tokens,
         }
+        # Claude models deprecated temperature — only send for non-Claude providers
+        if not self.model.startswith(("claude-", "anthropic/")):
+            kwargs["temperature"] = self.temperature
 
         # Use JSON Schema-constrained output when provided
         if json_schema is not None:
