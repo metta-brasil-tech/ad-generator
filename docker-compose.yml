@@ -22,6 +22,7 @@ services:
     environment:
       QDRANT_URL: http://qdrant:6333
       ARTIFACTS_DIR: /app/artifacts
+      BRAND_KNOWLEDGE_PATH: /app/brand-knowledge
     volumes:
       - artifacts:/app/artifacts
     depends_on:
