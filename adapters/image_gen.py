@@ -36,8 +36,8 @@ def _save_bytes(data: bytes, name: str) -> Path:
 def _aspect_to_size(aspect: str, provider: str, model: str = "") -> str:
     """Map aspect ratio to provider-specific size string."""
     if provider == "openai":
-        if model == "gpt-image-1":
-            # gpt-image-1: 1024x1024, 1024x1536 (portrait), 1536x1024 (landscape)
+        if model in ("gpt-image-2", "gpt-image-1"):
+            # gpt-image-2 + gpt-image-1 supported sizes: 1024x1024, 1024x1536 (portrait), 1536x1024 (landscape)
             mapping = {"9:16": "1024x1536", "3:4": "1024x1536", "16:9": "1536x1024", "1:1": "1024x1024"}
         else:
             # dall-e-3: 1024x1024, 1024x1792 (portrait), 1792x1024 (landscape)
@@ -65,17 +65,16 @@ class OpenAIImageGen:
         url = "https://api.openai.com/v1/images/generations"
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
-        # gpt-image-1 uses different params than dall-e-3
-        if self.model == "gpt-image-1":
+        if self.model in ("gpt-image-2", "gpt-image-1"):
+            # gpt-image-2 and gpt-image-1: same API surface, no response_format needed
             payload = {
                 "model": self.model,
-                "prompt": prompt[:4000],  # gpt-image-1 limit ~4000
+                "prompt": prompt[:4000],
                 "size": size,
                 "quality": "high",
                 "n": 1,
-                # gpt-image-1 returns b64 by default — no response_format needed
             }
-            est_cost = 0.19 if size == "1024x1792" else 0.17
+            est_cost = 0.17  # 1024x1536 portrait
         else:
             # dall-e-3 legacy
             payload = {
@@ -255,9 +254,13 @@ class ImageGenAdapter:
 
         if self.provider == "mock":
             self.backend = MockImageGen()
-        elif self.provider in ("openai", "gpt-image-1", "dall-e-3"):
-            # Default to gpt-image-1 (current model). dall-e-3 is legacy.
-            model = "dall-e-3" if self.provider == "dall-e-3" else "gpt-image-1"
+        elif self.provider in ("openai", "gpt-image-2", "gpt-image-1", "dall-e-3"):
+            if self.provider == "dall-e-3":
+                model = "dall-e-3"
+            elif self.provider == "gpt-image-1":
+                model = "gpt-image-1"
+            else:
+                model = "gpt-image-2"  # default for "openai" provider string
             self.backend = OpenAIImageGen(model=model)
         elif self.provider in ("nano-banana-2", "gemini-nano-banana"):
             self.backend = GeminiImageGen(model="gemini-2.5-flash-image-preview")
