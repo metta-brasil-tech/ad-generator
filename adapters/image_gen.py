@@ -273,7 +273,7 @@ class ImageGenAdapter:
         self,
         prompt: str,
         negative_prompt: str = "",
-        aspect_ratio: str = "9:16",
+        aspect_ratio: str = "1:1",
         reference_images: list[str] | None = None,
     ) -> ImageGenResult:
         # Embed negative prompt by appending it (OpenAI doesn't have native, Gemini ignores)

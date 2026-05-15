@@ -115,7 +115,7 @@ def _run_pipeline(briefing_text: str, mock: bool = False) -> dict:
                     ig_result = image_gen.generate(
                         prompt=p["prompt"],
                         negative_prompt=p.get("negative_prompt", ""),
-                        aspect_ratio=p.get("aspect_ratio", "9:16"),
+                        aspect_ratio=p.get("aspect_ratio", "1:1"),
                         reference_images=p.get("reference_images", []),
                     )
                     image_urls[p["slot_name"]] = ig_result.url
