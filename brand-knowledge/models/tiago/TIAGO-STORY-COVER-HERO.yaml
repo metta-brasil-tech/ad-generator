@@ -52,18 +52,18 @@ typography:
     style:          "Semibold"
     weight:         600
     stretch_pct:    75
-    size_range:     [54, 76]
+    size_range:     [80, 110]   # aumentado — headline tem que dominar a capa
     line_height_pct: 100
     letter_spacing_pct: -1
     text_case:      "sentence"
   body:
     role:           "subhead-curto"
-    family:         "SF Pro Condensed"
+    family:         "SF Pro"          # wdth 100 (mais arredondado que Condensed) — H2 abaixo da headline
     style:          "Light"
     weight:         300
-    stretch_pct:    75
-    size_range:     [28, 36]
-    line_height_pct: 125
+    stretch_pct:    100
+    size_range:     [34, 44]    # aumentado pra ser visivelmente H2, não nota de rodapé
+    line_height_pct: 130
     letter_spacing_pct: 0
     text_case:      "sentence"
   cta:
@@ -133,8 +133,8 @@ slots:
     max_lines:       5
     style_ref:       "typography.headline"
     color_ref:       "colors.fg_primary"
-    align:           "left"
-    position: {x: "64px", y: "center-vertical"}
+    align:           "center"   # centralizada — domina a peça
+    position: {x: "center-horizontal", y: "center-vertical"}
     accent_word:
       allowed:       true
       max_words:     3
@@ -142,15 +142,18 @@ slots:
       color_ref:     "colors.accent"
 
   - name:            "cta_pill"
-    role:            "arrasta_pro_lado"
+    role:            "cta_dynamic"
     required:        true
-    text:            "ARRASTA PRO LADO 👉"
+    # text é OVERRIDE-ABLE: o pipeline DEVE usar `briefing.cta` (digitado pelo user)
+    # em vez deste default. "ARRASTA PRO LADO 👉" é o fallback quando user
+    # não preencheu CTA (caso de campanhas sem instrução explícita do user).
+    text_default:    "ARRASTA PRO LADO 👉"
     bg_color_ref:    "colors.cta_bg"
     fg_color_ref:    "colors.cta_text"
     component:       "pill"
     height:          64
-    padding_x:       24
-    position: {x: "64px", y: "bottom-100px"}
+    padding_x:       28
+    position: {x: "center-horizontal", y: "bottom-80px"}
 
 quando_brilha:
   - "Capa de carrossel story Tiago — abre série"
