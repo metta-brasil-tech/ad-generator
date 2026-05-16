@@ -118,14 +118,19 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
     if key in _FONT_CACHE:
         return _FONT_CACHE[key]
 
-    # 1) Try SF Pro Variable first when family is SF Pro (Metta canonical)
-    if family == "SF Pro":
-        f = _load_sf_pro_variable(style, size)
+    # 1) Try SF Pro Variable when family é uma variante SF Pro.
+    #    Metta primary: SF Pro Expanded (heads/CTAs) + SF Pro Regular (body).
+    #    Tiago primary: SF Pro Condensed Semibold/Light (heads) + SF Pro Regular (body orgânico).
+    #    family hint informa o wdth axis correto quando style sozinho é ambíguo
+    #    (ex: 'Semibold' precisa de wdth 75 se family for SF Pro Condensed).
+    sf_pro_families = ("SF Pro", "SF Pro Condensed", "SF Pro Expanded", "SF Pro Compressed")
+    if family in sf_pro_families:
+        f = _load_sf_pro_variable(style, size, family=family)
         if f:
             _FONT_CACHE[key] = f
-            sentinel = ("_warned_sf", style)
+            sentinel = ("_warned_sf", family, style)
             if sentinel not in _FONT_CACHE:
-                print(f"  [info] using SF Pro Variable (Metta canonical) for '{style}'")
+                print(f"  [info] using SF Pro Variable for '{family} / {style}'")
                 _FONT_CACHE[sentinel] = None
             return f
 
@@ -205,60 +210,72 @@ def _find_sf_pro_variable() -> Path | None:
     return None
 
 
-# Style string → (wdth, opsz, wght) for SF Pro Variable axes
-# Metta DS: Expanded = wdth 132%, Regular = wdth 100%
-SF_PRO_STYLE_TO_AXES = {
-    # Expanded family (Metta primary for display)
-    "Expanded Heavy":     (132, 28, 870),
-    "Expanded Bold":      (132, 28, 700),
-    "Expanded Semibold":  (132, 28, 650),
-    "Expanded Medium":    (132, 28, 540),
-    "Expanded Regular":   (132, 28, 400),
-    "Expanded Light":     (132, 28, 270),
-    # Standard (wdth 100)
-    "Heavy":              (100, 28, 870),
-    "Heavy Italic":       (100, 28, 870),  # no italic axis in this font — non-italic
-    "Black":              (100, 28, 900),
-    "Black Italic":       (100, 28, 900),
-    "Bold":               (100, 28, 700),
-    "Bold Italic":        (100, 28, 700),
-    "Semibold":           (100, 28, 650),
-    "Medium":             (100, 28, 540),
-    "Regular":            (100, 28, 400),
-    "Light":              (100, 28, 270),
-    # Compressed/Condensed (rare in Metta)
-    "Compressed Heavy":   (60, 28, 870),
-    "Condensed Heavy":    (75, 28, 870),
+# Map (family, peso) → axes. Tiago usa Condensed (wdth 75), Metta usa Expanded (wdth 132).
+# Family hint determina wdth default quando style é só o peso ("Semibold", "Light", etc.).
+FAMILY_TO_WDTH = {
+    "SF Pro":            100,  # standard (Regular)
+    "SF Pro Expanded":   132,  # Metta primary — heads/CTAs
+    "SF Pro Condensed":  75,   # Tiago primary — heads
+    "SF Pro Compressed": 60,
+}
+
+# Style string → weight axis. Width vem do family hint OU do próprio style (se for "Expanded X").
+STYLE_TO_WEIGHT = {
+    "Heavy": 870, "Heavy Italic": 870,
+    "Black": 900, "Black Italic": 900,
+    "Bold": 700, "Bold Italic": 700,
+    "Semibold": 650, "Semibold Italic": 650,
+    "Medium": 540, "Medium Italic": 540,
+    "Regular": 400, "Italic": 400,
+    "Light": 270, "Light Italic": 270,
+    "Thin": 100, "Ultralight": 100,
 }
 
 
-def _load_sf_pro_variable(style: str, size: int) -> ImageFont.FreeTypeFont | None:
-    """Load SF Pro Variable with appropriate width/weight axes for the given style."""
+def _load_sf_pro_variable(style: str, size: int, family: str = "SF Pro") -> ImageFont.FreeTypeFont | None:
+    """Load SF Pro Variable com axes corretas combinando family hint + style.
+
+    family='SF Pro Condensed' + style='Semibold' → wdth=75, wght=650 (Tiago heads)
+    family='SF Pro Expanded'  + style='Bold'     → wdth=132, wght=700 (Metta heads)
+    family='SF Pro'           + style='Regular'  → wdth=100, wght=400 (Body)
+    family='SF Pro'           + style='Expanded Bold' → wdth=132 (style override), wght=700
+    """
     sf_path = _find_sf_pro_variable()
     if not sf_path:
         return None
     try:
         font = ImageFont.truetype(str(sf_path), size)
-        axes = SF_PRO_STYLE_TO_AXES.get(style)
-        if not axes:
-            # Default: try to parse the style string
-            wdth = 132 if "Expanded" in style else (60 if "Compressed" in style else (75 if "Condensed" in style else 100))
-            wght = (
-                870 if any(k in style for k in ["Heavy", "Black"])
-                else 700 if "Bold" in style
-                else 650 if "Semibold" in style
-                else 540 if "Medium" in style
-                else 270 if "Light" in style or "Thin" in style or "Ultralight" in style
-                else 400
-            )
-            axes = (wdth, 28, wght)
-        # Adjust opsz based on size (display vs text)
-        wdth, _opsz, wght = axes
-        opsz = 17 if size < 18 else 28  # small → 17, display → 28
+
+        # Width: style override (ex: "Expanded Bold") tem precedência sobre family hint
+        if "Expanded" in style:
+            wdth = 132
+        elif "Condensed" in style:
+            wdth = 75
+        elif "Compressed" in style:
+            wdth = 60
+        else:
+            wdth = FAMILY_TO_WDTH.get(family, 100)
+
+        # Weight: look up no map, ou parse por palavra-chave do style
+        # Remove qualificador de width pra ficar só o peso (ex: "Expanded Bold" → "Bold")
+        style_weight = style
+        for w in ("Expanded ", "Condensed ", "Compressed "):
+            style_weight = style_weight.replace(w, "")
+        wght = STYLE_TO_WEIGHT.get(style_weight)
+        if wght is None:
+            # Parse por palavra-chave
+            sl = style.lower()
+            if "heavy" in sl or "black" in sl: wght = 870
+            elif "bold" in sl: wght = 700
+            elif "semibold" in sl: wght = 650
+            elif "medium" in sl: wght = 540
+            elif "light" in sl or "thin" in sl or "ultralight" in sl: wght = 270
+            else: wght = 400
+
+        opsz = 17 if size < 18 else 28
         try:
             font.set_variation_by_axes([wdth, opsz, wght])
         except Exception:
-            # Try without opsz (axis order varies)
             try:
                 font.set_variation_by_axes([wdth, wght])
             except Exception:
