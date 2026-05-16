@@ -66,22 +66,29 @@ class OpenAIImageGen:
         url = "https://api.openai.com/v1/images/generations"
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
+        # IMAGE_QUALITY env var permite override do default 'high'.
+        # Para gpt-image-*: 'low' (~$0.04, 10-15s) | 'medium' (~$0.08, 18-25s) | 'high' (~$0.17, 35-50s) | 'auto'
+        # Para dall-e-3: 'standard' (~$0.04) | 'hd' (~$0.08)
+        quality_env = os.getenv("IMAGE_QUALITY", "").strip().lower()
         if self.model in ("gpt-image-2", "gpt-image-1"):
+            quality = quality_env if quality_env in ("low", "medium", "high", "auto") else "high"
             payload = {
                 "model": self.model,
                 "prompt": prompt[:4000],
                 "size": size,
-                "quality": "high",
+                "quality": quality,
                 "n": 1,
             }
-            est_cost = 0.17  # 1024x1536 portrait
+            cost_table = {"low": 0.04, "medium": 0.08, "high": 0.17, "auto": 0.17}
+            est_cost = cost_table.get(quality, 0.17) * (1.12 if size == "1024x1792" else 1.0)
         else:
             # dall-e-3 legacy
+            quality = quality_env if quality_env in ("standard", "hd") else "hd"
             payload = {
                 "model": self.model,
                 "prompt": prompt[:4000],
                 "size": size,
-                "quality": "hd",
+                "quality": quality,
                 "n": 1,
                 "response_format": "b64_json",
             }
