@@ -674,6 +674,17 @@ class PNGAssembler:
             img = ImageOps.fit(img, (target_w, target_h), method=Image.LANCZOS, centering=(0.5, 0.0))
             paste_x, paste_y = int(el.get("x", 0)), int(el.get("y", 0))
 
+        # Corner radius opcional pra image_slot (mock-twitter card embed = 28px)
+        corner_radius = int(el.get("corner_radius", 0))
+        if corner_radius > 0:
+            mask = Image.new("L", (target_w, target_h), 0)
+            ImageDraw.Draw(mask).rounded_rectangle(
+                (0, 0, target_w, target_h), radius=corner_radius, fill=255
+            )
+            rgba = img.convert("RGBA")
+            rgba.putalpha(mask)
+            img = rgba
+
         if img.mode == "RGBA":
             canvas.paste(img, (paste_x, paste_y), mask=img)
         else:
