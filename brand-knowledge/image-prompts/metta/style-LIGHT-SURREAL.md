@@ -1,142 +1,89 @@
 # Image Prompt — Estilo LIGHT-SURREAL
 
-> Herda de `_base.md`. **OBS:** este estilo NÃO usa foto realista — usa COLAGEM SURREAL. Prompt difere do padrão.
+> Herda de `_base.md`. Skill 04 escolhe a seção correta abaixo conforme `IMAGE_GEN_PROVIDER`.
 
 ## Função da imagem nesse estilo
 
-Colagem surreal **personifica visualmente a metáfora da dor descrita na copy**. Homem com cabeça de pedra = "pesa pensar". Cabeça de monitor = "vive plugado no operacional". Balão saindo do crânio = "ideia voando solta".
+Colagem/composição surreal **personifica visualmente a metáfora da dor descrita na copy**. Homem com pedra na cabeça = "pesa pensar". Cabeça-monitor = "vive plugado no operacional". A imagem é THUMBNAIL EDITORIAL — entende-se em 1 segundo. Estética HBR/Exame, não cartoon.
 
-A imagem é THUMBNAIL EDITORIAL — entende-se em 1 segundo. Estética HBR/Exame, não cartoon.
+## O que o banco real mostra
 
-## Constraints do estilo LIGHT-SURREAL
+- 3 de 4 LIGHT-SURREAL têm pessoa (com elemento surreal anexado)
+- Mood real top: `urgent reflection`, `thoughtful liberation`, `thoughtful urgency`
+- Composição: figura central com objeto simbólico sobre a cabeça, fundo claro/branco neutro
+- Palette: light-white (4 de 4) — SEMPRE fundo claro
+- Tema recorrente: peso/responsabilidade visualizado como objeto físico
 
-- **Foto-base + justaposição surreal.** SEMPRE foto real recortada e remontada com elemento incongruente. NUNCA ilustração vetorial chapada. NUNCA cartoon. NUNCA 3D render.
-- **Background neutro claro.** Fundo de papel texture, parede off-white ou cinza muito claro.
-- **Mood editorial gravitas** — peso de capa de revista séria. Não brincadeira.
-- **Filtros sutis.** Saturação 0, contrast +0.1.
-- **Composição centrada ou rule-of-thirds** — colagem é o protagonista visual.
-- **Ratio livre** — geralmente quadrado ou 4:5.
+---
 
-## Template de prompt
+## SEÇÃO PROD — gpt-image-1
 
-```
-editorial collage surreal portrait, brazilian style HBR-Exame magazine,
-photo-real base of {subject_with_metaphor_element_swapped},
-{specific_collage_concept},
-neutral light flat editorial,
-centered composition or rule of thirds,
-clean cut-out edges visible, intentional collage aesthetic,
-warm paper texture background, slight cream tint,
-shot on medium format,
-editorial gravitas, 4K, magazine cover quality,
-no cartoon, no vector illustration, no 3D render, no anime,
-no text, no logos
-```
+> gpt-image-1 é melhor em surrealismo conceitual fotográfico que em colagem clássica. Foca em "figura real + objeto incongruente" estilo Magritte editorial.
 
-## Exemplos preenchidos por metáfora
-
-### "Vive plugado no operacional / cabeça-monitor"
+### Template
 
 ```
-editorial collage surreal portrait, brazilian style HBR-Exame magazine,
-photo-real base of a man in business shirt seated at desk,
-his head replaced with a vintage CRT computer monitor showing static, body remaining photorealistic,
-the monitor head tilts slightly as if 'thinking',
-neutral overhead diffused light, flat editorial,
-centered composition,
-clean cut-out edges visible where monitor meets neck, intentional collage aesthetic,
-warm paper texture background off-white with cream tint,
-medium format quality,
-editorial gravitas, 4K, magazine cover quality,
-no cartoon, no vector illustration, no 3D render, no anime,
-no text, no logos
+Surreal editorial photograph in a clean minimalist style on a plain off-white background, of a Brazilian business owner in his/her {age_range}, {visual_persona}, {body_pose},
+WITH {surreal_metaphor_object} {placement_of_object},
+clean studio lighting, soft even shadows on the off-white background,
+subject CENTERED in the frame, full or three-quarter body shot,
+{ambient_around_subject_for_overlay},
+muted desaturated palette dominated by whites and neutral grays with one subtle accent color, sharp focus throughout, editorial conceptual photography in the style of Harvard Business Review or The New Yorker covers, high detail,
+without cartoon style, without 3D render look, without anime, without children's book illustration, without dark moody lighting, without text or logos in image
 ```
 
-### "Pesa pensar / cabeça de pedra"
+### Variáveis
+
+| Var | Opções |
+|---|---|
+| `{age_range}` | "early 40s" / "mid-40s" |
+| `{visual_persona}` | "Brazilian man, light olive skin, dark hair, wearing business casual gray sweater and dark trousers" / "Brazilian woman, warm light skin, hair pulled back, wearing dark navy blazer and black trousers" |
+| `{body_pose}` | "seated upright in a simple wooden chair facing the camera" / "standing upright in a neutral posture, arms relaxed at sides" / "seated at a small bare desk with hands resting on the surface, looking forward" |
+| `{surreal_metaphor_object}` | "a large rough gray stone the size of a watermelon" / "a vintage CRT computer monitor with cables hanging" / "a heavy iron anchor" / "a cage with small mechanical gears inside" / "a stack of folders that defies gravity" — depende da metáfora da copy |
+| `{placement_of_object}` | "balanced on top of the subject's head replacing or covering the head area" / "floating above the subject's head" / "hovering close to the subject's chest as if attached" |
+| `{ambient_around_subject_for_overlay}` | "with significant empty white space above the subject and to the sides (text overlay will be applied to upper area)" |
+
+### Exemplo preenchido — "pesa pensar"
 
 ```
-editorial collage surreal portrait, brazilian style HBR-Exame magazine,
-photo-real base of a man in dark sweater seated forward at table,
-his head replaced with a heavy gray boulder, body posture sagging slightly under weight,
-hands clasped supporting the boulder head,
-neutral side light editorial flat,
-rule of thirds composition, subject slightly left,
-clean cut-out edges visible where boulder meets neck,
-warm paper texture background light gray,
-medium format quality,
-editorial gravitas, 4K, magazine cover quality,
-no cartoon, no vector illustration, no 3D render, no anime,
-no text, no logos
+Surreal editorial photograph in a clean minimalist style on a plain off-white background, of a Brazilian business owner in his early 40s, light olive skin, dark short hair, wearing a business casual gray sweater and dark trousers, seated upright in a simple wooden chair facing the camera with hands resting on his thighs, WITH a large rough gray stone the size of a watermelon balanced on top of his head replacing the head area, clean studio lighting with soft even shadows on the off-white background, subject CENTERED in the frame, three-quarter body shot, with significant empty white space above the subject and to the sides (text overlay will be applied to upper area), muted desaturated palette dominated by whites and neutral grays with one subtle warm wood accent from the chair, sharp focus throughout, editorial conceptual photography in the style of Harvard Business Review or The New Yorker covers, high detail, without cartoon style, without 3D render look, without anime, without children's book illustration, without dark moody lighting, without text or logos
 ```
 
-### "Ideia voando solta / balão saindo do crânio"
+### Fallbacks
 
+**v2 — cabeça-monitor:**
 ```
-editorial collage surreal portrait, brazilian style HBR-Exame magazine,
-photo-real base of a woman entrepreneur in profile against neutral wall,
-the top of her head opens like a hinge, a single helium balloon escapes upward toward the sky,
-her gaze unfocused as if accepting the escape,
-warm flat editorial light,
-profile composition subject left, balloon trail upper right,
-clean cut-out edges visible at the hinge, intentional collage,
-warm paper texture background slightly cream,
-medium format quality,
-editorial gravitas, 4K, magazine cover quality,
-no cartoon, no vector illustration, no 3D render, no anime,
-no text, no logos
+Surreal editorial photograph on a clean off-white background, of a Brazilian business owner in his late 40s, warm brown skin, wearing a dark navy suit, seated at a bare wooden desk with hands typing on a laptop, but his head is replaced by a vintage CRT computer monitor showing a frozen blue screen, clean studio lighting, subject centered, three-quarter shot, lots of empty white space above and to the sides, muted neutral palette, sharp focus, HBR editorial conceptual photography, without cartoon, without 3D render, without text or logos
 ```
 
-### "Família esquecida / jantar como holograma"
-
+**v3 — peso em correntes:**
 ```
-editorial collage surreal portrait, brazilian style HBR-Exame magazine,
-photo-real base of a man in suit jacket seated at dining table,
-the dinner table and family chairs appear as translucent semi-faded photographic ghosts,
-the man solid and present but everyone else partially erased,
-warm dim window light, late evening,
-centered composition,
-clean cut-out edges where family fades, intentional editorial collage,
-warm paper texture background slightly cream-yellow,
-medium format quality,
-editorial gravitas, 4K, magazine cover quality,
-no cartoon, no vector illustration, no 3D render, no anime,
-no text, no logos
+Surreal editorial photograph on a clean off-white background, of a Brazilian woman entrepreneur in her early 40s, light skin, dark hair pulled back, wearing a dark navy blazer, standing upright in neutral posture but with several heavy iron chains attached to her ankles trailing on the floor, clean studio lighting, subject centered full body shot, empty white space surrounding her, muted desaturated grays with one accent of warm wood from the floor, sharp focus, editorial conceptual photography New Yorker style, without cartoon, without dark moody mood, without text or logos
 ```
 
-## Reference images (passar pro Nano Banana 2)
+---
 
-- `figma://1:220` — homem-pedra no computador (jantar com filhos vs reunião)
-- `figma://1:477` — colagem familiar (negócio saúde família)
-- `figma://1:1151` — metáfora de crescimento (varejistas dobram tamanho)
+## SEÇÃO LEGACY — Nano Banana 2
 
-## Negative prompt específico
+### Template
 
-Além do base, ESPECIAL pra esse estilo:
+```
+editorial surreal collage on white background, brazilian {persona},
+{age_range}, {body_pose_simple},
+{surreal_element_on_body},
+single light source, soft shadows on white background,
+centered composition, full-body or 3/4,
+muted palette, off-white + one accent,
+in the style of HBR / Harvard Business Review cover art,
+clean editorial collage, conceptual, no text, no logos
+```
 
-- no cartoon, no vector illustration, no anime style
-- no 3D rendered scenes, no CGI
-- no Pixar style, no Dreamworks style
-- no minimalist flat design
-- no chapado / no flat color blocks
-- no Photoshop obvious filter (oil paint, watercolor)
-- no AI-generic surrealism (giant moon, floating eye) — precisa ser metáfora ESPECÍFICA da copy
+### Reference images (NB2)
 
-## O que faz diferente vs Photoshop random surrealism
-
-LIGHT-SURREAL Metta é:
-
-1. **Foto-real base.** Tudo começa de foto real, depois UM elemento é trocado.
-2. **Metáfora literal da copy.** Não é estética genérica, é a tradução visual da tese.
-3. **Cut-out edges visíveis.** Não esconde a colagem — celebra como editorial print.
-4. **Editorial gravitas.** Peso de capa de revista. Não é brincalhão.
-
-## Iteração se não bater
-
-1. **Saiu cartoon** → reforçar `photo-real base`, `medium format quality`, listar todos os negative prompts de estilo
-2. **Metáfora literal demais (sem surreal)** → especificar mais o elemento trocado: "head replaced with X", "Y instead of Z"
-3. **Surreal sem ancoragem** → reforçar `body remaining photorealistic`, `clean cut-out edges visible`
-4. **Mood errado (festivo)** → reforçar `editorial gravitas`, `magazine cover quality`, mudar palette pra mais neutro
+- `figma://1:1452` — pedra na cabeça
+- `figma://1:1487` — cabeça-monitor
+- `figma://1:1521` — corrente nos pés
 
 ## Versão
 
-`style-LIGHT-SURREAL_v1.0` · 2026-05-13 · Head de Design Metta
+`style-LIGHT-SURREAL_v2.0` · 2026-05-17 · seção dupla, gpt-image-1 reformulado pra surrealismo fotográfico (não colagem clássica)

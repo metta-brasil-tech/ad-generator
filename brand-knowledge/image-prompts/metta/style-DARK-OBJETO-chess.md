@@ -1,106 +1,81 @@
-# Image Prompt — DARK-OBJETO variante: Peças de xadrez 3D (carrossel diferença)
+# Image Prompt — DARK-OBJETO variante: Peças de xadrez 3D
 
-> Herda de `_base.md`. Variante específica do DARK-OBJETO para o carrossel
-> "A diferença entre empresa que cresce e empresa que sobrevive".
+> Herda de `_base.md`. Skill 04 escolhe a seção correta abaixo conforme `IMAGE_GEN_PROVIDER`.
+> Variante específica do DARK-OBJETO usada em carrosséis de comparação/diferença.
 
-## Conceito visual do slide
+## Conceito visual
 
 Duas peças de xadrez 3D em destaque no centro do frame sobre fundo dark moody.
-O contraste entre a peça dourada (empresa que cresce = cavalo/knight) e
-a peça prateada/comum (empresa que sobrevive = peão/pawn) **é a metáfora**.
-A iluminação de rim-light dourado separa as duas peças e cria tensão.
-Fundo tem marca d'água tipográfica levíssima (texto repetido em loop, quase
-invisível — ≤5% opacidade).
+O contraste entre as peças (uma dourada/destacada vs comum) **é a metáfora** —
+ex: empresa que cresce vs empresa que sobrevive, founder estratégico vs apagador-de-incêndio.
 
-## Prompt principal (gpt-image-2)
+## O que o banco real mostra (DARK-OBJETO em geral)
 
-```
-Photorealistic 3D render of two chess pieces centered on a dark moody background.
-Left piece: a golden knight chess piece, highly detailed, metallic gold with warm
-reflections, rim light from right side creating a sharp gold edge highlight.
-Right piece: a standard silver pawn chess piece, matte silver-gray, slightly
-smaller than the knight, in shadow, flat rim light only.
-Both pieces rest on a very subtle dark surface (near invisible), slight reflection
-on surface.
-Background: deep dark #0C161B, near-black with very subtle film grain texture.
-Faint watermark text pattern repeated diagonally across background at 4% opacity
-(illegible, only texture).
-Cinematic rim lighting setup: primary light from top-right (warm golden key),
-fill from left (cold blue), no overhead.
-Render style: Cinema 4D + Octane quality, 4K, ultra-sharp focus on pieces,
-slight depth of field at edges.
-Composition: two pieces centered horizontally with slight breathing space between,
-golden knight slightly taller and forward, pawn slightly behind.
-No text, no logos, no humans, no watermarks visible, pure product render.
-```
+- 2 ads DARK-OBJETO, 0 com pessoa visível — objetos simbólicos são o protagonista
+- Mood real: `assertive urgency`, `confident strategic`
+- Composição padrão: objeto central em destaque, fundo escuro neutro, headline acima ou abaixo
+- Exemplos do banco: mão segurando bandeja amarela, peças de dominó
 
-## Variações por objeto-conceito
+---
 
-### Variante: Troféu Copa do Mundo (slide escassez de processo)
+## SEÇÃO PROD — gpt-image-1
+
+> gpt-image-1 é bom em renderização fotorrealista de objetos com luz dramática. Funciona bem pra cena de objetos isolados em fundo escuro.
+
+### Template
 
 ```
-Photorealistic 3D render of a FIFA World Cup trophy, golden, ultra-detailed,
-centered on dark moody background.
-Trophy: solid gold metallic, two human figures holding the globe base, intricate
-surface detail, highly polished with reflections.
-Background: deep dark #0C161B with very subtle film grain.
-Faint diagonal text watermark at 4% opacity across background.
-Cinematic lighting: warm golden key light from top-front, cold blue rim from behind
-creating separation, dark moody atmosphere.
-Render: Cinema 4D / Octane quality, 4K, trophy occupies 50-60% of canvas height.
-Slight lens flare on top highlight.
-No text, no logos, no humans.
+Cinematic photograph of {object_description}, photographed on a dark moody background,
+{lighting_dramatic_on_objects},
+objects positioned CENTRALLY in the lower third of the frame, leaving the upper two-thirds of the frame as empty dark space (this empty area will be covered by light-colored text headline overlay),
+{palette_dark_with_accent},
+sharp focus on the {hero_object} with shallow depth of field, soft background fall-off,
+editorial product photography in the style of luxury magazine spreads, high detail, photorealistic,
+without cartoon, without 3D render look generic, without bright lighting, without text or logos in image
 ```
 
-### Variante: Engrenagem / mecanismo (slide método/processo)
+### Variáveis
+
+| Var | Opções |
+|---|---|
+| `{object_description}` | "two chess pieces sitting on a polished dark wooden chess board: a golden knight piece in the foreground catching warm rim light, and a plain silver pawn behind it in soft shadow" / "two stacks of folders on a wooden desk: one stack neat and aligned, the other chaotic and tipping" / "a row of dominoes mid-fall, the first one already toppled" |
+| `{lighting_dramatic_on_objects}` | "single warm rim light from the right creating dramatic shadows behind the objects" / "soft amber spotlight from above creating focused pool of light on the objects" / "single light source from the left, half the scene in deep shadow" |
+| `{hero_object}` | "the golden knight" / "the leading domino" / "the neat stack of folders" |
+| `{palette_dark_with_accent}` | "dark teal and charcoal palette with one warm golden accent on the hero object" / "deep blacks with subtle amber highlights" |
+
+### Exemplo preenchido — peças de xadrez (cresce vs sobrevive)
 
 ```
-Photorealistic 3D render of a large brass mechanical gear, single piece,
-centered floating slightly above dark surface.
-Gear: antique brass/bronze finish, intricate teeth detail, visible machined surface.
-Background: deep dark #0C161B moody.
-Lighting: warm amber key from upper-right, cold secondary from lower-left.
-Render: Cinema 4D quality, 4K, sharp focus, no text, no logos, no humans.
+Cinematic photograph of two chess pieces sitting on a polished dark wooden chess board: a golden knight piece in the foreground catching warm rim light, and a plain silver pawn behind it in soft shadow, photographed on a dark moody background, single warm rim light from the right creating dramatic shadows behind the pieces, objects positioned CENTRALLY in the lower third of the frame, leaving the upper two-thirds of the frame as empty dark space (this empty area will be covered by light-colored text headline overlay), dark teal and charcoal palette with one warm golden accent on the knight, sharp focus on the golden knight with shallow depth of field, soft background fall-off, editorial product photography in the style of luxury magazine spreads, high detail, photorealistic, without cartoon, without 3D render look generic, without bright lighting, without text or logos
 ```
 
-### Variante: Dominó dourado (slide efeito cascata)
+### Fallbacks
 
+**v2 — dominós:**
 ```
-Photorealistic 3D render of a single golden domino tile, fallen at 45 degrees,
-as if mid-fall, centered on dark background.
-Domino: solid gold metallic, dots in platinum, sharp edges.
-Background: deep dark #0C161B, minimal reflection on surface.
-Cinematic lighting: sharp rim from top, warm and cold split.
-No text, no logos, no humans.
+Cinematic photograph of a row of dominoes mid-fall, the first one already toppled, the rest about to fall in sequence, photographed on a dark wooden surface with dark moody background, single amber spotlight from above creating focused pool of light, objects in the lower third of the frame, upper two-thirds empty dark space for text, dark palette with one warm accent, sharp focus on the leading domino, editorial product photography, photorealistic, without cartoon, without text or logos
 ```
 
-## Negative prompt
-
+**v3 — folders:**
 ```
-no text overlay, no watermark, no human figures, no hands, no tables visible,
-no white background, no bright backgrounds, no cartoon style, no illustration,
-no flat design, no generic stock, no soft focus on pieces, no oversaturated
-colors, no neon lights
+Cinematic photograph of two stacks of folders on a wooden desk in dim lighting: one stack neat and aligned, the other chaotic and tipping, photographed on a dark background, single side light from the left with deep shadows, objects in lower portion of frame, upper area dark empty space for text, dark palette with subtle amber accent, sharp focus on the neat stack, editorial documentary photography, photorealistic, without cartoon, without bright lighting, without text or logos
 ```
 
-## Nota de composição
+---
 
-A imagem gerada pela IA **não deve ter texto**. Todo o texto do slide
-(headline "A DIFERENÇA ENTRE", labels das peças, CTA pill "ARRASTA PRO LADO")
-é adicionado pelo assembler em cima da imagem. A IA só gera o background visual.
+## SEÇÃO LEGACY — Nano Banana 2
 
-## Referência de modelo YAML
-
-- Modelo base: `DARK-OBJETO`
-- Slots de texto no YAML `DARK-OBJETO.yaml`
-- Carrossel slide 1 copy:
-  - tag: "A DIFERENÇA ENTRE"
-  - headline: "EMPRESA QUE CRESCE"
-  - body: "e empresa que sobrevive em 2026"
-  - label_left: "empresa que cresce" (sob cavalo dourado)
-  - label_right: "empresa que sobrevive" (sob peão)
-  - cta: "ARRASTA PRO LADO"
+```
+3D rendered chess pieces on dark moody background,
+golden knight in foreground, plain silver pawn behind,
+dramatic side lighting, chiaroscuro,
+centered composition lower third, empty dark space top,
+dark teal palette with warm gold accent,
+editorial 3D product photography, Octane render quality,
+shallow depth of field, sharp focus on knight,
+no text, no logos
+```
 
 ## Versão
 
-`style-DARK-OBJETO-chess_v1.0` · 2026-05-15 · Head de Design Metta
+`style-DARK-OBJETO-chess_v2.0` · 2026-05-17 · seção dupla, gpt-image-1 versão fotorrealista (não 3D render)

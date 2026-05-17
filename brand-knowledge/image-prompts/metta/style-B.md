@@ -1,121 +1,77 @@
-# Image Prompt — Estilo B (Foto top + headline mixed bottom)
+# Image Prompt — Estilo B (Foto pessoa esquerda + texto direita)
 
-> Herda de `_base.md`. Use junto.
+> Herda de `_base.md`. Skill 04 escolhe a seção correta abaixo conforme `IMAGE_GEN_PROVIDER`.
 
 ## Função da imagem nesse estilo
 
-Foto top **abre o cenário emocional**. Pessoa na foto está VIVENDO a situação descrita na copy — é "cinema curto". Decisor reconhece a cena antes do texto bater.
+Foto pessoa **à esquerda do canvas** (não top como o nome legado sugere) — é o "apresentador" do conteúdo. Pessoa é tão importante quanto headline; convite pessoal, conexão direta.
 
-A foto AQUI é narrativa, ao contrário do Estilo A onde foto é só âncora.
+## O que o banco real mostra
 
-## Constraints do estilo B
+- **9 de 9** ads B têm pessoa (presença total)
+- Mood real top: `confident urgency`, `inviting confidence`, `motivational empowerment`, `serious urgency`
+- Composição padrão CONFIRMADA: pessoa esquerda + texto direita
+- Persona frequente: apresentador/líder em pose convidativa, postura aberta
+- Palette: dark (4) + light (3) + mixed (2) — variado
 
-- **Sempre evoca a tese literalmente.** "Refém do operacional" → pessoa exausta deitada no sofá com saco na cabeça. "Reunião sem fim" → pessoa em sala fechada com cara cansada. **A foto traduz a metáfora**.
-- **Bleed top.** Foto preenche todo o top 40-50% do canvas. Sem margem entre foto e borda superior.
-- **Gradiente fade-to-black** no bottom 30% pra texto ficar legível.
-- **Mood quiet exhaustion ou pensive reflection.** Raramente serious confidence (B é mais emocional).
-- **Filtros:** saturação 0 (natural), contrast +0.2.
-- **Ratio:** próximo a 16:9 horizontal (cena cinematográfica).
+---
 
-## Template de prompt
+## SEÇÃO PROD — gpt-image-1
+
+### Template
 
 ```
-[quiet exhaustion / pensive reflection] {scene_description},
-brazilian {audience}, {age_range}, {clothing},
-{specific_situation_metaphor},
-{lighting},
-{composition_cinematic},
-{palette},
-photographed in {environment_specific_to_metaphor},
-shallow depth of field, shot on Leica SL2, 35mm Summilux,
-editorial photography, 4K, cinematic intimacy,
+Photograph of a Brazilian {gender_and_role} in his/her {age_range}, {visual_persona},
+{inviting_pose}, photographed in {environment},
+{lighting_visual},
+subject positioned in the LEFT 45% of the frame from waist up, occupying the left side with body slightly angled toward the right side of the frame (where text will be), with the right 55% showing softly blurred environmental background space (this empty right area will be covered by text overlay),
+subject's gaze directed toward the right side of the frame (engaging with the empty space where text lives),
+{palette_visual}, sharp focus on subject's eyes, shallow depth of field,
+editorial documentary photography, high detail,
+without smiling stock pose, without ring light, without text or logos in image
+```
+
+### Variáveis
+
+| Var | Opções |
+|---|---|
+| `{gender_and_role}` | "business owner" / "founder" / "commercial team leader" / "entrepreneur" |
+| `{age_range}` | "early 40s" / "mid-40s" / "late 40s" / "early 50s" |
+| `{visual_persona}` | igual style-A — variar diversidade |
+| `{inviting_pose}` | "standing with one hand gesturing slightly open toward the camera" / "seated with forward lean, elbow on table, palm open" / "leaning against a wall arms loosely crossed in welcoming posture" / "mid-conversation with subtle hand gesture, mouth slightly open as if speaking" |
+| `{environment}` | "modern co-working space with soft architectural lines" / "executive office with warm wood textures and natural side light" / "podium during a business event" / "in front of clean off-white concrete wall" |
+| `{lighting_visual}` | "warm side light from a large window on the right casting soft shadows on the left side of the subject's face" / "even soft natural daylight from above" / "golden hour amber light from the right creating a warm rim glow on the subject's shoulders" |
+
+### Exemplo preenchido — convite pessoal evento
+
+```
+Photograph of a Brazilian commercial team leader in his late 40s, warm brown skin, short black hair, clean-shaven, wearing a smart business shirt in white with sleeves rolled up, standing with one hand gesturing slightly open toward the camera, photographed in a modern co-working space with soft architectural lines, warm side light from a large window on the right casting soft shadows on the left side of his face, subject positioned in the LEFT 45% of the frame from waist up, body slightly angled toward the right side, with the right 55% showing softly blurred warm-lit office space (this empty right area will be covered by text overlay), subject's gaze directed toward the right side of the frame, neutral palette with warm accent, sharp focus on eyes, shallow depth of field, editorial documentary photography, high detail, without smiling stock pose, without ring light, without text or logos
+```
+
+### Fallbacks
+
+**v2 — mais íntimo:**
+```
+Photograph of a Brazilian woman entrepreneur in her early 40s, light skin, dark hair pulled back, wearing a dark navy blazer over silk blouse, seated with forward lean and elbow on a wooden table, palm open in an inviting gesture, photographed in an executive office with warm wood textures and natural light from a window on the right, subject in left 45% of frame, gaze toward right side of frame, warm earth tones, sharp focus on eyes, editorial documentary quality, high detail, without stock smile, without ring light, without text or logos
+```
+
+---
+
+## SEÇÃO LEGACY — Nano Banana 2
+
+```
+[inviting confidence / confident urgency] portrait of a brazilian {persona},
+{age_range}, {clothing},
+{inviting_pose_describing_invitation},
+warm side light from right window,
+subject left third, body angled right, gaze across the frame,
+warm earth tones,
+photographed in {institutional_environment},
+shallow depth of field, shot on Sony A7R V 85mm GM f/1.4,
+editorial photography, 4K, sharp focus on eyes,
 no text, no logos, sujeito íntegro
 ```
-
-## Exemplos preenchidos por tese
-
-### "Refém do operacional / exaustão visível"
-
-```
-quiet exhaustion cinematic scene,
-brazilian retail entrepreneur, 45-50, wrinkled dress shirt rolled sleeves,
-slumped on dark leather couch, head in hands, work bag spilling papers on floor,
-warm window light from left, late afternoon,
-wide environmental shot, subject centered, room context visible,
-desaturated muted editorial dark,
-photographed in a tired home office with closed venetian blinds,
-shallow depth of field, shot on Leica SL2, 35mm Summilux,
-editorial photography, 4K, cinematic intimacy,
-no text, no logos, sujeito íntegro
-```
-
-### "Pressão do calendário / agenda imposta"
-
-```
-pensive reflection cinematic scene,
-brazilian service-business director, 42-48, dark turtleneck,
-standing by office window, looking at watch with concern, phone face-down on desk,
-golden hour rim light through window,
-subject right, environmental context left (papers scattered desk),
-warm orange-amber golden grading,
-photographed in a high-floor corporate office at sunset,
-shallow depth of field, shot on Sony A7R V, 85mm GM f/1.4,
-editorial photography, 4K, cinematic intimacy,
-no text, no logos, sujeito íntegro
-```
-
-### "Mantra-algema desmontado / questionando o próprio modelo"
-
-```
-pensive reflection cinematic scene,
-brazilian woman entrepreneur, 40-48, simple white blouse,
-seated at café table, coffee gone cold, notebook open with crossed-out lines,
-soft diffused window light,
-centered composition, subject medium close, hands visible,
-warm earth tones with mustard accent,
-photographed in a quiet morning café with wooden interior,
-shallow depth of field, shot on Hasselblad H6D-100c, 80mm lens,
-editorial photography, 4K, cinematic intimacy,
-no text, no logos, sujeito íntegro
-```
-
-### "Solidão da decisão / peso de liderar"
-
-```
-quiet exhaustion cinematic scene,
-brazilian founder, 38-45, dark hoodie zipped halfway,
-seated alone in empty conference room, chair facing window away from camera, view of city dusk,
-cold backlight from window,
-wide environmental, subject small in frame,
-cool steel blue dim corporate palette,
-photographed in a high-rise empty meeting room after hours,
-shallow depth of field, shot on Leica SL2, 35mm Summilux,
-editorial photography, 4K, cinematic intimacy,
-no text, no logos, sujeito íntegro
-```
-
-## Reference images (passar pro Nano Banana 2)
-
-- `figma://1:229` — homem deitado no sofá com saco na cabeça (mais icônico)
-- `figma://1:566` — Tiago pensativo (founder-led)
-- `figma://1:865` — provocação direta com foto
-
-## Negative prompt específico
-
-Além do base:
-
-- no anonymous suit-and-tie generic (precisa de roupa específica que ancora o personagem)
-- no faces blurred / hidden completely (vê metade do rosto mínimo)
-- no obvious stock posing (mãos no quadril, cruzando os braços confidente)
-- no team setting (B é solitário)
-
-## Iteração se não bater
-
-1. **Foto muito stock** → adicionar detalhes específicos do ambiente (papers scattered, coffee gone cold)
-2. **Metáfora fraca** → reescrever `{specific_situation_metaphor}` com cena mais literal da tese
-3. **Mood errado** → trocar entre exhaustion / reflection / authority — B é predominantemente exhaustion+reflection
-4. **Foto plana** → mudar pra wide environmental e ler "solidão na escala"
 
 ## Versão
 
-`style-B_v1.0` · 2026-05-13 · Head de Design Metta
+`style-B_v2.0` · 2026-05-17 · seção dupla + composição alinhada ao banco real (esquerda, não top)

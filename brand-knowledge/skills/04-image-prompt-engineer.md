@@ -187,6 +187,42 @@ Output:
 - ❌ Esquecer reference images (Nano Banana 2 fica muito melhor com 2-3 refs)
 - ❌ Usar `Empresário` literal — `entrepreneur` ou `business owner` é universal
 
+## Provider-aware (v3.0)
+
+Skill 04 agora é PROVIDER-AWARE. Os style-X.md têm duas seções:
+
+- **`## SEÇÃO PROD — gpt-image-1`**: prompts descritivos visuais com `without X` inline. Use quando `IMAGE_GEN_PROVIDER` for `openai`, `gpt-image-1`, `gpt-image-2`, `dall-e-3` (ou vazio — default).
+- **`## SEÇÃO LEGACY — Nano Banana 2`**: prompts com jargão técnico fotográfico (Hasselblad, etc.). Use quando provider for `nano-banana-2`, `gemini`, `gemini-nano-banana`.
+
+A `api/generate.py` injeta no `extra_context` da skill 04 a label da seção ativa. **Você deve usar SOMENTE a seção indicada, ignorando a outra**. Concatenar as duas vira ruído pro modelo de imagem.
+
+## Composição-por-slot (v3.0)
+
+Skill 04 RECEBE no extra_context a tabela de placement do(s) image_slot(s) do layout (e.g. `slot='foto_pessoa': placement='right-bleed'`). Pra CADA slot, você DEVE incluir no prompt a instrução de composição correspondente (consulta tabela em `_base.md §REGRA INVIOLÁVEL: composição-por-slot`).
+
+Sem isso, a foto NÃO ENCAIXA no slot — sujeito centralizado quando o slot espera right-bleed quebra o layout final.
+
+## Fallback prompts (v3.0)
+
+O campo `iteration_strategy.fallback_prompts` agora é USADO pelo image-gen — tenta primary, e em caso de erro tenta v2/v3 antes de desistir. Capacidade default = 2 tentativas (env `IMAGE_MAX_ATTEMPTS` override).
+
+Quando gerar prompts, **sempre forneça 2 fallback_prompts** com variações concretas:
+- v2: mudança de mood + persona (gender/age) + ambiente
+- v3: mudança de mood + lighting + composição
+
+Exemplo válido:
+```json
+"iteration_strategy": {
+  "max_attempts": 3,
+  "fallback_prompts": [
+    "Photograph of a Brazilian woman entrepreneur in her early 40s, ...",
+    "Photograph of a Brazilian man in his late 50s, light skin, glasses, ..."
+  ]
+}
+```
+
 ## Versão
 
-`image-prompt-engineer_v2.0` · 2026-05-14 · Head de Design Metta — adicionou namespace por marca (image-prompts/metta/ vs tiago/) e bases separados (_base.md vs _base-tiago.md)
+`image-prompt-engineer_v3.0` · 2026-05-17 · provider-aware (gpt-image-1 vs NB2) + composição-por-slot + fallback_prompts ativos
+
+`image-prompt-engineer_v2.0` · 2026-05-14 · namespace por marca + bases separados
