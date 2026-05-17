@@ -1,0 +1,33 @@
+{
+  "style_id": "D",
+  "tese_central": "Convite para donos de varejo para melhorar resultados de vendas.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "motivational urgency",
+  "composition": "Silhuetas de pessoas em destaque, headline centralizada na parte superior, corpo do texto abaixo da headline.",
+  "headline_text": "MULTIPLIQUE OS RESULTADOS DO SEU MELHOR VENDEDOR ATRAVES DA ENGENHARIA REVERSA",
+  "body_text": "Pare de ser refém de talentos ou do 'tiradores de pedido'. Reserve sua vaga no Plano de Saída da Operação.",
+  "cta_text": "Toque em 'saiba mais' para aplicar",
+  "has_person_photo": false,
+  "tags": [
+    "convite-evento",
+    "varejo",
+    "engenharia-reversa"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "varejo",
+    "engenharia reversa",
+    "melhor vendedor",
+    "resultados"
+  ],
+  "keywords_en": [
+    "sales",
+    "retail",
+    "reverse engineering",
+    "best seller",
+    "results"
+  ],
+  "_filename": "BANCO-AD-D-STORY-engenharia-reversa-melhor-vendedor.png",
+  "_png_path": "artifacts/banco/BANCO-AD-D-STORY-engenharia-reversa-melhor-vendedor.png"
+}

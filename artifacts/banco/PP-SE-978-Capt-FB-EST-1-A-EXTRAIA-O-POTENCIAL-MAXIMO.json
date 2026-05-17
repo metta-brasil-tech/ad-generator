@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Extrair o potencial máximo de quem já faz parte da sua folha de pagamento.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "motivational urgency",
+  "composition": "Imagem central de uma pessoa com texto destacado em amarelo, headline no topo e CTA na parte inferior.",
+  "headline_text": "EXTRAIA O POTENCIAL MÁXIMO",
+  "body_text": "5 movimentos simples para desbloquear o lucro que está represado no seu negócio.",
+  "cta_text": "ACESSE AGORA",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "desempenho-profissional",
+    "crescimento-negócio"
+  ],
+  "keywords_pt": [
+    "potencial máximo",
+    "folha de pagamento",
+    "lucro",
+    "negócio",
+    "crescimento"
+  ],
+  "keywords_en": [
+    "maximum potential",
+    "payroll",
+    "profit",
+    "business",
+    "growth"
+  ],
+  "_filename": "PP-SE-978-Capt-FB-EST-1-A-EXTRAIA-O-POTENCIAL-MAXIMO.png",
+  "_png_path": "artifacts/banco/PP-SE-978-Capt-FB-EST-1-A-EXTRAIA-O-POTENCIAL-MAXIMO.png"
+}

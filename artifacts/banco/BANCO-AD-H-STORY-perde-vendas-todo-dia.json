@@ -1,0 +1,33 @@
+{
+  "style_id": "H",
+  "tese_central": "Ajudar empresas a evitar perdas de vendas diárias.",
+  "intent": "dor_pessoal",
+  "palette": "light-white",
+  "mood": "urgent concern",
+  "composition": "Imagem de notas de dinheiro penduradas em ganchos, headline centralizada acima da imagem.",
+  "headline_text": "Sua empresa perde vendas todo dia",
+  "body_text": "Protocolo M.E.T.T.A. para donos de varejo que querem sair do operacional sem derrubar o faturamento.",
+  "cta_text": "Toque em 'Saiba Mais' e preencha sua aplicação.",
+  "has_person_photo": false,
+  "tags": [
+    "perda-vendas",
+    "mentoria",
+    "varejo"
+  ],
+  "keywords_pt": [
+    "perda de vendas",
+    "mentoria empresarial",
+    "varejo",
+    "protocolo M.E.T.T.A.",
+    "aumento de faturamento"
+  ],
+  "keywords_en": [
+    "sales loss",
+    "business mentoring",
+    "retail",
+    "M.E.T.T.A. protocol",
+    "revenue increase"
+  ],
+  "_filename": "BANCO-AD-H-STORY-perde-vendas-todo-dia.png",
+  "_png_path": "artifacts/banco/BANCO-AD-H-STORY-perde-vendas-todo-dia.png"
+}

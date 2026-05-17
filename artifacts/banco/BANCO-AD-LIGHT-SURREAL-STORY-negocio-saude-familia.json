@@ -1,0 +1,34 @@
+{
+  "style_id": "LIGHT-SURREAL",
+  "tese_central": "O ad comunica que um bom planejamento comercial pode libertar o empresário, melhorando sua saúde e vida familiar.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "thoughtful liberation",
+  "composition": "A imagem central apresenta uma figura com uma pedra na cabeça, simbolizando o peso das responsabilidades, enquanto o texto está posicionado na parte inferior em um fundo escuro.",
+  "headline_text": "Seu negócio não nasceu para engolir sua saúde e sua família",
+  "body_text": "Um comercial bem montado libera você para ser empresário de verdade.",
+  "cta_text": "TOQUE EM 'SAIBA MAIS' E TENTE UMA VAGA.",
+  "has_person_photo": true,
+  "tags": [
+    "saúde",
+    "negócio",
+    "liberdade",
+    "mentoria"
+  ],
+  "keywords_pt": [
+    "negócio",
+    "saúde",
+    "família",
+    "mentoria",
+    "liberdade"
+  ],
+  "keywords_en": [
+    "business",
+    "health",
+    "family",
+    "mentorship",
+    "freedom"
+  ],
+  "_filename": "BANCO-AD-LIGHT-SURREAL-STORY-negocio-saude-familia.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LIGHT-SURREAL-STORY-negocio-saude-familia.png"
+}

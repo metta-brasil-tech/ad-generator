@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Oferece um diagnóstico gratuito para impulsionar o crescimento comercial.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "confident professional",
+  "composition": "A imagem do especialista está centralizada, com o texto da headline acima e o CTA na parte inferior.",
+  "headline_text": "Descubra o que está travando o crescimento da sua operação comercial — em uma hora de diagnóstico gratuito com um especialista Metta.",
+  "body_text": "",
+  "cta_text": "AGENDIE UMA SESSÃO ESTRATÉGICA.",
+  "has_person_photo": true,
+  "tags": [
+    "diagnóstico-gratuito",
+    "crescimento-comercial",
+    "sessão-estratégica"
+  ],
+  "keywords_pt": [
+    "diagnóstico gratuito",
+    "crescimento comercial",
+    "especialista",
+    "sessão estratégica",
+    "metta"
+  ],
+  "keywords_en": [
+    "free diagnosis",
+    "business growth",
+    "specialist",
+    "strategic session",
+    "metta"
+  ],
+  "_filename": "BANCO-AD-A-STORY-diagnostico-1h-gratuito.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-diagnostico-1h-gratuito.png"
+}

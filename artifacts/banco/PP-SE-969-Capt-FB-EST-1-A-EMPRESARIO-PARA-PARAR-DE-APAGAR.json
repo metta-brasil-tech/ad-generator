@@ -1,0 +1,33 @@
+{
+  "style_id": "YELLOW-BLOCO",
+  "tese_central": "Empresários podem assumir a estratégia sem precisar de mais braços.",
+  "intent": "promessa_numerica",
+  "palette": "yellow-bg",
+  "mood": "confident urgency",
+  "composition": "Imagem central de um empresário segurando vários objetos, headline acima e CTA em destaque na parte inferior.",
+  "headline_text": "Empresário, para parar de apagar incêndios e assumir a cadeira de estrategista, você não precisa de mais braços.",
+  "body_text": "Aplique agora para uma reunião estratégica e a 1 e 2 construa uma equipe que bate meta sem depender de você.",
+  "cta_text": "Toque em Saiba Mais",
+  "has_person_photo": true,
+  "tags": [
+    "case-nominal",
+    "estratégia",
+    "empresário"
+  ],
+  "keywords_pt": [
+    "empresário",
+    "estratégia",
+    "reunião",
+    "equipe",
+    "meta"
+  ],
+  "keywords_en": [
+    "entrepreneur",
+    "strategy",
+    "meeting",
+    "team",
+    "goal"
+  ],
+  "_filename": "PP-SE-969-Capt-FB-EST-1-A-EMPRESARIO-PARA-PARAR-DE-APAGAR.png",
+  "_png_path": "artifacts/banco/PP-SE-969-Capt-FB-EST-1-A-EMPRESARIO-PARA-PARAR-DE-APAGAR.png"
+}

@@ -1,0 +1,33 @@
+{
+  "style_id": "YELLOW-BLOCO",
+  "tese_central": "Ajudar empresários a entenderem que a falta de operação pode estar prejudicando seu potencial de lucro.",
+  "intent": "dor_pessoal",
+  "palette": "mixed",
+  "mood": "serious urgency",
+  "composition": "Imagem de um homem em destaque à esquerda, headline em bloco amarelo à direita, corpo do texto abaixo da headline.",
+  "headline_text": "SE VOCÊ NÃO CONSEGUE SAIR DA OPERAÇÃO SUA EMPRESA TÁ PERDENDO POTENCIAL",
+  "body_text": "Existe um sistema de 5 etapas que organiza o seu comercial e destrava até 50% mais lucro — sem depender de você ou de um vendedor estrela.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "case-nominal",
+    "empresários",
+    "potencial-lucro"
+  ],
+  "keywords_pt": [
+    "empresa",
+    "operação",
+    "lucro",
+    "sistema",
+    "etapas"
+  ],
+  "keywords_en": [
+    "business",
+    "operation",
+    "profit",
+    "system",
+    "stages"
+  ],
+  "_filename": "BANCO-AD-YELLOW-BLOCO-STORY-nao-consegue-sair-operacao.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-BLOCO-STORY-nao-consegue-sair-operacao.png"
+}

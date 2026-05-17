@@ -1,0 +1,33 @@
+{
+  "style_id": "C",
+  "tese_central": "Aumente o lucro da sua empresa em até 50% com um sistema simples.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "confident persuasive",
+  "composition": "Texto centralizado com headline em destaque e CTA na parte inferior.",
+  "headline_text": "COMO AUMENTAR O LUCRO DA SUA EMPRESA EM ATÉ 50% SEM CONTRATAR, MAIS NINGUÉM",
+  "body_text": "Aplicando um sistema simples de 5 etapas já validado em mais de 1.000 empresas.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "promessa-numerica",
+    "aumento-lucro",
+    "sistema-simples"
+  ],
+  "keywords_pt": [
+    "aumentar lucro",
+    "empresa",
+    "sistema de 5 etapas",
+    "validado",
+    "empresários"
+  ],
+  "keywords_en": [
+    "increase profit",
+    "business",
+    "5-step system",
+    "validated",
+    "entrepreneurs"
+  ],
+  "_filename": "BANCO-AD-C-STORY-aumentar-lucro-50-num.png",
+  "_png_path": "artifacts/banco/BANCO-AD-C-STORY-aumentar-lucro-50-num.png"
+}

@@ -1,0 +1,33 @@
+{
+  "style_id": "DARK-CARTA",
+  "tese_central": "Convite para empresários acessarem um sistema exclusivo de vendas.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "exclusive urgency",
+  "composition": "Texto centralizado com destaque para o convite e CTA na parte inferior.",
+  "headline_text": "VOCÊ FOI CONVIDADO PARA ACESSAR UM SISTEMA QUE POUCOS EMPRESÁRIOS CONHECEM",
+  "body_text": "Descubra o protocolo de 5 etapas para tornar suas vendas previsíveis e sustentáveis — sem contratar mais gente, sem depender de 'vendedores externos' e em seu microgerenciamento.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "convite-evento",
+    "sistema-exclusivo",
+    "vendas"
+  ],
+  "keywords_pt": [
+    "convite",
+    "sistema de vendas",
+    "empresários",
+    "exclusivo",
+    "protocolo"
+  ],
+  "keywords_en": [
+    "invitation",
+    "sales system",
+    "entrepreneurs",
+    "exclusive",
+    "protocol"
+  ],
+  "_filename": "BANCO-AD-DARK-CARTA-STORY-convite-sistema-poucos-empresarios.png",
+  "_png_path": "artifacts/banco/BANCO-AD-DARK-CARTA-STORY-convite-sistema-poucos-empresarios.png"
+}

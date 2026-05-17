@@ -1,0 +1,33 @@
+{
+  "style_id": "DARK-OBJETO",
+  "tese_central": "Multiplique resultados de vendas com um sistema estruturado.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "confident strategic",
+  "composition": "Imagem de dominós em destaque, headline centralizada, CTA na parte inferior.",
+  "headline_text": "MULTIPLIQUE OS RESULTADOS DO MELHOR VENDEDOR",
+  "body_text": "Sem contratar mais gente e sem depender de talento individual. Apenas organizando o comercial em um sistema de 5 etapas R$ 3,5 bilhões em metas batidas com esse sistema.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "promessa-numerica",
+    "vendas",
+    "sistema-estruturado"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "sistema de vendas",
+    "resultados",
+    "melhor vendedor",
+    "metas"
+  ],
+  "keywords_en": [
+    "sales",
+    "sales system",
+    "results",
+    "best seller",
+    "goals"
+  ],
+  "_filename": "BANCO-AD-DARK-OBJETO-STORY-multiplique-melhor-vendedor-domino.png",
+  "_png_path": "artifacts/banco/BANCO-AD-DARK-OBJETO-STORY-multiplique-melhor-vendedor-domino.png"
+}

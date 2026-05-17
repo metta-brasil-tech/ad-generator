@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "O ad questiona a satisfação do empresário com os resultados da sua empresa, destacando desafios do mercado.",
+  "intent": "dor_pessoal",
+  "palette": "dark",
+  "mood": "urgent concern",
+  "composition": "Texto centralizado com headline em destaque e corpo logo abaixo, CTA na parte inferior.",
+  "headline_text": "Empresário, você está satisfeito com o resultado da sua empresa hoje?",
+  "body_text": "Se a sua operação comercial já opera no limite, imagine com a Copa, as Eleições e feriados prolongados pela frente retendo o mercado.\n\nCom as mesmas práticas, é impossível esperar algo diferente. Aplique agora para uma reunião estratégica 1 a 1 e construa um método imune ao cenário externo.",
+  "cta_text": "TOQUE EM SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "dor-emocional",
+    "estratégia-empresarial",
+    "resultado-negócio"
+  ],
+  "keywords_pt": [
+    "satisfação empresarial",
+    "resultado",
+    "estratégia",
+    "mercado",
+    "desafios"
+  ],
+  "keywords_en": [
+    "business satisfaction",
+    "results",
+    "strategy",
+    "market",
+    "challenges"
+  ],
+  "_filename": "PP-SE-974-Capt-FB-EST-1-A-EMPRESARIO-VOCE-ESTA-SATISFEITO.png",
+  "_png_path": "artifacts/banco/PP-SE-974-Capt-FB-EST-1-A-EMPRESARIO-VOCE-ESTA-SATISFEITO.png"
+}

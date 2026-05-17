@@ -1,0 +1,34 @@
+{
+  "style_id": "A",
+  "tese_central": "O ad comunica a importância de entender o processo de vendas para fechar negócios.",
+  "intent": "dor_pessoal",
+  "palette": "light-white",
+  "mood": "informative urgency",
+  "composition": "A imagem mostra um cliente em uma loja, com o headline posicionado na parte superior e o corpo do texto abaixo.",
+  "headline_text": "VOCÊ RECEBE CLIENTE NA LOJA, MAS NÃO FECHA A VENDA?",
+  "body_text": "O problema é o processo de vendas. Na Sessão Estratégica, a gente mapeia seu processo comercial e mostra onde sua equipe está perdendo venda. Sem custo.",
+  "cta_text": "AGENDIE UMA SESSÃO ESTRATÉGICA",
+  "has_person_photo": true,
+  "tags": [
+    "vendas",
+    "estratégia",
+    "atendimento",
+    "negócios"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "atendimento ao cliente",
+    "estratégia comercial",
+    "perda de vendas",
+    "sessão estratégica"
+  ],
+  "keywords_en": [
+    "sales",
+    "customer service",
+    "business strategy",
+    "sales loss",
+    "strategic session"
+  ],
+  "_filename": "BANCO-AD-A-STORY-cliente-na-loja-nao-fecha.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-cliente-na-loja-nao-fecha.png"
+}

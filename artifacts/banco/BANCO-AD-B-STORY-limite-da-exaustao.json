@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "A exaustão do empresário limita o crescimento da empresa.",
+  "intent": "dor_pessoal",
+  "palette": "dark",
+  "mood": "serious urgency",
+  "composition": "Imagem do apresentador em destaque, headline centralizada em negrito, corpo do texto abaixo da headline.",
+  "headline_text": "O LIMITE DA SUA EMPRESA É A SUA EXAUSTÃO.",
+  "body_text": "Enquanto você for a única engrenagem, o negócio não cresce. Aplique para a Mentoria SMTM e construa uma operação com método, liderança treinada e pessoas que funcionem sem você.",
+  "cta_text": "APLIQUE PARA A MENTORIA",
+  "has_person_photo": true,
+  "tags": [
+    "mentoria",
+    "crescimento-empresarial",
+    "liderança"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "crescimento",
+    "exaustão",
+    "liderança",
+    "negócios"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "growth",
+    "exhaustion",
+    "leadership",
+    "business"
+  ],
+  "_filename": "BANCO-AD-B-STORY-limite-da-exaustao.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-limite-da-exaustao.png"
+}

@@ -174,11 +174,23 @@ def search_ad_refs(
         if matching:
             scored = matching
 
+    # Resolve png_path relativo (commitado como "artifacts/banco/X.png") pra absoluto.
+    # Base = diretório do engine/. Em Vercel os PNGs não existem (gitignored), mas
+    # JSONs + _embeddings.json sim — search_ad_refs continua devolvendo paths
+    # absolutos coerentes, e o adapter Gemini é quem decide se consegue ler.
+    engine_dir = Path(__file__).resolve().parent
+
     refs = []
     for score, item in scored[:top_k]:
+        raw_png = item.get("png_path", "")
+        # Se for relativo (commitado), prepende engine_dir; absoluto fica como está
+        if raw_png and not Path(raw_png).is_absolute():
+            resolved_png = str((engine_dir / raw_png).resolve())
+        else:
+            resolved_png = raw_png
         refs.append(AdRef(
             filename=item.get("filename", ""),
-            png_path=item.get("png_path", ""),
+            png_path=resolved_png,
             style_id=item.get("style_id", ""),
             intent=item.get("intent", ""),
             tese_central=item.get("tese_central", ""),

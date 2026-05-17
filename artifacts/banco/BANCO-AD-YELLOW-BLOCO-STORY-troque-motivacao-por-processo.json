@@ -1,0 +1,34 @@
+{
+  "style_id": "YELLOW-BLOCO",
+  "tese_central": "Transforme sua equipe de vendas em uma máquina de resultados.",
+  "intent": "promessa_numerica",
+  "palette": "yellow-bg",
+  "mood": "motivational focus",
+  "composition": "Imagem de uma pessoa sentada em uma mesa, com o texto da headline em destaque na parte superior.",
+  "headline_text": "TROQUE A MOTIVAÇÃO POR PROCESSOS DE VENDAS QUE FUNCIONAM",
+  "body_text": "Me dê 60 minutos para transformar o seu time comercial em uma máquina de bater meta.",
+  "cta_text": "TOQUE EM 'SAIBA MAIS' ABAIXO",
+  "has_person_photo": true,
+  "tags": [
+    "transformação",
+    "vendas",
+    "processos",
+    "diagnóstico"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "motivação",
+    "processos",
+    "diagnóstico",
+    "transformação"
+  ],
+  "keywords_en": [
+    "sales",
+    "motivation",
+    "processes",
+    "diagnostic",
+    "transformation"
+  ],
+  "_filename": "BANCO-AD-YELLOW-BLOCO-STORY-troque-motivacao-por-processo.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-BLOCO-STORY-troque-motivacao-por-processo.png"
+}

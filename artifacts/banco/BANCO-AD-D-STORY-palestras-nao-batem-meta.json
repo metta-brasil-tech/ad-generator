@@ -1,0 +1,33 @@
+{
+  "style_id": "D",
+  "tese_central": "O ad comunica a urgência de evitar palestras ineficazes e oferece um diagnóstico comercial gratuito.",
+  "intent": "dor_pessoal",
+  "palette": "dark",
+  "mood": "urgent frustration",
+  "composition": "Imagem central de dinheiro queimando, headline em destaque na parte superior, CTA na parte inferior.",
+  "headline_text": "PARE DE PERDER TEMPO COM PALESTRAS QUE NÃO FAZEM SEU TIME BATER META",
+  "body_text": "Receba um diagnóstico comercial gratuito baseado na realidade real da sua empresa.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "diagnóstico-comercial",
+    "palestras",
+    "meta-vendas"
+  ],
+  "keywords_pt": [
+    "palestras",
+    "diagnóstico comercial",
+    "vendas",
+    "meta",
+    "tempo"
+  ],
+  "keywords_en": [
+    "lectures",
+    "commercial diagnosis",
+    "sales",
+    "goal",
+    "time"
+  ],
+  "_filename": "BANCO-AD-D-STORY-palestras-nao-batem-meta.png",
+  "_png_path": "artifacts/banco/BANCO-AD-D-STORY-palestras-nao-batem-meta.png"
+}

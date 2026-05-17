@@ -1,0 +1,33 @@
+{
+  "style_id": "YELLOW-BLOCO",
+  "tese_central": "Aumente o lucro em até 50% sem depender de vendedor estrela.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident informative",
+  "composition": "Imagem de um apresentador à esquerda, headline em destaque na parte superior, corpo do texto abaixo da headline, CTA na parte inferior.",
+  "headline_text": "COMO AUMENTAR O LUCRO EM ATÉ 50% SEM CONTRATAR, MAIS NINGUÉM",
+  "body_text": "5 ETAPAS SIMPLES E APLICÁVEIS\n+1.000 EMPRESAS JÁ VALIDARAM\nSEM DEPENDER DE VENDEDOR ESTRELA",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "aumento-lucro",
+    "empresários"
+  ],
+  "keywords_pt": [
+    "aumento de lucro",
+    "empresários",
+    "estratégias de vendas",
+    "sistema completo",
+    "validar empresas"
+  ],
+  "keywords_en": [
+    "profit increase",
+    "entrepreneurs",
+    "sales strategies",
+    "complete system",
+    "validate companies"
+  ],
+  "_filename": "BANCO-AD-YELLOW-BLOCO-STORY-aumentar-lucro-50.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-BLOCO-STORY-aumentar-lucro-50.png"
+}

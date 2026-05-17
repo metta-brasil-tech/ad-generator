@@ -1,0 +1,33 @@
+{
+  "style_id": "LIGHT-SURREAL",
+  "tese_central": "A urgência de priorizar o tempo com a família em vez de compromissos de última hora.",
+  "intent": "dor_pessoal",
+  "palette": "light-white",
+  "mood": "urgent reflection",
+  "composition": "Imagem surreal de um empresário com uma pedra na cabeça, sentado em frente a um computador, com a headline acima e o corpo do texto abaixo.",
+  "headline_text": "EMPRESÁRIO DO VAREJO",
+  "body_text": "Até quando você vai trocar jantar com seus filhos por reunião de última hora?",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "mentoria",
+    "varejo",
+    "tempo-familiar"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "varejo",
+    "tempo com a família",
+    "reuniões",
+    "prioridades"
+  ],
+  "keywords_en": [
+    "mentorship",
+    "retail",
+    "family time",
+    "meetings",
+    "priorities"
+  ],
+  "_filename": "BANCO-AD-LIGHT-SURREAL-STORY-jantar-filhos-reuniao.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LIGHT-SURREAL-STORY-jantar-filhos-reuniao.png"
+}

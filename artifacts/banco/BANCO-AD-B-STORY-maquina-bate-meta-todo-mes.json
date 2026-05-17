@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "Transforme seu time de vendas em uma máquina que bate meta todo mês.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "confident success",
+  "composition": "A imagem mostra um homem sorridente em um ambiente de escritório, com a headline posicionada na parte superior e o corpo do texto na parte inferior.",
+  "headline_text": "TRANSFORME SEU TIME DE VENDAS EM UMA MÁQUINA QUE BATE META TODO MÊS",
+  "body_text": "Veja o plano que ajudou empresas a acumularem R$ 8,5 bilhões em metas batidas.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "case-nominal",
+    "vendas",
+    "sucesso-empresarial"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "maquina de vendas",
+    "metas",
+    "sucesso",
+    "empresas"
+  ],
+  "keywords_en": [
+    "sales",
+    "sales machine",
+    "goals",
+    "success",
+    "companies"
+  ],
+  "_filename": "BANCO-AD-B-STORY-maquina-bate-meta-todo-mes.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-maquina-bate-meta-todo-mes.png"
+}

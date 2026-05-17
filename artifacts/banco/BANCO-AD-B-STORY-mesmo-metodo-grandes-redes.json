@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "O ad comunica a oportunidade de aplicar um método eficaz utilizado por grandes redes para empresários do varejo.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "confident opportunity",
+  "composition": "A imagem apresenta três pessoas em destaque, com o headline posicionado na parte superior e o CTA na parte inferior.",
+  "headline_text": "O MESMO MÉTODO QUE RODA EM GRANDES REDES",
+  "body_text": "Agora aberto para poucos empresários selecionados do varejo.",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "convite-evento",
+    "varejo",
+    "oportunidade"
+  ],
+  "keywords_pt": [
+    "método",
+    "varejo",
+    "empresários",
+    "grandes redes",
+    "oportunidade"
+  ],
+  "keywords_en": [
+    "method",
+    "retail",
+    "entrepreneurs",
+    "big networks",
+    "opportunity"
+  ],
+  "_filename": "BANCO-AD-B-STORY-mesmo-metodo-grandes-redes.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-mesmo-metodo-grandes-redes.png"
+}

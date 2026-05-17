@@ -1,0 +1,35 @@
+{
+  "style_id": "C",
+  "tese_central": "O ad comunica que, com a mentoria da Metta, é possível alcançar resultados significativos em 6 meses.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "confident urgency",
+  "composition": "A imagem apresenta um fundo escuro com texto centralizado, destacando a headline e o CTA na parte inferior.",
+  "headline_text": "HOJE VOCÊ APAGA INCÊNDIO, DAQUI A 6 MESES, SUA EQUIPE PODE BATER META SEM TE CHAMAR",
+  "body_text": "Mentoria para empresários de serviços que querem um comercial previsível, não heróico.",
+  "cta_text": "TOQUE EM 'SAIBA MAIS' E TENTE UMA VAGA.",
+  "has_person_photo": false,
+  "tags": [
+    "mentoria",
+    "empresários",
+    "serviços",
+    "resultado",
+    "comercial"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "empresários",
+    "serviços",
+    "resultado",
+    "comercial previsível"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "entrepreneurs",
+    "services",
+    "results",
+    "predictable sales"
+  ],
+  "_filename": "BANCO-AD-C-STORY-apaga-incendio-6-meses.png",
+  "_png_path": "artifacts/banco/BANCO-AD-C-STORY-apaga-incendio-6-meses.png"
+}

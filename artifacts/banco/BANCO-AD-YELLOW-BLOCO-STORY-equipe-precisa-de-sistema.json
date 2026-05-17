@@ -1,0 +1,33 @@
+{
+  "style_id": "YELLOW-BLOCO",
+  "tese_central": "A equipe comercial precisa de um sistema para aumentar a eficiência.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident urgency",
+  "composition": "Imagem de uma pessoa falando em um evento, headline posicionada na parte superior, CTA na parte inferior.",
+  "headline_text": "A EQUIPE COMERCIAL NÃO PRECISA DE MAIS PRESSÃO, PRECISA DE UM SISTEMA",
+  "body_text": "Empresas estão aumentando até 50% do lucro organizando o comercial em 5 etapas simples",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "sistema-comercial",
+    "eficiencia"
+  ],
+  "keywords_pt": [
+    "equipe comercial",
+    "sistema",
+    "aumento de lucro",
+    "organização",
+    "eficiência"
+  ],
+  "keywords_en": [
+    "sales team",
+    "system",
+    "profit increase",
+    "organization",
+    "efficiency"
+  ],
+  "_filename": "BANCO-AD-YELLOW-BLOCO-STORY-equipe-precisa-de-sistema.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-BLOCO-STORY-equipe-precisa-de-sistema.png"
+}

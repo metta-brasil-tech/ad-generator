@@ -1,0 +1,33 @@
+{
+  "style_id": "DARK-COLAGEM",
+  "tese_central": "Transforme vendedores em craques de vendas através de engenharia reversa.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "confident strategic",
+  "composition": "Imagem central de uma mão segurando uma peça de quebra-cabeça com um vendedor, headline na parte superior e CTA em destaque na parte inferior.",
+  "headline_text": "Transforme qualquer vendedor em um craque de vendas",
+  "body_text": "Use a engenharia reversa para replicar o sucesso do seu melhor vendedor no time todo",
+  "cta_text": "Toque em saiba mais para começar",
+  "has_person_photo": true,
+  "tags": [
+    "vendas",
+    "engenharia_reversa",
+    "desenvolvimento_pessoal"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "craque de vendas",
+    "engenharia reversa",
+    "sucesso",
+    "diagnóstico"
+  ],
+  "keywords_en": [
+    "sales",
+    "sales expert",
+    "reverse engineering",
+    "success",
+    "diagnostic"
+  ],
+  "_filename": "BANCO-AD-DARK-COLAGEM-STORY-craque-de-vendas-quebra-cabeca.png",
+  "_png_path": "artifacts/banco/BANCO-AD-DARK-COLAGEM-STORY-craque-de-vendas-quebra-cabeca.png"
+}

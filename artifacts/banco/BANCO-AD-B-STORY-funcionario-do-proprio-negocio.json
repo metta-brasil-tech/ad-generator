@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "O ad comunica a importância de parar de ser funcionário e construir um negócio autônomo.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "motivational empowerment",
+  "composition": "A imagem do orador está centralizada, com a headline em destaque na parte superior e o corpo do texto logo abaixo.",
+  "headline_text": "PARE DE SER O FUNCIONÁRIO DO SEU PRÓPRIO NEGÓCIO.",
+  "body_text": "Aplique para a mentoria e comece a construir uma operação que não depende de você para funcionar.",
+  "cta_text": "APLIQUE PARA A MENTORIA",
+  "has_person_photo": true,
+  "tags": [
+    "mentoria",
+    "negócios",
+    "autonomia"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "negócios",
+    "autonomia",
+    "empreendedorismo",
+    "sucesso"
+  ],
+  "keywords_en": [
+    "mentorship",
+    "business",
+    "autonomy",
+    "entrepreneurship",
+    "success"
+  ],
+  "_filename": "BANCO-AD-B-STORY-funcionario-do-proprio-negocio.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-funcionario-do-proprio-negocio.png"
+}

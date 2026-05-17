@@ -1,0 +1,39 @@
+{
+  "style_id": "NEWS-CARD",
+  "tese_central": "Mentoria oferece contrato de 'Risco Zero' para donos de lojas físicas no varejo.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "confident innovative engaging",
+  "composition": "Imagem de um apresentador em um evento, headline na parte superior, corpo do texto e CTA na parte inferior.",
+  "headline_text": "Varejo: Mentoria desafia o mercado e lança contrato de 'Risco Zero' para donos de lojas físicas",
+  "body_text": "Fim do desespero para bater meta. O Protocolo M.E.T.T.A. assume 100% do risco da sua operação: lucro previsível ou seu investimento de volta em contrato.",
+  "cta_text": "APLIQUE PARA A MENTORIA",
+  "has_person_photo": true,
+  "tags": [
+    "varejo",
+    "mentoria",
+    "risco-zero",
+    "contrato",
+    "inovação"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "varejo",
+    "risco zero",
+    "contrato",
+    "inovação",
+    "lojas físicas",
+    "lucro previsível"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "retail",
+    "zero risk",
+    "contract",
+    "innovation",
+    "physical stores",
+    "predictable profit"
+  ],
+  "_filename": "BANCO-AD-NEWS-CARD-STORY-risco-zero-varejo.png",
+  "_png_path": "artifacts/banco/BANCO-AD-NEWS-CARD-STORY-risco-zero-varejo.png"
+}

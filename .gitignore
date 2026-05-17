@@ -1,8 +1,15 @@
 .env
 .env.local
-artifacts/
 __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
 venv/
+
+# Artifacts: ignoramos tudo, EXCETO os JSONs do banco (descriptions + embeddings)
+# que precisam ir pra produção (Vercel) pra search_ad_refs funcionar
+artifacts/*
+!artifacts/banco/
+artifacts/banco/*
+!artifacts/banco/*.json
+

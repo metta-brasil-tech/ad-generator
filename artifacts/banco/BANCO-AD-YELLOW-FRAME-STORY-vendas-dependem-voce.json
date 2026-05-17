@@ -1,0 +1,35 @@
+{
+  "style_id": "YELLOW-FRAME",
+  "tese_central": "Mentoria Metta ajuda empresários do varejo a superar desafios de vendas.",
+  "intent": "dor_pessoal",
+  "palette": "mixed",
+  "mood": "urgent support",
+  "composition": "Imagem central de notas de dinheiro, headline em destaque na parte superior, CTA na parte inferior.",
+  "headline_text": "SUAS VENDAS AINDA DEPENDEM DE VOCÊ?",
+  "body_text": "Mentoria Metta para donos que querem bater meta previsível sem viver presos no operacional.",
+  "cta_text": "TOQUE EM 'SAIBA MAIS' E PREENCHA A APLICAÇÃO.",
+  "has_person_photo": false,
+  "tags": [
+    "mentoria",
+    "varejo",
+    "vendas",
+    "apoio",
+    "desempenho"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "vendas",
+    "varejo",
+    "apoio empresarial",
+    "desempenho"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "sales",
+    "retail",
+    "business support",
+    "performance"
+  ],
+  "_filename": "BANCO-AD-YELLOW-FRAME-STORY-vendas-dependem-voce.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-FRAME-STORY-vendas-dependem-voce.png"
+}

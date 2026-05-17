@@ -1,0 +1,33 @@
+{
+  "style_id": "D",
+  "tese_central": "Transforme seu melhor talento em um processo replicável em 60 minutos.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "confident transformative",
+  "composition": "Imagem central de uma pessoa reclinada, headline na parte superior, CTA na parte inferior.",
+  "headline_text": "O MÉTODO DE 60 MINUTOS",
+  "body_text": "QUE TRANSFORMA SEU MELHOR TALENTO EM UM PROCESSO REPLICÁVEL",
+  "cta_text": "SAIBA MAIS",
+  "has_person_photo": true,
+  "tags": [
+    "metodo-replicavel",
+    "desenvolvimento-pessoal",
+    "negocios"
+  ],
+  "keywords_pt": [
+    "método",
+    "talento",
+    "negócios",
+    "replicável",
+    "estratégia"
+  ],
+  "keywords_en": [
+    "method",
+    "talent",
+    "business",
+    "replicable",
+    "strategy"
+  ],
+  "_filename": "BANCO-AD-D-STORY-metodo-60-min-replicavel.png",
+  "_png_path": "artifacts/banco/BANCO-AD-D-STORY-metodo-60-min-replicavel.png"
+}

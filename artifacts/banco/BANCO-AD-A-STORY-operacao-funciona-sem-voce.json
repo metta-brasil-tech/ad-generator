@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Empresários aprendem a construir operações autônomas com a Mentoria SMTM.",
+  "intent": "convite_evento",
+  "palette": "light-white",
+  "mood": "inspirational engagement",
+  "composition": "Imagem de um palestrante em destaque, com público ao fundo; headline na parte inferior.",
+  "headline_text": "Você, entre empresários que construíram uma operação que funciona sem eles.",
+  "body_text": "Aplique para a Mentoria SMTM e receba um diagnóstico da sua operação com um especialista Metta.",
+  "cta_text": "APLIQUE PARA A MENTORIA",
+  "has_person_photo": true,
+  "tags": [
+    "mentoria",
+    "operacao-autonoma",
+    "desenvolvimento-pessoal"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "operacao",
+    "especialista",
+    "diagnóstico",
+    "empresários"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "operation",
+    "specialist",
+    "diagnosis",
+    "entrepreneurs"
+  ],
+  "_filename": "BANCO-AD-A-STORY-operacao-funciona-sem-voce.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-operacao-funciona-sem-voce.png"
+}

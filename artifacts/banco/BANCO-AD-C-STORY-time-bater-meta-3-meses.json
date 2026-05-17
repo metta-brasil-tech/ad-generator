@@ -1,0 +1,34 @@
+{
+  "style_id": "C",
+  "tese_central": "O ad comunica a eficácia da Mentoria Metta para ajudar equipes a bater metas sem supervisão constante.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident motivational",
+  "composition": "Imagem centralizada com gráfico, headline no topo e CTA destacado na parte inferior.",
+  "headline_text": "SEU TIME CONSEGUE BATER A META 3 MESES SEGUIDOS SEM VOCÊ COBRANDO NO GRUPO?",
+  "body_text": "Mentoria Metta para empresários do varejo que querem equipe autogerenciável e faturamento previsível. Protocolo M.E.T.T.A., usado em mais de 1.000 empresas, gerou R$ 8,5 bilhões em vendas no último ano.",
+  "cta_text": "TOQUE EM \"SAIBA MAIS\" E APLIQUE PARA A MENTORIA.",
+  "has_person_photo": false,
+  "tags": [
+    "mentoria",
+    "varejo",
+    "autogerenciamento",
+    "faturamento"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "varejo",
+    "autogerenciamento",
+    "faturamento",
+    "metas"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "retail",
+    "self-management",
+    "revenue",
+    "goals"
+  ],
+  "_filename": "BANCO-AD-C-STORY-time-bater-meta-3-meses.png",
+  "_png_path": "artifacts/banco/BANCO-AD-C-STORY-time-bater-meta-3-meses.png"
+}

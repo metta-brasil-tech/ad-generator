@@ -1,0 +1,33 @@
+{
+  "style_id": "LOGO-WALL",
+  "tese_central": "Mil empresas confiam em um método comprovado para aumentar vendas.",
+  "intent": "prova_social_case_nominal",
+  "palette": "dark",
+  "mood": "confident urgency",
+  "composition": "Headline positioned at the top, body text below, CTA at the bottom.",
+  "headline_text": "+1000 empresas",
+  "body_text": "Mais de R$ 8,5 bilhões em vendas em 12 meses não vêm de sorte...",
+  "cta_text": "TOQUE EM 'SAIBA MAIS'",
+  "has_person_photo": false,
+  "tags": [
+    "case-nominal",
+    "vendas",
+    "prova-social"
+  ],
+  "keywords_pt": [
+    "mil empresas",
+    "vendas",
+    "método comprovado",
+    "mentoria",
+    "negócios"
+  ],
+  "keywords_en": [
+    "thousand companies",
+    "sales",
+    "proven method",
+    "mentoring",
+    "business"
+  ],
+  "_filename": "BANCO-AD-LOGO-WALL-STORY-mil-empresas-8-5-bi.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LOGO-WALL-STORY-mil-empresas-8-5-bi.png"
+}

@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Empresários que faturam bem podem ter férias mais livres.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident relaxed",
+  "composition": "A figura do empresário está centralizada, segurando uma bola de praia e um notebook, com o texto em destaque na parte superior.",
+  "headline_text": "Empresário, você fatura +R$200 mil/mês e as suas férias ainda se parecem com isso?",
+  "body_text": "Se você precisa levar o notebook para a praia para a operação comercial não parar, você não tem liberdade, tem uma colônia invisível.",
+  "cta_text": "Toque em Saiba Mais",
+  "has_person_photo": true,
+  "tags": [
+    "case-nominal",
+    "liberdade-financeira",
+    "verão"
+  ],
+  "keywords_pt": [
+    "empresário",
+    "férias",
+    "liberdade",
+    "faturamento",
+    "negócios"
+  ],
+  "keywords_en": [
+    "entrepreneur",
+    "vacation",
+    "freedom",
+    "revenue",
+    "business"
+  ],
+  "_filename": "PP-SE-972-Capt-FB-EST-1-A-EMPRESARIO-VOCE-FATURA-200MIL.png",
+  "_png_path": "artifacts/banco/PP-SE-972-Capt-FB-EST-1-A-EMPRESARIO-VOCE-FATURA-200MIL.png"
+}

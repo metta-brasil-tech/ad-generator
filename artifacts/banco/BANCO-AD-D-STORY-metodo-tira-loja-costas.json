@@ -1,0 +1,33 @@
+{
+  "style_id": "D",
+  "tese_central": "Transforme seu conhecimento em vendas efetivas com nosso método.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "focused determination",
+  "composition": "Imagem de uma pessoa sentada em uma mesa, com a headline posicionada na parte superior e o corpo do texto abaixo.",
+  "headline_text": "O método que tira a loja das suas costas",
+  "body_text": "Transforme o conhecimento que você tem hoje em um sistema que faz sua equipe vender 25% a mais, sem que você precise dar uma única ordem.",
+  "cta_text": "QUERO GARANTIR MINHA VAGA",
+  "has_person_photo": true,
+  "tags": [
+    "varejo",
+    "método",
+    "aumento de vendas"
+  ],
+  "keywords_pt": [
+    "método de vendas",
+    "varejo",
+    "aumento de lucro",
+    "gestão de equipe",
+    "transformação"
+  ],
+  "keywords_en": [
+    "sales method",
+    "retail",
+    "profit increase",
+    "team management",
+    "transformation"
+  ],
+  "_filename": "BANCO-AD-D-STORY-metodo-tira-loja-costas.png",
+  "_png_path": "artifacts/banco/BANCO-AD-D-STORY-metodo-tira-loja-costas.png"
+}

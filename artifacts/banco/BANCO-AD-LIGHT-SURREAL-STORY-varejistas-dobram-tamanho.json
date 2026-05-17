@@ -1,0 +1,33 @@
+{
+  "style_id": "LIGHT-SURREAL",
+  "tese_central": "Convite para um encontro online sobre gestão comercial, destacando a importância de se destacar no mercado.",
+  "intent": "convite_evento",
+  "palette": "light-white",
+  "mood": "thought-provoking urgency",
+  "composition": "A figura surrealista de um homem de negócios está centralizada, com a headline posicionada acima e o CTA em destaque na parte inferior.",
+  "headline_text": "ENCONTRO ONLINE DE GESTÃO COMERCIAL",
+  "body_text": "Enquanto outros vivem brigando por migalhas e com o caixa sempre no limite da sobrevivência?",
+  "cta_text": "INSCREVA-SE AGORA",
+  "has_person_photo": true,
+  "tags": [
+    "gestão-comercial",
+    "encontro-online",
+    "convite-evento"
+  ],
+  "keywords_pt": [
+    "gestão comercial",
+    "encontro online",
+    "sobrevivência",
+    "varejistas",
+    "oportunidade"
+  ],
+  "keywords_en": [
+    "business management",
+    "online meeting",
+    "survival",
+    "retailers",
+    "opportunity"
+  ],
+  "_filename": "BANCO-AD-LIGHT-SURREAL-STORY-varejistas-dobram-tamanho.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LIGHT-SURREAL-STORY-varejistas-dobram-tamanho.png"
+}

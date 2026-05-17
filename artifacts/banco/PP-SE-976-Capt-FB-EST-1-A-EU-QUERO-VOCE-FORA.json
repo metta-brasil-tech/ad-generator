@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Convite para donos de empresas a se afastarem da operação comercial.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "assertive invitation",
+  "composition": "Imagem de um dedo apontando para a direita, headline em destaque na parte superior, body text abaixo, CTA na parte inferior.",
+  "headline_text": "EU QUERO VOCÊ FORA",
+  "body_text": "DA OPERAÇÃO COMERCIAL DA SUA EMPRESA\nAplique agora para sua reunião estratégica individual e construa uma equipe que bate meta sem depender de você.",
+  "cta_text": "TOQUE EM SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "convite-evento",
+    "estratégia-empresarial",
+    "autonomia"
+  ],
+  "keywords_pt": [
+    "convite",
+    "estratégia",
+    "autonomia",
+    "negócios",
+    "donos de empresas"
+  ],
+  "keywords_en": [
+    "invitation",
+    "strategy",
+    "autonomy",
+    "business",
+    "business owners"
+  ],
+  "_filename": "PP-SE-976-Capt-FB-EST-1-A-EU-QUERO-VOCE-FORA.png",
+  "_png_path": "artifacts/banco/PP-SE-976-Capt-FB-EST-1-A-EU-QUERO-VOCE-FORA.png"
+}

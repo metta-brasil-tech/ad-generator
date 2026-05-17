@@ -1,0 +1,33 @@
+{
+  "style_id": "YELLOW-DRAW",
+  "tese_central": "A pressão excessiva reduz as vendas.",
+  "intent": "dor_pessoal",
+  "palette": "yellow-bg",
+  "mood": "urgent awareness",
+  "composition": "Texto centralizado com elementos gráficos de setas e destaque em amarelo.",
+  "headline_text": "QUANTO MAIS VOCÊ COBRA, MENOS ELES VENDEN.",
+  "body_text": "A CIÊNCIA EXPLICA: PRESSÃO CRÔNICA ATIVA O 'MODO SOBREVIVÊNCIA', NÃO O 'MODO VENDA'.",
+  "cta_text": "APLIQUE PARA O DIAGNÓSTICO E TRANSFORME SEU TIME EM CAMPEÕES DE VENDAS.",
+  "has_person_photo": false,
+  "tags": [
+    "pressão-vendas",
+    "modo-sobrevivência",
+    "diagnóstico"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "pressão",
+    "modo sobrevivência",
+    "diagnóstico",
+    "transformação"
+  ],
+  "keywords_en": [
+    "sales",
+    "pressure",
+    "survival mode",
+    "diagnostic",
+    "transformation"
+  ],
+  "_filename": "BANCO-AD-YELLOW-DRAW-STORY-pressao-modo-sobrevivencia.png",
+  "_png_path": "artifacts/banco/BANCO-AD-YELLOW-DRAW-STORY-pressao-modo-sobrevivencia.png"
+}

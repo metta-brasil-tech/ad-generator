@@ -1,0 +1,33 @@
+{
+  "style_id": "LIGHT-TIPO",
+  "tese_central": "O ad comunica que faturamento é ego, enquanto lucro representa liberdade.",
+  "intent": "reframe_intelectual",
+  "palette": "light-white",
+  "mood": "bold clarity, motivational",
+  "composition": "Texto centralizado com headline em destaque e corpo abaixo, CTA na parte inferior.",
+  "headline_text": "FATURAMENTO É EGO. LUCRO É LIBERDADE.",
+  "body_text": "Descubra o sistema de 5 etapas que vai estancar a fuga do seu caixa e fazer a sua equipe vender sozinha.",
+  "cta_text": "TOQUE NO LINK ABAIXO",
+  "has_person_photo": false,
+  "tags": [
+    "varejo",
+    "liberdade financeira",
+    "sistema de vendas"
+  ],
+  "keywords_pt": [
+    "faturamento",
+    "lucro",
+    "liberdade",
+    "vendas",
+    "varejo"
+  ],
+  "keywords_en": [
+    "revenue",
+    "profit",
+    "freedom",
+    "sales",
+    "retail"
+  ],
+  "_filename": "BANCO-AD-LIGHT-TIPO-STORY-faturamento-ego-lucro-liberdade.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LIGHT-TIPO-STORY-faturamento-ego-lucro-liberdade.png"
+}

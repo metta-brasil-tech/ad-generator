@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "O ad comunica a importância de gerenciar uma equipe de vendas de forma proativa.",
+  "intent": "convite_evento",
+  "palette": "mixed",
+  "mood": "confident strategic warm",
+  "composition": "A imagem do especialista está centralizada, com o texto da headline na parte superior e o CTA destacado em amarelo na parte inferior.",
+  "headline_text": "VOCÊ ESTÁ GERINDO UMA EQUIPE DE VENDAS... OU SÓ ESPERANDO QUE ELES VENDAM?",
+  "body_text": "Na Sessão Estratégica gratuita da Metta, um especialista mapeia por que sua equipe perde vendas e o que é preciso para transformar tirador de pedido em vendedor com método.",
+  "cta_text": "AGENDE UMA SESSÃO ESTRATÉGICA",
+  "has_person_photo": true,
+  "tags": [
+    "convite-evento",
+    "gestão-vendas",
+    "estratégia"
+  ],
+  "keywords_pt": [
+    "gestão de vendas",
+    "sessão estratégica",
+    "especialista em vendas",
+    "transformação de equipe",
+    "metodologia de vendas"
+  ],
+  "keywords_en": [
+    "sales management",
+    "strategic session",
+    "sales expert",
+    "team transformation",
+    "sales methodology"
+  ],
+  "_filename": "BANCO-AD-A-STORY-gerindo-ou-esperando.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-gerindo-ou-esperando.png"
+}

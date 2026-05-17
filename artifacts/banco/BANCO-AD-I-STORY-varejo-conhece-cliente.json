@@ -1,0 +1,35 @@
+{
+  "style_id": "I",
+  "tese_central": "Empresários do varejo conhecem melhor seus clientes através de pesquisa de mercado.",
+  "intent": "prova_social_case_nominal",
+  "palette": "mixed",
+  "mood": "insightful determination",
+  "composition": "Imagem central de um empresário com peças de quebra-cabeça, headline em destaque na parte superior, corpo do texto abaixo.",
+  "headline_text": "TEM EMPRESÁRIO DO VAREJO QUE CONHECE O CLIENTE MELHOR QUE QUALQUER PESQUISA DE MERCADO...",
+  "body_text": "mas essa inteligência fica presa na cabeça dele e dois vendedores que se destacam. Mentoria Metta para transformar conhecimento da sua equipe em resultado comercial previsível. Mais de 300 mil vendedores no Protocolo M.E.T.T.A. aos longos de 21 anos.",
+  "cta_text": "Toque em \"Saiba Mais\" e preencha sua aplicação.",
+  "has_person_photo": true,
+  "tags": [
+    "varejo",
+    "mentoria",
+    "conhecimento",
+    "pesquisa",
+    "case-nominal"
+  ],
+  "keywords_pt": [
+    "varejo",
+    "conhecimento do cliente",
+    "pesquisa de mercado",
+    "mentoria",
+    "vendedores"
+  ],
+  "keywords_en": [
+    "retail",
+    "customer knowledge",
+    "market research",
+    "mentoring",
+    "salespeople"
+  ],
+  "_filename": "BANCO-AD-I-STORY-varejo-conhece-cliente.png",
+  "_png_path": "artifacts/banco/BANCO-AD-I-STORY-varejo-conhece-cliente.png"
+}

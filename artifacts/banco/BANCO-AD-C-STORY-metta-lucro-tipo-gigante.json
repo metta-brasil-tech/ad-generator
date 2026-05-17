@@ -1,0 +1,33 @@
+{
+  "style_id": "C",
+  "tese_central": "Método que ajuda lojas a reduzir custos e aumentar vendas.",
+  "intent": "promessa_numerica",
+  "palette": "dark",
+  "mood": "serious confidence",
+  "composition": "Imagem de uma pessoa em perfil à esquerda, headline centralizada na parte superior, corpo do texto abaixo da headline, CTA destacado em amarelo na parte inferior.",
+  "headline_text": "O MÉTODO QUE TIRA A LOJA DAS SUAS CUSTAS",
+  "body_text": "Transforme o conhecimento que você tem hoje em um sistema que faz sua equipe vender 25% a mais, sem que você precise dar uma única ordem.",
+  "cta_text": "QUERO GARANTIR MINHA VAGA",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "varejo",
+    "redução-de-custos"
+  ],
+  "keywords_pt": [
+    "método de vendas",
+    "redução de custos",
+    "aumento de vendas",
+    "varejo",
+    "sistema de vendas"
+  ],
+  "keywords_en": [
+    "sales method",
+    "cost reduction",
+    "sales increase",
+    "retail",
+    "sales system"
+  ],
+  "_filename": "BANCO-AD-C-STORY-metta-lucro-tipo-gigante.png",
+  "_png_path": "artifacts/banco/BANCO-AD-C-STORY-metta-lucro-tipo-gigante.png"
+}

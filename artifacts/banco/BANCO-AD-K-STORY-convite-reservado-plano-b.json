@@ -1,0 +1,33 @@
+{
+  "style_id": "K",
+  "tese_central": "Convite para um programa de gestão empresarial que promete resultados em vendas.",
+  "intent": "convite_evento",
+  "palette": "dark",
+  "mood": "urgent opportunity",
+  "composition": "Headline em destaque na parte superior, corpo do texto centralizado, CTA na parte inferior.",
+  "headline_text": "CONVITE RESERVADO",
+  "body_text": "AO DONO QUE JÁ TEM RESULTADO, MAS AINDA É O PLANO B DA PRÓPRIA EMPRESA\nPrograma de implementação em gestão comercial criado pela Metta, responsável por R$ 8,2 bilhões em vendas geradas para clientes em 12 meses.",
+  "cta_text": "TOQUE EM SAIBA MAIS",
+  "has_person_photo": false,
+  "tags": [
+    "convite-evento",
+    "gestão-empresarial",
+    "resultados-vendas"
+  ],
+  "keywords_pt": [
+    "convite",
+    "gestão empresarial",
+    "resultados",
+    "vendas",
+    "plano B"
+  ],
+  "keywords_en": [
+    "invitation",
+    "business management",
+    "results",
+    "sales",
+    "plan B"
+  ],
+  "_filename": "BANCO-AD-K-STORY-convite-reservado-plano-b.png",
+  "_png_path": "artifacts/banco/BANCO-AD-K-STORY-convite-reservado-plano-b.png"
+}

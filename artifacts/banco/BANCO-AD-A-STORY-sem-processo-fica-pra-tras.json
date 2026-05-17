@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "A mentoria da Metta ajuda a evitar que processos comerciais inadequados deixem negócios para trás.",
+  "intent": "dor_pessoal",
+  "palette": "dark",
+  "mood": "urgent support",
+  "composition": "A imagem do mentor está centralizada, com o texto da headline na parte superior e o corpo do texto logo abaixo.",
+  "headline_text": "QUEM NÃO TEM PROCESSO COMERCIAL COM MÉTODO ESTÁ FICANDO PARA TRÁS",
+  "body_text": "A Mentoria Supre a Meta Todo Mês coloca um especialista dentro da sua operação e constrói o processo adequado ao seu modelo de negócio. Com garantia contratual.",
+  "cta_text": "APLIQUE PARA A MENTORIA",
+  "has_person_photo": true,
+  "tags": [
+    "mentoria",
+    "processo-comercial",
+    "apoio-empresarial"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "processo comercial",
+    "negócio",
+    "especialista",
+    "garantia"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "commercial process",
+    "business",
+    "specialist",
+    "guarantee"
+  ],
+  "_filename": "BANCO-AD-A-STORY-sem-processo-fica-pra-tras.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-sem-processo-fica-pra-tras.png"
+}

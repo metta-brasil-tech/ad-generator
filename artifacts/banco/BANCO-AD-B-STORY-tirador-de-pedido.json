@@ -1,0 +1,34 @@
+{
+  "style_id": "B",
+  "tese_central": "Transforme tiradores de pedido em vendedores de verdade.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident transformation",
+  "composition": "Imagem de uma pessoa falando ao telefone à esquerda, com texto destacado à direita.",
+  "headline_text": "TRANSFORME QUALQUER TIRADOR DE PEDIDO EM UM VENDEDOR DE VERDADE",
+  "body_text": "Use o Protocolo M.E.T.T.A. para blindar a sua loja e bater meta sem a sua presença física.",
+  "cta_text": "Toque em 'saiba mais' para começar",
+  "has_person_photo": true,
+  "tags": [
+    "transformação",
+    "vendas",
+    "serviços",
+    "negócios"
+  ],
+  "keywords_pt": [
+    "tirador de pedido",
+    "vendas",
+    "transformação",
+    "negócios",
+    "protocolo"
+  ],
+  "keywords_en": [
+    "order taker",
+    "sales",
+    "transformation",
+    "business",
+    "protocol"
+  ],
+  "_filename": "BANCO-AD-B-STORY-tirador-de-pedido.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-tirador-de-pedido.png"
+}

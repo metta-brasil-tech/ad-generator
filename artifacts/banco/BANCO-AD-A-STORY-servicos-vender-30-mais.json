@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Como aumentar vendas sem sobrecarregar a equipe.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "motivational clarity",
+  "composition": "Imagem de um empresário concentrado, headline posicionada na parte superior, corpo do texto abaixo da headline.",
+  "headline_text": "Empresário de serviços: como fazer sua equipe vender 30% a mais sem aumentar sua carga de trabalho",
+  "body_text": "Encontro gratuito para aprender a usar o método testado para aumentar suas vendas.",
+  "cta_text": "Toque em 'Saiba mais' e participe gratuitamente",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "encontro-online",
+    "vendas"
+  ],
+  "keywords_pt": [
+    "vendas",
+    "aumento de vendas",
+    "empresário",
+    "carga de trabalho",
+    "encontro gratuito"
+  ],
+  "keywords_en": [
+    "sales",
+    "sales increase",
+    "entrepreneur",
+    "workload",
+    "free event"
+  ],
+  "_filename": "BANCO-AD-A-STORY-servicos-vender-30-mais.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-servicos-vender-30-mais.png"
+}

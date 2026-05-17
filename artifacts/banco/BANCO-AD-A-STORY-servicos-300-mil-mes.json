@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "Empresários de serviços podem aumentar faturamento sem estar presente.",
+  "intent": "promessa_numerica",
+  "palette": "mixed",
+  "mood": "confident informative",
+  "composition": "Imagem de um empresário sorridente à esquerda, com texto em destaque à direita.",
+  "headline_text": "Empresário de serviços que já fatura acima de R$ 300 mil mês:",
+  "body_text": "sua equipe precisa bater meta sem você no balcão",
+  "cta_text": "Toque em 'Saiba mais'",
+  "has_person_photo": true,
+  "tags": [
+    "promessa-numerica",
+    "serviços",
+    "encontro-online"
+  ],
+  "keywords_pt": [
+    "faturamento",
+    "serviços",
+    "metas",
+    "empresário",
+    "online"
+  ],
+  "keywords_en": [
+    "revenue",
+    "services",
+    "goals",
+    "entrepreneur",
+    "online"
+  ],
+  "_filename": "BANCO-AD-A-STORY-servicos-300-mil-mes.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-servicos-300-mil-mes.png"
+}

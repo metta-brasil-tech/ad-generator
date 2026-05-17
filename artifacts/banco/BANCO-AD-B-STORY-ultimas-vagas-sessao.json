@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "Últimas vagas para uma sessão estratégica gratuita com um especialista Metta.",
+  "intent": "convite_evento",
+  "palette": "light-white",
+  "mood": "professional approachable",
+  "composition": "A imagem do especialista está à direita, com o texto à esquerda em uma coluna organizada.",
+  "headline_text": "Últimas vagas para uma Sessão Estratégica gratuita com um especialista Metta.",
+  "body_text": "- Diagnóstico Comercial Completo\n- Uma hora dedicada à sua operação\n- Sem compromisso",
+  "cta_text": "AGENDAR UMA SESSÃO ESTRATÉGICA",
+  "has_person_photo": true,
+  "tags": [
+    "convite-evento",
+    "sessão-estratégica",
+    "diagnóstico-comercial"
+  ],
+  "keywords_pt": [
+    "sessão estratégica",
+    "especialista Metta",
+    "diagnóstico comercial",
+    "vagas limitadas",
+    "consultoria gratuita"
+  ],
+  "keywords_en": [
+    "strategic session",
+    "Metta specialist",
+    "commercial diagnosis",
+    "limited spots",
+    "free consulting"
+  ],
+  "_filename": "BANCO-AD-B-STORY-ultimas-vagas-sessao.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-ultimas-vagas-sessao.png"
+}

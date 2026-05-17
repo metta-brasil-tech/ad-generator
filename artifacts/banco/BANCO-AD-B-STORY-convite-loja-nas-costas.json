@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "Convite para mentoria exclusiva para empresários do varejo.",
+  "intent": "convite_evento",
+  "palette": "mixed",
+  "mood": "inviting confidence",
+  "composition": "Imagem de um apresentador à esquerda, texto e CTA à direita.",
+  "headline_text": "CONVITE PESSOAL",
+  "body_text": "Fui selecionado para a única mentoria do Brasil que coloca o empresário no caminho pelo seu resultado.",
+  "cta_text": "TOQUE EM SAIBA MAIS ↓",
+  "has_person_photo": true,
+  "tags": [
+    "convite-evento",
+    "mentoria",
+    "varejo"
+  ],
+  "keywords_pt": [
+    "mentoria",
+    "varejo",
+    "convite",
+    "empresários",
+    "negócios"
+  ],
+  "keywords_en": [
+    "mentoring",
+    "retail",
+    "invitation",
+    "entrepreneurs",
+    "business"
+  ],
+  "_filename": "BANCO-AD-B-STORY-convite-loja-nas-costas.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-convite-loja-nas-costas.png"
+}

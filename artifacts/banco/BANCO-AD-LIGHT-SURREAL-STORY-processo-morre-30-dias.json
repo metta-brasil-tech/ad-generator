@@ -1,0 +1,34 @@
+{
+  "style_id": "LIGHT-SURREAL",
+  "tese_central": "A mudança de processos na empresa é desafiadora e muitas vezes falha rapidamente.",
+  "intent": "dor_pessoal",
+  "palette": "light-white",
+  "mood": "thoughtful urgency",
+  "composition": "Imagem central de um cérebro em um balão, headline no topo, body text abaixo da imagem.",
+  "headline_text": "POR QUE TODO PROCESSO NOVO NA SUA EMPRESA MORRE EM 30 DIAS?",
+  "body_text": "você treina na segunda, na quarta eles voltam a fazer do jeito velho. Não é preguiça, é o cérebro rejeitando a mudança.",
+  "cta_text": "Toque em 'saiba mais' e descubra como quebrar esse ciclo",
+  "has_person_photo": false,
+  "tags": [
+    "mudança",
+    "processos",
+    "cérebro",
+    "desempenho"
+  ],
+  "keywords_pt": [
+    "processos",
+    "mudança",
+    "empresa",
+    "cérebro",
+    "desempenho"
+  ],
+  "keywords_en": [
+    "processes",
+    "change",
+    "company",
+    "brain",
+    "performance"
+  ],
+  "_filename": "BANCO-AD-LIGHT-SURREAL-STORY-processo-morre-30-dias.png",
+  "_png_path": "artifacts/banco/BANCO-AD-LIGHT-SURREAL-STORY-processo-morre-30-dias.png"
+}

@@ -1,0 +1,33 @@
+{
+  "style_id": "B",
+  "tese_central": "Sessão exclusiva para donos de negócios com foco em resultados rápidos.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "confident urgency",
+  "composition": "Imagem de uma pessoa em destaque à esquerda, headline em destaque à direita, corpo do texto abaixo da headline.",
+  "headline_text": "ME DÊ 60 MINUTOS PARA TIRAR DO BALCÃO DA SUA PRÓPRIA LOJA",
+  "body_text": "O Plano de Saída da Operação com o protocolo que gerou R$ 8,5 bilhões em vendas no varejo sem \"motivaçãozinha\" e dinâmicas de palco.",
+  "cta_text": "TOQUE NO LINK ABAIXO",
+  "has_person_photo": true,
+  "tags": [
+    "sessão-exclusiva",
+    "donos-de-negócios",
+    "promessa-numerica"
+  ],
+  "keywords_pt": [
+    "sessão exclusiva",
+    "donos de negócios",
+    "resultados rápidos",
+    "vendas no varejo",
+    "plano de saída"
+  ],
+  "keywords_en": [
+    "exclusive session",
+    "business owners",
+    "quick results",
+    "retail sales",
+    "exit plan"
+  ],
+  "_filename": "BANCO-AD-B-STORY-60-min-tirar-do-balcao.png",
+  "_png_path": "artifacts/banco/BANCO-AD-B-STORY-60-min-tirar-do-balcao.png"
+}

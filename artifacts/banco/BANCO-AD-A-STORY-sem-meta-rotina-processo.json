@@ -1,0 +1,33 @@
+{
+  "style_id": "A",
+  "tese_central": "O ad comunica a importância de ter um protocolo comercial estruturado para melhorar resultados.",
+  "intent": "promessa_numerica",
+  "palette": "light-white",
+  "mood": "informative urgency",
+  "composition": "A imagem do apresentador está centralizada, com o texto da headline na parte superior e o CTA destacado em amarelo na parte inferior.",
+  "headline_text": "SEU COMERCIAL NÃO TEM META, ROTINA E PROCESSO?",
+  "body_text": "O protocolo de estruturação comercial da Metta muda isso. Diagnóstico gratuito.",
+  "cta_text": "AGENDIE SUA SESSÃO",
+  "has_person_photo": true,
+  "tags": [
+    "diagnóstico-gratuito",
+    "estruturação-comercial",
+    "meta-rotina-processo"
+  ],
+  "keywords_pt": [
+    "comercial",
+    "estruturação",
+    "diagnóstico",
+    "meta",
+    "rotina"
+  ],
+  "keywords_en": [
+    "commercial",
+    "structuring",
+    "diagnostic",
+    "goal",
+    "routine"
+  ],
+  "_filename": "BANCO-AD-A-STORY-sem-meta-rotina-processo.png",
+  "_png_path": "artifacts/banco/BANCO-AD-A-STORY-sem-meta-rotina-processo.png"
+}
