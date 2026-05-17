@@ -109,10 +109,10 @@ image:
     contrast:        0.15
     overlay:         "none"
   ratio:             "free"
-  prompt_template_ref: "image-prompts/style-YELLOW-BLOCO.md"
-  reference_image:
-    - "figma://1:78"
-    - "figma://1:1021"
+  prompt_template_ref: "image-prompts/metta/style-YELLOW-BLOCO.md"
+  reference_image: []  # figma:// refs removidos — adicionar PNGs locais em exemplars/metta/ quando disponíveis
+  # - "figma://1:78"
+  # - "figma://1:1021"
 
 slots:
   - name:            "logo_bar"

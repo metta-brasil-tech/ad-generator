@@ -56,8 +56,8 @@ image:
   placement: "center-top"
   filters: {saturation: -0.3, contrast: 0.4, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/style-LIGHT-SURREAL.md"
-  reference_image: ["figma://1:947"]
+  prompt_template_ref: "image-prompts/metta/style-LIGHT-SURREAL.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "headline", role: "decoda_metafora", required: true, max_chars: 100, max_lines: 4,

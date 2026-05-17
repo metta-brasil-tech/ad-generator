@@ -109,10 +109,10 @@ image:
     contrast:        0.1
     overlay:         "none"
   ratio:             "free"
-  prompt_template_ref: "image-prompts/style-LIGHT-SURREAL.md"
-  reference_image:
-    - "figma://1:220"
-    - "figma://1:477"
+  prompt_template_ref: "image-prompts/metta/style-LIGHT-SURREAL.md"
+  reference_image: []  # figma:// refs removidos — adicionar PNGs locais em exemplars/metta/ quando disponíveis
+  # - "figma://1:220"
+  # - "figma://1:477"
 
 slots:
   - name:            "headline"

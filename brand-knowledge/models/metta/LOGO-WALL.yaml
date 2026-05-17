@@ -59,7 +59,7 @@ image:
   filters: {saturation: -1, contrast: 0.2, overlay: "none"}
   ratio: "free"
   prompt_template_ref: "n/a — assets reais"
-  reference_image: ["figma://1:444"]
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "tag", role: "label", required: false, max_chars: 30,

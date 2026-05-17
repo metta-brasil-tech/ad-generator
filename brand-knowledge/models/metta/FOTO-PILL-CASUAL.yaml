@@ -108,7 +108,7 @@ image:
     contrast: 0.1
     overlay: "gradient-fade-to-white-bottom-25%"
   ratio: "free"
-  prompt_template_ref: "image-prompts/style-foto-pill-casual.md"
+  prompt_template_ref: "image-prompts/metta/style-A.md"
   reference_image: []
 
 slots:

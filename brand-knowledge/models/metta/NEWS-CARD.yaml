@@ -57,8 +57,8 @@ image:
   placement: "top-centered-after-tag"
   filters: {saturation: 0, contrast: 0.15, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/style-A.md"
-  reference_image: ["figma://1:296"]
+  prompt_template_ref: "image-prompts/metta/style-A.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "tag", role: "segmento_data", required: true, max_chars: 40,

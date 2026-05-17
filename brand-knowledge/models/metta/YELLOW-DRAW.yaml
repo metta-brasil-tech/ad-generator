@@ -56,8 +56,8 @@ image:
   placement: "center"
   filters: {saturation: 0, contrast: 0.1, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/_base.md"
-  reference_image: ["figma://1:624"]
+  prompt_template_ref: "image-prompts/metta/_base.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "headline", role: "conceito_leve", required: true, max_chars: 70, max_lines: 3,

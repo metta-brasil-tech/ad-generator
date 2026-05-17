@@ -57,7 +57,7 @@ image:
   filters: {saturation: -0.1, contrast: 0.3, overlay: "moody-rim-light"}
   ratio: "free"
   prompt_template_ref: "n/a — render 3D em Cinema 4D / Blender"
-  reference_image: ["figma://1:1076"]
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "tag", role: "etapa_metodo", required: false, max_chars: 30,

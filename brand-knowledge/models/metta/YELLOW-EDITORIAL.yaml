@@ -57,8 +57,8 @@ image:
   placement: "top"
   filters: {saturation: -1, contrast: 0.3, overlay: "blur-3px"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/_base.md"
-  reference_image: ["figma://1:957"]
+  prompt_template_ref: "image-prompts/metta/_base.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "tag", role: "label", required: false, max_chars: 30,

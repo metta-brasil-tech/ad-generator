@@ -62,8 +62,8 @@ image:
   placement: "top-inside-card"
   filters: {saturation: 0, contrast: 0.2, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/_base.md"
-  reference_image: ["figma://1:139", "figma://1:370"]
+  prompt_template_ref: "image-prompts/metta/_base.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "tag", role: "segmento_pergunta", required: true, max_chars: 30,

@@ -234,11 +234,19 @@ class GeminiImageGen:
 
     @staticmethod
     def _read_image(ref: str) -> bytes:
-        """Read image from local path or http URL."""
+        """Read image from local path or http URL.
+
+        figma:// refs viram FileNotFoundError soft (capturado no caller como
+        warning), porque ainda não temos resolver Figma API. Adicionar PNGs
+        locais em exemplars/{marca}/ pra ter refs funcionais.
+        """
         if ref.startswith(("http://", "https://")):
             return httpx.get(ref, timeout=30).content
         if ref.startswith("figma://"):
-            raise NotImplementedError("figma:// refs need Figma API resolution — pass http URL instead")
+            raise FileNotFoundError(
+                f"figma:// ref ainda não resolvível: {ref} — adicionar PNG local em "
+                f"exemplars/{{marca}}/ ou implementar figma_resolver via FIGMA_TOKEN"
+            )
         return Path(ref).read_bytes()
 
 
@@ -284,6 +292,17 @@ class ImageGenAdapter:
         full_prompt = prompt
         if negative_prompt:
             full_prompt += f"\n\nAVOID: {negative_prompt}"
+
+        # WARN LOUD: refs vão pro buraco quando provider não é Gemini.
+        # Sem isso, o flow inteiro de banco de refs vira código morto invisível.
+        n_refs = len(reference_images or [])
+        if n_refs > 0 and not isinstance(self.backend, GeminiImageGen):
+            print(
+                f"  [warn] {n_refs} reference_image(s) ignored — provider '{self.provider}' "
+                f"doesn't accept refs. Use IMAGE_GEN_PROVIDER=nano-banana-2 (+ GEMINI_API_KEY) "
+                f"pra usar referências visuais."
+            )
+
         try:
             if isinstance(self.backend, GeminiImageGen):
                 return self.backend.generate(full_prompt, aspect_ratio, reference_images)

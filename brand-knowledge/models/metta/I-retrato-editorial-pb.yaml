@@ -63,8 +63,8 @@ image:
   placement: "top-centered"
   filters: {saturation: -1, contrast: 0.3, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "image-prompts/_base.md"
-  reference_image: ["figma://1:212", "figma://1:679"]
+  prompt_template_ref: "image-prompts/metta/_base.md"
+  reference_image: []  # figma:// ref removido
 
 slots:
   - {name: "headline", role: "interpretacao_autoritaria", required: true, max_chars: 100, max_lines: 4,

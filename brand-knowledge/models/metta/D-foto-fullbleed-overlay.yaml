@@ -108,11 +108,11 @@ image:
     contrast:        0.5
     overlay:         "gradient-fade-to-black-bottom-50%"
   ratio:             "9:16"
-  prompt_template_ref: "image-prompts/style-D.md"
-  reference_image:
-    - "figma://1:487"
-    - "figma://1:1159"
-    - "figma://538:105"
+  prompt_template_ref: "image-prompts/metta/style-D.md"
+  reference_image: []  # figma:// refs removidos — adicionar PNGs locais em exemplars/metta/ quando disponíveis
+  # - "figma://1:487"
+  # - "figma://1:1159"
+  # - "figma://538:105"
 
 slots:
   - name:            "headline"
