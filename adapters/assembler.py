@@ -363,14 +363,35 @@ def _hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
     if s.startswith("var("):
         # CSS variable — should have been resolved upstream. Fall back to known map.
         var_map = {
-            "var(--metta-sys-color-primary)": "#FFBE18",
-            "var(--metta-ref-palette-yellow-50)": "#FFBE18",
-            "var(--metta-ref-palette-night-10)": "#0C161B",
-            "var(--metta-ref-palette-night-100)": "#FFFFFF",
-            "var(--metta-ref-palette-night-85)": "#B0CAD8",
-            "var(--metta-ref-palette-night-40)": "#435965",
-            "var(--metta-sys-color-on-primary)": "#0C161B",
-            "var(--metta-sys-color-surface)": "#0C161B",
+            # ── Metta brand tokens ──────────────────────────────────────
+            "var(--metta-sys-color-primary)":           "#FFBE18",
+            "var(--metta-ref-palette-yellow-50)":       "#FFBE18",
+            "var(--metta-ref-palette-night-10)":        "#0C161B",
+            "var(--metta-ref-palette-night-100)":       "#FFFFFF",
+            "var(--metta-ref-palette-night-85)":        "#B0CAD8",
+            "var(--metta-ref-palette-night-40)":        "#435965",
+            "var(--metta-sys-color-on-primary)":        "#0C161B",
+            "var(--metta-sys-color-surface)":           "#0C161B",
+            "var(--metta-color-bg)":                    "#0C161B",
+            "var(--metta-color-text-primary)":          "#FFFFFF",
+            "var(--metta-color-text-secondary)":        "#B0CAD8",
+            "var(--metta-color-accent)":                "#FFBE18",
+            # ── Tiago brand tokens ──────────────────────────────────────
+            "var(--tiago-color-bg)":                    "#FFFFFF",
+            "var(--tiago-color-text-primary)":          "#0F1419",
+            "var(--tiago-color-text-secondary)":        "#536471",
+            "var(--tiago-color-accent)":                "#FFCC00",
+            "var(--tiago-color-accent-ring)":           "#FFCC00",
+            "var(--tiago-color-accent-yellow)":         "#FFCC00",
+            "var(--tiago-color-marker-bg)":             "#FFE89E",
+            "var(--tiago-color-body-text)":             "#6E6E73",
+            "var(--tiago-color-fg-secondary)":          "#6E6E73",
+            "var(--tiago-color-dark-bg)":               "#0C0F0F",
+            "var(--tiago-color-dark-text)":             "#FFFFFF",
+            "var(--tiago-color-speech-bubble-bg)":      "#F7F9F9",
+            "var(--tiago-color-speech-bubble-fg)":      "#0F1419",
+            "var(--tiago-color-verified-blue)":         "#1D9BF0",
+            "var(--tiago-color-handle)":                "#536471",
         }
         s = var_map.get(s, "#000000")
     if s.startswith("#"):
