@@ -824,7 +824,7 @@ class PNGAssembler:
             el["text"],
             font,
             _hex_to_rgb(el["background"]),
-            _hex_to_rgb(el["text_color"]),
+            _hex_to_rgb(el.get("text_color") or el.get("color", "#000000")),
             padding_x=int(el.get("padding_x", 38)),
             padding_y=int(el.get("padding_y", 22)),
             text_case=el["font"].get("text_case", "UPPER"),
