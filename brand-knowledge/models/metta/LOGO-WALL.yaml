@@ -58,7 +58,7 @@ image:
   placement: "center-left"
   filters: {saturation: -1, contrast: 0.2, overlay: "none"}
   ratio: "free"
-  prompt_template_ref: "n/a — assets reais"
+  prompt_template_ref: "brand-knowledge/image-prompts/metta/style-LOGO-WALL.md"
   reference_image: []  # figma:// ref removido
 
 slots:
