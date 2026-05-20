@@ -176,7 +176,8 @@ def log_event(run_id: str, event: dict, artifacts_dir: Path):
 @click.option("--stop-at", help="Stop after this skill id (e.g. '02').")
 @click.option("--input", "input_file", help="JSON file with structured briefing (skips skill 01).")
 @click.option("--verbose/--quiet", default=True)
-def main(briefing_text, mock, provider, stop_at, input_file, verbose):
+@click.option("--no-clarify", is_flag=True, default=False, help="Skip clarification pause.")
+def main(briefing_text, mock, provider, stop_at, input_file, verbose, no_clarify):
     """ad-generator pipeline — gera ad Metta a partir de briefing PT-BR.
 
     Exemplos:
@@ -221,7 +222,7 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose):
             err(f"briefing-parser failed: {result.error}")
             sys.exit(2)
         briefing = result.output
-        if briefing.get("clarifying_questions"):
+        if briefing.get("clarifying_questions") and not no_clarify:
             ok("briefing-parser asked for clarification:")
             for q in briefing["clarifying_questions"]:
                 console.print(f"  ? {q}") if 'console' in globals() else print(f"  ? {q}")
