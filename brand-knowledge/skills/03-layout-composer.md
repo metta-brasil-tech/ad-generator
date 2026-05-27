@@ -57,7 +57,7 @@ Se a copy NÃO COUBER, retornar `errors[]` com sugestões — não inventar layo
       "width": 920,
       "height": "auto",
       "font": {
-        "family": "SF Pro",
+        "family": "Inter",
         "style": "Expanded Medium",
         "weight": 540,
         "stretch_pct": 132,
@@ -82,7 +82,7 @@ Se a copy NÃO COUBER, retornar `errors[]` com sugestões — não inventar layo
       "width": 920,
       "height": "auto",
       "font": {
-        "family": "SF Pro",
+        "family": "Inter",
         "style": "Expanded Heavy",
         "weight": 870,
         "stretch_pct": 132,
@@ -191,8 +191,8 @@ Use uma função `resolve_position(slot, computed_positions)` que processa em or
 Pra cada elemento textual, hidratar `font` com valores do `typography.{role}` do YAML.
 
 Cores: resolver `colors.fg_primary` → hex literal do doc de tokens da marca:
-- `marca=metta` → `design/metta-tokens.md` (paleta dark/yellow, SF Pro Expanded)
-- `marca=tiago` → `design/tiago-tokens.md` (paleta light, SF Pro Regular, ring amarelo signature)
+- `marca=metta` → `design/metta-tokens.md` (paleta dark/yellow, Zalando Sans Expanded)
+- `marca=tiago` → `design/tiago-tokens.md` (paleta light, Inter, ring amarelo signature)
 
 **Inviolável:** token `var(--metta-*)` só aparece em layouts `marca=metta`. Token `var(--tiago-*)` só em `marca=tiago`. Sem cross-contamination.
 
@@ -245,7 +245,7 @@ accent_words: ["12 lojas", "sem perder margem"]
 
 Carrega `models/A-headline-foto-dark.yaml`:
 - Frame: 1080x1920, bg #0C161B
-- Headline: SF Pro Expanded Heavy, 67-80px, max 60 chars, max 5 lines, UPPER
+- Headline: Zalando Sans Expanded Heavy, 67-80px, max 60 chars, max 5 lines, UPPER
 - Body: max 180 chars, max 4 lines
 - CTA: pill amarelo, max 24 chars
 
@@ -264,7 +264,7 @@ Output: ver schema acima ↑
 - ❌ Mudar tokens (fonte, cor, peso) — eles vêm do YAML, não você decide
 - ❌ Posicionar elementos fora da safe area (`spacing.safe_margin_*` do YAML)
 - ❌ Ignorar `errors[]` — se a copy não cabe, sinalize, não force
-- ❌ Misturar token de marca diferente (Metta yellow em layout Tiago, dark bg em Tiago, SF Pro Expanded em Tiago, etc.) — bug crítico, `06-qa-validator` falha o ad
+- ❌ Misturar token de marca diferente (Metta yellow em layout Tiago, dark bg em Tiago, Zalando Sans Expanded em Tiago, etc.) — bug crítico, `06-qa-validator` falha o ad
 
 ## Versão
 

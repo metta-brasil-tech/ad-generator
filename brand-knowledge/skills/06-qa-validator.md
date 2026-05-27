@@ -33,8 +33,8 @@ Validação é determinística — você NÃO opina sobre estética. Só checa r
       "severity": "error | warning",
       "category": "typography | color | spacing | brand | safe_zone | content",
       "rule": "headline_font_off",
-      "expected": "SF Pro / Expanded Heavy",
-      "actual": "SF Pro / Bold",
+      "expected": "Zalando Sans Expanded / Black",
+      "actual": "Inter / Bold",
       "element": "headline",
       "fix_suggestion": "Reload font and re-render — assembler may have failed font load"
     }
@@ -59,7 +59,7 @@ Validação é determinística — você NÃO opina sobre estética. Só checa r
 | `marca_matches_briefing` | `layout_spec.marca === briefing.marca` | error |
 | `model_yaml_marca_matches` | `model_yaml.marca === briefing.marca` | error |
 | `model_path_matches_marca` | `model_yaml._source_file.startswith(briefing.marca + "/")` | error |
-| `no_metta_token_in_tiago` | se `briefing.marca === "tiago"`, NENHUM elemento usa cor/font com prefixo `var(--metta-*)` ou hex Metta core (#0C161B dark bg, #FFBE18 yellow CTA, SF Pro Expanded) | error |
+| `no_metta_token_in_tiago` | se `briefing.marca === "tiago"`, NENHUM elemento usa cor/font com prefixo `var(--metta-*)` ou hex Metta core (#0C161B dark bg, #FFBE18 yellow CTA, Zalando Sans Expanded) | error |
 | `no_tiago_token_in_metta` | se `briefing.marca === "metta"`, NENHUM elemento usa cor/font com prefixo `var(--tiago-*)` ou ring amarelo signature em formato não-Tiago | error |
 | `tiago_no_uppercase_headline` | se `marca === "tiago"`, headline.text_case !== "UPPER" | error |
 | `tiago_no_dark_bg` | se `marca === "tiago"`, frame.background.value !== valores dark Metta (#0C161B, #1A2B33, etc.) | error |
@@ -109,10 +109,10 @@ def check_brand_consistency(layout_spec, briefing):
 
 | Rule | Check | Severity |
 |---|---|---|
-| `headline_font_family` | font.family === SF Pro OR Zalando Sans Expanded | error |
+| `headline_font_family` | font.family === Inter OR Zalando Sans Expanded | error |
 | `headline_font_style` | font.style matches `model.typography.headline.style` | error |
 | `headline_size_in_range` | font.size ∈ [model.typography.headline.size_range] | warning |
-| `body_font_family` | font.family === SF Pro OR Inter | error |
+| `body_font_family` | font.family === Inter OR Inter | error |
 | `cta_font_uppercase` | text_case === "UPPER" | error |
 | `tag_letter_spacing` | letter_spacing_pct >= 11 | warning |
 | `no_roboto_flex` | no font.family === "Roboto Flex" (deprecated) | error |
@@ -233,10 +233,10 @@ def check_brand_consistency(layout_spec, briefing):
       "severity": "error",
       "category": "typography",
       "rule": "no_roboto_flex",
-      "expected": "SF Pro OR Zalando Sans Expanded OR Inter",
+      "expected": "Inter OR Zalando Sans Expanded OR Inter",
       "actual": "Roboto Flex",
       "element": "headline",
-      "fix_suggestion": "Roboto Flex deprecated em 2026-05-12. Trocar pra SF Pro Expanded Heavy."
+      "fix_suggestion": "Roboto Flex deprecated em 2026-05-12. Trocar pra Zalando Sans Expanded Heavy."
     }
   ],
   "warnings": [],
@@ -271,10 +271,10 @@ def check_brand_consistency(layout_spec, briefing):
       "severity": "error",
       "category": "brand_consistency",
       "rule": "tiago_no_expanded_font",
-      "expected": "SF Pro Regular/Bold",
+      "expected": "Inter/Bold",
       "actual": "Expanded Heavy",
       "element": "headline",
-      "fix_suggestion": "Tiago usa SF Pro stretch 100%. Trocar style pra Bold (weight 700, stretch 100)."
+      "fix_suggestion": "Tiago usa Inter stretch 100%. Trocar style pra Bold (weight 700, stretch 100)."
     }
   ],
   "warnings": [],

@@ -14,7 +14,7 @@ logica_visual: |
   Mock visual do app Notes do iPhone — empresta credibilidade nativa de "isso aqui é o que ele realmente
   anotou". Status bar 9:41 + nav '<Notas' amarelo + 'OK' amarelo + ícone '...' amarelo no header.
   Conteúdo: H1 com background marker amarelo (selo de destaque) seguido de lista numerada (1./2./3.)
-  com sub-texto cinza em SF Pro Regular. Sensação alvo: "isso é a anotação dele de verdade",
+  com sub-texto cinza em Inter. Sensação alvo: "isso é a anotação dele de verdade",
   storytelling em formato organizado (3 decisões, 5 lições, N coisas).
 
 estrutura:
@@ -44,7 +44,7 @@ composicao:
 typography:
   headline:
     role:           "notes-h1"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Semibold"
     weight:         600
     stretch_pct:    75
@@ -54,7 +54,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "notes-body-regular"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -64,7 +64,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "lista-item-numero"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Semibold"
     weight:         600
     stretch_pct:    75
@@ -74,7 +74,7 @@ typography:
     text_case:      "sentence"
   cta:
     role:           "notes-nav-amarelo"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -149,7 +149,7 @@ slots:
     item_structure:
       numero:        "'1.' '2.' '3.' em Condensed Semibold preto"
       titulo_item:   "Texto em Condensed Semibold preto, sentence case"
-      sub_texto:     "Texto em SF Pro Regular cinza #6E6E73, sentence case"
+      sub_texto:     "Texto em Inter cinza #6E6E73, sentence case"
 
 quando_brilha:
   - "Storytelling em lista organizada ('Tomei 3 decisões:', '5 lições do livro X')"
@@ -186,9 +186,9 @@ embedding_text:
     decisões tomadas, frameworks simples.
   visual_features: |
     Background branco puro #FFFFFF. Status bar iOS 9:41 no topo. Nav Notes amarelo
-    ('<Notas', '...', 'OK'). H1 SF Pro Condensed Semibold 40-52px preto com marker
+    ('<Notas', '...', 'OK'). H1 Inter Condensed Semibold 40-52px preto com marker
     amarelo solid retangular embaixo (efeito highlighter). Lista numerada Condensed
-    Semibold preto + sub SF Pro Regular cinza #6E6E73 22-28px. Sem foto, sem CTA pill.
+    Semibold preto + sub Inter cinza #6E6E73 22-28px. Sem foto, sem CTA pill.
 
 referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"
 created:             "2026-05-15"

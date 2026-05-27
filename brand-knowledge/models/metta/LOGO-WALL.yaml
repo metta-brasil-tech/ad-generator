@@ -28,15 +28,15 @@ composicao:
   ornament: "logo-grid-3x3"
 
 typography:
-  headline: {role: "display-medium", family: "SF Pro", style: "Expanded Heavy",
+  headline: {role: "display-medium", family: "Inter", style: "Expanded Heavy",
     weight: 870, stretch_pct: 132, size_range: [150, 220], line_height_pct: 88,
     letter_spacing_pct: -2, text_case: "UPPER"}
-  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+  body: {role: "body-medium", family: "Inter", style: "Expanded Regular",
     weight: 510, stretch_pct: 100, size_range: [24, 30], line_height_pct: 140, text_case: "sentence"}
-  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+  tag_eyebrow: {role: "label-large", family: "Inter", style: "Expanded Medium",
     weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
     letter_spacing_pct: 11, text_case: "UPPER"}
-  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+  cta: {role: "label-large", family: "Inter", style: "Expanded Bold",
     weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
 
 colors:

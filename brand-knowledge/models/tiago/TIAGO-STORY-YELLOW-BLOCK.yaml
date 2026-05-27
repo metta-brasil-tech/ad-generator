@@ -13,7 +13,7 @@ marca:               "tiago"
 
 logica_visual: |
   Story 9:16 com foto bleed lo-fi de ambiente (escritório, academia, mesa, paisagem) — SEM Tiago como sujeito.
-  Bloco amarelo solid overlay centralizado com headline preto SF Pro Condensed Semibold (pergunta ou checklist).
+  Bloco amarelo solid overlay centralizado com headline preto Inter Condensed Semibold (pergunta ou checklist).
   Sub-headline em peso Light embaixo. Variante opcional: timestamp/hora no canto superior direito.
   Foto serve de pano de fundo contextual (sala de reunião = empresa, academia = disciplina, mesa = trabalho).
   Sensação alvo: "esse momento te lembra de pensar nisso?" — gancho situacional.
@@ -43,7 +43,7 @@ composicao:
 typography:
   headline:
     role:           "yellow-block-headline"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Semibold"
     weight:         600
     stretch_pct:    75
@@ -53,7 +53,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "sub-headline-light"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Light"
     weight:         300
     stretch_pct:    75
@@ -63,7 +63,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "timestamp-opcional"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -181,11 +181,11 @@ embedding_text:
   intent: |
     Story 9:16 com pergunta diagnóstica ou checklist ancorada em ambiente cotidiano.
     Foto lo-fi de espaço (escritório, academia, mesa) como contexto, bloco amarelo
-    central com headline preto SF Pro Condensed Semibold. Hook situacional Tiago.
+    central com headline preto Inter Condensed Semibold. Hook situacional Tiago.
   visual_features: |
     Story 9:16. Foto bleed full lo-fi de ambiente (SEM pessoas em destaque).
     Bloco amarelo solid (#FFCC00) radius 16 ocupa 60-70% largura center-vertical.
-    Headline preto SF Pro Condensed Semibold 42-58px + sub Light cinza 22-30px dentro.
+    Headline preto Inter Condensed Semibold 42-58px + sub Light cinza 22-30px dentro.
     Timestamp opcional canto superior direito. Sem pílula ARRASTA.
 
 referencias_dna_completo: "design/banco-tiago-conteudo.md#§3"

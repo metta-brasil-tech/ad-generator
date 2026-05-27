@@ -52,14 +52,14 @@
           },
           "name": {
             "text": "Tiago Alves",
-            "font": {"family": "SF Pro", "style": "Bold", "weight": 700, "size": 40, "line_height_pct": 120, "letter_spacing_pct": -0.5, "text_case": "sentence"},
+            "font": {"family": "Inter", "style": "Bold", "weight": 700, "size": 40, "line_height_pct": 120, "letter_spacing_pct": -0.5, "text_case": "sentence"},
             "color": "#0F1419"
           },
           "verified_badge": {"size": 32, "color": "#1D9BF0"},
           "ellipsis": {"text": "⋯", "color": "#71767B", "size": 32},
           "handle": {
             "text": "@tiago.alves.oliveira",
-            "font": {"family": "SF Pro", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 120, "text_case": "sentence"},
+            "font": {"family": "Inter", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 120, "text_case": "sentence"},
             "color": "#536471"
           }
         },
@@ -73,7 +73,7 @@
           ],
           "x": 64, "y": 300, "width": 952,
           "font": {
-            "family": "SF Pro", "style": "Bold",
+            "family": "Inter", "style": "Bold",
             "weight": 700, "stretch_pct": 100, "size": 56,
             "line_height_pct": 125, "letter_spacing_pct": -1, "text_case": "sentence"
           },
@@ -85,7 +85,7 @@
           "text": "Arrasta pro Lado 👉",
           "x": 64, "y": 600, "width": 600,
           "font": {
-            "family": "SF Pro", "style": "Regular",
+            "family": "Inter", "style": "Regular",
             "weight": 400, "stretch_pct": 100, "size": 34,
             "line_height_pct": 130, "text_case": "sentence"
           },

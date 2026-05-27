@@ -49,7 +49,7 @@ composicao:
 typography:
   headline:
     role:           "manchete-noir-upper"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         800
     stretch_pct:    100
@@ -59,7 +59,7 @@ typography:
     text_case:      "UPPER"
   body:
     role:           "sub-regular-noir"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -69,7 +69,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "framing-noir-tracked"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
@@ -79,7 +79,7 @@ typography:
     text_case:      "UPPER"
   cta:
     role:           "pill-cta-dark"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100

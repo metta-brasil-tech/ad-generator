@@ -47,7 +47,7 @@ composicao:
 typography:
   headline:
     role:           "stats-central"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         800
     stretch_pct:    100
@@ -57,7 +57,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "stats-detalhe"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -67,7 +67,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "eyebrow-amarelo-label"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
@@ -77,7 +77,7 @@ typography:
     text_case:      "UPPER"
   cta:
     role:           "remate-bold-inline"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100

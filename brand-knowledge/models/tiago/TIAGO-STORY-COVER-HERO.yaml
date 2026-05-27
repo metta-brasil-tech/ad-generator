@@ -15,7 +15,7 @@ marca:               "tiago"
 
 logica_visual: |
   Capa de carrossel em formato story 9:16 com Tiago como sujeito principal (palestra, casa, leitura, viagem).
-  Foto bleed full real e lo-fi (sem produção, parece celular). Headline branco SF Pro Condensed Semibold
+  Foto bleed full real e lo-fi (sem produção, parece celular). Headline branco Inter Condensed Semibold
   ocupa metade do canvas alinhado canto-esquerdo. Assinatura SVG do Tiago (amarela ou branca) no topo.
   Pílula amarela "ARRASTA PRO LADO 👉" na base como CTA de carrossel.
   Sensação alvo: "olha o que ele tá pensando agora" — pessoa real, não produção publicitária.
@@ -24,7 +24,7 @@ logica_visual: |
 estrutura:
   zonas:
     top:        "Assinatura SVG Tiago (amarelo em fundos light/yellow, branco em dark)"
-    center:     "Headline branco SF Pro Condensed Semibold ocupando ~40% da altura, alinhado esquerda"
+    center:     "Headline branco Inter Condensed Semibold ocupando ~40% da altura, alinhado esquerda"
     bottom:     "Pílula amarela 'ARRASTA PRO LADO 👉'"
     overlay:    "Foto bleed full por baixo de tudo, sem moldura, sem grain"
   hierarquia:
@@ -48,7 +48,7 @@ composicao:
 typography:
   headline:
     role:           "story-hero-headline"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Semibold"
     weight:         600
     stretch_pct:    75
@@ -58,7 +58,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "subhead-curto"
-    family:         "SF Pro"          # wdth 100 (mais arredondado que Condensed) — H2 abaixo da headline
+    family:         "Inter"          # wdth 100 (mais arredondado que Condensed) — H2 abaixo da headline
     style:          "Light"
     weight:         300
     stretch_pct:    100
@@ -68,7 +68,7 @@ typography:
     text_case:      "sentence"
   cta:
     role:           "pill-arrasta"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Semibold"
     weight:         600
     stretch_pct:    100
@@ -191,7 +191,7 @@ embedding_text:
     PRO LADO amarelo bottom. Tom: real, sem produção, pensamento no calor da hora.
   visual_features: |
     Story 9:16. Foto bleed full lo-fi (iPhone, sem produção). Tiago como sujeito.
-    Headline branco SF Pro Condensed Semibold 54-76px alinhado canto-esquerdo center-vertical.
+    Headline branco Inter Condensed Semibold 54-76px alinhado canto-esquerdo center-vertical.
     Assinatura SVG Tiago amarela top-right 180px. Pílula amarela ARRASTA PRO LADO 👉
     bottom-left 64px height. Sem grain noise, sem colagem surreal.
 

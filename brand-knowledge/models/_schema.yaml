@@ -53,7 +53,7 @@ composicao:                 # princípios composicionais
 typography:
   headline:
     role:           ""      # display-hero | title-large | display-large | etc (de metta-tokens.md §3.4)
-    family:         ""      # ex: "SF Pro" + fallback "Zalando Sans Expanded"
+    family:         ""      # ex: "Inter" + fallback "Zalando Sans Expanded"
     style:          ""      # ex: "Expanded Heavy"
     weight:         870
     stretch_pct:    132

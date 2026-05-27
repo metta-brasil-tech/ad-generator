@@ -51,7 +51,7 @@
           ],
           "x": 80, "y": 960, "width": 920,
           "font": {
-            "family": "SF Pro", "style": "Expanded Heavy",
+            "family": "Inter", "style": "Expanded Heavy",
             "weight": 870, "stretch_pct": 132, "size": 88,
             "line_height_pct": 95, "letter_spacing_pct": -1, "text_case": "UPPER"
           },
@@ -63,7 +63,7 @@
           "text": "Toda decisão volta pra sua mesa. Toda crise espera você. Toda venda depende do seu sim.",
           "x": 80, "y": 1480, "width": 920,
           "font": {
-            "family": "SF Pro", "style": "Expanded Regular",
+            "family": "Inter", "style": "Expanded Regular",
             "weight": 590, "stretch_pct": 100, "size": 32,
             "line_height_pct": 117, "letter_spacing_pct": -1, "text_case": "sentence"
           },
@@ -78,7 +78,7 @@
           "padding_x": 38, "padding_y": 22,
           "background": "#FFBE18", "text_color": "#0C161B", "corner_radius": 999,
           "font": {
-            "family": "SF Pro", "style": "Expanded Bold",
+            "family": "Inter", "style": "Expanded Bold",
             "weight": 700, "stretch_pct": 132, "size": 24,
             "line_height_pct": 100, "letter_spacing_pct": 0, "text_case": "UPPER"
           }

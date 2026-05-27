@@ -86,7 +86,7 @@ Fonte: `design/banco-ads-figma.md §3`. Cobre 80% dos casos Metta.
 Fonte: `design/banco-tiago-conteudo.md §1-5` (editorial) + `design/banco-tiago-conteudo.md §3` (lo-fi cotidiano 2026-05-15). Catálogo de **12 estilos** organizados em duas camadas:
 
 - **Camada editorial-cinema (5):** TIAGO-TWITTER-CARD + 4 editoriais (HERO/CARD/DARK/CTA) — capa de carrossel cinematográfico com colagem surreal noir
-- **Camada lo-fi cotidiano (7):** STORY-COVER-HERO, STORY-YELLOW-BLOCK, STORY-MINIMAL-QUESTION, NOTES-MOCKUP, TYPO-PURE, DARK-SURREAL, PHOTO-RAW — feed/story do dia a dia, fotografia real, SF Pro Condensed Semibold/Light
+- **Camada lo-fi cotidiano (7):** STORY-COVER-HERO, STORY-YELLOW-BLOCK, STORY-MINIMAL-QUESTION, NOTES-MOCKUP, TYPO-PURE, DARK-SURREAL, PHOTO-RAW — feed/story do dia a dia, fotografia real, Inter Condensed Semibold/Light
 
 | Tese central | Posição no carrossel | Estilos recomendados |
 |---|---|---|

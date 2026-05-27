@@ -29,16 +29,16 @@ _FONT_CACHE: dict[tuple, ImageFont.FreeTypeFont] = {}
 _IMAGE_CACHE: dict[str, Image.Image] = {}
 
 
-# Map "SF Pro" / style → font filenames (Windows + fallbacks)
+# Map "Inter" / style → font filenames (Windows + fallbacks)
 FONT_FILE_MAP = {
-    # SF Pro Expanded variants (installed via Apple SF Pro family)
-    ("SF Pro", "Expanded Heavy"): ["SF-Pro-Expanded-Heavy.otf", "SFProExpanded-Heavy.otf"],
-    ("SF Pro", "Expanded Bold"): ["SF-Pro-Expanded-Bold.otf", "SFProExpanded-Bold.otf"],
-    ("SF Pro", "Expanded Semibold"): ["SF-Pro-Expanded-Semibold.otf", "SFProExpanded-Semibold.otf"],
-    ("SF Pro", "Expanded Medium"): ["SF-Pro-Expanded-Medium.otf", "SFProExpanded-Medium.otf"],
-    ("SF Pro", "Expanded Regular"): ["SF-Pro-Expanded-Regular.otf", "SFProExpanded-Regular.otf"],
-    ("SF Pro", "Heavy"): ["SF-Pro-Heavy.otf"],
-    ("SF Pro", "Heavy Italic"): ["SF-Pro-HeavyItalic.otf"],
+    # Zalando Sans Expanded variants (installed via Apple Inter family)
+    ("Inter", "Expanded Heavy"): ["Zalando-Sans-Expanded-Heavy.otf", "InterExpanded-Heavy.otf"],
+    ("Inter", "Expanded Bold"): ["Zalando-Sans-Expanded-Bold.otf", "InterExpanded-Bold.otf"],
+    ("Inter", "Expanded Semibold"): ["Zalando-Sans-Expanded-Semibold.otf", "InterExpanded-Semibold.otf"],
+    ("Inter", "Expanded Medium"): ["Zalando-Sans-Expanded-Medium.otf", "InterExpanded-Medium.otf"],
+    ("Inter", "Expanded Regular"): ["Zalando-Sans-Expanded-Regular.otf", "InterExpanded-Regular.otf"],
+    ("Inter", "Heavy"): ["Inter-Heavy.otf"],
+    ("Inter", "Heavy Italic"): ["Inter-HeavyItalic.otf"],
     # Inter fallback (always available if user runs pip install)
     ("Inter", "Regular"): ["Inter-Regular.ttf"],
     ("Inter", "Medium"): ["Inter-Medium.ttf"],
@@ -109,7 +109,7 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
     """Load font with caching + graceful fallback chain.
 
     Priority for Metta brand fidelity:
-    1. SF Pro Variable (canonical Metta typeface) — width/weight axes set per style
+    1. Zalando Sans Expanded (canonical Metta typeface) — width/weight axes set per style
     2. Inter Variable bundled (Metta official fallback for Regular axis)
     3. System Arial/Helvetica
     4. Pillow default
@@ -118,19 +118,19 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
     if key in _FONT_CACHE:
         return _FONT_CACHE[key]
 
-    # 1) Try SF Pro Variable when family é uma variante SF Pro.
-    #    Metta primary: SF Pro Expanded (heads/CTAs) + SF Pro Regular (body).
-    #    Tiago primary: SF Pro Condensed Semibold/Light (heads) + SF Pro Regular (body orgânico).
+    # 1) Try Zalando Sans Expanded when family é uma variante Inter.
+    #    Metta primary: Zalando Sans Expanded (heads/CTAs) + Inter (body).
+    #    Tiago primary: Inter Condensed Semibold/Light (heads) + Inter (body orgânico).
     #    family hint informa o wdth axis correto quando style sozinho é ambíguo
-    #    (ex: 'Semibold' precisa de wdth 75 se family for SF Pro Condensed).
-    sf_pro_families = ("SF Pro", "SF Pro Condensed", "SF Pro Expanded", "SF Pro Compressed")
+    #    (ex: 'Semibold' precisa de wdth 75 se family for Inter Condensed).
+    sf_pro_families = ("Inter", "Inter Condensed", "Zalando Sans Expanded", "Inter Compressed")
     if family in sf_pro_families:
         f = _load_sf_pro_variable(style, size, family=family)
         if f:
             _FONT_CACHE[key] = f
             sentinel = ("_warned_sf", family, style)
             if sentinel not in _FONT_CACHE:
-                print(f"  [info] using SF Pro Variable for '{family} / {style}'")
+                print(f"  [info] using Zalando Sans Expanded for '{family} / {style}'")
                 _FONT_CACHE[sentinel] = None
             return f
 
@@ -150,7 +150,7 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
         _FONT_CACHE[key] = f
         sentinel = ("_warned", family, style)
         if (family, style) != ("Inter", style) and sentinel not in _FONT_CACHE:
-            print(f"  [info] using Inter variable as fallback for '{family} / {style}' (install SF Pro Variable for full brand fidelity)")
+            print(f"  [info] using Inter variable as fallback for '{family} / {style}' (install Zalando Sans Expanded for full brand fidelity)")
             _FONT_CACHE[sentinel] = None
         return f
 
@@ -175,7 +175,7 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
                     # Only warn once per unique (family, style) — store sentinel
                     sentinel = ("_warned", family, style)
                     if sentinel not in _FONT_CACHE:
-                        print(f"  ⚠ font '{family} / {style}' not found — falling back to '{fam} / {sty}' (install Inter or SF Pro for production quality)")
+                        print(f"  ⚠ font '{family} / {style}' not found — falling back to '{fam} / {sty}' (install Inter or Inter for production quality)")
                         _FONT_CACHE[sentinel] = None
                 return f
             except Exception:
@@ -191,19 +191,19 @@ def _load_font(family: str, style: str, size: int) -> ImageFont.FreeTypeFont:
 INTER_VARIABLE_URL = "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf"
 INTER_VARIABLE_FILENAME = "Inter-Variable.ttf"
 
-# SF Pro Variable — Apple's official font (Metta primary).
+# Zalando Sans Expanded — Apple's official font (Metta primary).
 # Axes: Width (30-150), Optical Size (17-28), Weight (1-1000)
 SF_PRO_VARIABLE_PATHS = [
-    Path.home() / "AppData/Local/Microsoft/Windows/Fonts/SF-Pro-Variable-Official.ttf",
-    Path.home() / "AppData/Local/Microsoft/Windows/Fonts/SF-Pro.ttf",
-    Path("/Library/Fonts/SF-Pro.ttf"),  # macOS
-    Path("/System/Library/Fonts/SFPro.ttf"),
-    Path(__file__).parent.parent / "assets/fonts/SF-Pro-Variable-Official.ttf",
+    Path.home() / "AppData/Local/Microsoft/Windows/Fonts/fonts-legacy-removed-2026-05-27",
+    Path.home() / "AppData/Local/Microsoft/Windows/Fonts/Inter.ttf",
+    Path("/Library/Fonts/Inter.ttf"),  # macOS
+    Path("/System/Library/Fonts/Inter.ttf"),
+    Path(__file__).parent.parent / "assets/fonts/fonts-legacy-removed-2026-05-27",
 ]
 
 
 def _find_sf_pro_variable() -> Path | None:
-    """Locate SF Pro Variable font on disk."""
+    """Locate Zalando Sans Expanded font on disk."""
     for p in SF_PRO_VARIABLE_PATHS:
         if p.exists() and p.stat().st_size > 1_000_000:
             return p
@@ -213,10 +213,10 @@ def _find_sf_pro_variable() -> Path | None:
 # Map (family, peso) → axes. Tiago usa Condensed (wdth 75), Metta usa Expanded (wdth 132).
 # Family hint determina wdth default quando style é só o peso ("Semibold", "Light", etc.).
 FAMILY_TO_WDTH = {
-    "SF Pro":            100,  # standard (Regular)
-    "SF Pro Expanded":   132,  # Metta primary — heads/CTAs
-    "SF Pro Condensed":  75,   # Tiago primary — heads
-    "SF Pro Compressed": 60,
+    "Inter":            100,  # standard (Regular)
+    "Zalando Sans Expanded":   132,  # Metta primary — heads/CTAs
+    "Inter Condensed":  75,   # Tiago primary — heads
+    "Inter Compressed": 60,
 }
 
 # Style string → weight axis. Width vem do family hint OU do próprio style (se for "Expanded X").
@@ -232,13 +232,13 @@ STYLE_TO_WEIGHT = {
 }
 
 
-def _load_sf_pro_variable(style: str, size: int, family: str = "SF Pro") -> ImageFont.FreeTypeFont | None:
-    """Load SF Pro Variable com axes corretas combinando family hint + style.
+def _load_sf_pro_variable(style: str, size: int, family: str = "Inter") -> ImageFont.FreeTypeFont | None:
+    """Load Zalando Sans Expanded com axes corretas combinando family hint + style.
 
-    family='SF Pro Condensed' + style='Semibold' → wdth=75, wght=650 (Tiago heads)
-    family='SF Pro Expanded'  + style='Bold'     → wdth=132, wght=700 (Metta heads)
-    family='SF Pro'           + style='Regular'  → wdth=100, wght=400 (Body)
-    family='SF Pro'           + style='Expanded Bold' → wdth=132 (style override), wght=700
+    family='Inter Condensed' + style='Semibold' → wdth=75, wght=650 (Tiago heads)
+    family='Zalando Sans Expanded'  + style='Bold'     → wdth=132, wght=700 (Metta heads)
+    family='Inter'           + style='Regular'  → wdth=100, wght=400 (Body)
+    family='Inter'           + style='Expanded Bold' → wdth=132 (style override), wght=700
     """
     sf_path = _find_sf_pro_variable()
     if not sf_path:

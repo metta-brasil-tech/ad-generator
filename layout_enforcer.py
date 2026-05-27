@@ -217,8 +217,8 @@ def enforce(layout_spec: dict, briefing: dict, knowledge_path: str | None = None
             cur_family = cur_font.get("family", "")
             cur_style = cur_font.get("style", "")
 
-            # Force family to YAML's specified family (default SF Pro)
-            yaml_family = role.get("family", "SF Pro")
+            # Force family to YAML's specified family (default Zalando Sans Expanded for display)
+            yaml_family = role.get("family", "Zalando Sans Expanded")
             if cur_family != yaml_family:
                 log.append(f"FIX: {slot} font family '{cur_family}' -> '{yaml_family}'")
                 cur_font["family"] = yaml_family

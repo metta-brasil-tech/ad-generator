@@ -5,7 +5,7 @@
 
 ## Identidade visual da marca (NÃO sobrescrever)
 
-A marca pessoal Tiago Alves é **light-first** (fundo claro), **neutra tipograficamente** (SF Pro Regular), **emocionalmente acolhedora** (voz que pensa em vez de acusar). Imagens nesse namespace seguem o mesmo princípio:
+A marca pessoal Tiago Alves é **light-first** (fundo claro), **neutra tipograficamente** (Inter), **emocionalmente acolhedora** (voz que pensa em vez de acusar). Imagens nesse namespace seguem o mesmo princípio:
 
 - **Não** são fotos editoriais dark moody (isso é Metta)
 - **Não** mostram empresário exausto/refém (Tiago acolhe, não acusa)

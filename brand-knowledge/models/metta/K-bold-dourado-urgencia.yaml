@@ -34,15 +34,15 @@ composicao:
   ornament: "yellow-band-divider"
 
 typography:
-  headline: {role: "title-large", family: "SF Pro", style: "Expanded Heavy",
+  headline: {role: "title-large", family: "Inter", style: "Expanded Heavy",
     weight: 870, stretch_pct: 132, size_range: [70, 90], line_height_pct: 92,
     letter_spacing_pct: -1, text_case: "UPPER"}
-  body: {role: "body-medium", family: "SF Pro", style: "Expanded Medium",
+  body: {role: "body-medium", family: "Inter", style: "Expanded Medium",
     weight: 510, stretch_pct: 100, size_range: [26, 34], line_height_pct: 130, text_case: "sentence"}
-  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+  tag_eyebrow: {role: "label-large", family: "Inter", style: "Expanded Medium",
     weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
     letter_spacing_pct: 12, text_case: "UPPER"}
-  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+  cta: {role: "label-large", family: "Inter", style: "Expanded Bold",
     weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
 
 colors:

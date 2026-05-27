@@ -41,7 +41,7 @@ composicao:
 typography:
   headline:
     role:           "title-large"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Expanded Heavy"
     weight:         870
     stretch_pct:    132
@@ -51,7 +51,7 @@ typography:
     text_case:      "UPPER"
   body:
     role:           "body-large"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Expanded Regular"
     weight:         590
     stretch_pct:    100
@@ -61,7 +61,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "label-large"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Expanded Medium"
     weight:         540
     stretch_pct:    132
@@ -71,7 +71,7 @@ typography:
     text_case:      "UPPER"
   cta:
     role:           "label-large"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Expanded Bold"
     weight:         700
     stretch_pct:    132

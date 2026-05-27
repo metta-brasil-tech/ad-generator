@@ -42,7 +42,7 @@ composicao:
 typography:
   headline:
     role:           "n/a"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Light"
     weight:         300
     stretch_pct:    75

@@ -27,14 +27,14 @@ composicao:
   ornament: "yellow-highlight-block"
 
 typography:
-  headline: {role: "display-hero", family: "SF Pro", style: "Expanded Heavy",
+  headline: {role: "display-hero", family: "Inter", style: "Expanded Heavy",
     weight: 870, stretch_pct: 132, size_range: [120, 180], line_height_pct: 85,
     letter_spacing_pct: -2, text_case: "UPPER"}
-  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+  body: {role: "body-medium", family: "Inter", style: "Expanded Regular",
     weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
-  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+  cta: {role: "label-large", family: "Inter", style: "Expanded Bold",
     weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
-  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+  tag_eyebrow: {role: "label-large", family: "Inter", style: "Expanded Medium",
     weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
     letter_spacing_pct: 11, text_case: "UPPER"}
 

@@ -50,7 +50,7 @@ composicao:
 typography:
   headline:
     role:           "editorial-display"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         800
     stretch_pct:    100
@@ -60,7 +60,7 @@ typography:
     text_case:      "sentence"   # UPPER em outliers (quando enunciado tipo-jornal)
   body:
     role:           "body-bold-mixed"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
@@ -70,7 +70,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "framing-header"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
@@ -80,7 +80,7 @@ typography:
     text_case:      "UPPER"
   cta:
     role:           "pill-arrasta"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
