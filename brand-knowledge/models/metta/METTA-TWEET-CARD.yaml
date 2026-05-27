@@ -40,7 +40,7 @@ composicao:
 typography:
   statement:
     role: "title-xl"
-    family: "SF Pro"
+    family: "Inter"
     style: "Expanded Heavy"
     weight: 870
     stretch_pct: 132
@@ -50,7 +50,7 @@ typography:
     text_case: "sentence"
   byline_name:
     role: "label-large"
-    family: "SF Pro"
+    family: "Inter"
     style: "Expanded Bold"
     weight: 700
     stretch_pct: 100
@@ -59,7 +59,7 @@ typography:
     text_case: "sentence"
   byline_handle:
     role: "label-medium"
-    family: "SF Pro"
+    family: "Inter"
     style: "Regular"
     weight: 400
     stretch_pct: 100
@@ -68,7 +68,7 @@ typography:
     text_case: "lowercase"
   credencial:
     role: "body-small"
-    family: "SF Pro"
+    family: "Inter"
     style: "Regular"
     weight: 400
     stretch_pct: 100

@@ -15,7 +15,7 @@ marca:               "tiago"
 
 logica_visual: |
   Story 9:16 ultra-minimalista. Foto bleed lo-fi cotidiana (mesa noturna, sala vista, livro aberto, paisagem RJ).
-  Texto branco/cinza claro em SF Pro Condensed Light ou Regular alinhado ao canto — geralmente uma pergunta
+  Texto branco/cinza claro em Inter Condensed Light ou Regular alinhado ao canto — geralmente uma pergunta
   contemplativa ou frase curta de reflexão. SEM caixa, SEM assinatura forte, SEM pílula CTA.
   Variante: keyword colorida em amarelo destacada inline.
   Sensação alvo: "ele tá pensando alto" — voz íntima, baixo volume, alta densidade.
@@ -43,7 +43,7 @@ composicao:
 typography:
   headline:
     role:           "reflexao-leve"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Light"
     weight:         300
     stretch_pct:    75
@@ -53,7 +53,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "complemento-curto"
-    family:         "SF Pro Condensed"
+    family:         "Inter Condensed"
     style:          "Regular"
     weight:         400
     stretch_pct:    75
@@ -158,7 +158,7 @@ embedding_text:
     Texto leve sem caixa, sem CTA. Tom: pensamento privado, voz íntima Tiago.
   visual_features: |
     Story 9:16. Foto bleed full lo-fi (mesa, vista, livro, sala). Mood contemplativo
-    baixa saturação. Texto branco SF Pro Condensed Light 30-42px alinhado canto-
+    baixa saturação. Texto branco Inter Condensed Light 30-42px alinhado canto-
     esquerdo. Keyword opcional em amarelo inline (sem fundo). Sem container, sem
     pílula, sem assinatura forte. Mínimo absoluto.
 

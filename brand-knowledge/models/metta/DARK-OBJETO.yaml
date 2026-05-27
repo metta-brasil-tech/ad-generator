@@ -27,15 +27,15 @@ composicao:
   ornament: "none"
 
 typography:
-  headline: {role: "title-medium", family: "SF Pro", style: "Expanded Heavy",
+  headline: {role: "title-medium", family: "Inter", style: "Expanded Heavy",
     weight: 870, stretch_pct: 132, size_range: [56, 76], line_height_pct: 95,
     letter_spacing_pct: -0.5, text_case: "UPPER"}
-  body: {role: "body-medium", family: "SF Pro", style: "Expanded Regular",
+  body: {role: "body-medium", family: "Inter", style: "Expanded Regular",
     weight: 510, stretch_pct: 100, size_range: [24, 32], line_height_pct: 130, text_case: "sentence"}
-  tag_eyebrow: {role: "label-large", family: "SF Pro", style: "Expanded Medium",
+  tag_eyebrow: {role: "label-large", family: "Inter", style: "Expanded Medium",
     weight: 540, stretch_pct: 132, size_range: [18, 22], line_height_pct: 100,
     letter_spacing_pct: 11, text_case: "UPPER"}
-  cta: {role: "label-large", family: "SF Pro", style: "Expanded Bold",
+  cta: {role: "label-large", family: "Inter", style: "Expanded Bold",
     weight: 700, stretch_pct: 132, size_range: [22, 28], line_height_pct: 100, text_case: "UPPER"}
 
 colors:

@@ -197,7 +197,7 @@ def build_index_html(results: list[dict], out_path: Path) -> Path:
 <style>
   :root {{ --bg:#0C161B; --fg:#FAFCFD; --yellow:#FFBE18; --gray:#B0CAD8; --dim:#435965; }}
   * {{ box-sizing: border-box; }}
-  body {{ margin:0; padding:32px; background:var(--bg); color:var(--fg); font-family:-apple-system,'SF Pro',system-ui,sans-serif; }}
+  body {{ margin:0; padding:32px; background:var(--bg); color:var(--fg); font-family:-apple-system,'Inter',system-ui,sans-serif; }}
   h1 {{ font-size:32px; font-weight:870; font-stretch:132%; letter-spacing:-0.02em; margin:0 0 8px; }}
   h1 span {{ color:var(--yellow); }}
   .meta {{ color:var(--gray); font-size:14px; margin-bottom:32px; }}

@@ -39,21 +39,21 @@
 
 ## Tipografia
 
-### Família principal: SF Pro
+### Família principal: Inter
 
 | Uso | Family | Style | Weight | Width |
 |---|---|---|---|---|
-| Headline FEED editorial | SF Pro | Bold | 700 | 100 (standard) |
-| Headline STORY cover | SF Pro | Bold | 700 | 100 |
-| Headline Notes H1 | SF Pro Condensed | Semibold | 600 | 75 |
-| Body/parágrafo | SF Pro | Regular | 400 | 100 |
-| Handle / tag / eyebrow | SF Pro | Regular | 400 | 100 |
-| Lista numerada (número+título) | SF Pro Condensed | Semibold | 600 | 75 |
-| Sub-texto lista (Notes) | SF Pro | Regular | 400 | 100 |
-| Footnote / transição | SF Pro | Regular | 400 | 100 |
+| Headline FEED editorial | Inter | Bold | 700 | 100 (standard) |
+| Headline STORY cover | Inter | Bold | 700 | 100 |
+| Headline Notes H1 | Inter Condensed | Semibold | 600 | 75 |
+| Body/parágrafo | Inter | Regular | 400 | 100 |
+| Handle / tag / eyebrow | Inter | Regular | 400 | 100 |
+| Lista numerada (número+título) | Inter Condensed | Semibold | 600 | 75 |
+| Sub-texto lista (Notes) | Inter | Regular | 400 | 100 |
+| Footnote / transição | Inter | Regular | 400 | 100 |
 
-> **Atenção:** Tiago usa SF Pro **standard** (width 100) e **Condensed** (width 75).
-> **Nunca** usar SF Pro Expanded (width 132) — esse é o typeface Metta institucional.
+> **Atenção:** Tiago usa Inter **standard** (width 100) e **Condensed** (width 75).
+> **Nunca** usar Zalando Sans Expanded (width 132) — esse é o typeface Metta institucional.
 
 ### Tamanhos por template
 
@@ -111,7 +111,7 @@
 ## Regras de isolamento
 
 - ❌ `var(--metta-*)` nunca em layout `marca=tiago`
-- ❌ SF Pro Expanded nunca em layout `marca=tiago`
+- ❌ Zalando Sans Expanded nunca em layout `marca=tiago`
 - ❌ Fundo escuro `#0C161B` (Metta night) nunca no Tiago padrão
 - ❌ Amarelo Metta `#FFBE18` nunca no Tiago (amarelo Tiago é `#FFCC00`)
 - ❌ UPPER CASE nas headlines — Tiago é sempre sentence case

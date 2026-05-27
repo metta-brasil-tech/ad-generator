@@ -39,19 +39,19 @@
 
 ## Tipografia
 
-### Família principal: SF Pro Expanded
+### Família principal: Zalando Sans Expanded
 
 | Uso | Family | Style | Weight | Width |
 |---|---|---|---|---|
-| Headline principal | SF Pro | Expanded Heavy | 870 | 132 |
-| Headline secundária | SF Pro | Expanded Bold | 700 | 132 |
-| Sub-headline | SF Pro | Expanded Semibold | 650 | 132 |
-| Body / texto | SF Pro | Expanded Regular | 400 | 132 |
-| Tag / eyebrow / CTA | SF Pro | Expanded Medium | 540 | 132 |
-| CTA pill | SF Pro | Expanded Bold | 700 | 132 |
+| Headline principal | Inter | Expanded Heavy | 870 | 132 |
+| Headline secundária | Inter | Expanded Bold | 700 | 132 |
+| Sub-headline | Inter | Expanded Semibold | 650 | 132 |
+| Body / texto | Inter | Expanded Regular | 400 | 132 |
+| Tag / eyebrow / CTA | Inter | Expanded Medium | 540 | 132 |
+| CTA pill | Inter | Expanded Bold | 700 | 132 |
 
-> **Atenção:** Metta usa SF Pro **Expanded** (width 132) em quase todos os elementos.
-> Nunca usar SF Pro Regular/Condensed nos templates Metta — esses são da marca Tiago.
+> **Atenção:** Metta usa Inter **Expanded** (width 132) em quase todos os elementos.
+> Nunca usar Inter/Condensed nos templates Metta — esses são da marca Tiago.
 
 ### Tamanhos por tipo de slot
 
@@ -102,7 +102,7 @@
 ## Regras de isolamento
 
 - ❌ `var(--tiago-*)` nunca em layout `marca=metta`
-- ❌ SF Pro Regular/Condensed como headline — Metta usa Expanded
+- ❌ Inter/Condensed como headline — Metta usa Expanded
 - ❌ Fundo branco `#FFFFFF` como bg padrão em dark templates
 - ❌ Amarelo Tiago `#FFCC00` nunca no Metta (amarelo Metta é `#FFBE18`)
 - ❌ Sentence case nas headlines de anúncio — Metta é UPPER (exceto tweet card e news)

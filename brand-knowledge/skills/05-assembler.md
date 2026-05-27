@@ -276,7 +276,7 @@ await page.screenshot({ path: `${config.output_dir}/ad-${id}.png` });
 
 ## Constraints
 
-- **Fontes:** Pillow procura SF Pro em sistema, fallback Inter, fallback Arial. Se nenhuma achada, warning + default font.
+- **Fontes:** Pillow procura Inter em sistema, fallback Inter, fallback Arial. Se nenhuma achada, warning + default font.
 - **Logos da Metta:** carregar SVG ou PNG via `_load_image_from_url`. Cache global em memória.
 - **Logos de cliente:** se `briefing.constraints.case_nominal_id`, buscar PNG em asset library local (`assets/logos/clients/{id}.png`). Se não existe, placeholder.
 - **Posições negativas (bleed):** permitidas pra image_slots (foto pode sair do canvas — Pillow auto-clipa). Texto nunca bleed.

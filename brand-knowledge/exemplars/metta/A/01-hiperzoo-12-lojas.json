@@ -41,7 +41,7 @@
           "text": "CASE · HIPERZOO",
           "x": 80, "y": 100, "width": 920,
           "font": {
-            "family": "SF Pro", "style": "Expanded Medium",
+            "family": "Inter", "style": "Expanded Medium",
             "weight": 540, "stretch_pct": 132, "size": 22,
             "line_height_pct": 100, "letter_spacing_pct": 11, "text_case": "UPPER"
           },
@@ -57,7 +57,7 @@
           ],
           "x": 80, "y": 260, "width": 920,
           "font": {
-            "family": "SF Pro", "style": "Expanded Heavy",
+            "family": "Inter", "style": "Expanded Heavy",
             "weight": 870, "stretch_pct": 132, "size": 80,
             "line_height_pct": 90, "letter_spacing_pct": -1, "text_case": "UPPER"
           },
@@ -77,7 +77,7 @@
           "text": "Implementamos os 5 protocolos de gestão comercial e o resultado apareceu no terceiro mês.",
           "x": 80, "y": 1480, "width": 600,
           "font": {
-            "family": "SF Pro", "style": "Expanded Regular",
+            "family": "Inter", "style": "Expanded Regular",
             "weight": 510, "stretch_pct": 100, "size": 28,
             "line_height_pct": 120, "letter_spacing_pct": -1, "text_case": "sentence"
           },
@@ -92,7 +92,7 @@
           "padding_x": 38, "padding_y": 22,
           "background": "#FFBE18", "text_color": "#0C161B", "corner_radius": 999,
           "font": {
-            "family": "SF Pro", "style": "Expanded Bold",
+            "family": "Inter", "style": "Expanded Bold",
             "weight": 700, "stretch_pct": 132, "size": 24,
             "line_height_pct": 100, "letter_spacing_pct": 0, "text_case": "UPPER"
           }

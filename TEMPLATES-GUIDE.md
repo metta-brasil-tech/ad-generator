@@ -79,7 +79,7 @@ story manifesto Metta sobre empresário que cresce com método, sem foto, tom pr
 - Sem `image_slot`
 - Headline ocupa a maior parte do canvas (max 180 chars / 7 linhas)
 - Body opcional (max 100 chars)
-- Fonte SF Pro Expanded Heavy UPPER
+- Fonte Zalando Sans Expanded Heavy UPPER
 
 ---
 
@@ -103,7 +103,7 @@ story dor — empresário refém da operação, fullbleed emocional, funil TOFU 
 
 ## H — H-fundo-branco-headline-gigante
 
-**Visual:** Fundo branco · Headline gigante preta SF Pro Expanded · Clean editorial
+**Visual:** Fundo branco · Headline gigante preta Zalando Sans Expanded · Clean editorial
 
 **Quando brilha:** Statement de autoridade limpo · Comparação de conceitos · Quando a frase já é o anúncio
 
@@ -114,7 +114,7 @@ story statement Metta — frase de autoridade sobre gestão comercial, sem foto,
 
 **O que esperar:**
 - Fundo branco `#FFFFFF`
-- Headline max 120 chars / 4 linhas, SF Pro Expanded Heavy
+- Headline max 120 chars / 4 linhas, Zalando Sans Expanded Heavy
 - Sem foto
 
 ---

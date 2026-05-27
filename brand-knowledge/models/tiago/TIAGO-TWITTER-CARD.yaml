@@ -44,7 +44,7 @@ composicao:
 typography:
   headline:
     role:           "tweet-headline"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Bold"
     weight:         700
     stretch_pct:    100
@@ -54,7 +54,7 @@ typography:
     text_case:      "sentence"
   body:
     role:           "body-regular"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -64,7 +64,7 @@ typography:
     text_case:      "sentence"
   tag_eyebrow:
     role:           "handle"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100
@@ -74,7 +74,7 @@ typography:
     text_case:      "sentence"
   cta:
     role:           "footnote-or-transition"
-    family:         "SF Pro"
+    family:         "Inter"
     style:          "Regular"
     weight:         400
     stretch_pct:    100

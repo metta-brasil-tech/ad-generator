@@ -24,10 +24,10 @@
       "frame": {"width": 1080, "height": 1350, "background": {"type": "solid", "value": "#EDEEEE", "noise": true}},
       "elements": [
         {"type": "asset", "slot_name": "signature_ornament", "asset": "assinatura-tiago-amarelo.svg", "x": "center", "y": 40, "width": 980, "color": "#FFCC00", "opacity": 1.0},
-        {"type": "text", "slot_name": "headline", "text": "Pra você, o que separa um chefe de um líder de verdade?", "ranges": [{"start": 12, "end": 26, "color": "#3D5762"}], "x": 64, "y": 540, "width": 952, "font": {"family": "SF Pro", "weight": 800, "size": 68, "line_height_pct": 110, "text_case": "sentence"}, "color": "#0F1419", "align": "left"},
-        {"type": "text", "slot_name": "sub", "text": "Conta aqui\nembaixo. Quero ler.", "x": 64, "y": "after-headline+40", "font": {"family": "SF Pro", "weight": 700, "size": 44, "line_height_pct": 125, "text_case": "sentence"}, "color": "#0F1419"},
+        {"type": "text", "slot_name": "headline", "text": "Pra você, o que separa um chefe de um líder de verdade?", "ranges": [{"start": 12, "end": 26, "color": "#3D5762"}], "x": 64, "y": 540, "width": 952, "font": {"family": "Inter", "weight": 800, "size": 68, "line_height_pct": 110, "text_case": "sentence"}, "color": "#0F1419", "align": "left"},
+        {"type": "text", "slot_name": "sub", "text": "Conta aqui\nembaixo. Quero ler.", "x": 64, "y": "after-headline+40", "font": {"family": "Inter", "weight": 700, "size": 44, "line_height_pct": 125, "text_case": "sentence"}, "color": "#0F1419"},
         {"type": "asset", "slot_name": "avatar_tiago_verified", "asset": "avatar-tiago.png", "x": "center", "y": 1170, "width": 80},
-        {"type": "text", "slot_name": "avatar_name", "text": "Tiago Alves", "x": "center", "y": 1265, "font": {"family": "SF Pro", "weight": 700, "size": 28}, "color": "#0F1419", "align": "center"},
+        {"type": "text", "slot_name": "avatar_name", "text": "Tiago Alves", "x": "center", "y": 1265, "font": {"family": "Inter", "weight": 700, "size": 28}, "color": "#0F1419", "align": "center"},
         {"type": "verified_badge", "slot_name": "avatar_verified_badge", "color": "#1D9BF0", "x": "after-avatar-name+8", "y": 1268, "size": 24}
       ],
       "errors": [], "warnings": [],

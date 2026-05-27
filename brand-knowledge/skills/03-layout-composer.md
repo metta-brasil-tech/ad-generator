@@ -48,7 +48,87 @@ Se a copy NÃO COUBER, retornar `errors[]` com sugestões — não inventar layo
     "height": 1920,
     "background": { "type": "solid", "value": "#0C161B" }
   },
-  "elements": [ ... ],
+  "elements": [
+    {
+      "type": "text",
+      "slot_name": "tag",
+      "text": "CASE · HIPERZOO",
+      "x": 80,
+      "y": 100,
+      "width": 920,
+      "height": "auto",
+      "font": {
+        "family": "Zalando Sans Expanded",
+        "weight": 540,
+        "size": 22,
+        "line_height_pct": 100,
+        "letter_spacing_pct": 11,
+        "text_case": "UPPER"
+      },
+      "color": "#B0CAD8",
+      "align": "left"
+    },
+    {
+      "type": "text",
+      "slot_name": "headline",
+      "text": "Como a Hiperzoo\nabriu 12 lojas em\n18 meses sem perder\nmargem.",
+      "ranges": [
+        { "start": 25, "end": 33, "fill": "#FFBE18" },
+        { "start": 49, "end": 67, "fill": "#FFBE18" }
+      ],
+      "x": 80,
+      "y": 260,
+      "width": 920,
+      "height": "auto",
+      "font": {
+        "family": "Zalando Sans Expanded",
+        "weight": 900,
+        "size": 80,
+        "line_height_pct": 90,
+        "letter_spacing_pct": -1,
+        "text_case": "UPPER"
+      },
+      "color": "#FFFFFF",
+      "align": "left"
+    },
+    {
+      "type": "image_slot",
+      "slot_name": "photo",
+      "x": 540,
+      "y": 1000,
+      "width": 600,
+      "height": 900,
+      "bleed_right": true,
+      "image_prompt_ref": "image-prompts/style-A.md",
+      "url_placeholder": "pending"
+    },
+    {
+      "type": "text",
+      "slot_name": "body",
+      "text": "Implementamos os 5 protocolos de gestão comercial e o resultado apareceu no terceiro mês.",
+      "x": 80,
+      "y": 1480,
+      "width": 600,
+      "height": "auto",
+      "font": { "family": "Inter", "weight": 400, "size": 30 },
+      "color": "#B0CAD8"
+    },
+    {
+      "type": "pill_cta",
+      "slot_name": "cta",
+      "text": "VER CASE COMPLETO",
+      "x": 80,
+      "y": 1700,
+      "width": "auto",
+      "height": 88,
+      "padding_x": 38,
+      "padding_y": 22,
+      "background": "#FFBE18",
+      "text_color": "#0C161B",
+      "corner_radius": 999,
+      "font": { "family": "Zalando Sans Expanded", "weight": 700, "size": 24, "text_case": "UPPER" }
+    }
+  ],
   "errors": [],
   "warnings": [],
   "fit_metrics": { "fit_score": 0.95 }
@@ -111,6 +191,10 @@ Ação: **pular completamente na geração de elementos**. Se o assembler precis
 
 Slots com `type: image_slot` ou role de imagem (`foto_bleed`, `imagem_surreal`, `foto_raw`, `collage_image`, `image_fullbleed`, `media`).
 
+Cores: resolver `colors.fg_primary` → hex literal do doc de tokens da marca:
+- `marca=metta` → `design/metta-tokens.md` (paleta dark/yellow, Zalando Sans Expanded + Inter)
+- `marca=tiago` → `design/tiago-tokens.md` (paleta light, Inter, ring amarelo signature)
+
 Ação: gerar elemento `"type": "image_slot"` com `url_placeholder: "pending"` e `image_prompt_ref` do YAML. A skill 04 preencherá depois.
 
 Dois modelos são **100% visuais sem nenhum texto**:
@@ -168,8 +252,8 @@ Este slot tem `item_structure: {numero, titulo_item, sub_texto}` e não é uma s
 Regras:
 - `min_items: 3`, `max_items: 6` — gerar entre 3 e 6 itens
 - Cada item: `"{N}. {titulo_item}\n{sub_texto}"` com linha em branco (`\n`) entre itens
-- `titulo_item`: SF Pro Condensed Semibold preto, sentence case
-- `sub_texto`: SF Pro Regular cinza `#6E6E73`, sentence case
+- `titulo_item`: Inter Condensed Semibold preto, sentence case
+- `sub_texto`: Inter cinza `#6E6E73`, sentence case
 - `numero` (`1.`, `2.`, `3.`) faz parte do `titulo_item` na mesma linha
 
 #### Categoria F — Slot de bullets (YELLOW-BLOCO `bullets`)
@@ -310,8 +394,8 @@ Processar em ordem de dependência: elementos fixos → headline → subhead →
 
 ### Etapa 6 — Aplicar tokens do DS da marca
 
-- `marca=metta`: SF Pro Expanded, paleta dark/yellow (`#0C161B`, `#FFBE18`, `#B0CAD8`)
-- `marca=tiago`: SF Pro Regular/Condensed, paleta light/yellow (`#FFFFFF`, `#FFCC00`, `#6E6E73`, `#3D5762`)
+- `marca=metta`: Zalando Sans Expanded, paleta dark/yellow (`#0C161B`, `#FFBE18`, `#B0CAD8`)
+- `marca=tiago`: Inter/Condensed, paleta light/yellow (`#FFFFFF`, `#FFCC00`, `#6E6E73`, `#3D5762`)
 
 **Inviolável:** tokens de marcas diferentes nunca se misturam no mesmo layout.
 
@@ -367,9 +451,15 @@ Input: `{ headline: "Como a Hiperzoo abriu 12 lojas em 18 meses sem perder marge
   "text": "Como a Hiperzoo\nabriu 12 lojas em\n18 meses sem perder\nmargem.",
   "ranges": [{ "start": 25, "end": 33, "fill": "#FFBE18" }, { "start": 49, "end": 67, "fill": "#FFBE18" }],
   "x": 80, "y": 260, "width": 920, "height": "auto",
-  "font": { "family": "SF Pro", "style": "Expanded Heavy", "weight": 870, "stretch_pct": 132, "size": 80, "line_height_pct": 90, "text_case": "UPPER" },
+  "font": { "family": "Zalando Sans Expanded", "weight": 900, "size": 80, "line_height_pct": 90, "text_case": "UPPER" },
   "color": "#FFFFFF", "align": "left" }
 ```
+
+Carrega `models/A-headline-foto-dark.yaml`:
+- Frame: 1080x1920, bg #0C161B
+- Headline: Zalando Sans Expanded Black 900, 67-80px, max 60 chars, max 5 lines, UPPER
+- Body: Inter Regular 400, max 180 chars, max 4 lines
+- CTA: pill amarelo, max 24 chars
 
 ### Few-shot 2 — Lista numerada (TIAGO-NOTES-MOCKUP)
 
@@ -379,9 +469,9 @@ Input tese: "3 decisões que tomei antes de contratar o primeiro gerente"
 { "type": "text", "slot_name": "lista_numerada",
   "text": "1. Contratar antes de precisar.\nA maioria espera a dor aparecer primeiro.\n\n2. Criar protocolo de onboarding de 30 dias.\nSem ritual de entrada, turnover come a margem.\n\n3. Parar de ser o único vendedor.\nO fundador que vende tudo é gargalo com nome.",
   "x": 32, "y": 240, "width": 1016, "height": "auto",
-  "font": { "family": "SF Pro Condensed", "style": "Semibold", "weight": 600, "size": 26, "line_height_pct": 140 },
+  "font": { "family": "Inter Condensed", "style": "Semibold", "weight": 600, "size": 26, "line_height_pct": 140 },
   "color": "#000000", "align": "left",
-  "secondary_font": { "family": "SF Pro", "style": "Regular", "weight": 400, "size": 24, "color": "#6E6E73" } }
+  "secondary_font": { "family": "Inter", "style": "Regular", "weight": 400, "size": 24, "color": "#6E6E73" } }
 ```
 
 ### Few-shot 3 — Bullets (YELLOW-BLOCO)
@@ -392,7 +482,7 @@ Input: evento com 3 benefícios
 { "type": "text", "slot_name": "bullets",
   "text": "• Agenda de alto impacto em 2 dias\n• Cases reais de empresas como a sua\n• Protocolo de implementação imediata",
   "x": 80, "y": 520, "width": 920, "height": "auto",
-  "font": { "family": "SF Pro", "style": "Expanded Regular", "weight": 400, "size": 28, "line_height_pct": 160 },
+  "font": { "family": "Inter", "style": "Expanded Regular", "weight": 400, "size": 28, "line_height_pct": 160 },
   "color": "#0C161B", "align": "left" }
 ```
 
@@ -404,7 +494,7 @@ Input: "crescimento de 47% de margem em 90 dias"
 { "type": "text", "slot_name": "headline",
   "text": "+47%",
   "x": 80, "y": 680, "width": 920, "height": "auto",
-  "font": { "family": "SF Pro", "style": "Expanded Heavy", "weight": 870, "size": 220, "line_height_pct": 90, "text_case": "UPPER" },
+  "font": { "family": "Inter", "style": "Expanded Heavy", "weight": 870, "size": 220, "line_height_pct": 90, "text_case": "UPPER" },
   "color": "#0C161B", "align": "left" }
 ```
 
@@ -416,7 +506,7 @@ Input: tese sobre sistema vs motivação
 { "type": "text", "slot_name": "body",
   "text": "Todo mundo fala sobre motivação.\nNinguém fala sobre sistema.\n\nMotivação você depende do humor.\nSistema você depende da agenda.\n\nEmpresa que cresce tem sistema.\nNão tem pessoa especial.",
   "x": 64, "y": 320, "width": 952, "height": "auto",
-  "font": { "family": "SF Pro", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 150 },
+  "font": { "family": "Inter", "style": "Regular", "weight": 400, "size": 30, "line_height_pct": 150 },
   "color": "#0F1419", "align": "left" }
 ```
 
@@ -473,10 +563,11 @@ Input: tese sobre sistema vs motivação
 - ❌ Gerar mais de 6 items em `lista_numerada` do TIAGO-NOTES-MOCKUP
 - ❌ Inventar slot novo que não existe no YAML
 - ❌ Aumentar `max_chars` do slot
-- ❌ Misturar tokens de marcas (SF Pro Expanded Metta em layout Tiago, dark bg Metta em fundo Tiago)
+- ❌ Misturar tokens de marcas (Zalando Sans Expanded Metta em layout Tiago, dark bg Metta em fundo Tiago)
 - ❌ Não escolher variante em modelos com variantes (TIAGO-EDITORIAL-CTA, TIAGO-TWITTER-CARD)
 - ❌ Usar `accent_word.mode: "yellow-text"` com fill Metta (`#FFBE18`) em layout Tiago — cor Tiago é `#FFCC00`
 - ❌ Ignorar `errors[]` — se a copy não cabe, sinalize, não force
+- ❌ Misturar token de marca diferente (Metta yellow em layout Tiago, dark bg em Tiago, Zalando Sans Expanded em Tiago, etc.) — bug crítico, `06-qa-validator` falha o ad
 
 ---
 

@@ -22,15 +22,15 @@
       "marca": "tiago",
       "frame": {"width": 1080, "height": 1350, "background": {"type": "solid", "value": "#EDEEEE", "noise": true}},
       "elements": [
-        {"type": "text", "slot_name": "header_eyebrow_left", "text": "ESTRATÉGIAS DE\nGESTÃO DE VENDAS", "x": 64, "y": 60, "font": {"family": "SF Pro", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#0F1419"},
+        {"type": "text", "slot_name": "header_eyebrow_left", "text": "ESTRATÉGIAS DE\nGESTÃO DE VENDAS", "x": 64, "y": 60, "font": {"family": "Inter", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#0F1419"},
         {"type": "asset", "slot_name": "header_signature", "asset": "assinatura-tiago-amarelo.svg", "x": "center", "y": 40, "width": 220},
-        {"type": "text", "slot_name": "header_eyebrow_right", "text": "VENDAS É CIÊNCIA", "x": "right-64", "y": 60, "align": "right", "font": {"family": "SF Pro", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#0F1419"},
+        {"type": "text", "slot_name": "header_eyebrow_right", "text": "VENDAS É CIÊNCIA", "x": "right-64", "y": 60, "align": "right", "font": {"family": "Inter", "weight": 700, "size": 18, "letter_spacing_pct": 8, "text_case": "UPPER"}, "color": "#0F1419"},
         {"type": "container", "slot_name": "speech_bubble", "x": 64, "y": 180, "width": 952, "padding": 48, "corner_radius": 32, "tail": "bottom-right", "bg": "#3D5762"},
-        {"type": "text", "slot_name": "headline", "text": "\"A Geração Z não quer trabalhar.\"", "x": "bubble-center", "y": "bubble-center", "font": {"family": "SF Pro", "weight": 800, "size": 86, "line_height_pct": 95, "text_case": "sentence"}, "color": "#FFFFFF", "align": "center"},
-        {"type": "text", "slot_name": "subhead", "text": "OK. E SE 68% DAS EMPRESAS ESTÃO DIZENDO\nA MESMA COISA, A VARIÁVEL COMUM NÃO É A GERAÇÃO.", "x": 64, "y": "after-bubble+32", "font": {"family": "SF Pro", "weight": 800, "size": 36, "text_case": "UPPER"}, "color": "#0F1419"},
-        {"type": "text", "slot_name": "body", "text": "É o modelo de liderança que todos vocês copiaram uns dos outros.", "ranges": [{"start": 35, "end": 64, "yellow_highlight": true}], "x": 64, "y": "after-subhead+24", "font": {"family": "SF Pro", "weight": 700, "size": 36, "line_height_pct": 130, "text_case": "sentence"}, "color": "#0F1419"},
+        {"type": "text", "slot_name": "headline", "text": "\"A Geração Z não quer trabalhar.\"", "x": "bubble-center", "y": "bubble-center", "font": {"family": "Inter", "weight": 800, "size": 86, "line_height_pct": 95, "text_case": "sentence"}, "color": "#FFFFFF", "align": "center"},
+        {"type": "text", "slot_name": "subhead", "text": "OK. E SE 68% DAS EMPRESAS ESTÃO DIZENDO\nA MESMA COISA, A VARIÁVEL COMUM NÃO É A GERAÇÃO.", "x": 64, "y": "after-bubble+32", "font": {"family": "Inter", "weight": 800, "size": 36, "text_case": "UPPER"}, "color": "#0F1419"},
+        {"type": "text", "slot_name": "body", "text": "É o modelo de liderança que todos vocês copiaram uns dos outros.", "ranges": [{"start": 35, "end": 64, "yellow_highlight": true}], "x": 64, "y": "after-subhead+24", "font": {"family": "Inter", "weight": 700, "size": 36, "line_height_pct": 130, "text_case": "sentence"}, "color": "#0F1419"},
         {"type": "image_slot", "slot_name": "collage_image", "x": 540, "y": 540, "width": 540, "height": 700, "image_prompt_ref": "image-prompts/tiago/style-editorial-collage.md#exemplo-1", "url_placeholder": "Editorial collage: man kneeling in black suit, HEAD REPLACED BY SMOKE, B&W with selective yellow on shirt collar"},
-        {"type": "pill_cta", "slot_name": "cta_pill", "text": "ARRASTA PRO LADO 👉", "x": 64, "y": "bottom-100", "bg": "#FFCC00", "text_color": "#0F1419", "corner_radius": 999, "padding_x": 28, "height": 70, "font": {"family": "SF Pro", "weight": 700, "size": 24, "text_case": "UPPER", "letter_spacing_pct": 4}}
+        {"type": "pill_cta", "slot_name": "cta_pill", "text": "ARRASTA PRO LADO 👉", "x": 64, "y": "bottom-100", "bg": "#FFCC00", "text_color": "#0F1419", "corner_radius": 999, "padding_x": 28, "height": 70, "font": {"family": "Inter", "weight": 700, "size": 24, "text_case": "UPPER", "letter_spacing_pct": 4}}
       ],
       "errors": [], "warnings": [],
       "fit_metrics": {"fit_score": 0.95}
