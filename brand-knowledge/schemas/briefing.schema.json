@@ -43,7 +43,7 @@
         },
         "cargo": {
           "type": "string",
-          "enum": ["empresario", "diretor", "gerente", "coordenador", "founder"]
+          "enum": ["empresario", "diretor", "gerente", "coordenador", "founder", "desconhecido"]
         },
         "porte_revenue": {
           "type": "string",

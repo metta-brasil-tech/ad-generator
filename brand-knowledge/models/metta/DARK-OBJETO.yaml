@@ -56,7 +56,7 @@ image:
   placement: "center-top"
   filters: {saturation: -0.1, contrast: 0.3, overlay: "moody-rim-light"}
   ratio: "free"
-  prompt_template_ref: "n/a — render 3D em Cinema 4D / Blender"
+  prompt_template_ref: "brand-knowledge/image-prompts/metta/style-DARK-OBJETO-3d.md"
   reference_image: []  # figma:// ref removido
 
 slots:
