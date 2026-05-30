@@ -23,7 +23,7 @@ def load_model_yaml(model_id: str, knowledge_path: str | None = None) -> dict | 
       4. first-segment match (LLM hybrid like "B-light-provocador" → "B" → B-foto-top-headline-mixed)
     """
     kp = Path(knowledge_path or os.getenv("BRAND_KNOWLEDGE_PATH", "./brand-knowledge"))
-    candidates = list((kp / "models").rglob("*.yaml"))
+    candidates = list((kp / "models").glob("*.yaml"))
     model_id_lc = model_id.lower().strip()
     # Get the FIRST SEGMENT before "-" — handles hybrids like "B-something" → "B"
     first_segment = model_id_lc.split("-", 1)[0]
