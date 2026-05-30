@@ -399,6 +399,19 @@ def main(briefing_text, mock, provider, stop_at, input_file, verbose, no_clarify
                 # Merge LLM-provided refs with banco refs
                 refs = list(p.get("reference_images", []) or [])
                 refs.extend(ref_paths)
+                # Filter out hallucinated URLs (figma://, http, non-existent paths)
+                filtered_refs = []
+                for r in refs:
+                    if not r or not isinstance(r, str):
+                        continue
+                    if r.startswith(("http://", "https://", "figma://")):
+                        info(f"  skipping non-local ref (LLM hallucination): {r[:60]}")
+                        continue
+                    if Path(r).exists():
+                        filtered_refs.append(r)
+                    else:
+                        info(f"  skipping missing local ref: {r}")
+                refs = filtered_refs
                 ig_result = image_gen.generate(
                     prompt=p["prompt"],
                     negative_prompt=p.get("negative_prompt", ""),

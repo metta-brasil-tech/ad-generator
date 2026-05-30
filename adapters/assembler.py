@@ -565,6 +565,17 @@ def _draw_pill(
     return pill_w, pill_h
 
 
+def _classify_text_zone(el_x: int, el_width, canvas_w: int) -> str:
+    """Classify element into left/right/full zone for flow tracking."""
+    w = int(el_width) if isinstance(el_width, (int, float)) else 0
+    if w >= canvas_w * 0.55:
+        return "full"
+    elif el_x >= canvas_w * 0.5:
+        return "right"
+    else:
+        return "left"
+
+
 class PNGAssembler:
     """Render layout-spec to PNG (entregável final) and JPEG (optional)."""
 
@@ -595,6 +606,11 @@ class PNGAssembler:
         draw = ImageDraw.Draw(canvas)
 
         elements = layout_spec.get("elements", [])
+        # Text flow tracking — prevents overlap between consecutive text elements
+        _FLOW_GAP = 10
+        _FLOOR_PCT = 0.82
+        text_bottom: dict[str, int] = {"left": 0, "right": 0, "full": 0}
+
         # Draw image_slots first (backgrounds), then text/pill on top
         for layer in ("image_slot", "other"):
             for el in elements:
@@ -606,7 +622,16 @@ class PNGAssembler:
                     continue
                 try:
                     if etype == "text":
-                        self._draw_text(canvas, draw, el)
+                        zone = _classify_text_zone(int(el.get("x", 0)), el.get("width"), W)
+                        y_spec = int(el["y"])
+                        prev_bottom = text_bottom[zone]
+                        if prev_bottom > 0 and y_spec < prev_bottom + _FLOW_GAP and y_spec < H * _FLOOR_PCT:
+                            y_actual = prev_bottom + _FLOW_GAP
+                        else:
+                            y_actual = y_spec
+                        bottom = self._draw_text(canvas, draw, el, y_override=y_actual)
+                        if y_actual < H * _FLOOR_PCT:
+                            text_bottom[zone] = bottom
                     elif etype == "image_slot":
                         self._draw_image(canvas, el, image_urls, warnings, W, H)
                     elif etype == "pill_cta":
@@ -642,7 +667,7 @@ class PNGAssembler:
             warnings=warnings,
         )
 
-    def _draw_text(self, canvas, draw, el):
+    def _draw_text(self, canvas, draw, el, y_override: int | None = None) -> int:
         font = _load_font(
             el["font"]["family"],
             el["font"]["style"],
@@ -650,12 +675,13 @@ class PNGAssembler:
         )
         line_height = int(el["font"]["size"] * (el["font"].get("line_height_pct", 120) / 100))
         max_w = el.get("width") if isinstance(el.get("width"), (int, float)) else None
-        _draw_text_with_ranges(
+        y = y_override if y_override is not None else int(el["y"])
+        height = _draw_text_with_ranges(
             draw,
             el["text"],
             font,
             int(el["x"]),
-            int(el["y"]),
+            y,
             _hex_to_rgb(el["color"]),
             el.get("ranges"),
             line_height,
@@ -663,6 +689,7 @@ class PNGAssembler:
             max_width=int(max_w) if max_w else None,
             text_case=el["font"].get("text_case", "sentence"),
         )
+        return y + (height or 0)
 
     def _draw_image(self, canvas, el, image_urls, warnings, canvas_w=1080, canvas_h=1920):
         url = image_urls.get(el["slot_name"])
