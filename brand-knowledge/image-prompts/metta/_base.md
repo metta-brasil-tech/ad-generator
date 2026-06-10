@@ -117,6 +117,28 @@ Versão jargão (NB2):
 - "industrial warehouse with concrete and metal textures (logística)"
 - "in front of clean off-white textured wall in a modern studio (clean editorial)"
 
+## Archetypes de foto canônicos (taxonomia validada no catálogo de 109 peças)
+
+> Vocabulário REAL extraído dos 73 ads canônicos (`data/applications-index.json` →
+> `archetype_foto`). Use o archetype mais próximo da tese pra ancorar a CENA — é o
+> padrão que já funciona, não invente fora dessa lista.
+
+| archetype_foto | uso | cena-âncora |
+|---|---|---|
+| `executivo-em-decisao` (26) | mais comum | empresário só, semblante decidido, olhar fora de quadro, ambiente real desfocado |
+| `tiago-conselheiro` (13) | autoridade Metta | **FOTO REAL do Tiago** recortado sobre fundo escuro de palco/evento + logo Metta |
+| `retrato-individual-confiante` (9) | prova/autoridade | retrato médio-close, mood confiante, luz natural |
+| `executivo-cansado` (7) | dor/confronto | empresário pensativo/exausto, peso da rotina, sem caricatura |
+| `metafora-conceitual` (6) | tese abstrata | objeto/cena que ilustra a ideia (engrenagem, peça fora do lugar) |
+| `mentoria-1-on-1` (3) | processo | duas pessoas em conversa de orientação, ambiente real |
+| `time-colaborando-laptops` / `time-em-acao` / `time-celebrando-resultado` | resultado coletivo | time real trabalhando/comemorando sem pose stock |
+| `objeto-conceitual` (+escuro) | editorial | objeto isolado em fundo neutro/escuro, mood editorial |
+| `tiago-retrato-pb` (2) | colagem | recorte B&W estilo colagem editorial (surreal) |
+| `palco-evento` / `analise-dados-tela` / `vendedor-passivo` | contextual | cena documental específica da tese |
+
+Regra: `tiago-conselheiro` e `tiago-retrato-pb` exigem **foto real do Tiago** (recorte),
+NÃO geração de pessoa. Os demais aceitam geração editorial seguindo este base.
+
 ## Anti-padrões universais (NÃO incluir em prompt — sempre via "without X")
 
 - "successful businessman" → gera pose fake
