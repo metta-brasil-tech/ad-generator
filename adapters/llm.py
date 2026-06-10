@@ -44,7 +44,11 @@ class LLMAdapter:
         model = os.getenv(env_var)
         if not model:
             defaults = {
-                "claude": "claude-opus-4-7",
+                # Sonnet 4.6 ($3/$15 por 1M) — a própria skill 04 recomenda "Claude
+                # Sonnet ou GPT-4o" pra engenharia de prompt de imagem. Escrever prompt
+                # a partir de template não exige o raciocínio (nem o custo) do Opus
+                # ($5/$25). Override por env: LLM_MODEL_CLAUDE.
+                "claude": "claude-sonnet-4-6",
                 "openai": "gpt-5",
                 "gemini": "gemini-2-flash",
                 "ollama": "llama3.1:70b",

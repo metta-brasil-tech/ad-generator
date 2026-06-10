@@ -5,13 +5,23 @@
 
 ## Identidade visual da marca (NÃO sobrescrever)
 
-A marca pessoal Tiago Alves é **light-first** (fundo claro), **neutra tipograficamente** (Inter), **emocionalmente acolhedora** (voz que pensa em vez de acusar). Imagens nesse namespace seguem o mesmo princípio:
+A marca pessoal Tiago Alves trabalha em **DOIS registros visuais** — o template de cada
+`style-*.md` (archetype) decide qual usar. O base NÃO impõe um registro único: ele dá o
+vocabulário dos dois e deixa o template do estilo mandar.
 
-- **Não** são fotos editoriais dark moody (isso é Metta)
-- **Não** mostram empresário exausto/refém (Tiago acolhe, não acusa)
-- **São** fotos contextuais, ilustrativas, com mood pensativo/observacional
-- **São** objetos, cenas, screenshots, momentos que ancoram o tweet
-- Mood-alvo: "diary photo de pensamento", não "ad institucional"
+**Registro 1 — documental / lo-fi (light):** foto crua de celular, luz natural, mood
+pensativo/observacional. Usado em `photo-raw`, `story-hero`, `story-yellow`,
+`story-minimal`, `twitter`. Mood-alvo: "diary photo de pensamento", não "ad institucional".
+
+**Registro 2 — cinema editorial / surreal (dark):** B&W cinemático com toque amarelo
+seletivo, colagem surreal de revista, noir close-up. Usado em `editorial-hero` (colagem
+surreal), `editorial-dark` (noir), `editorial-card`, `dark-surreal`. Esse registro É parte
+do DNA do Tiago — **não** é Metta.
+
+Princípios que valem nos DOIS registros:
+- **Não** mostram empresário exausto/refém num tom acusatório (Tiago provoca, não humilha)
+- **Sempre** carregam intenção editorial — nunca foto de banco de imagem genérica
+- O amarelo seletivo (#FFCC00) é o único elemento que sobrevive ao B&W no Registro 2
 
 ## Como o prompt funciona
 
@@ -66,13 +76,16 @@ no text in image, no logos visible, no over-saturation
 
 ## Negative prompt base
 
+> SÓ negativos que valem nos DOIS registros. Restrições de registro (ex.: "no dark cinema"
+> no lo-fi, ou "no surreal collage" no editorial-dark) vivem no negative prompt do
+> `style-*.md` do archetype — NUNCA aqui no base, senão briga com o template.
+
 ```
 no text, no logos, no over-saturation, no HDR look,
-no dramatic golden hour, no cinematic teal-orange grade,
+no cinematic teal-orange grade,
 no group photo, no eye contact with camera,
 no stock smile, no fake business pose,
-no dark moody editorial (that's Metta brand), no Hasselblad cinema,
-no AI-render artifacts, no surreal collage
+no AI-render artifacts, no plastic skin
 ```
 
 ## Quando o slot pede screenshot/objeto e não pessoa
@@ -90,7 +103,10 @@ no text overlay, no logos, no studio look
 
 ## Reference images
 
-Quando rodando via Nano Banana 2 (que aceita imagens de referência), passar 1-2 PNGs de `brand-knowledge/exemplars/tiago/` pra style transfer manter coerência light/quieto.
+> Provider atual em produção é **gpt-image-2** (texto→imagem, sem ref images). A passagem de
+> PNGs de referência só se aplica a providers legacy (Nano Banana 2 / Gemini). Em gpt-image-2,
+> a coerência de marca vem 100% do texto do prompt — não há style-transfer por imagem.
+> Os exemplars em `brand-knowledge/exemplars/tiago/` ficam só como referência humana de curadoria.
 
 ## Versão
 

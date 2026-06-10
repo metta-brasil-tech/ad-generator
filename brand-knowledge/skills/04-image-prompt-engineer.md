@@ -1,8 +1,10 @@
 # Skill 04 — Image Prompt Engineer
 
-> **Função:** dado layout-spec + estilo, gera prompt completo pra image-gen API (Nano Banana 2 / gpt-image-1).
+> **Função:** dado layout-spec + estilo, gera prompt completo pra image-gen API.
+> **Provider em produção:** **gpt-image-2** (OpenAI) — ver `IMAGE_GEN_PROVIDER`. Providers
+> legacy (Nano Banana 2 / Gemini) ainda suportados via SEÇÃO LEGACY, mas dormentes.
 > **Input:** `layout-spec.schema.json` + `briefing.schema.json` · **Output:** `image-prompt.schema.json`
-> **Model recommendation:** Claude Sonnet ou GPT-4o (precisa raciocínio criativo).
+> **Model recommendation:** Claude Sonnet (suficiente — é transformação de template, não raciocínio pesado).
 
 ## Papel
 
@@ -166,6 +168,49 @@ Output:
 }
 ```
 
+## Few-shot — Tiago · TIAGO-EDITORIAL-DARK (cinema noir)
+
+Input:
+```json
+{
+  "briefing": {
+    "intent": "reflexao_disciplina",
+    "tese_central": "A maioria desiste a um passo da virada.",
+    "marca": "tiago"
+  },
+  "image_slots": [{ "slot_name": "photo", "image_prompt_ref": "image-prompts/tiago/style-editorial-dark.md" }]
+}
+```
+
+Output (note: registro 2 / cinema dark — herda `_base-tiago.md` mas o estilo manda no mood):
+```json
+{
+  "prompts": [
+    {
+      "slot_name": "photo",
+      "prompt": "Cinematic noir photograph of a single male silhouette walking down a long dark corridor, back to camera, slight motion blur on legs, deep dramatic overhead spotlight from the far end of the corridor, hard controlled shadow, vanishing point in distance, extremely shallow depth of field, sharp focus on shoulders, desaturated black and white with subtle warm undertone (tint #2E1F0F), heavy vignette, no faces visible, isolated solitary figure, corridor walls in deep shadow, Sony A7R V 35mm f/1.8, cinema editorial 4K, RAW, no text in image, no logos",
+      "negative_prompt": "no smile, no eye contact with camera, no posed business portrait, no studio bright lighting, no commercial polish, no HDR look, no logos, no readable text, no group photo, no surreal collage, no selective yellow paint here, no documentary snap mood, no orange-teal grade",
+      "aspect_ratio": "4:5",
+      "model_hint": "gpt-image-2",
+      "iteration_strategy": {
+        "max_attempts": 3,
+        "fallback_prompts": [
+          "Cinematic noir extreme close-up of a single adult human eye, brown iris sharp on pupil, dramatic side light from the right, hard shadow on left, desaturated B&W with subtle warm undertone, heavy vignette, isolated against deep black, Sony A7R V 85mm f/1.4, cinema editorial 4K RAW, no text no logos",
+          "Cinematic noir of male hands interlaced on a dark desk, single side light from left, shallow DoF sharp on front hand, desaturated B&W warm undertone, deep blacks, no face, no logos, 85mm f/1.4 editorial 4K"
+        ]
+      },
+      "metadata": { "style_id": "TIAGO-EDITORIAL-DARK", "registro": "2-cinema-dark", "mood_chosen": "noir solitude" }
+    }
+  ],
+  "skip": false
+}
+```
+
+> **Por que esse few-shot importa:** o Tiago tem DOIS registros (ver `_base-tiago.md`). Pro
+> registro lo-fi (photo-raw, story), o prompt é cru de celular, luz natural, COLORIDO — NÃO
+> cinema. Pro registro cinema (editorial-*, dark-surreal), é B&W noir/colagem com amarelo
+> seletivo. SEMPRE siga o registro do `style-*.md` indicado, não um default genérico.
+
 ## Few-shot — Estilo C (skip)
 
 Input: `style_id = "C-tipografia-pura-dark"`
@@ -184,7 +229,7 @@ Output:
 - ❌ Escrever prompt em PT-BR (image-gen funciona melhor em EN — exceções: `brazilian decision-maker`, `sujeito íntegro`)
 - ❌ Inventar variáveis que não estão no template (`{neon_glow}`, `{rainbow_palette}`)
 - ❌ Pular o negative prompt (essencial pra evitar saída off-brand)
-- ❌ Esquecer reference images (Nano Banana 2 fica muito melhor com 2-3 refs)
+- ❌ (legacy NB2/Gemini) Esquecer reference images — irrelevante em gpt-image-2 (texto→imagem, sem refs)
 - ❌ Usar `Empresário` literal — `entrepreneur` ou `business owner` é universal
 
 ## Provider-aware (v3.0)
