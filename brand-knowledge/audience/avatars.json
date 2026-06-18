@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "version": "avatars_v1.0",
+    "updated": "2026-06-18",
+    "purpose": "Fonte canônica de avatares (ICP) pro seletor da UI /criar e pro skill 04 (image-prompt-engineer). Eixo COMBINADO: segmento (quem aparece + onde) + variante (registro emocional do sujeito). Afeta SÓ a imagem — a copy no modo wizard é digitada pelo usuário.",
+    "derivado_de": ["audience/avatar.md (§1 firmográfico, §5 dores, §12 momentos, §16 variantes)", "provas.md (ambientes de cases reais)", "image-prompts/metta/_base.md (personas e ambientes pré-aprovados)"],
+    "regras_globais": {
+      "dignidade": "NUNCA retratar o empresário de forma acusatória, humilhante ou caricata. A dor aparece com dignidade (avatar.md §5.5). Tiago provoca, não humilha (mito-fundador-tiago).",
+      "paridade_genero": "Paridade real entre compradores (avatar.md §1). Variar gênero entre o prompt principal e os fallbacks. Persona masculina e feminina fornecidas em cada segmento.",
+      "brasilidade": "Sempre decisor brasileiro 35-55, pele variando (light olive, warm brown, light). Nunca americano/Hollywood/Silicon Valley.",
+      "moderacao_segura": "Cenas sem conteúdo sensível, sem nudez, sem violência, sem sofrimento explícito — evita bloqueio de moderação do gpt-image-2. Exaustão = ombros levemente caídos + olhar pensativo, nunca corpo em sofrimento.",
+      "linhas_vermelhas": "Nunca 'successful businessman', sorriso stock, thumbs up, comemoração, ring light, terno de luxo Faria Lima, estética de ostentação (avatar.md §17 linhas vermelhas + _base.md anti-padrões)."
+    }
+  },
+
+  "segments": [
+    {
+      "id": "varejo-pet",
+      "label": "Varejo · Pet shop / agropet",
+      "ui_desc": "Dono de rede ou loja de pet/agropet. Ex: Hiperzoo.",
+      "case_anchor": "Hiperzoo (rede de pet shop, 110 colaboradores, +141% em vendas)",
+      "age_range": "40-55",
+      "clothing": "casual button-up shirt or polo, sleeves often rolled up, no tie",
+      "persona_male": "Brazilian man, light olive skin, dark short hair, well-trimmed beard, casual button-up shirt",
+      "persona_female": "Brazilian woman, warm light skin, dark hair pulled back, minimal jewelry, casual blouse or light blazer",
+      "environment": "inside a modern Brazilian pet retail store, shelves of pet products and a grooming area softly blurred in the background, natural store lighting"
+    },
+    {
+      "id": "varejo-farmacia",
+      "label": "Varejo · Farmácia / drogaria",
+      "ui_desc": "Dono de farmácia ou rede de drogarias. Ex: Brava.",
+      "case_anchor": "Brava (rede de farmácias, +16% ticket médio, 5 recordes de venda)",
+      "age_range": "40-58",
+      "clothing": "smart business shirt or light blazer, neat and practical",
+      "persona_male": "Brazilian man, warm brown skin, short black hair, clean-shaven, smart business shirt with sleeves rolled up",
+      "persona_female": "Brazilian woman, light skin, shoulder-length dark hair, structured blazer over blouse",
+      "environment": "on a Brazilian pharmacy/drugstore floor, medicine shelves and the front counter softly blurred, even overhead retail light"
+    },
+    {
+      "id": "varejo-otica-joias",
+      "label": "Varejo · Ótica / joalheria",
+      "ui_desc": "Dono de ótica, joalheria ou semi-joias. Ex: Ótica Visão, Órex.",
+      "case_anchor": "Ótica Visão (rede de óticas, recorde em 30 anos) / Órex (semi-joias)",
+      "age_range": "38-55",
+      "clothing": "elegant but understated — silk blouse or tailored shirt, refined",
+      "persona_male": "Brazilian man, light skin, short brown hair, thin metal-frame glasses, tailored shirt no tie",
+      "persona_female": "Brazilian woman, warm light skin, dark hair, tasteful minimal jewelry, structured camel blazer over silk blouse",
+      "environment": "inside an upscale Brazilian eyewear or jewelry boutique, glass display cases with soft reflections softly blurred, warm boutique lighting"
+    },
+    {
+      "id": "varejo-construcao-deco",
+      "label": "Varejo · Construção / decoração / móveis",
+      "ui_desc": "Dono de loja de material de construção, decoração ou móveis.",
+      "case_anchor": "Segmento prioritário do ICP (varejo de construção/decoração)",
+      "age_range": "42-58",
+      "clothing": "practical button-up or polo, durable, hands-on look",
+      "persona_male": "Brazilian man, light olive skin, short hair, light beard, practical button-up shirt",
+      "persona_female": "Brazilian woman, warm light skin, hair pulled back, practical blazer over plain top",
+      "environment": "in a Brazilian home-improvement or decor showroom, aisles of building materials or furniture softly blurred, bright warehouse-retail light"
+    },
+    {
+      "id": "servico-profissional",
+      "label": "Serviço · Advocacia / clínica / escritório",
+      "ui_desc": "Dono de escritório de advocacia, clínica, consultório ou prestação B2C.",
+      "case_anchor": "Segmento prioritário do ICP (serviço relacional B2C)",
+      "age_range": "38-55",
+      "clothing": "smart business shirt or navy blazer no tie, professional but not corporate-cold",
+      "persona_male": "Brazilian man, warm brown skin, short black hair, clean-shaven, navy blazer over open shirt",
+      "persona_female": "Brazilian woman, light skin, dark hair pulled back, dark navy blazer over blouse, minimal jewelry",
+      "environment": "in a Brazilian professional-services office with wooden furniture, framed diplomas or bookshelves softly blurred, soft natural window light"
+    },
+    {
+      "id": "industria-b2b",
+      "label": "Indústria · B2B pequena/média",
+      "ui_desc": "Dono de indústria B2B com venda relacional. Ex: Ambi, CBA Diesel.",
+      "case_anchor": "Ambi Soluções Acústicas (indústria) / CBA Diesel (rede de filiais)",
+      "age_range": "42-60",
+      "clothing": "wool sweater over shirt or button-up, grounded and experienced",
+      "persona_male": "Brazilian man, light skin, short grey-flecked hair, glasses, wool sweater over a collared shirt",
+      "persona_female": "Brazilian woman, warm light skin, dark hair, structured blazer, confident and grounded",
+      "environment": "in a small Brazilian industrial / B2B setting, a clean factory floor or warehouse with concrete and metal textures softly blurred, mixed natural and overhead light"
+    },
+    {
+      "id": "generico",
+      "label": "Genérico · Empresário (sem segmento)",
+      "ui_desc": "Empresário brasileiro em geral, ambiente neutro. Use quando o segmento não importa.",
+      "case_anchor": "Empresário em ponto de inflexão (definição-mãe do ICP, avatar.md §1)",
+      "age_range": "40-55",
+      "clothing": "smart-casual button-up or sweater over shirt, no tie",
+      "persona_male": "Brazilian man, light olive skin, short dark hair, well-trimmed beard, smart-casual button-up",
+      "persona_female": "Brazilian woman, warm light skin, dark hair pulled back, structured blazer over plain top",
+      "environment": "in front of a clean off-white textured wall in a modern studio, or a generic modern Brazilian small-business office softly blurred, soft natural light"
+    }
+  ],
+
+  "variants": [
+    {
+      "id": "padrao",
+      "label": "Padrão · Empresário em ponto de inflexão",
+      "ui_desc": "O dono que construiu na intuição e bateu no teto da própria capacidade. Registro neutro.",
+      "emotional_cue": "serious confidence with a quiet trace of fatigue, decision-grade reflective gaze, dignified",
+      "posture": "mid-shot from chest up, body slightly angled toward camera, looking off-frame in thought",
+      "dor_ref": "avatar.md §1 — o empresário em ponto de inflexão"
+    },
+    {
+      "id": "decide-sozinho",
+      "label": "Decide sozinho",
+      "ui_desc": "Carrega o negócio sem co-decisor. Mais cansaço e solidão da liderança. Incidência maior em mulher solo.",
+      "emotional_cue": "quiet exhaustion but dignified, the weight of deciding everything alone, calm solitude — never suffering, never defeated",
+      "posture": "alone in the frame, no other people, reflective and self-contained, slight shoulder drop",
+      "gender_lean": "skews female-solo but keep parity — alternate between a woman and a man across prompt and fallbacks",
+      "dor_ref": "avatar.md §16 Variante A + §5.6 solidão da liderança"
+    },
+    {
+      "id": "tecnico-virou-empresario",
+      "label": "Técnico que virou empresário",
+      "ui_desc": "Era advogado, médico, engenheiro, vendedor bom. Cresceu fazendo, nunca aceitou virar gestor.",
+      "emotional_cue": "pensive and slightly out of place in the manager role, mid-thought, the discomfort of having become a manager without choosing it — dignified, not anxious",
+      "posture": "caught between doing and managing, glancing toward the operation around them, hands suggesting they'd rather be doing the technical work",
+      "dor_ref": "avatar.md §16 Variante B + §5.9 'não me reconheço mais no que faço'"
+    },
+    {
+      "id": "herdeiro",
+      "label": "Herdeiro / continuador",
+      "ui_desc": "Entrou pra ajudar os pais ou sócio mais velho e ficou. Peso de modernizar o que outro construiu.",
+      "emotional_cue": "quiet responsibility and respect, the weight of modernizing a legacy built by someone else, careful and grounded — never arrogant",
+      "posture": "slightly younger than the segment average, standing in an established/older business setting, looking at something built before them",
+      "dor_ref": "avatar.md §16 Variante C — culpa silenciosa de 'estragar' o legado"
+    }
+  ]
+}
