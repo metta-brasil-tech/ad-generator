@@ -18,15 +18,19 @@ A foto precisa **encaixar no slot que o layout reservou**. Se o layout coloca a 
 
 Skill 04 deve LER o `image_slot.placement` do layout_spec e INJETAR a instrução de composição correspondente no prompt. Mapeamento:
 
+> **NUNCA escreva a palavra "text"/"overlay"/"caption" na instrução de composição.** Dizer pro
+> modelo de imagem que vai haver TEXTO faz ele RENDERIZAR texto dentro da foto (defeito real).
+> Descreva só o espaço VAZIO ("clean empty space"), nunca o que vai por cima.
+
 | placement YAML | Instrução obrigatória no prompt |
 |---|---|
-| `right-bleed`, `corner-bleed-right` | "subject positioned in the right 40% of the frame, with the left 60% showing softly blurred neutral background space (this empty area will be covered by text overlay)" |
-| `left-bleed`, `corner-bleed-left` | "subject positioned in the LEFT 45% of the frame, with the right 55% showing softly blurred neutral background space" |
-| `top-bleed` | "subject positioned in the upper 50% of the frame, with the lower half showing softly blurred environmental floor/desk space (this empty bottom will be covered by text overlay)" |
-| `bottom-bleed` | "subject positioned in the lower 50% of the frame, with the upper half showing softly blurred environmental ceiling/wall background (this empty top area will be covered by text overlay)" |
-| `fullbleed`, `full-bleed` | "subject CENTERED in the frame, mid-shot from chest up, ample headroom and breathing space, background slightly out of focus to maintain readability of dark text overlay applied to upper third / lower third (per layout)" |
-| `center` | "subject CENTERED in the frame, with empty space surrounding for text overlay" |
-| (não especificado) | usar default `subject centered, ambient space around for potential text overlay` |
+| `right-bleed`, `corner-bleed-right` | "subject positioned in the right 40% of the frame, with the left 60% showing softly blurred, clean, EMPTY neutral background with nothing in it" |
+| `left-bleed`, `corner-bleed-left` | "subject positioned in the LEFT 45% of the frame, with the right 55% showing softly blurred, clean, EMPTY neutral background with nothing in it" |
+| `top-bleed` | "subject positioned in the upper 50% of the frame, with the lower half showing softly blurred, clean, EMPTY environmental floor/desk space with nothing in it" |
+| `bottom-bleed` | "subject positioned in the lower 50% of the frame, with the upper half showing softly blurred, clean, EMPTY environmental ceiling/wall background with nothing in it" |
+| `fullbleed`, `full-bleed` | "subject CENTERED in the frame, mid-shot from chest up, ample headroom and breathing space, background slightly out of focus, lower third kept as clean EMPTY space" |
+| `center` | "subject CENTERED in the frame, with clean EMPTY space surrounding it" |
+| (não especificado) | usar default `subject centered, clean empty ambient space around` |
 
 **IMPORTANTE:** mesmo quando o estilo (style-X.md) traz seu próprio bloco "Composição-por-slot", essa tabela aqui é o fallback se faltar — nunca enviar prompt SEM instrução de composição quando o layout tem image_slot.
 
@@ -39,9 +43,15 @@ Skill 04 deve LER o `image_slot.placement` do layout_spec e INJETAR a instruçã
   - without cartoon, without 3D render look generic
   - without anime, without children's book illustration
   - without ring light, without flash, without harsh lighting
-  - without text or logos in image
+  - **without any text, letters, words, numbers, captions, paragraphs, titles, labels, signage, charts, graphs, watermarks or document text anywhere in the image** (gpt-image-2 adora "escrever" — martele isso)
   - without fake teeth-bleached smile
   - without recortes de sujeito principal (subject must be fully visible from chest up or wider)
+
+> **REGRA ANTI-TEXTO (crítica pro gpt-image-2):** NUNCA descreva no prompt papéis, telas,
+> relatórios, placas, livros, quadros ou documentos *com conteúdo legível* ("report filled
+> with charts and numbers", "screen showing data", "sign that says..."). Se um objeto desses
+> entrar na cena, descreva-o como **em branco / desfocado / ilegível** ("a blank out-of-focus
+> document", "a screen with no readable content"). Texto na cena vira texto renderizado.
 
 (Skill 04 deve concatenar esses negatives ao negative_prompt da resposta — quando provider for gpt-image-1, eles também entram inline no prompt principal via "without X" syntax. Quando NB2, vão no campo negative_prompt nativo.)
 
