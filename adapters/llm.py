@@ -88,6 +88,12 @@ class LLMAdapter:
                 "json_schema": {"name": "Output", "schema": json_schema, "strict": False},
             }
 
+        # Timeout + retries: sem isso, uma request travada (socket parado) prende o
+        # pipeline inteiro por horas (já aconteceu). litellm aborta em LLM_TIMEOUT_S
+        # e retenta LLM_NUM_RETRIES vezes com backoff.
+        kwargs["timeout"] = float(os.getenv("LLM_TIMEOUT_S", "90"))
+        kwargs["num_retries"] = int(os.getenv("LLM_NUM_RETRIES", "2"))
+
         response = completion(**kwargs)
         elapsed_ms = int((time.time() - t0) * 1000)
 
