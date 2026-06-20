@@ -153,6 +153,36 @@ A geração de `TIAGO-EDITORIAL-HERO` já foi **bloqueada por moderação** quan
 
 ---
 
+## MODOS DE FALHA DO gpt-image-2 — onde ele erra e como reformular (v5)
+
+> Portado do `metta-image-models.md` do plugin-metta-ads. Vale para **as duas
+> marcas**. **Princípio-mãe: reformule a IDEIA, não force o modelo.** Se a copy fala
+> de "mensagens no WhatsApp", a imagem NÃO precisa mostrar bolhas de chat — pode ser
+> "celular virado pra baixo com glow vazando". Qualquer cena renderizável que carregue
+> o mesmo significado serve. Texto, marca e números **nunca** entram na imagem gerada
+> — entram via HTML/SVG por cima (a `metta-brand`/blueprint cuida disso).
+
+| Falha | Sintoma típico | Como reformular o prompt |
+|---|---|---|
+| **Texto na cena** | Letras tortas, palavras inventadas, bolhas vazias | Cena onde texto não importa: tela com **gradiente/glow** em vez de UI; papel **em branco**; placa fora de foco. Nunca pedir texto legível. |
+| **Mãos detalhadas** | Dedos a mais, mãos retorcidas | Esconder mãos, mostrar em silhueta, ou enquadrar acima do punho. `no hands visible` no negativo (relaxar só se a mão for essencial E simples). |
+| **Logos de marcas** (WhatsApp, Apple, IG) | Logo deformado/errado | **Nunca** pedir logo. Marca entra como SVG inline depois. |
+| **Numerais específicos** | Dígitos trocados/inventados | Não embutir número na imagem — vem via HTML por cima. |
+| **Faces reconhecíveis** | Rosto genérico mesmo pedindo alguém específico | De costas, perfil, sombra ou silhueta. (É também por isso que os archetypes que mostram o Tiago preferem **foto real** — ver `_TIAGO_LIKENESS`/`image.prefer_upload`.) |
+| **Telas de aparelho (UI)** | Interface irreal/inventada | Tela apagada, reflexo difuso, ou só a silhueta do aparelho. |
+| **Reflexos em vidro/espelho** | Reflexo deformado | Evitar pedir reflexo específico. |
+| **Múltiplas pessoas próximas** | Corpos fundidos, membros extras | Limitar a 1–2 pessoas, bem posicionadas e com espaço entre elas. |
+
+**Estrutura de prompt que funciona** (a Etapa 4 já segue isto; aqui é o checklist):
+`<cena em inglês> | <luz> | <mood> | <color grading> | <ângulo> | <composição/negative space>`
++ tail inline `without text, without logos, without signage, without hands visible`
+(além do `negative_prompt` da resposta).
+
+Quando o brief pede **ícone, símbolo, padrão geométrico ou peça tipo-dominante**:
+não use gpt-image-2 — isso vira SVG/HTML no render (`skip: true` na imagem).
+
+---
+
 ## Few-shot 1 — Metta · A-headline-foto-dark · COM avatar (varejo-pet + decide-sozinho)
 
 Bloco recebido:
@@ -259,6 +289,8 @@ O `iteration_strategy.fallback_prompts` é USADO pelo image-gen. Sempre 2 fallba
 - ❌ `Empresário` literal em inglês — `entrepreneur` / `business owner`.
 
 ## Versão
+
+`image-prompt-engineer_v5.0` · 2026-06-20 · seção **MODOS DE FALHA DO gpt-image-2** (texto/mãos/faces/UI/numerais/múltiplas pessoas + como reformular), portada do `metta-image-models.md` do plugin-metta-ads e válida pras 2 marcas. O `NEG_MODEL_FAILS` é anexado ao negative_prompt no pipeline (ver `api/_art_director.py`). Mantém tudo do v4.
 
 `image-prompt-engineer_v4.0` · 2026-06-18 · consumo de AVATAR ALVO (segmento+variante) + dor→archetype + regra de moderação/dignidade + paridade de gênero nos fallbacks. Mantém: provider-aware, composição-por-slot, fallbacks ativos.
 
