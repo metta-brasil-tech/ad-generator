@@ -17,17 +17,24 @@ style), não corporativa séria.
 
 ```
 3D rendered illustration in a matte clay/soft-plastic material style (like modern
-app onboarding art or a Pixar concept render), of {object_description}, isolated
-and floating on a solid flat SOLID YELLOW background (hex #F5C518 or similar warm
-amber-yellow, NO gradient, NO texture, NO shadow gradient on the backdrop itself),
-soft studio three-point lighting on the object with gentle contact shadow beneath
-it, matte non-glossy surface finish, {accent_prop_if_any}, minimalist clean
-composition with generous negative space around the object, object positioned in
-the lower two-thirds of the frame,
+app onboarding art or a Pixar concept render), of {object_description}, a LARGE
+DOMINANT hero object filling roughly 70-85% of the frame WIDTH, isolated and
+floating on a solid flat SOLID YELLOW background that fills the ENTIRE frame edge
+to edge (hex #F5C518 or similar warm amber-yellow, NO gradient, NO texture, NO
+shadow gradient on the backdrop itself, background must reach all four edges of
+the image with zero border/margin/frame), soft studio three-point lighting on the
+object with gentle contact shadow beneath it, matte non-glossy surface finish,
+{accent_prop_if_any}, object anchored in the lower two-thirds of the frame and
+large enough that it reads as the clear visual protagonist (NOT a small icon
+floating in a mostly-empty field), only the TOP ~25% of the frame kept clear of
+the object (reserved negative space for a headline to be overlaid later),
+minimal negative space directly around the object itself — the object should feel
+big and close to the "camera", almost touching the left/right edges,
 high production 3D render quality, smooth clay-like textures, muted secondary
 color on the object itself (not bright rainbow, 1-2 accent colors max),
 without photorealism, without real photography look, without cartoon 2D flat
-illustration, without hand-drawn line art, without text or logos in image
+illustration, without hand-drawn line art, without text or logos in image, without
+a small/distant/timid object, without excessive empty yellow space around the object
 ```
 
 ### Variáveis
