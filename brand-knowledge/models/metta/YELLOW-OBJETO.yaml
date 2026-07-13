@@ -1,0 +1,203 @@
+$schema_version: "1.0"
+
+id:                  "YELLOW-OBJETO"
+display_name:        "Objeto-conceito 3D flutuante sobre amarelo"
+alias:               ["yellow-objeto", "Yellow Objeto"]
+formato:             "STORY"
+banco_ref:           []
+versao:              "1.0"
+status:              "ativo"
+marca:               "metta"
+
+logica_visual: |
+  Metáfora física do método, em tom leve/editorial — NÃO corporativo dark. Um objeto
+  3D estilizado (render clay/matte, não fotografia) flutua isolado sobre fundo amarelo
+  chapado, como capa de app / editorial contemporâneo. O decisor lê o OBJETO como
+  conceito visual antes de a palavra confirmar. Distinto do DARK-OBJETO (que é
+  fotorrealista e sério): aqui é claro, leve, ilustrado.
+
+estrutura:
+  zonas:
+    top:        "Logo Metta + tag (breadcrumb curto)"
+    center:     "Objeto 3D render centralizado (40-50% do canvas) sobre amarelo chapado"
+    bottom:     "Headline preta + subhead opcional + CTA pill escura"
+    overlay:    "nenhum — objeto isolado, sem pessoa, sem textura de fundo"
+  hierarquia:
+    - {elemento: "objeto_3d", peso: 1}
+    - {elemento: "headline", peso: 2}
+    - {elemento: "subhead", peso: 3}
+    - {elemento: "cta", peso: 4}
+
+composicao:
+  background:        "solid"
+  background_color:  "var(--m-yellow)"
+  contrast:          "high"
+  ritmo:             "objeto-conceito → headline (nomeia) → CTA — leitura em 3 tempos"
+  proporcao:
+    headline_area:   "22%"
+    image_area:      "40-50% (centro)"
+    body_area:       "18%"
+    cta_area:        "100-140px"
+  ornament:          "none"
+
+typography:
+  headline:
+    role:           "title-large"
+    family:         "Inter"
+    style:          "Expanded Heavy"
+    weight:         870
+    stretch_pct:    132
+    size_range:     [58, 96]
+    line_height_pct: 96
+    letter_spacing_pct: -1
+    text_case:      "sentence"
+  body:
+    role:           "body-large"
+    family:         "Inter"
+    style:          "Expanded Regular"
+    weight:         590
+    stretch_pct:    100
+    size_range:     [26, 34]
+    line_height_pct: 130
+    letter_spacing_pct: -0.5
+    text_case:      "sentence"
+  tag_eyebrow:
+    role:           "label-large"
+    family:         "Inter"
+    style:          "Expanded Medium"
+    weight:         540
+    stretch_pct:    132
+    size_range:     [18, 22]
+    line_height_pct: 100
+    letter_spacing_pct: 11
+    text_case:      "UPPER"
+  cta:
+    role:           "label-large"
+    family:         "Inter"
+    style:          "Expanded Bold"
+    weight:         700
+    stretch_pct:    132
+    size_range:     [24, 28]
+    line_height_pct: 100
+    text_case:      "UPPER"
+
+colors:
+  bg_primary:        "var(--metta-sys-color-primary)"       # amarelo Metta chapado
+  fg_primary:        "var(--metta-ref-palette-night-10)"
+  accent:            "var(--metta-ref-palette-night-100)"
+  body_text:         "var(--metta-ref-palette-night-10)"
+  cta_bg:            "var(--metta-ref-palette-night-100)"
+  cta_text:          "var(--metta-ref-palette-night-10)"
+
+spacing:
+  safe_margin_x:     80
+  safe_margin_top:   140
+  safe_margin_bot:   140
+  gap_between_blocks: 32
+
+shape:
+  cta_radius:        "var(--metta-sys-shape-corner-full)"
+  card_radius:       "var(--metta-sys-shape-corner-xl)"
+
+composition_pattern: "object-center-on-yellow"
+
+image:
+  required:          true
+  type:              "object-3d-render"
+  placement:         "center"
+  filters:
+    saturation:      0
+    contrast:        0
+    overlay:         "none"
+  ratio:             "free"
+  prompt_template_ref: "image-prompts/metta/style-YELLOW-OBJETO.md"
+  reference_image: []
+  treatment:         "objeto simbólico 3D render estilizado (clay/matte), flutuando, luz de estúdio suave, fundo amarelo chapado, sem pessoa"
+
+slots:
+  - name:            "tag"
+    role:            "breadcrumb"
+    required:        false
+    max_chars:       30
+    style_ref:       "typography.tag_eyebrow"
+    color_ref:       "colors.fg_primary"
+    align:           "left"
+    position: {x: "80px", y: "100px"}
+  - name:            "headline"
+    role:            "nomeia_o_conceito"
+    required:        true
+    max_chars:       100
+    max_lines:       3
+    style_ref:       "typography.headline"
+    color_ref:       "colors.fg_primary"
+    align:           "center"
+    position: {x: "center", y: "below-object"}
+  - name:            "subhead"
+    role:            "ponte_conceito_aplicacao"
+    required:        false
+    max_chars:       80
+    max_lines:       2
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "center"
+    position: {x: "center", y: "after-headline"}
+  - name:            "body"
+    role:            "aplicacao_pratica"
+    required:        false
+    max_chars:       120
+    style_ref:       "typography.body"
+    color_ref:       "colors.body_text"
+    align:           "center"
+    position: {x: "center", y: "after-subhead"}
+  - name:            "cta"
+    role:            "acao"
+    required:        true
+    max_chars:       24
+    style_ref:       "typography.cta"
+    color_ref:       "colors.cta_text"
+    bg_color_ref:    "colors.cta_bg"
+    component:       "pill"
+    position: {x: "center", y: "bottom-130px"}
+
+quando_brilha:
+  - "Conteúdo motivacional/processo (hábito, disciplina, consistência)"
+  - "Conceito abstrato que precisa de metáfora leve, não corporativa"
+  - "Tom editorial contemporâneo (não HBR sério, não dark urgente)"
+  - "TOFU/MOFU de identificação"
+
+funil_recomendado: ["TOFU", "MOFU"]
+
+audiencia_recomendada:
+  - "gestor_buscando_metodo_leve"
+  - "publico_identificacao_processo"
+
+teses_compativeis:
+  - "processo_habito_consistencia"
+  - "metafora_conceitual_leve"
+  - "motivacional_editorial"
+
+anti_padroes:
+  - "Objeto fotorrealista — isso é DARK-OBJETO, não YELLOW-OBJETO"
+  - "Pessoa na cena — quebra o conceito de objeto isolado"
+  - "Fundo com gradiente ou textura — precisa ser amarelo chapado"
+  - "Tese dark/urgente — o amarelo leve destrói a gravidade"
+
+hibridizacoes_validas:
+  - "YELLOW-EDITORIAL (variante com mais texto, sem objeto dominante)"
+  - "DARK-OBJETO (mesma lógica de objeto, tom sério fotorrealista)"
+
+embedding_text:
+  intent: |
+    Metáfora física do método em tom leve e editorial. Objeto 3D render (clay/matte)
+    isolado sobre amarelo chapado nomeia o conceito antes da headline. Motivacional/
+    processo, não corporativo dark. TOFU/MOFU de identificação.
+  visual_features: |
+    Fundo amarelo Metta chapado, sem gradiente. Objeto 3D render estilizado centralizado
+    (40-50%), luz de estúdio suave, não fotorrealista, não cartoon 2D. Headline preta
+    UPPER/sentence abaixo do objeto. Subhead/body opcionais. CTA pill escura na base.
+    Sem pessoas. Estética capa-de-app / editorial contemporâneo.
+
+referencias_dna_completo: "design/banco-ads-figma.md#§5.14"
+created:             "2026-07-12"
+updated:             "2026-07-12"
+maintainer:          "Head de Design Metta"
