@@ -28,7 +28,7 @@ Você DEVE produzir JSON que valide contra o schema. Campos obrigatórios e opci
 ```json
 {
   "intent": "prova_social_case_nominal | dor_pessoal | reframe_intelectual | convite_evento | manifesto | promessa_numerica | case_metric | reframe_mantra | autoridade_founder_led | posicionamento_institucional",
-  "tese_central": "string — frase única que resume o que o ad diz (extrair ou inferir)",
+  "tese_central": "string — TEXTO PRONTO PRA VIRAR HEADLINE (não uma descrição/resumo do assunto — ver seção 'tese_central é copy, não resumo' abaixo)",
   "formato": "story | feed | sqr | carrossel | story_video | feed_video",
   "funil": "TOFU | MOFU | BOFU | retargeting",
   "audiencia": {
@@ -91,6 +91,36 @@ Inferir do contexto se não dito:
 
 Default `metta` salvo se mencionar:
 - "Tiago" / "founder-led" / "voz pessoal" → `tiago`
+
+### `tese_central` é COPY, não resumo
+
+Quando o pedido vem em modo livre (briefing por voz/texto, sem passar pelo wizard
+estruturado), `tese_central` vira a headline final da peça diretamente — não existe
+uma etapa depois que reescreve isso. Por isso `tese_central` DEVE ser a frase pronta
+pra ir pro anúncio, não uma descrição em terceira pessoa do que o ad fala sobre.
+
+❌ Errado (descrição, não copy): `"Pergunta diagnóstica: gerente de vendas vs vendedor com crachá de chefe"`
+✅ Certo (já é a headline): `"Gerente de vendas ou vendedor com crachá de chefe?"`
+
+❌ Errado: `"Empresário refém da própria operação — exaustão como problema"`
+✅ Certo: `"Quanto mais a operação depende de você, menos ela é sua."`
+
+Isso vale pra TODA marca, mas é especialmente crítico em `marca: tiago` com intent
+`reframe_intelectual` / `reframe_mantra` / `autoridade_founder_led` — formatos de
+"frase de efeito" (post-quote, tese isolada, reflexão). O erro mais comum aqui é
+produzir uma PERGUNTA CURTA E GENÉRICA ("O que você faz impacta diretamente nos
+resultados?") quando a voz real do Tiago é uma AFIRMAÇÃO EM DUAS PARTES, contraste
+ou reframe — mais densa, sem ponto de interrogação, format "X não é Y. É Z.":
+
+- "O problema nunca foi o mercado. É o seu processo comercial."
+- "Para o empregado alienado lucro é ganância. Para o empresário é resultado."
+- "Paz não é uma empresa sem problemas. É uma empresa que não precisa de você pra resolver todos eles."
+- "Quanto mais você precisa carregar o resultado nas costas, menos a sua operação cresce sem você."
+
+Use essas 4 frases como calibração de TAMANHO (uma ou duas frases completas, não um
+fragmento) e de ESTRUTURA (contraste/reframe: "não é X, é Y" ou "quanto mais X, menos Y")
+sempre que `marca=tiago` e o pedido pedir reflexão, tese ou frase de impacto — nunca
+encolha pra uma pergunta de uma linha só pra caber em pouco espaço.
 
 ### Clarifying questions
 
@@ -183,7 +213,7 @@ Exemplos de **NÃO PERGUNTAR** (inferir):
 ```json
 {
   "intent": "reframe_intelectual",
-  "tese_central": "Pergunta diagnóstica: gerente de vendas vs vendedor com crachá de chefe",
+  "tese_central": "Gerente de vendas ou vendedor com crachá de chefe?",
   "formato": "carrossel",
   "funil": "MOFU",
   "audiencia": {
@@ -256,5 +286,7 @@ Exemplos de **NÃO PERGUNTAR** (inferir):
 - ❌ Misturar marca Metta com voz Tiago sem indicação explícita
 
 ## Versão
+
+`briefing-parser_v2.1` · 2026-07-16 · `tese_central` agora é copy pronta (headline final), não uma descrição em terceira pessoa — no modo livre (sem wizard) ela vai direto pro anúncio sem reescrita. Motivado por bug real: briefing por voz gerava peça vazia (ver `api/generate.py`) e, quando gerava, saía como pergunta curta genérica em vez da voz real de "frase de efeito" do Tiago (contraste/reframe). Calibração adicionada com 4 frases reais do perfil.
 
 `briefing-parser_v2.0` · 2026-05-14 · Head de Design Metta — enum marca simplificado pra `metta`/`tiago` (era `metta_institucional`/`tiago_founder_led`). Detecção continua via heurística de menção a "Tiago" / "founder-led" / "voz pessoal".
