@@ -56,6 +56,23 @@ class LLMAdapter:
             model = defaults.get(provider, provider)
         return model
 
+    def _should_fallback_to_claude(self, e: Exception) -> bool:
+        """True se vale refazer no Claude: erro de cota/billing/auth/rate do
+        provider primário, chave Anthropic disponível, primário != claude."""
+        if os.getenv("LLM_FALLBACK_CLAUDE", "1") != "1":
+            return False
+        if not (os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_KEY")):
+            return False
+        if str(self.model).startswith(("claude-", "anthropic/")):
+            return False  # o primário JÁ é Claude — não há pra onde cair
+        name = e.__class__.__name__.lower()
+        msg = str(e).lower()
+        return (
+            "ratelimit" in name or "authentication" in name or "permission" in name
+            or "quota" in msg or "rate limit" in msg or "billing" in msg
+            or "insufficient" in msg or "exceeded your current" in msg
+        )
+
     def complete(
         self,
         system: str,
@@ -94,7 +111,24 @@ class LLMAdapter:
         kwargs["timeout"] = float(os.getenv("LLM_TIMEOUT_S", "90"))
         kwargs["num_retries"] = int(os.getenv("LLM_NUM_RETRIES", "2"))
 
-        response = completion(**kwargs)
+        try:
+            response = completion(**kwargs)
+        except Exception as e:
+            # AUTO-CURA: se o provider primário estourar cota/billing/auth e houver
+            # chave Anthropic, refaz no Claude na hora. O site não pode morrer (500)
+            # porque a conta de UM provider secou. Ex real: OpenAI "exceeded your
+            # current quota". Desliga com LLM_FALLBACK_CLAUDE=0.
+            if not self._should_fallback_to_claude(e):
+                raise
+            fb_model = os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8")
+            import sys as _sys
+            print(f"[llm] provider primário falhou ({e.__class__.__name__}); "
+                  f"caindo pro Claude ({fb_model})", file=_sys.stderr)
+            kwargs["model"] = fb_model
+            kwargs.pop("temperature", None)       # Claude descontinuou temperature
+            kwargs.pop("response_format", None)    # e não suporta json_schema aqui
+            response = completion(**kwargs)
+            self.model = fb_model  # reflete o que REALMENTE rodou
         elapsed_ms = int((time.time() - t0) * 1000)
 
         content = response.choices[0].message.content or ""
