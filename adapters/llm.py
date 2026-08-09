@@ -50,28 +50,41 @@ class LLMAdapter:
                 # ($5/$25). Override por env: LLM_MODEL_CLAUDE.
                 "claude": "claude-sonnet-4-6",
                 "openai": "gpt-5",
-                "gemini": "gemini-2-flash",
+                "gemini": "gemini/gemini-2.5-flash",  # string litellm válida (testada)
                 "ollama": "llama3.1:70b",
             }
             model = defaults.get(provider, provider)
         return model
 
-    def _should_fallback_to_claude(self, e: Exception) -> bool:
-        """True se vale refazer no Claude: erro de cota/billing/auth/rate do
-        provider primário, chave Anthropic disponível, primário != claude."""
-        if os.getenv("LLM_FALLBACK_CLAUDE", "1") != "1":
-            return False
-        if not (os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_KEY")):
-            return False
-        if str(self.model).startswith(("claude-", "anthropic/")):
-            return False  # o primário JÁ é Claude — não há pra onde cair
+    def _fallback_model(self, e: Exception) -> str | None:
+        """Modelo pra REFAZER quando o provider primário estoura cota/billing/auth/
+        rate — escolhe um provider com chave disponível QUE NÃO SEJA o que falhou.
+        Ordem: Gemini > Claude > OpenAI (Gemini primeiro porque é o que tem crédito
+        aqui; antes só caía pro Claude, que hoje está sem crédito). None = não refaz.
+        Desliga com LLM_FALLBACK=0 (ou o legado LLM_FALLBACK_CLAUDE=0)."""
+        if os.getenv("LLM_FALLBACK", os.getenv("LLM_FALLBACK_CLAUDE", "1")) != "1":
+            return None
         name = e.__class__.__name__.lower()
         msg = str(e).lower()
-        return (
+        transient = (
             "ratelimit" in name or "authentication" in name or "permission" in name
-            or "quota" in msg or "rate limit" in msg or "billing" in msg
-            or "insufficient" in msg or "exceeded your current" in msg
+            or any(k in msg for k in ("quota", "rate limit", "billing", "insufficient",
+                                      "exceeded your current", "credit balance", "credit",
+                                      "invalid api key", "api key"))
         )
+        if not transient:
+            return None
+        cur = str(self.model)
+        has_gem = bool(os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY"))
+        has_claude = bool(os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_KEY"))
+        has_openai = bool(os.getenv("OPENAI_API_KEY"))
+        if has_gem and not cur.startswith("gemini/"):
+            return os.getenv("LLM_MODEL_GEMINI", "gemini/gemini-2.5-flash")
+        if has_claude and not cur.startswith(("claude-", "anthropic/")):
+            return os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8")
+        if has_openai and not cur.startswith(("gpt-", "openai/")):
+            return os.getenv("LLM_MODEL_OPENAI", "gpt-5")
+        return None
 
     def complete(
         self,
@@ -114,19 +127,21 @@ class LLMAdapter:
         try:
             response = completion(**kwargs)
         except Exception as e:
-            # AUTO-CURA: se o provider primário estourar cota/billing/auth e houver
-            # chave Anthropic, refaz no Claude na hora. O site não pode morrer (500)
-            # porque a conta de UM provider secou. Ex real: OpenAI "exceeded your
-            # current quota". Desliga com LLM_FALLBACK_CLAUDE=0.
-            if not self._should_fallback_to_claude(e):
+            # AUTO-CURA: se o provider primário estourar cota/billing/auth, refaz num
+            # provider com chave disponível (Gemini > Claude > OpenAI). O site não pode
+            # morrer (500) porque a conta de UM provider secou. Caso real atual: a
+            # Anthropic está sem crédito ("credit balance too low") → cai pro Gemini.
+            # Desliga com LLM_FALLBACK=0.
+            fb_model = self._fallback_model(e)
+            if not fb_model:
                 raise
-            fb_model = os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8")
             import sys as _sys
             print(f"[llm] provider primário falhou ({e.__class__.__name__}); "
-                  f"caindo pro Claude ({fb_model})", file=_sys.stderr)
+                  f"caindo pro fallback ({fb_model})", file=_sys.stderr)
             kwargs["model"] = fb_model
-            kwargs.pop("temperature", None)       # Claude descontinuou temperature
-            kwargs.pop("response_format", None)    # e não suporta json_schema aqui
+            if fb_model.startswith(("claude-", "anthropic/")):
+                kwargs.pop("temperature", None)    # Claude descontinuou temperature
+                kwargs.pop("response_format", None)  # e não suporta json_schema aqui
             response = completion(**kwargs)
             self.model = fb_model  # reflete o que REALMENTE rodou
         elapsed_ms = int((time.time() - t0) * 1000)
